@@ -11,10 +11,10 @@
                 <div class="col-lg-8 offset-lg-1">
                     <div class="filter-control">
                         <ul>
-                            <li class="active">Clothings</li>
-                            <li>HandBag</li>
-                            <li>Shoes</li>
-                            <li>Accessories</li>
+                            <li class="active">Pommade</li>
+                            <li>Savon</li>
+                            <li>Thé</li>
+                            <li>Huile de corp</li>
                         </ul>
                     </div>
                     <div class="product-slider owl-carousel">
@@ -261,7 +261,7 @@
                 <div class="col-lg-3 offset-lg-1">
                     <div class="product-large set-bg m-large" data-setbg="{{ asset('fashi/img/products/man-large.jpg') }}">
                         <h2>Men’s</h2>
-                        <a href="#">Discover More</a>
+                        <a href="#">Decouvrir plus</a>
                     </div>
                 </div>
             </div>

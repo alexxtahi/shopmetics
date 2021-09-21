@@ -118,7 +118,7 @@
                 <nav class="nav-menu mobile-menu">
                     <ul>
                         <li class="active"><a href="./index.html">Acceuil</a></li>
-                        <li><a href="./shop.html">Shop</a></li>
+                        <li><a href="./shop.html">Boutique</a></li>
                         <li><a href="#">Collection</a>
                             <ul class="dropdown">
                                 <li><a href="#">Beauté & soin</a></li>
