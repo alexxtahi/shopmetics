@@ -4,15 +4,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
-                            <span>Bag,kids</span>
-                            <h1>Black friday</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore</p>
-                            <a href="#" class="primary-btn">Shop Now</a>
+                            <h1> Bienvenue</h1>
+                            <p>
+                                Bienvenue sur shopmetics la référence des produits de beauté, de soin personnel.....
+                            </p>
+                            <a href="#" class="primary-btn">Achetez maintenant</a>
                         </div>
                     </div>
                     <div class="off-card">
-                        <h2>Sale <span>50%</span></h2>
+                        <h2>Solde<span> 50%</span></h2>
                     </div>
                 </div>
             </div>
@@ -20,15 +20,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
-                            <span>Bag,kids</span>
-                            <h1>Black friday</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore</p>
-                            <a href="#" class="primary-btn">Shop Now</a>
+                            <h1>Services</h1>
+                            <p>
+                                shopmetics met à votre disposition des produits  de qualité à votre disposition.
+                            </p>
+                            <a href="#" class="primary-btn">Achetez maintenant</a>
                         </div>
                     </div>
                     <div class="off-card">
-                        <h2>Sale <span>50%</span></h2>
+                        <h2>Solde <span>50%</span></h2>
                     </div>
                 </div>
             </div>

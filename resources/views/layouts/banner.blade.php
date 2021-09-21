@@ -5,7 +5,7 @@
                     <div class="single-banner">
                         <img src="{{ asset('fashi/img/banner-1.jpg') }}" alt="">
                         <div class="inner-text">
-                            <h4>Men’s</h4>
+                            <h4>Beauté & soins</h4>
                         </div>
                     </div>
                 </div>
@@ -13,7 +13,7 @@
                     <div class="single-banner">
                         <img src="{{ asset('fashi/img/banner-2.jpg') }}" alt="">
                         <div class="inner-text">
-                            <h4>Women’s</h4>
+                            <h4>Santé</h4>
                         </div>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                     <div class="single-banner">
                         <img src="{{ asset('fashi/img/banner-3.jpg') }}" alt="">
                         <div class="inner-text">
-                            <h4>Kid’s</h4>
+                            <h4>Maquillage</h4>
                         </div>
                     </div>
                 </div>
