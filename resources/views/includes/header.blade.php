@@ -19,8 +19,8 @@
                                 data-title="English">English</option>
                             <option value='yu' data-image="{{ asset('fashi/img/flag-2.jpg') }}" data-imagecss="flag yu"
                                 data-title="Bangladesh">German </option>
-                                <option value='yu' data-image="{{ asset('fashi/img/flag-2.jpg') }}" data-imagecss="flag yu"
-                                data-title="Bangladesh">Francais </option>
+                                <option value='yu' data-image="{{ asset('fashi/img/flag-4.png') }}" data-imagecss="flag yu"
+                                data-title="Bangladesh">Français</option>
                         </select>
                     </div>
                     <div class="top-social">
