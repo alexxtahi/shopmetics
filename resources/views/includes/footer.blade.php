@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <div class="copyright-reserved">
+        <div class="copyright-reserved"> 
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">

@@ -5,7 +5,7 @@
                 <div class="col-lg-3">
                     <div class="product-large set-bg" data-setbg="{{ asset('fashi/img/products/women-large.jpg') }}">
                         <h2>Women’s</h2>
-                        <a href="#">Discover More</a>
+                        <a href="#">Découvrir plus</a>
                     </div>
                 </div>
                 <div class="col-lg-8 offset-lg-1">

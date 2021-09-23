@@ -20,4 +20,16 @@ Route::get(
     }
 );
 
+Route::get(
+    '/', // uri
+    function () {
+        return view('boutique');
+    }
+);
+
+/* Route pour le panier
+
+Route :: post('/panier/ajouter', 'CartController@store')-->name('cart.store') ; */
+
+// Route pour le tableau de bord
 Route::view('/admin', 'admin/admin-dashboard')->name('admin');

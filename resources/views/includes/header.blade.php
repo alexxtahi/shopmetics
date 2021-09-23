@@ -118,11 +118,11 @@
                 <nav class="nav-menu mobile-menu">
                     <ul>
                         <li class="active"><a href="./index.html">Acceuil</a></li>
-                        <li><a href="./shop.html">Boutique</a></li>
+                        <li><a href="boutique.blade.php">Boutique</a></li>
                         <li><a href="#">Collection</a>
                             <ul class="dropdown">
-                                <li><a href="#">Beauté & soin</a></li>
-                                <li><a href="#">Maquillage</a></li>
+                                <li><a href="#">Beauté</a></li>
+                                <li><a href="#">Hygiène</a></li>
                                 <li><a href="#">Santé</a></li>
                             </ul>
                         </li>
