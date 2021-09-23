@@ -19,3 +19,14 @@ Route::get(
         return view('home');
     }
 );
+
+Route::get(
+    '/', // uri
+    function () {
+        return view('boutique');
+    }
+);
+
+/* Route pour le panier
+
+Route :: post('/panier/ajouter', 'CartController@store')-->name('cart.store') ; */
