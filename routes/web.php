@@ -19,3 +19,5 @@ Route::get(
         return view('home');
     }
 );
+
+Route::view('/admin', 'admin/admin-dashboard')->name('admin');
