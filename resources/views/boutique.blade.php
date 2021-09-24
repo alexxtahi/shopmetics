@@ -7,9 +7,8 @@
     <meta name="keywords" content="Fashi, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fashi | Template</title>
+    <title>Shopmetics | Boutique</title>
 
-    
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
     @include('includes.css')
 </head>
@@ -19,9 +18,9 @@
     <div id="preloder">
         <div class="loader"></div>
     </div>
-    
+
     @include('includes.header')
-    
+
 
     <!-- Breadcrumb Section Begin -->
     <div class="breacrumb-section">
@@ -196,7 +195,8 @@
                                         <ul>
                                             <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
 
-                                            <form action=" {{ route('cart.store')}}" method="POST">
+                                            <!-- Rajouter les accolades pour que ça marche -->
+                                            <form action="{ route('cart.store') }" method="POST">
                                                 <li class="quick-view"><a href="#">+ Ajouter au panier</a></li>
                                             </form>
 
@@ -223,7 +223,7 @@
                                         </div>
                                         <ul>
                                             <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            
+
                                             <form action="#" method="POST">
                                                 <li class="quick-view"><a href="#">+ Ajouter au panier </a></li>
                                             </form>
@@ -251,7 +251,7 @@
                                         </div>
                                         <ul>
                                             <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            
+
                                             <form action="#" method="POST">
                                                 <li class="quick-view"><a href="#">+ Ajouter au panier </a></li>
                                             </form>
@@ -279,7 +279,7 @@
                                         </div>
                                         <ul>
                                             <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            
+
                                             <form action="#" method="POST">
                                                 <li class="quick-view"><a href="#">+ Ajouter au panier </a></li>
                                             </form>
@@ -307,7 +307,7 @@
                                         </div>
                                         <ul>
                                             <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            
+
                                             <form action="#" method="POST">
                                                 <li class="quick-view"><a href="#">+ Ajouter au panier </a></li>
                                             </form>
@@ -335,7 +335,7 @@
                                         </div>
                                         <ul>
                                             <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            
+
                                             <form action="#" method="POST">
                                                 <li class="quick-view"><a href="#">+ Ajouter au panier </a></li>
                                             </form>
@@ -364,7 +364,7 @@
                                         </div>
                                         <ul>
                                             <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            
+
                                             <form action="#" method="POST">
                                                 <li class="quick-view"><a href="#">+ Ajouter au panier </a></li>
                                             </form>
@@ -396,7 +396,7 @@
                                             <form action="#" method="POST">
                                                 <li class="quick-view"><a href="#">+ Ajouter au panier </a></li>
                                             </form>
-                                           
+
                                         </ul>
                                     </div>
                                     <div class="pi-text">
@@ -420,7 +420,7 @@
                                         </div>
                                         <ul>
                                             <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            
+
                                             <form action="#" method="POST">
                                                 <li class="quick-view"><a href="#">+ Ajouter au panier </a></li>
                                             </form>
@@ -484,7 +484,7 @@
     <!-- Footer Section -->
     @include('includes.footer')
 
-    
+
 
     <!-- Js Plugins -->
     @include('includes.js')

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// ! Route vers l'accueil
 Route::get(
     '/', // uri
     function () {
@@ -20,13 +21,12 @@ Route::get(
     }
 );
 
-Route::get(
-    '/', // uri
-    function () {
-        return view('boutique');
-    }
-);
+// ! Route vers la boutique
+Route::view('/boutique', 'boutique');
 
 /* Route pour le panier
 
 Route :: post('/panier/ajouter', 'CartController@store')-->name('cart.store') ; */
+
+// ! Route pour le tableau de bord
+Route::view('/admin', 'admin/admin-dashboard')->name('admin');
