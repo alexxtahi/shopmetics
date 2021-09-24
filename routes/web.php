@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 // ! Route vers l'accueil
-Route::get(
-    '/', // uri
-    function () {
-        return view('home');
-    }
-);
+Route::get('/', [HomeController::class, 'index'])->name('home');
+//Route::get('/', 'HomeController@index');
 
 // ! Route vers la boutique
 Route::view('/boutique', 'boutique');
