@@ -34,9 +34,10 @@
     @include('layouts.banner')
     <!-- Banner Section End -->
 
-    <!-- Partner Logo Section Begin -->
-    @include('includes.content')
-    <!-- Partner Logo Section End -->
+    <!-- Content Section Begin -->
+    <!-- include('includes.content') Ne pas utiliser-->
+    @yield('content')
+    <!-- Content Section End -->
 
     <!-- Footer Section Begin -->
     @include('includes.footer')
