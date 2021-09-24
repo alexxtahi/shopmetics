@@ -28,8 +28,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <a href="#"><i class="fa fa-home"></i> Home</a>
-                        <span>Shop</span>
+                        <a href="#"><i class="fa fa-home"></i> Accueil</a>
+                        <span>Boutique</span>
                     </div>
                 </div>
             </div>
@@ -45,25 +45,20 @@
                     <div class="filter-widget">
                         <h4 class="fw-title">Catégories</h4>
                         <ul class="filter-catagories">
-                            <li><a href="#">Beauté</a></li>
-                            <li><a href="#">Hygiène</a></li>
-                            <li><a href="#">Santé</a></li>
+                            <!-- Récupération des catégories depuis la base de données -->
+                            @foreach ($categories as $categorie)
+                            <li><a href="#">{{ $categorie->lib_cat }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
+                    <!--
                     <div class="filter-widget">
-                        <h4 class="fw-title">Brand</h4>
+                        <h4 class="fw-title">Marque</h4>
                         <div class="fw-brand-check">
                             <div class="bc-item">
                                 <label for="bc-calvin">
                                     Calvin Klein
                                     <input type="checkbox" id="bc-calvin">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="bc-item">
-                                <label for="bc-diesel">
-                                    Diesel
-                                    <input type="checkbox" id="bc-diesel">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
@@ -83,8 +78,9 @@
                             </div>
                         </div>
                     </div>
+                    -->
                     <div class="filter-widget">
-                        <h4 class="fw-title">Price</h4>
+                        <h4 class="fw-title">Prix</h4>
                         <div class="filter-range-wrap">
                             <div class="range-slider">
                                 <div class="price-input">
@@ -93,14 +89,15 @@
                                 </div>
                             </div>
                             <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="33" data-max="98">
+                                data-min="100" data-max="500000">
                                 <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                             </div>
                         </div>
-                        <a href="#" class="filter-btn">Filter</a>
+                        <a href="#" class="filter-btn">Filtrer</a>
                     </div>
+                    <!--
                     <div class="filter-widget">
                         <h4 class="fw-title">Color</h4>
                         <div class="fw-color-choose">
@@ -151,16 +148,15 @@
                             </div>
                         </div>
                     </div>
+                    -->
                     <div class="filter-widget">
                         <h4 class="fw-title">Tags</h4>
                         <div class="fw-tags">
-                            <a href="#">Towel</a>
-                            <a href="#">Shoes</a>
-                            <a href="#">Coat</a>
-                            <a href="#">Dresses</a>
-                            <a href="#">Trousers</a>
-                            <a href="#">Men's hats</a>
-                            <a href="#">Backpack</a>
+                            <a href="#">Pommade</a>
+                            <a href="#">Crème</a>
+                            <a href="#">Savon</a>
+                            <a href="#">Thé</a>
+                            <a href="#">Huile</a>
                         </div>
                     </div>
                 </div>
@@ -170,25 +166,30 @@
                             <div class="col-lg-7 col-md-7">
                                 <div class="select-option">
                                     <select class="sorting">
-                                        <option value="">Default Sorting</option>
+                                        <option value="">Tri par défaut</option>
                                     </select>
                                     <select class="p-show">
-                                        <option value="">Show:</option>
+                                        <option value="">Afficher:</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-5 text-right">
-                                <p>Show 01- 09 Of 36 Product</p>
+                                <p>Afficher 01-09 Sur 36 Produits</p>
                             </div>
                         </div>
                     </div>
                     <div class="product-list">
                         <div class="row">
+                            <!-- Récupération des produits depuis la base de données -->
+                            @foreach ($produits as $produit)
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
                                         <img src= "{{ asset('fashi/img/products/product-1.jpg') }}"  alt="">
+                                        <!-- Afficher la bannière promo si le produit est en promotion -->
+                                        @if ($produit)
                                         <div class="sale pp-sale">Sale</div>
+                                        @endif
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
                                         </div>
@@ -214,231 +215,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="{{ asset('fashi/img/products/product-2.jpg') }}" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-
-                                            <form action="#" method="POST">
-                                                <li class="quick-view"><a href="#">+ Ajouter au panier </a></li>
-                                            </form>
-
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Coat</div>
-                                        <a href="#">
-                                            <h5>Guangzhou sweater</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $13.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="{{ asset('fashi/img/products/product-3.jpg') }}" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-
-                                            <form action="#" method="POST">
-                                                <li class="quick-view"><a href="#">+ Ajouter au panier </a></li>
-                                            </form>
-
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Shoes</div>
-                                        <a href="#">
-                                            <h5>Guangzhou sweater</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $34.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="{{ asset('fashi/img/products/product-4.jpg') }}"alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-
-                                            <form action="#" method="POST">
-                                                <li class="quick-view"><a href="#">+ Ajouter au panier </a></li>
-                                            </form>
-
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Coat</div>
-                                        <a href="#">
-                                            <h5>Microfiber Wool Scarf</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $64.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src= "{{ asset('fashi/img/products/product-5.jpg') }}" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-
-                                            <form action="#" method="POST">
-                                                <li class="quick-view"><a href="#">+ Ajouter au panier </a></li>
-                                            </form>
-
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Shoes</div>
-                                        <a href="#">
-                                            <h5>Men's Painted Hat</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $44.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src= "{{ asset('fashi/img/products/product-6.jpg') }}" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-
-                                            <form action="#" method="POST">
-                                                <li class="quick-view"><a href="#">+ Ajouter au panier </a></li>
-                                            </form>
-
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Shoes</div>
-                                        <a href="#">
-                                            <h5>Converse Shoes</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $34.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="{{ asset('fashi/img/products/product-7.jpg') }}"alt="">
-                                        <div class="sale pp-sale">Sale</div>
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-
-                                            <form action="#" method="POST">
-                                                <li class="quick-view"><a href="#">+ Ajouter au panier </a></li>
-                                            </form>
-
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Towel</div>
-                                        <a href="#">
-                                            <h5>Pure Pineapple</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $64.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="{{ asset('fashi/img/products/product-8.jpg') }}"" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-
-                                            <form action="#" method="POST">
-                                                <li class="quick-view"><a href="#">+ Ajouter au panier </a></li>
-                                            </form>
-
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Coat</div>
-                                        <a href="#">
-                                            <h5>2 Layer Windbreaker</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $44.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="{{ asset('fashi/img/products/product-9.jpg') }}" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-
-                                            <form action="#" method="POST">
-                                                <li class="quick-view"><a href="#">+ Ajouter au panier </a></li>
-                                            </form>
-
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Shoes</div>
-                                        <a href="#">
-                                            <h5>Converse Shoes</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $34.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

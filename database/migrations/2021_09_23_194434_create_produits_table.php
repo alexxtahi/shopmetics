@@ -15,6 +15,7 @@ class CreateProduitsTable extends Migration
     {
         Schema::create('produits', function (Blueprint $table) {
             $table->id('id_prod');
+            // ! Attributs
             $table->string('code_prod');
             $table->string('designation');
             $table->string('description')->nullable();
@@ -22,12 +23,10 @@ class CreateProduitsTable extends Migration
             $table->string('img_prod')->nullable();
             $table->integer('prix_prod');
             $table->integer('ancien_prix')->nullable();
-            // ! Clé étrangère
+            // ! Clés étrangères
             $table->integer('id_cat')->unsigned();
             $table->integer('id_sous_cat')->unsigned()->nullable();
             // ! Statistiques
-
-
             $table->dateTime('deleted_at')->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
             $table->integer('deleted_by')->unsigned()->nullable();

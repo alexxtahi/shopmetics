@@ -17,10 +17,8 @@
                         <select class="language_drop" name="countries" id="countries" style="width:300px;">
                             <option value='yt' data-image="{{ asset('fashi/img/flag-1.jpg') }}" data-imagecss="flag yt"
                                 data-title="English">English</option>
-                            <option value='yu' data-image="{{ asset('fashi/img/flag-2.jpg') }}" data-imagecss="flag yu"
-                                data-title="Bangladesh">German </option>
-                                <option value='yu' data-image="{{ asset('fashi/img/flag-4.png') }}" data-imagecss="flag yu"
-                                data-title="Bangladesh">Français</option>
+                            <option value='yu' data-image="{{ asset('fashi/img/flag-4.png') }}" data-imagecss="flag yu"
+                            data-title="Bangladesh">Français</option>
                         </select>
                     </div>
                     <div class="top-social">
@@ -117,8 +115,8 @@
                 <div class="nav-depart">
                 <nav class="nav-menu mobile-menu">
                     <ul>
-                        <li class="active"><a href="./index.html">Acceuil</a></li>
-                        <li><a href="boutique.blade.php">Boutique</a></li>
+                        <li class="active"><a href="{{ route('home') }}">Acceuil</a></li>
+                        <li><a href="{{ route('boutique') }}">Boutique</a></li>
                         <li><a href="#">Collection</a>
                             <ul class="dropdown">
                                 <li><a href="#">Beauté</a></li>
