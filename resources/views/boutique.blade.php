@@ -187,7 +187,7 @@
                                     <div class="pi-pic">
                                         <img src= "{{ asset('fashi/img/products/product-1.jpg') }}"  alt="">
                                         <!-- Afficher la bannière promo si le produit est en promotion -->
-                                        @if ($produit)
+                                        @if ($produit->en_promo == true)
                                         <div class="sale pp-sale">Sale</div>
                                         @endif
                                         <div class="icon">
@@ -204,13 +204,17 @@
                                         </ul>
                                     </div>
                                     <div class="pi-text">
-                                        <div class="catagory-name">Towel</div>
+                                        <div class="catagory-name">{{ $produit->lib_cat }}</div>
                                         <a href="#">
-                                            <h5>Pure Pineapple</h5>
+                                            <h5>{{ $produit->designation }}</h5>
                                         </a>
                                         <div class="product-price">
-                                            $14.00
-                                            <span>$35.00</span>
+                                            <!-- Prix actuel -->
+                                            {{ $produit->prix_prod }} FCFA
+                                            <!-- Ancien prix -->
+                                            @if ($produit->ancien_prix != $produit->prix_prod)
+                                            <span>{{ $produit->ancien_prix }} FCFA</span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

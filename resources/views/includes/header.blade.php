@@ -115,8 +115,15 @@
                 <div class="nav-depart">
                 <nav class="nav-menu mobile-menu">
                     <ul>
-                        <li class="active"><a href="{{ route('home') }}">Acceuil</a></li>
-                        <li><a href="{{ route('boutique') }}">Boutique</a></li>
+                        <!-- Bouton Accueil -->
+                        <li @if ($view_name == 'home') class="active" @endif>
+                            <a href="{{ route('home') }}">Acceuil</a>
+                        </li>
+                        <!-- Bouton Boutique -->
+                        <li @if ($view_name == 'boutique') class="active" @endif>
+                            <a href="{{ route('boutique') }}">Boutique</a>
+                        </li>
+                        <!-- Bouton Accueil -->
                         <li><a href="#">Collection</a>
                             <ul class="dropdown">
                                 <li><a href="#">Beauté</a></li>
@@ -124,8 +131,14 @@
                                 <li><a href="#">Santé</a></li>
                             </ul>
                         </li>
-                        <li><a href="./blog.html">Blog</a></li>
-                        <li><a href="./contact.html">Contact</a></li>
+                        <!-- Bouton Blog -->
+                        <li @if ($view_name == 'blog') class="active" @endif>
+                            <a href="./blog.html">Blog</a>
+                        </li>
+                        <!-- Bouton Contact -->
+                        <li @if ($view_name == 'contact') class="active" @endif>
+                            <a href="./contact.html">Contact</a>
+                        </li>
                         <li><a href="#">Pages</a>
                             <ul class="dropdown">
                                 <li><a href="./check-out.html">Panier</a></li>

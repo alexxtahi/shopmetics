@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Categorie;
+use App\Models\Produit;
+use App\Models\Promotion;
+use Illuminate\Http\Request;
+
+class BoutiqueController extends Controller
+{
+    /**
+     * Affiche la page d'accueil
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        // Récupération des produits hors promo
+        $produitsHorsPromo = Produit::where([['deleted_at', null]])
+            // Jointure avec les promotions
+            ->join('produit_promotions', 'produit_promotions.id_prod', '!=', 'produit.id_prod')
+            ->get();
+        // Récupération des produits en promotion
+        $produitsEnPromo = Produit::where([['deleted_at', null]])
+            // Jointure avec les promotions
+            ->join('produit_promotions', 'produit_promotions.id_prod', '=', 'produit.id_prod')
+            ->join('promotions', 'promotions.id_promo', '=', 'produit_promotions.id_promo')
+            ->get();
+        // ? Fusion des listes de produits hors promo et en promo
+        $produits = array_merge($produitsHorsPromo, $produitsEnPromo)->shuffle(); // la fonction shuffle() pour mélanger la liste
+        // Récupération des categories
+        $categories = Categorie::where('deleted_at', null)->get();
+        // Récupération des promotions
+        /*$promotions = Promotion::where('deleted_at', null)
+            ->join('clients', 'clients.id', '=', 'ventes.client_id')->get();*/
+        // ? Appel de la vue en passant les données
+        return view(
+            'boutique',
+            [
+                'produits' => $produits,
+                'categories' => $categories,
+                //'promotions' => $promotions,
+            ]
+        );
+    }
+}
