@@ -33,7 +33,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 // route pour le client
-Route::apiResource('client', ClientController::class);
+Route::apiResource('Client', ClientController::class);
 
 
 
