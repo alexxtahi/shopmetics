@@ -1,22 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Client;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Client;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Client\Response;
 
 class ClientController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $client = Client::All() ;
-        return response()->json($client);
-        dd($client);
+        $array = Response()->json($client) ;
+        $reponse = compact("array") ;
+        return $reponse ;
     }
 
     /**
@@ -26,7 +25,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -84,4 +83,5 @@ class ClientController extends Controller
     {
         //
     }
+
 }

@@ -1,7 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\CommandeController;
+use App\Http\Controllers\LivraisonController;
+use App\Http\Controllers\MoyenPaiementController;
+use App\Http\Controllers\ProduitCommandeController;
+use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\SousCategorieController;
+use App\Http\Controllers\Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
