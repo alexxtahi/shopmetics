@@ -21,11 +21,12 @@
                 </div>
                 <div class="col-lg-2 offset-lg-1">
                     <div class="footer-widget">
-                        <h5>Information</h5>
+                        <h5>Informations</h5>
                         <ul>
                             <li><a href="#">A propos de nous</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="{{ route('contact') }}">Contact</a></li>
                             <li><a href="#">Services</a></li>
+                            <li><a href="{{ route('faq') }}">F.A.Q</a></li>
                         </ul>
                     </div>
                 </div>
@@ -33,10 +34,14 @@
                     <div class="footer-widget">
                         <h5>Mon compte</h5>
                         <ul>
+                            @if (true)
+                            <li><a href="{{ route('login') }}">Connexion</a></li>
+                            <li><a href="{{ route('register') }}">Inscription</a></li>
+                            @else
                             <li><a href="#">Mon compte</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Panier</a></li>
-                            <li><a href="#">Boutique</a></li>
+                            @endif
+                            <li><a href="{{ route('panier') }}">Panier</a></li>
+                            <li><a href="{{ route('boutique') }}">Boutique</a></li>
                         </ul>
                     </div>
                 </div>
@@ -52,13 +57,13 @@
                 </div>
             </div>
         </div>
-        <div class="copyright-reserved"> 
+        <div class="copyright-reserved">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="copyright-text">
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright  <strong> shopmetics</strong> | All rights reserved | Designed <i class="fa fa-heart-o" aria-hidden="true"></i> by XCoders</a>
+Copyright &copy; <strong>Shopmetics</strong> | Tous droits réservés | Designed <i class="fa fa-heart-o" aria-hidden="true"></i> by XCODERS</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </div>
                         <div class="payment-pic">

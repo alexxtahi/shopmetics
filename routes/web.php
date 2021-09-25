@@ -21,7 +21,24 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // ! Route vers la boutique
 Route::get('/boutique', [BoutiqueController::class, 'index'])->name('boutique');
-//Route::view('/boutique', 'boutique')->name('boutique');
+
+// ! Route vers les contacts
+Route::view('/contact', 'contact')->name('contact');
+
+// ! Route vers le blog
+Route::view('/blog', 'blog')->name('blog');
+
+// ! Route vers le panier
+Route::view('/panier', 'panier')->name('panier');
+
+// ! Route vers la foire aux questions
+Route::view('/faq', 'faq')->name('faq');
+
+// ! Route vers la page de connexion
+Route::view('/connexion', 'login')->name('login');
+
+// ! Route vers la page d'inscription
+Route::view('/inscription', 'register')->name('register');
 
 /* Route pour le panier
 

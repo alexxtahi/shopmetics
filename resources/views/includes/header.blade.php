@@ -12,13 +12,13 @@
                     </div>
                 </div>
                 <div class="ht-right">
-                    <a href="#" class="login-panel"><i class="fa fa-user"></i>Connexion</a>
+                    <a href="{{ route('login') }}" class="login-panel"><i class="fa fa-user"></i>Connexion</a>
                     <div class="lan-selector">
                         <select class="language_drop" name="countries" id="countries" style="width:300px;">
+                            <option value='yu' data-image="{{ asset('fashi/img/flag-4.png') }}" data-imagecss="flag yu"
+                                data-title="Français">Français</option>
                             <option value='yt' data-image="{{ asset('fashi/img/flag-1.jpg') }}" data-imagecss="flag yt"
                                 data-title="English">English</option>
-                            <option value='yu' data-image="{{ asset('fashi/img/flag-4.png') }}" data-imagecss="flag yu"
-                            data-title="Bangladesh">Français</option>
                         </select>
                     </div>
                     <div class="top-social">
@@ -133,18 +133,18 @@
                         </li>
                         <!-- Bouton Blog -->
                         <li @if ($view_name == 'blog') class="active" @endif>
-                            <a href="./blog.html">Blog</a>
+                            <a href="{{ route('blog') }}">Blog</a>
                         </li>
                         <!-- Bouton Contact -->
                         <li @if ($view_name == 'contact') class="active" @endif>
-                            <a href="./contact.html">Contact</a>
+                            <a href="{{ route('contact') }}">Contact</a>
                         </li>
                         <li><a href="#">Pages</a>
                             <ul class="dropdown">
-                                <li><a href="./check-out.html">Panier</a></li>
-                                <li><a href="./faq.html">Faq</a></li>
-                                <li><a href="./register.html">Inscription</a></li>
-                                <li><a href="./login.html">Connexion</a></li>
+                                <li><a href="{{ route('panier') }}">Panier</a></li>
+                                <li><a href="{{ route('faq') }}">F.A.Q</a></li>
+                                <li><a href="{{ route('register') }}">Inscription</a></li>
+                                <li><a href="{{ route('login') }}">Connexion</a></li>
                             </ul>
                         </li>
                     </ul>

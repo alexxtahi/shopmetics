@@ -1,3 +1,6 @@
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+<!-- Fashi styles -->
 <link rel="stylesheet" href="{{ asset('fashi/css/bootstrap.min.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('fashi/css/font-awesome.min.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ asset('fashi/css/themify-icons.css') }}" type="text/css">
