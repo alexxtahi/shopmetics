@@ -15,6 +15,6 @@ class Commande extends Model
         'statut_cmd',
         'id_client',
         'id_moyen_paiement',
-   
+
     ] ;
 }

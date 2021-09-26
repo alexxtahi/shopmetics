@@ -68,7 +68,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        //
+        return $client ;
     }
 
     /**
@@ -91,7 +91,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        $client->update($request->all()) ;
     }
 
     /**
@@ -102,7 +102,9 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        $client->deleteProfilePhoto() ;
+        $client->tokens->each->delete() ;
+        $client->delete() ;
     }
 
 }

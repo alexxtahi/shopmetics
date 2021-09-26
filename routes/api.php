@@ -34,44 +34,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // route pour le client
 Route::apiResource('Client', ClientController::class);
-
-
-
 // route pour l'admin
 Route::apiResource('Admin', AdminController::class);
-
-
-
 // route pour la cart
 Route::apiResource('Cart', CartController::class);
-
-
-
 // route pour la commande
 Route::apiResource('Commande', CommandeController::class);
-
-
-
 // route pour livraison
 Route::apiResource('Livraison', LivraisonController::class);
-
-
-
 // route pour le moyen de paiement
 Route::apiResource('MoyenPaiement', MoyenPaiementController::class);
-
-
-
 // route pour le produit
 Route::apiResource('Produit', ProduitController::class);
-
-
-
 // route pour le clieproduit commander
 Route::apiResource('ProduitCommande', ProduitCommandeController::class);
-
-
-
 // route pour le sous categorie
 Route::apiResource('SousCategorie', SousCategorieController::class);
 
