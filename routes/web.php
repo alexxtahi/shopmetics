@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BoutiqueController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,8 @@ Route::view('/faq', 'faq')->name('faq');
 Route::view('/connexion', 'login')->name('login');
 
 // ! Route vers la page d'inscription
-Route::view('/inscription', 'register')->name('register');
+Route::view('/inscription', 'register')->name('register'); // Page d'sincription
+Route::post('/inscription', [UserController::class, 'store'])->name('register.store'); // Enregistrer un compte
 
 /* Route pour le panier
 

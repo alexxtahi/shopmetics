@@ -14,7 +14,7 @@ class CreateLivraisonsTable extends Migration
     public function up()
     {
         Schema::create('livraisons', function (Blueprint $table) {
-            $table->id('id_livraison');
+            $table->id();
             $table->string('code_livraison');
             // ! Statistiques
 

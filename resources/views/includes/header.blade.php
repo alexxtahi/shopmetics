@@ -35,8 +35,8 @@
                 <div class="row">
                     <div class="col-lg-2 col-md-2">
                         <div class="logo">
-                            <a href="./index.html">
-                                <img src="{{ asset('fashi/img/logo.png') }}" alt="">
+                            <a href="{{ route('home') }}">
+                                <p class="logo-text">Shopmetics<span>.</span></p>
                             </a>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                                 </a>
                             </li>
                             <li class="cart-icon">
-                                <a href="#">
+                                <a href="{{ route('panier') }}">
                                     <i class="icon_bag_alt"></i>
                                    <!--  <span>3</span> -->
                                 </a>
@@ -113,6 +113,21 @@
         <div class="nav-item">
             <div class="container">
                 <div class="nav-depart">
+                    <div class="depart-btn">
+                        <i class="ti-menu"></i>
+                        <span>Voir</span>
+                        <ul class="depart-hover">
+                            <li class="active"><a href="#">Beauté</a></li>
+                            <li><a href="#">Pommade</a></li>
+                            <li><a href="#">Soins</a></li>
+                            <li><a href="#">Huiles</a></li>
+                            <li><a href="#">Santé</a></li>
+                            <li><a href="#">Hygiène</a></li>
+                            <li><a href="#">Savon</a></li>
+                            <li><a href="#">Thé</a></li>
+                        </ul>
+                    </div>
+                </div>
                 <nav class="nav-menu mobile-menu">
                     <ul>
                         <!-- Bouton Accueil -->

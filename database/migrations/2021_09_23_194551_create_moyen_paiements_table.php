@@ -14,7 +14,7 @@ class CreateMoyenPaiementsTable extends Migration
     public function up()
     {
         Schema::create('moyen_paiements', function (Blueprint $table) {
-            $table->id('id_moyen_paiement');
+            $table->id();
             $table->string('lib_moyen_paiement');
             // ! Statistiques
 

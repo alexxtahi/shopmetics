@@ -14,7 +14,7 @@ class CreateProduitCommandesTable extends Migration
     public function up()
     {
         Schema::create('produit_commandes', function (Blueprint $table) {
-            $table->id('id_prod_cmd');
+            $table->id();
             // ! Clés étrangères
             $table->integer('id_prod')->unsigned();
             $table->integer('id_cmd')->unsigned();

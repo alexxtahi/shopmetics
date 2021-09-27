@@ -14,7 +14,7 @@ class CreateSousCategoriesTable extends Migration
     public function up()
     {
         Schema::create('sous_categories', function (Blueprint $table) {
-            $table->id('id_sous_cat');
+            $table->id();
             $table->string('lib_sous_cat')->unique();
             // ! Clé étrangère
             $table->integer('id_cat')->unsigned();

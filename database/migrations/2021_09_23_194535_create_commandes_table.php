@@ -14,7 +14,7 @@ class CreateCommandesTable extends Migration
     public function up()
     {
         Schema::create('commandes', function (Blueprint $table) {
-            $table->id('id_cmd');
+            $table->id();
             $table->dateTime('date_cmd');
             $table->string('statut_cmd');
             // ! Clé étrangère

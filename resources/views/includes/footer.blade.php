@@ -4,12 +4,14 @@
                 <div class="col-lg-3">
                     <div class="footer-left">
                         <div class="footer-logo">
-                            <a href="#"><img src="{{ asset('fashi/img/footer-logo.png') }}" alt=""></a>
+                            <a href="{{ route('home') }}">
+                                <p class="logo-text footer-logo-text">Shopmetics<span>.</span></p>
+                            </a>
                         </div>
                         <ul>
-                            <li>Address: 60-49 Road 11378 New York</li>
-                            <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello.colorlib@gmail.com</li>
+                            <li>Adresse: 60-49 Road 11378 New York</li>
+                            <li>Téléhone: +225 XX XX XX XX XX</li>
+                            <li>Email: shopmetics@gmail.com</li>
                         </ul>
                         <div class="footer-social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
@@ -34,6 +36,7 @@
                     <div class="footer-widget">
                         <h5>Mon compte</h5>
                         <ul>
+                            <!-- On affiche [Mon compte] seulement si l'utilisateur est connecté -->
                             @if (true)
                             <li><a href="{{ route('login') }}">Connexion</a></li>
                             <li><a href="{{ route('register') }}">Inscription</a></li>

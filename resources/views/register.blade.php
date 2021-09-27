@@ -40,18 +40,62 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="register-form">
                         <h2>Inscription</h2>
-                        <form action="#">
+                        <!-- Affichage d'un message en fonction du résultat de l'inscription -->
+                        @if (isset($register_state))
+                            @switch($register_state)
+                                @case('success')
+                                    <div class="alert alert-success" role="alert">
+                                        {{ $register_message }}
+                                    </div>
+                                    @break
+                                @case('warning')
+                                    <div class="alert alert-warning" role="alert">
+                                        {{ $register_message }}
+                                    </div>
+                                    @break
+                                @case('error')
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ $register_message }}
+                                    </div>
+                                    @break
+                                @default
+                            @endswitch
+                        @endif
+                        <!-- Formulaire d'inscription -->
+                        <form method="POST" action="{{ route('register.store') }}">
+                        @method('POST')
+                        @csrf
                             <div class="group-input">
-                                <label for="username">Nom d'utilisateur / Adresse Mail *</label>
-                                <input type="text" id="username">
+                                <label for="name">Nom</label>
+                                <input type="text" id="name" name="name" required>
                             </div>
                             <div class="group-input">
-                                <label for="pass">Mot de passe *</label>
-                                <input type="password" id="pass">
+                                <label for="lastname">Prénom</label>
+                                <input type="text" id="lastname" name="lastname" required>
                             </div>
                             <div class="group-input">
-                                <label for="con-pass">Confirmer le mot de passe *</label>
-                                <input type="password" id="con-pass">
+                                <label for="email">Adresse Mail</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="group-input">
+                                <label for="contact">Contact</label>
+                                <input type="tel" id="contact" name="contact">
+                            </div>
+                            <div class="group-input">
+                                <label for="ville">Ville</label>
+                                <input type="text" id="ville" name="ville" required>
+                            </div>
+                            <div class="group-input">
+                                <label for="commune">Commune</label>
+                                <input type="text" id="commune" name="commune" required>
+                            </div>
+                            <div class="group-input">
+                                <label for="password">Mot de passe</label>
+                                <input type="password" id="password" name="password" required>
+                            </div>
+                            <div class="group-input">
+                                <label for="confirm-password">Confirmer le mot de passe</label>
+                                <input type="password" id="confirm-password" name="confirm-password" required>
                             </div>
                             <button type="submit" class="site-btn register-btn">S'INSCRIRE</button>
                         </form>
