@@ -12,13 +12,13 @@
                     </div>
                 </div>
                 <div class="ht-right">
-                    <a href="#" class="login-panel"><i class="fa fa-user"></i>Connexion</a>
+                    <a href="{{ route('login') }}" class="login-panel"><i class="fa fa-user"></i>Connexion</a>
                     <div class="lan-selector">
                         <select class="language_drop" name="countries" id="countries" style="width:300px;">
+                            <option value='yu' data-image="{{ asset('fashi/img/flag-4.png') }}" data-imagecss="flag yu"
+                                data-title="Français">Français</option>
                             <option value='yt' data-image="{{ asset('fashi/img/flag-1.jpg') }}" data-imagecss="flag yt"
                                 data-title="English">English</option>
-                            <option value='yu' data-image="{{ asset('fashi/img/flag-4.png') }}" data-imagecss="flag yu"
-                            data-title="Bangladesh">Français</option>
                         </select>
                     </div>
                     <div class="top-social">
@@ -35,8 +35,8 @@
                 <div class="row">
                     <div class="col-lg-2 col-md-2">
                         <div class="logo">
-                            <a href="./index.html">
-                                <img src="{{ asset('fashi/img/logo.png') }}" alt="">
+                            <a href="{{ route('home') }}">
+                                <p class="logo-text">Shopmetics<span>.</span></p>
                             </a>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                                 </a>
                             </li>
                             <li class="cart-icon">
-                                <a href="#">
+                                <a href="{{ route('panier') }}">
                                     <i class="icon_bag_alt"></i>
                                    <!--  <span>3</span> -->
                                 </a>
@@ -113,10 +113,32 @@
         <div class="nav-item">
             <div class="container">
                 <div class="nav-depart">
+                    <div class="depart-btn">
+                        <i class="ti-menu"></i>
+                        <span>Voir</span>
+                        <ul class="depart-hover">
+                            <li class="active"><a href="#">Beauté</a></li>
+                            <li><a href="#">Pommade</a></li>
+                            <li><a href="#">Soins</a></li>
+                            <li><a href="#">Huiles</a></li>
+                            <li><a href="#">Santé</a></li>
+                            <li><a href="#">Hygiène</a></li>
+                            <li><a href="#">Savon</a></li>
+                            <li><a href="#">Thé</a></li>
+                        </ul>
+                    </div>
+                </div>
                 <nav class="nav-menu mobile-menu">
                     <ul>
-                        <li class="active"><a href="{{ route('home') }}">Acceuil</a></li>
-                        <li><a href="{{ route('boutique') }}">Boutique</a></li>
+                        <!-- Bouton Accueil -->
+                        <li @if ($view_name == 'home') class="active" @endif>
+                            <a href="{{ route('home') }}">Acceuil</a>
+                        </li>
+                        <!-- Bouton Boutique -->
+                        <li @if ($view_name == 'boutique') class="active" @endif>
+                            <a href="{{ route('boutique') }}">Boutique</a>
+                        </li>
+                        <!-- Bouton Accueil -->
                         <li><a href="#">Collection</a>
                             <ul class="dropdown">
                                 <li><a href="#">Beauté</a></li>
@@ -124,14 +146,20 @@
                                 <li><a href="#">Santé</a></li>
                             </ul>
                         </li>
-                        <li><a href="./blog.html">Blog</a></li>
-                        <li><a href="./contact.html">Contact</a></li>
+                        <!-- Bouton Blog -->
+                        <li @if ($view_name == 'blog') class="active" @endif>
+                            <a href="{{ route('blog') }}">Blog</a>
+                        </li>
+                        <!-- Bouton Contact -->
+                        <li @if ($view_name == 'contact') class="active" @endif>
+                            <a href="{{ route('contact') }}">Contact</a>
+                        </li>
                         <li><a href="#">Pages</a>
                             <ul class="dropdown">
-                                <li><a href="./check-out.html">Panier</a></li>
-                                <li><a href="./faq.html">Faq</a></li>
-                                <li><a href="./register.html">Inscription</a></li>
-                                <li><a href="./login.html">Connexion</a></li>
+                                <li><a href="{{ route('panier') }}">Panier</a></li>
+                                <li><a href="{{ route('faq') }}">F.A.Q</a></li>
+                                <li><a href="{{ route('register') }}">Inscription</a></li>
+                                <li><a href="{{ route('login') }}">Connexion</a></li>
                             </ul>
                         </li>
                     </ul>

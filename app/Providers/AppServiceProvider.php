@@ -23,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Passer le nom de la vue actuelle à toutes les pages
+        view()->composer('*', function ($view) {
+            $view_name = str_replace('.', '-', $view->getName());
+            view()->share('view_name', $view_name);
+        });
     }
 }

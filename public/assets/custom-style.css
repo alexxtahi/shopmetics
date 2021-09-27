@@ -1,3 +1,17 @@
 #maxamount {
     max-width: 30% !important;
 }
+
+.logo-text {
+    color: black;
+    font-weight: 900;
+    font-size: 24px;
+}
+
+.logo-text span {
+    color: #e7ab3c;
+}
+
+.footer-logo-text {
+    color: white;
+}

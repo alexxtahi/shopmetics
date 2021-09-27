@@ -1,15 +1,10 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="FR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Fashi Template">
-    <meta name="keywords" content="Fashi, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Shopmetics | Boutique</title>
-
-    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <!-- Metas -->
+    @include('includes.meta')
+    <!-- Css Styles -->
     @include('includes.css')
 </head>
 
@@ -19,7 +14,9 @@
         <div class="loader"></div>
     </div>
 
+    <!-- Header Section Begin -->
     @include('includes.header')
+    <!-- Header Section End -->
 
 
     <!-- Breadcrumb Section Begin -->
@@ -28,7 +25,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <a href="#"><i class="fa fa-home"></i> Accueil</a>
+                        <a href="{{ route('home') }}"><i class="fa fa-home"></i> Accueil</a>
                         <span>Boutique</span>
                     </div>
                 </div>
@@ -187,7 +184,7 @@
                                     <div class="pi-pic">
                                         <img src= "{{ asset('fashi/img/products/product-1.jpg') }}"  alt="">
                                         <!-- Afficher la bannière promo si le produit est en promotion -->
-                                        @if ($produit)
+                                        @if ($produit->en_promo == true)
                                         <div class="sale pp-sale">Sale</div>
                                         @endif
                                         <div class="icon">
@@ -204,13 +201,17 @@
                                         </ul>
                                     </div>
                                     <div class="pi-text">
-                                        <div class="catagory-name">Towel</div>
+                                        <div class="catagory-name">{{ $produit->lib_cat }}</div>
                                         <a href="#">
-                                            <h5>Pure Pineapple</h5>
+                                            <h5>{{ $produit->designation }}</h5>
                                         </a>
                                         <div class="product-price">
-                                            $14.00
-                                            <span>$35.00</span>
+                                            <!-- Prix actuel -->
+                                            {{ $produit->prix_prod }} FCFA
+                                            <!-- Ancien prix -->
+                                            @if ($produit->ancien_prix != $produit->prix_prod)
+                                            <span>{{ $produit->ancien_prix }} FCFA</span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -257,12 +258,8 @@
         </div>
     </div>
 
-
     <!-- Footer Section -->
     @include('includes.footer')
-
-
-
     <!-- Js Plugins -->
     @include('includes.js')
 </body>

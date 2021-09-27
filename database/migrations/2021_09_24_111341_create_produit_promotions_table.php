@@ -14,7 +14,7 @@ class CreateProduitPromotionsTable extends Migration
     public function up()
     {
         Schema::create('produit_promotions', function (Blueprint $table) {
-            $table->id('id_prod_promo');
+            $table->id();
             // ! Clés étrangères
             $table->integer('id_prod')->unsigned();
             $table->integer('id_promo')->unsigned();

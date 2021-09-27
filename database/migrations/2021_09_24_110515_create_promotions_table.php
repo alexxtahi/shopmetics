@@ -14,7 +14,7 @@ class CreatePromotionsTable extends Migration
     public function up()
     {
         Schema::create('promotions', function (Blueprint $table) {
-            $table->id('id_promo');
+            $table->id();
             // ! Attributs
             $table->string('code_promo');
             $table->string('titre_promo');
