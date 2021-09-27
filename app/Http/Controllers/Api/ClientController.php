@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Client;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Client ;
+
 
 class ClientController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $client = Client::All() ;
+        $array = Response()->json($client) ;
+        $reponse = compact("array") ;
+        return $reponse ;
     }
 
     /**
@@ -33,15 +33,14 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
     public function store(Request $input)
     {
-        $input ->Validate([
+        $input ->validate([
 
-            "nom_client" => "required|string|max:255|unique:Client,name",
-            "prenom_client" => "required|string|max:255|unique:Client,name",
+            "nom_client" => "required|string|max:255",
+            "prenom_client" => "required|string|max:255",
             "contact_client" => "required|string|max:20",
-            "email_client" => "required|email|max:255|unique:Client,email",
+            "email_client" => "required|email|max:255",
             "ville" => "required|string|max:225",
             "commune" => "required|string|max:255",
 
@@ -57,12 +56,9 @@ class ClientController extends Controller
             "commune" => $input -> commune ,
 
         ]);
+
+
     }
-
-
-
-
-
 
     /**
      * Display the specified resource.
@@ -75,11 +71,6 @@ class ClientController extends Controller
         return $client ;
     }
 
-
-
-
-
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -90,9 +81,6 @@ class ClientController extends Controller
     {
         //
     }
-
-
-
 
     /**
      * Update the specified resource in storage.
@@ -105,10 +93,6 @@ class ClientController extends Controller
     {
         $client->update($request->all()) ;
     }
-
-
-
-
 
     /**
      * Remove the specified resource from storage.
@@ -123,7 +107,4 @@ class ClientController extends Controller
         $client->delete() ;
     }
 
-
 }
-
-

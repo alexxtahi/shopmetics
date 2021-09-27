@@ -7,5 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Admin extends Model
 {
-    use HasFactory;
+    // use HasFactory;
+
+    protected $fillable = [
+
+        'nom_admin',
+        'prenom_admin',
+        'contact_cadmin',
+        'email_admin',
+    ] ;
 }
