@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Categorie extends Model
 {
-    // use HasFactory;
+    //use HasFactory;
 
-    protected $fillable = [
+   protected $fillable = [
 
         'lib_cat',
 

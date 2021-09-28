@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class SousCategorie extends Model
 {
-    // use HasFactory;
+    //use HasFactory;
 
     protected $fillable = [
 
         'lib_sous_cat',
         'id_cat',
-        
+
     ] ;
 }

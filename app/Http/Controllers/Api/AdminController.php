@@ -11,10 +11,8 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $admin = Admin::All() ;
-        $array = Response()->json($admin) ;
-        $reponse = compact("array") ;
-        return $reponse ;
+
+        return response()->json(Admin::all()) ;
     }
 
     public function store(Request $input)
@@ -82,8 +80,6 @@ class AdminController extends Controller
      */
     public function destroy(Admin $admin)
     {
-        $admin->deleteProfilePhoto() ;
-        $admin->tokens->each->delete() ;
         $admin->delete() ;
     }
 }

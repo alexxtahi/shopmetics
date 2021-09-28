@@ -764,7 +764,7 @@ ol {
 }
 
 .nav-item .nav-menu li.active a {
-    background: #e7ab3c;
+    background: #28CF07;
 }
 
 .nav-item .nav-menu li a {
@@ -781,7 +781,7 @@ ol {
 }
 
 .nav-item .nav-menu li:hover>a {
-    background: #e7ab3c;
+    background: #28CF07;
 }
 
 .nav-item .nav-menu li:hover .dropdown {
@@ -796,7 +796,7 @@ ol {
     top: 82px;
     width: 200px;
     z-index: 99;
-    background: #252525;
+    background: #28CF07;
     opacity: 0;
     visibility: hidden;
     -webkit-transition: all 0.3s;
@@ -4159,7 +4159,7 @@ ol {
         margin-top: -48px;
     }
     .slicknav_nav {
-        background: #333;
+        background: #28CF07;
     }
     .slicknav_nav ul {
         margin: 0;
