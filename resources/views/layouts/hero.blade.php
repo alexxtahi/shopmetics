@@ -4,9 +4,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
-                            <h1> Bienvenue</h1>
+                            <h1>Bienvenue</h1>
                             <p>
-                                Bienvenue sur shopmetics la référence des produits de beauté, de soin personnel.....
+                                Bienvenue sur shopmetics la référence des produits de beauté et de soin personnel !
                             </p>
                             <a href="#" class="primary-btn">Achetez maintenant</a>
                         </div>
@@ -22,7 +22,7 @@
                         <div class="col-lg-5">
                             <h1>Services</h1>
                             <p>
-                                shopmetics met à votre disposition des produits  de qualité à votre disposition.
+                                Shopmetics met à votre disposition des produits de qualité livrés dans les plus brefs délais.
                             </p>
                             <a href="#" class="primary-btn">Achetez maintenant</a>
                         </div>

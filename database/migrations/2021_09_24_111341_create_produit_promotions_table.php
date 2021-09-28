@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdminsTable extends Migration
+class CreateProduitPromotionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateAdminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
-            $table->id('id_admin');
-            $table->string('nom_admin');
-            $table->string('prenom_admin');
-            $table->string('contact_admin');
-            $table->string('email_admin');
+        Schema::create('produit_promotions', function (Blueprint $table) {
+            $table->id();
+            // ! Clés étrangères
+            $table->integer('id_prod')->unsigned();
+            $table->integer('id_promo')->unsigned();
+            // ! Attributs
+            $table->integer('qte_prod_promo');
+            $table->integer('prix_prod_promo');
             // ! Statistiques
-
-
             $table->dateTime('deleted_at')->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
             $table->integer('deleted_by')->unsigned()->nullable();
@@ -37,6 +37,6 @@ class CreateAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('produit_promotions');
     }
 }

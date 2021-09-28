@@ -21,6 +21,7 @@ class ClientFactory extends Factory
      */
     public function definition()
     {
+        /*
         return [
             // ! Properties of fakes datas
             'nom_client' => $this->faker->name(),
@@ -30,5 +31,6 @@ class ClientFactory extends Factory
             'ville' => $this->faker->country(),
             'commune' => $this->faker->city(),
         ];
+        */
     }
 }

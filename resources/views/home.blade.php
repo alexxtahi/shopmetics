@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="product-large set-bg" data-setbg="{{ asset('fashi/img/products/women-large.jpg') }}">
-                        <h2>Women’s</h2>
+                        <h2>Femmes</h2>
                         <a href="#">Découvrir plus</a>
                     </div>
                 </div>
@@ -20,30 +20,8 @@
                         </ul>
                     </div>
                     <div class="product-slider owl-carousel">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="{{ asset('fashi/img/products/women-1.jpg') }}" alt="">
-                                <div class="sale">Sale</div>
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Coat</div>
-                                <a href="#">
-                                    <h5>Pure Pineapple</h5>
-                                </a>
-                                <div class="product-price">
-                                    $14.00
-                                    <span>$35.00</span>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- Récupération des produits depuis la base de données -->
+                        @foreach ($produits as $produit)
                         <div class="product-item">
                             <div class="pi-pic">
                                 <img src="{{ asset('fashi/img/products/women-2.jpg') }}" alt="">
@@ -52,64 +30,23 @@
                                 </div>
                                 <ul>
                                     <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                    <li class="quick-view"><a href="#">+ Aperçu</a></li>
                                     <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
                                 </ul>
                             </div>
                             <div class="pi-text">
                                 <div class="catagory-name">Shoes</div>
+                                <!-- Désignation du produti -->
                                 <a href="#">
-                                    <h5>Guangzhou sweater</h5>
+                                    <h5>{{ $produit->designation }}</h5>
                                 </a>
+                                <!-- Prix du produti -->
                                 <div class="product-price">
-                                    $13.00
+                                    {{ $produit->prix_prod }} FCFA
                                 </div>
                             </div>
                         </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="{{ asset('fashi/img/products/women-3.jpg') }}" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
-                                <a href="#">
-                                    <h5>Pure Pineapple</h5>
-                                </a>
-                                <div class="product-price">
-                                    $34.00
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="{{ asset('fashi/img/products/women-4.jpg') }}" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
-                                <a href="#">
-                                    <h5>Converse Shoes</h5>
-                                </a>
-                                <div class="product-price">
-                                    $34.00
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -122,29 +59,30 @@
         <div class="container">
             <div class="col-lg-6 text-center">
                 <div class="section-title">
-                    <h2>Deal Of The Week</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed<br /> do ipsum dolor sit amet,
-                        consectetur adipisicing elit </p>
+                    <h2>Promo de la semaine</h2>
+                    <p>
+                        Ne manquez pas notre promotion de la semaine ! Elle se termine bientôt.
+                    </p>
                     <div class="product-price">
-                        $35.00
-                        <span>/ HanBag</span>
+                        15 000 FCFA
+                        <span>/ Sac de voyage</span>
                     </div>
                 </div>
                 <div class="countdown-timer" id="countdown">
                     <div class="cd-item">
-                        <span>56</span>
-                        <p>Days</p>
+                        <span>100</span>
+                        <p>Jours</p>
                     </div>
                     <div class="cd-item">
-                        <span>12</span>
+                        <span>24</span>
                         <p>Hrs</p>
                     </div>
                     <div class="cd-item">
-                        <span>40</span>
+                        <span>00</span>
                         <p>Mins</p>
                     </div>
                     <div class="cd-item">
-                        <span>52</span>
+                        <span>00</span>
                         <p>Secs</p>
                     </div>
                 </div>
@@ -168,101 +106,38 @@
                         </ul>
                     </div>
                     <div class="product-slider owl-carousel">
+                        <!-- Récupération des produits depuis la base de données -->
+                        @foreach ($produits as $produit)
                         <div class="product-item">
                             <div class="pi-pic">
-                                <img src="{{ asset('fashi/img/products/man-1.jpg') }}" alt="">
-                                <div class="sale">Sale</div>
+                                <img src="{{ asset('fashi/img/products/women-2.jpg') }}" alt="">
                                 <div class="icon">
                                     <i class="icon_heart_alt"></i>
                                 </div>
                                 <ul>
                                     <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Coat</div>
-                                <a href="#">
-                                    <h5>Pure Pineapple</h5>
-                                </a>
-                                <div class="product-price">
-                                    $14.00
-                                    <span>$35.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="{{ asset('fashi/img/products/man-2.jpg') }}" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                    <li class="quick-view"><a href="#">+ Aperçu</a></li>
                                     <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
                                 </ul>
                             </div>
                             <div class="pi-text">
                                 <div class="catagory-name">Shoes</div>
+                                <!-- Désignation du produti -->
                                 <a href="#">
-                                    <h5>Guangzhou sweater</h5>
+                                    <h5>{{ $produit->designation }}</h5>
                                 </a>
+                                <!-- Prix du produti -->
                                 <div class="product-price">
-                                    $13.00
+                                    {{ $produit->prix_prod }} FCFA
                                 </div>
                             </div>
                         </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="{{ asset('fashi/img/products/man-3.jpg') }}" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
-                                <a href="#">
-                                    <h5>Pure Pineapple</h5>
-                                </a>
-                                <div class="product-price">
-                                    $34.00
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="{{ asset('fashi/img/products/man-4.jpg') }}" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
-                                <a href="#">
-                                    <h5>Converse Shoes</h5>
-                                </a>
-                                <div class="product-price">
-                                    $34.00
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-lg-3 offset-lg-1">
                     <div class="product-large set-bg m-large" data-setbg="{{ asset('fashi/img/products/man-large.jpg') }}">
-                        <h2>Men’s</h2>
+                        <h2>Hommes</h2>
                         <a href="#">Decouvrir plus</a>
                     </div>
                 </div>
@@ -318,7 +193,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>From The Blog</h2>
+                        <h2>Blog</h2>
                     </div>
                 </div>
             </div>

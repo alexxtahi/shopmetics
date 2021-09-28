@@ -31,6 +31,7 @@ class ProduitFactory extends Factory
             'ancien_prix' => $this->faker->numberBetween(1, 100000),
             'id_cat' => $this->faker->numberBetween(1, 5),
             'id_sous_cat' => $this->faker->numberBetween(1, 5),
+            'en_promo' => array_rand([true, false]),
         ];
     }
 }

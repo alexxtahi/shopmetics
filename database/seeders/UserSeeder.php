@@ -14,24 +14,37 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // Admin
+        // Concepteur 1
         DB::table('users')->insert([
-            'name' => "Admin",
-            'login' => "Admin",
-            'password' => bcrypt('password'),
+            'nom' => "TAHI",
+            'prenom' => "Alexandre",
+            'password' => bcrypt('#Xcoders2021'),
+            'role' => 'Concepteur',
+            'email' => 'alexandretahi7@gmail.com',
+            'email_verified_at' => now(),
+            'created_at' => now(),
+        ]);
+
+        // Concepteur 2
+        DB::table('users')->insert([
+            'nom' => "TANOH",
+            'prenom' => "Olivier",
+            'password' => bcrypt('#Xcoders2021'),
+            'role' => 'Concepteur',
+            'email' => 'bouadoutanoh9@gmail.com',
+            'email_verified_at' => now(),
+            'created_at' => now(),
+        ]);
+
+        // Default Admin
+        DB::table('users')->insert([
+            'nom' => "Admin",
+            'prenom' => "Admin",
+            'password' => bcrypt('Admin'),
             'role' => 'Admin',
             'email' => 'admin@admin.com',
             'email_verified_at' => now(),
-        ]);
-
-        // Client 1
-        DB::table('users')->insert([
-            'name' => "Client",
-            'login' => "Client",
-            'password' => bcrypt('password'),
-            'role' => 'Client',
-            'email' => 'client@client.com',
-            'email_verified_at' => now(),
+            'created_at' => now(),
         ]);
     }
 }

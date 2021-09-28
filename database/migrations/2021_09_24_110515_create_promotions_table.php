@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProduitCommandesTable extends Migration
+class CreatePromotionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateProduitCommandesTable extends Migration
      */
     public function up()
     {
-        Schema::create('produit_commandes', function (Blueprint $table) {
+        Schema::create('promotions', function (Blueprint $table) {
             $table->id();
-            // ! Clés étrangères
-            $table->integer('id_prod')->unsigned();
-            $table->integer('id_cmd')->unsigned();
             // ! Attributs
-            $table->integer('qte_cmd');
-            $table->integer('prix_prod_actuel');
+            $table->string('code_promo');
+            $table->string('titre_promo');
+            $table->dateTime('date_debut');
+            $table->dateTime('date_fin');
             // ! Statistiques
             $table->dateTime('deleted_at')->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
@@ -37,6 +36,6 @@ class CreateProduitCommandesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produit_commandes');
+        Schema::dropIfExists('promotions');
     }
 }
