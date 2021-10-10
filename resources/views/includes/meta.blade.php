@@ -1,4 +1,5 @@
 <meta charset="UTF-8">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <meta name="description" content="Shopmetics">
 <meta name="keywords" content="e-commerce, soin, beauté, pommade, huile, boutique">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
