@@ -31,6 +31,8 @@ use App\Http\Controllers\Controller;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 //Route::get('/', 'HomeController@index');
 
+Route::get('/search', [ProduitController::class, 'search'])->name('products.search') ;
+
 // ! Route vers la boutique
 Route::get('/boutique', [BoutiqueController::class, 'index'])->name('boutique');
 
