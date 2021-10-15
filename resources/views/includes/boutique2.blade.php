@@ -217,6 +217,7 @@
                                 </div>
                             </div>
                             @endforeach
+                            {{ $products ->appends(request()->input())->links() }}
                         </div>
                     </div>
                 </div>

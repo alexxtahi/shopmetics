@@ -40,15 +40,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-7 col-md-7">
-                        <div class="advanced-search">
-                            <button type="button" class="category-btn">Catégories</button>
-                            <div class="input-group">
-                                <input type="text" placeholder="Que cherchez vous ? ">
-                                <button type="button"><i class="ti-search"></i></button>
-                            </div>
-                        </div>
-                    </div>
+                    @include('includes.search')
                     <div class="col-lg-3 text-right col-md-3">
                         <ul class="nav-right">
                             <li class="heart-icon">
@@ -138,14 +130,6 @@
                         <li @if ($view_name == 'boutique') class="active" @endif>
                             <a href="{{ route('boutique') }}">Boutique</a>
                         </li>
-                        <!-- Bouton Accueil -->
-                        <li><a href="#">Collection</a>
-                            <ul class="dropdown">
-                                <li><a href="#">Beauté</a></li>
-                                <li><a href="#">Hygiène</a></li>
-                                <li><a href="#">Santé</a></li>
-                            </ul>
-                        </li>
                         <!-- Bouton Blog -->
                         <li @if ($view_name == 'blog') class="active" @endif>
                             <a href="{{ route('blog') }}">Blog</a>
@@ -154,13 +138,7 @@
                         <li @if ($view_name == 'contact') class="active" @endif>
                             <a href="{{ route('contact') }}">Contact</a>
                         </li>
-                        <li><a href="#">Pages</a>
-                            <ul class="dropdown">
-                                <li><a href="{{ route('panier') }}">Panier</a></li>
-                                <li><a href="{{ route('faq') }}">F.A.Q</a></li>
-                                <li><a href="{{ route('register') }}">Inscription</a></li>
-                                <li><a href="{{ route('login') }}">Connexion</a></li>
-                            </ul>
+                        <li><a href="{{ route('faq') }}">F.A.Q</a>
                         </li>
                     </ul>
                 </nav>

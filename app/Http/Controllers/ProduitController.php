@@ -82,4 +82,15 @@ class ProduitController extends Controller
     {
         //
     }
+
+    public function search(){
+
+        $request = request()->input('var') ;
+        $myproduit = Produit::where('designation', 'like', "%$request");
+
+
+        return view('boutique2')->with('myproduit', $myproduit) ;
+
+
+    }
 }
