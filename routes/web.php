@@ -24,6 +24,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // ! Route vers le tableau de bord
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
+Route::get('/search', [ProduitController::class, 'search'])->name('products.search') ;
+
 // ! Route vers la boutique
 Route::get('/boutique', [BoutiqueController::class, 'index'])->name('boutique');
 

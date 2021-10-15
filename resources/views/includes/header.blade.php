@@ -66,7 +66,10 @@
                 <div class="col-lg-3 text-right col-md-3">
                     <ul class="nav-right">
                         <!-- Si l'admin est connecté -->
-                        @if (Auth::check() && (Auth::user()->role == "Administrateur" || Auth::user()->role == "Dev"))
+                        <!--if (Auth::check() && (Auth::user()->role == "Administrateur" || Auth::user()->role == "Dev"))-->
+                    @include('partials.search')
+                    <div class="col-lg-3 text-right col-md-3">
+                        <ul class="nav-right">
                             <li class="heart-icon">
                                 <a href="{{ route('dashboard') }}">
                                     <i class="icon_toolbox_alt"></i>

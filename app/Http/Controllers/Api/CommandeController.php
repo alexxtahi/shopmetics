@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Commande ;
+use Illuminate\Console\Command;
 
 class CommandeController extends Controller
 {
@@ -15,10 +16,7 @@ class CommandeController extends Controller
      */
     public function index()
     {
-        $commande = Commande::All() ;
-        $array = Response()->json($commande) ;
-        $reponse = compact("array") ;
-        return $reponse ;
+        return response()->json(Command::all()) ;
     }
 
     /**

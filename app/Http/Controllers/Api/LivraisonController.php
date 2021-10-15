@@ -17,10 +17,7 @@ class LivraisonController extends Controller
      */
     public function index()
     {
-        $livraison = Livraison::All() ;
-        $array = Response()->json($livraison) ;
-        $reponse = compact("array") ;
-        return $reponse ;
+        return response()->json(Livraison::all()) ;
     }
 
     /**

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="FR">
 
 <head>
     <!-- Metas -->
@@ -43,9 +43,7 @@
                         <h4 class="fw-title">Catégories</h4>
                         <ul class="filter-catagories">
                             <!-- Récupération des catégories depuis la base de données -->
-                            @foreach ($categories as $categorie)
-                            <li><a href="#">{{ $categorie->lib_cat }}</a></li>
-                            @endforeach
+
                         </ul>
                     </div>
                     <!--
@@ -200,7 +198,7 @@
                                         </ul>
                                     </div>
                                     <div class="pi-text">
-                                        <div class="catagory-name"><!-- {$produit->lib_cat }--></div>
+                                        <div class="catagory-name">{{ $produit->lib_cat }}</div>
                                         <a href="#">
                                             <h5>{{ $produit->designation }}</h5>
                                         </a>

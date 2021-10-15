@@ -15,10 +15,7 @@ class MoyenPaiementController extends Controller
      */
     public function index()
     {
-        $moyenPaiement = MoyenPaiement::All() ;
-        $array = Response()->json($moyenPaiement) ;
-        $reponse = compact("array") ;
-        return $reponse ;
+        return response()->json(MoyenPaiement::all()) ;
     }
 
      /**

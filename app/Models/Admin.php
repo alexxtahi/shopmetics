@@ -5,12 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Livraison extends Model
+class Admin extends Model
 {
     //use HasFactory;
 
     protected $fillable = [
 
-        'code_livraison',
+        'nom_admin',
+        'prenom_admin',
+        'contact_cadmin',
+        'email_admin',
     ] ;
 }
