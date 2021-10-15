@@ -40,7 +40,7 @@
                             </a>
                         </div>
                     </div>
-                    @include('includes.search')
+                    @include('partials.search')
                     <div class="col-lg-3 text-right col-md-3">
                         <ul class="nav-right">
                             <li class="heart-icon">

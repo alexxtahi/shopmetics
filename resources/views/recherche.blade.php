@@ -43,9 +43,7 @@
                         <h4 class="fw-title">Catégories</h4>
                         <ul class="filter-catagories">
                             <!-- Récupération des catégories depuis la base de données -->
-                            @foreach ($categories as $categorie)
-                            <li><a href="#">{{ $categorie->lib_cat }}</a></li>
-                            @endforeach
+
                         </ul>
                     </div>
                     <!--
@@ -191,10 +189,9 @@
                                             <i class="icon_heart_alt"></i>
                                         </div>
                                         <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-
                                             <!-- Rajouter les accolades pour que ça marche -->
                                             <form action="{ route('cart.store') }" method="POST">
+                                                <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
                                                 <li class="quick-view"><a href="#">+ Ajouter au panier</a></li>
                                             </form>
 
@@ -217,7 +214,6 @@
                                 </div>
                             </div>
                             @endforeach
-                            {{ $products ->appends(request()->input())->links() }}
                         </div>
                     </div>
                 </div>

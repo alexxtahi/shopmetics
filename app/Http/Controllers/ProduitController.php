@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Produit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB ;
 
 class ProduitController extends Controller
 {
@@ -85,11 +86,15 @@ class ProduitController extends Controller
 
     public function search(){
 
-        $request = request()->input('var') ;
-        $myproduit = Produit::where('designation', 'like', "%$request");
+        $q = request()->input('q') ;
+
+        //$produits = Produit::where('designation', 'Like', "$q");
+
+        $produits = DB::table('produits')->where('designation', 'Like', "%$q%")->get();
+        $categories = DB::table('categories')->get();
 
 
-        return view('boutique2')->with('myproduit', $myproduit) ;
+        return view('boutique')->with('produits', $produits)->with('categories', $categories);
 
 
     }
