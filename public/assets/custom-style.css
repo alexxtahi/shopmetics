@@ -23,3 +23,17 @@
 .login-panel {
     padding: 18px 20px !important;
 }
+
+.admin-footer {
+    /*position: absolute;
+    bottom: 0;*/
+}
+
+.best-products-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin-searchbar {
+    min-height: 44px !important;
+}

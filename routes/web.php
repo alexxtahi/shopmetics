@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BoutiqueController;
@@ -21,9 +22,7 @@ require __DIR__ . '/auth.php';
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // ! Route vers le tableau de bord
-Route::get('/dashboard', function () {
-    return view('admin.admin-dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 // ! Route vers la boutique
 Route::get('/boutique', [BoutiqueController::class, 'index'])->name('boutique');

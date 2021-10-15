@@ -10,3 +10,6 @@
 <!-- Template CSS -->
 <link rel="stylesheet" href="{{ asset('stisla/assets/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('stisla/assets/css/components.css') }}">
+
+<!-- App styles -->
+<link rel="stylesheet" href="{{ asset('assets/custom-style.css') }}" type="text/css">

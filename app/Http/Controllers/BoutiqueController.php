@@ -18,7 +18,7 @@ class BoutiqueController extends Controller
     {
         // Récupération des produits
         $produits = Produit::where('produits.deleted_at', null)
-            ->join('categories', 'categories.id_cat', '=', 'produits.id_cat') // Jointure avec les catégories
+            ->join('categories', 'categories.id', '=', 'produits.id_cat') // Jointure avec les catégories
             ->select('produits.*', 'categories.lib_cat as lib_cat') // Choix de ce qu'on veut récupérer dans la requête
             ->get();
         // Récupération des categories

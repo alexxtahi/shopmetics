@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // Concepteur 1
+        // Dev 1
         DB::table('users')->insert([
             'nom' => "TAHI",
             'prenom' => "Alexandre",
@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             'created_at' => now(),
         ]);
 
-        // Concepteur 2
+        // Dev 2
         DB::table('users')->insert([
             'nom' => "TANOH",
             'prenom' => "Olivier",
