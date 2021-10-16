@@ -4,8 +4,9 @@ use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BoutiqueController;
-// Importation des resources d'authentification
+// Importation des routes externes
 require __DIR__ . '/auth.php';
+require __DIR__ . '/shop.php';
 
 /*
 |--------------------------------------------------------------------------

@@ -37,3 +37,15 @@
 .admin-searchbar {
     min-height: 44px !important;
 }
+
+.custom-search-btn {
+    right: -35px !important;
+}
+
+.custom-search-form {
+    height: 47px;
+}
+
+.filter-btn {
+    border: none;
+}

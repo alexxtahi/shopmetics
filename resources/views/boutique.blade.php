@@ -44,7 +44,7 @@
                         <ul class="filter-catagories">
                             <!-- Récupération des catégories depuis la base de données -->
                             @foreach ($categories as $categorie)
-                            <li><a href="#">{{ $categorie->lib_cat }}</a></li>
+                                <li><a href="#">{{ $categorie->lib_cat }}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -76,24 +76,24 @@
                         </div>
                     </div>
                     -->
-                    <div class="filter-widget">
+                    <form action="{{ route('boutique.filtre-prix') }}" method="POST" class="filter-widget">
                         <h4 class="fw-title">Prix</h4>
                         <div class="filter-range-wrap">
                             <div class="range-slider">
                                 <div class="price-input">
-                                    <input type="text" id="minamount">
-                                    <input type="text" id="maxamount">
+                                    <input type="text" id="minamount" name="minamount">
+                                    <input type="text" id="maxamount" name="maxamount">
                                 </div>
                             </div>
                             <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="30" data-max="5000">
+                                data-min="0" data-max="100000" id="price-filter">
                                 <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                             </div>
                         </div>
-                        <a href="#" class="filter-btn">Filtrer</a>
-                    </div>
+                        <button type="submit" class="filter-btn">Filtrer</button>
+                    </form>
                     <!--
                     <div class="filter-widget">
                         <h4 class="fw-title">Color</h4>
@@ -182,7 +182,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src= "{{ asset('fashi/' . $produit->img_prod) }}"  alt="">
+                                        <img src= "{{ asset($produit->img_prod) }}"  alt="">
                                         <!-- Afficher la bannière promo si le produit est en promotion -->
                                         @if ($produit->en_promo == true)
                                         <div class="sale pp-sale">Sale</div>
@@ -206,10 +206,10 @@
                                         </a>
                                         <div class="product-price">
                                             <!-- Prix actuel -->
-                                            {{ $produit->prix_prod }} FCFA
+                                            {{ number_format($produit->prix_prod, 0, ',', ' ') }} FCFA
                                             <!-- Ancien prix -->
                                             @if ($produit->ancien_prix != $produit->prix_prod)
-                                            <span>{{ $produit->ancien_prix }} FCFA</span>
+                                            <span>{{ number_format($produit->ancien_prix, 0, ',', ' ') }} FCFA</span>
                                             @endif
                                         </div>
                                     </div>

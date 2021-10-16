@@ -23,7 +23,7 @@
                     </form>
                     <a href="#" class="login-panel"><i class="fa fa-user"></i>Bonjour, {{ Auth::user()->nom }} !</a>
                 @else
-                    <a href="{{ route('login') }}"  class="login-panel"><i class="fa fa-user"></i>Connexion</a>
+                    <a href="{{ route('login') }}" class="login-panel"><i class="fa fa-user"></i>Connexion</a>
                 @endif
                 <div class="lan-selector">
                 </div>
@@ -54,22 +54,13 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-7">
-                    <div class="advanced-search">
-                        <button type="button" class="category-btn">Catégories</button>
-                        <div class="input-group">
-                            <input type="text" placeholder="Que cherchez vous ? ">
-                            <button type="button"><i class="ti-search"></i></button>
-                        </div>
-                    </div>
-                </div>
+                <!-- Barre de recherche -->
+                @include('partials.search')
+                <!-- Fin Barre de recherche -->
                 <div class="col-lg-3 text-right col-md-3">
                     <ul class="nav-right">
                         <!-- Si l'admin est connecté -->
-                        <!--if (Auth::check() && (Auth::user()->role == "Administrateur" || Auth::user()->role == "Dev"))-->
-                    @include('partials.search')
-                    <div class="col-lg-3 text-right col-md-3">
-                        <ul class="nav-right">
+                        @if (Auth::check() && (Auth::user()->role == "Administrateur" || Auth::user()->role == "Dev"))
                             <li class="heart-icon">
                                 <a href="{{ route('dashboard') }}">
                                     <i class="icon_toolbox_alt"></i>

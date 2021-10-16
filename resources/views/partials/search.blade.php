@@ -2,12 +2,12 @@
 
     <div class="advanced-search">
         <button type="button" class="category-btn">Catégories</button>
-        <form action="{{ route('products.search') }}">
+        <form class="custom-search-form" action="{{ route('products.search') }}">
             <div class="input-group">
                 <input type="text" name="q" placeholder="Que cherchez vous ? ">
-                <button type="button"><i class="ti-search"></i></button>
+                <button type="button" class="custom-search-btn"><i class="ti-search"></i></button>
             </div>
-    </form>
+        </form>
     </div>
 
 </div>
