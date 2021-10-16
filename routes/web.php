@@ -27,29 +27,45 @@ use App\Http\Controllers\Controller;
 |
 */
 
+// ! Route pour ajouter au panier
+
+
 // ! Route vers l'accueil
 Route::get('/', [HomeController::class, 'index'])->name('home');
 //Route::get('/', 'HomeController@index');
 
+// ! Route pour faire une recherche
 Route::get('/search', [ProduitController::class, 'search'])->name('products.search') ;
+
+// ! Route pour faire une recherche selon la categorie
+Route::get('/categorie', 'ProduitController@cat')->name('products.categorie');
 
 // ! Route vers la boutique
 Route::get('/boutique', [BoutiqueController::class, 'index'])->name('boutique');
 
+
+
 // ! Route vers les contacts
 Route::view('/contact', 'contact')->name('contact');
+
+
 
 // ! Route vers le blog
 Route::view('/blog', 'blog')->name('blog');
 
+
+
 // ! Route vers le panier
 Route::view('/panier', 'panier')->name('panier');
+
 
 // ! Route vers la foire aux questions
 Route::view('/faq', 'faq')->name('faq');
 
+
 // ! Route vers la page de connexion
 Route::view('/connexion', 'login')->name('login');
+
 
 // ! Route vers la page d'inscription
 Route::view('/inscription', 'register')->name('register'); // Page d'sincription
@@ -60,4 +76,4 @@ Route::post('/inscription', [UserController::class, 'store'])->name('register.st
 Route :: post('/panier/ajouter', 'CartController@store')-->name('cart.store') ; */
 
 // ! Route vers le tableau de bord
-Route::view('/admin', 'admin/admin-dashboard')->name('admin');
+Route::view('/admin', 'admin/admin-dashboard')->name('dashboard');

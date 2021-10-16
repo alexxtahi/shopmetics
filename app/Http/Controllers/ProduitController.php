@@ -6,6 +6,8 @@ use App\Models\Produit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB ;
 
+
+
 class ProduitController extends Controller
 {
     /**
@@ -96,6 +98,13 @@ class ProduitController extends Controller
 
         return view('boutique')->with('produits', $produits)->with('categories', $categories);
 
+    }
 
+    public function cat ($var){
+
+        $produits = DB::table('produits')->where('id_cat', 'Like', $var)->get();
+        $categories = DB::table('categories')->get();
+
+        return view('boutique')->with('produits', $produits)->with('categories', $categories);
     }
 }
