@@ -36,15 +36,28 @@
                     <div class="footer-widget">
                         <h5>Mon compte</h5>
                         <ul>
-                            <!-- On affiche [Mon compte] seulement si l'utilisateur est connecté -->
-                            @if (true)
-                            <li><a href="{{ route('login') }}">Connexion</a></li>
-                            <li><a href="{{ route('register') }}">Inscription</a></li>
-                            @else
-                            <li><a href="#">Mon compte</a></li>
-                            @endif
                             <li><a href="{{ route('panier') }}">Panier</a></li>
                             <li><a href="{{ route('boutique') }}">Boutique</a></li>
+                            <!-- On affiche [Mon compte] seulement si l'utilisateur est connecté -->
+                            @if (Auth::check())
+                                <li><a href="#">Mon compte</a></li>
+                                <!-- On affiche [Tableau de bord] seulement si l'utilisateur est connecté -->
+                                @if (Auth::user()->role == "Administrateur" || Auth::user()->role == "Dev")
+                                    <li><a href="{{ route('dashboard') }}">Tableau de bord</a></li>
+                                @endif
+                                <li> <!-- Formulaire de déconnexion -->
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @method('POST')
+                                        @csrf
+                                        <a href="" style="color: #b2b2b2;" onclick="event.preventDefault(); this.closest('form').submit();">
+                                            Déconnexion
+                                        </a>
+                                    </form>
+                                </li>
+                            @else
+                                <li><a href="{{ route('login') }}">Connexion</a></li>
+                                <li><a href="{{ route('register') }}">Inscription</a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>
