@@ -88,15 +88,16 @@ class ProduitController extends Controller
 
     public function search(){
 
-        $q = request()->input('q') ;
+        $request = request()->input('q') ;
+        dd($request) ;
 
         //$produits = Produit::where('designation', 'Like', "$q");
 
-        $produits = DB::table('produits')->where('designation', 'Like', "%$q%")->get();
+        $produits = DB::table('produits')->where('designation', 'Like', "%$request%")->get();
         $categories = DB::table('categories')->get();
 
 
-        return view('boutique')->with('produits', $produits)->with('categories', $categories);
+        //return view('boutique')->with('produits', $produits)->with('categories', $categories);
 
     }
 

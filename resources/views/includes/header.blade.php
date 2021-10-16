@@ -54,20 +54,25 @@
                         </a>
                     </div>
                 </div>
+
                 <div class="col-lg-7 col-md-7">
+                    <form action="{{ route('products.search')}} " >
                     <div class="advanced-search">
                         <button type="button" class="category-btn">Catégories</button>
                         <div class="input-group">
-                            <input type="text" placeholder="Que cherchez vous ? ">
+                            <input type="text" name="q" placeholder="Que cherchez vous ? ">
                             <button type="button"><i class="ti-search"></i></button>
                         </div>
+
                     </div>
+                </form>
                 </div>
+
                 <div class="col-lg-3 text-right col-md-3">
                     <ul class="nav-right">
                         <!-- Si l'admin est connecté -->
                         <!--if (Auth::check() && (Auth::user()->role == "Administrateur" || Auth::user()->role == "Dev"))-->
-                    @include('partials.search')
+
                     <div class="col-lg-3 text-right col-md-3">
                         <ul class="nav-right">
                             <li class="heart-icon">
@@ -76,7 +81,7 @@
                                     <!-- <span>1</span> -->
                                 </a>
                             </li>
-                        @endif
+
                         <li class="heart-icon">
                             <a href="#">
                                 <i class="icon_heart_alt"></i>
