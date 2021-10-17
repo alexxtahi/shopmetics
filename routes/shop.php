@@ -14,5 +14,8 @@ use App\Http\Controllers\BoutiqueController;
 |
 */
 
-// ! Route vers la boutique
-Route::post('/boutique/filtre-prix', [BoutiqueController::class, 'filterProdByPrice'])->name('boutique.filtre-prix');
+// ! Route vers la boutique avec le filtre de prix
+Route::get('/boutique/filtre-prix', [BoutiqueController::class, 'filterProdByPrice'])->name('boutique.filtre-prix');
+
+// ! Route vers la boutique avec le filtre de catégories
+Route::get('/boutique/filtre-categories', [BoutiqueController::class, 'filterProdByCategorie'])->name('boutique.filtre-categorie');

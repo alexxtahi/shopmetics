@@ -1,5 +1,10 @@
+#minamount,
 #maxamount {
-    max-width: 30% !important;
+    max-width: 40% !important;
+}
+
+.price-input:after {
+    left: 112px !important;
 }
 
 .logo-text {
@@ -48,4 +53,8 @@
 
 .filter-btn {
     border: none;
+}
+
+.active-filter {
+    color: #e7ab3c !important;
 }

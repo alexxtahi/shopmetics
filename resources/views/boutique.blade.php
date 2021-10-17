@@ -44,7 +44,11 @@
                         <ul class="filter-catagories">
                             <!-- Récupération des catégories depuis la base de données -->
                             @foreach ($categories as $categorie)
-                                <li><a href="#">{{ $categorie->lib_cat }}</a></li>
+                                @if (isset($_GET['categorie']) && !empty($_GET['categorie']) && $_GET['categorie'] == $categorie->id)
+                                    <li><a href="{{ url('/boutique/filtre-categories?categorie=' . $categorie->id) }}" class="active-filter">{{ $categorie->lib_cat }}</a></li>
+                                @else
+                                    <li><a href="{{ url('/boutique/filtre-categories?categorie=' . $categorie->id) }}">{{ $categorie->lib_cat }}</a></li>
+                                @endif
                             @endforeach
                         </ul>
                     </div>
@@ -76,13 +80,23 @@
                         </div>
                     </div>
                     -->
-                    <form action="{{ route('boutique.filtre-prix') }}" method="POST" class="filter-widget">
+                    <form action="{{ route('boutique.filtre-prix') }}" method="GET" class="filter-widget">
                         <h4 class="fw-title">Prix</h4>
                         <div class="filter-range-wrap">
                             <div class="range-slider">
                                 <div class="price-input">
-                                    <input type="text" id="minamount" name="minamount">
-                                    <input type="text" id="maxamount" name="maxamount">
+                                    <!-- Si le filtre de prix min a été appliqué -->
+                                    @if (isset($_GET['minamount']) && !empty($_GET['minamount']))
+                                        <input type="text" id="minamount" name="minamount" value="{{ $_GET['minamount'] }}">
+                                    @else
+                                        <input type="text" id="minamount" name="minamount">
+                                    @endif
+                                    <!-- Si le filtre de prix max a été appliqué -->
+                                    @if (isset($_GET['maxamount']) && !empty($_GET['maxamount']))
+                                        <input type="text" id="maxamount" name="maxamount" value="{{ $_GET['maxamount'] }}">
+                                    @else
+                                        <input type="text" id="maxamount" name="maxamount">
+                                    @endif
                                 </div>
                             </div>
                             <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
@@ -93,6 +107,7 @@
                             </div>
                         </div>
                         <button type="submit" class="filter-btn">Filtrer</button>
+                        <a href="{{ route("boutique") }}" class="filter-btn">Réinitialiser</a>
                     </form>
                     <!--
                     <div class="filter-widget">
@@ -162,16 +177,20 @@
                         <div class="row">
                             <div class="col-lg-7 col-md-7">
                                 <div class="select-option">
-                                    <select class="sorting">
+                                    <select class="sorting" id="sorting" name="sorting">
                                         <option value="">Tri par défaut</option>
+                                        <option value="tri-par-nom" onclick="triProdByPrix()">Tri par nom</option>
+                                        <option value="tri-par-prix" onclick="triProdByPrix()">Tri par prix</option>
                                     </select>
-                                    <select class="p-show">
+                                    <!--<select class="p-show">
                                         <option value="">Afficher:</option>
-                                    </select>
+                                        <option value="9">Afficher: 9 Produits</option>
+                                        <option value="12">Afficher: 12 Produits</option>
+                                    </select>-->
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-5 text-right">
-                                <p>Afficher 01-09 Sur 36 Produits</p>
+                                <p><strong>{{ $produits->count() }}</strong> Produits</p>
                             </div>
                         </div>
                     </div>

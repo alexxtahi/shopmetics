@@ -27,7 +27,7 @@ $("#countdown").countdown(timerdate, function(event) {
     $(this).html(event.strftime("<div class='cd-item'><span>%D</span> <p>Jours</p> </div>" + "<div class='cd-item'><span>%H</span> <p>Hrs</p> </div>" + "<div class='cd-item'><span>%M</span> <p>Mins</p> </div>" + "<div class='cd-item'><span>%S</span> <p>Secs</p> </div>"));
 });
 
-function getPriceFilter() {
-    var filter = $('price-filter');
-    alert('Filtre prix = ' + filter.dataMin);
+function triProdByPrix() {
+    //var filter = $('#sorting');
+    alert('Filtre par prix');
 }
