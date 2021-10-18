@@ -45,9 +45,9 @@
                             <!-- Récupération des catégories depuis la base de données -->
                             @foreach ($categories as $categorie)
                                 @if (isset($_GET['categorie']) && !empty($_GET['categorie']) && $_GET['categorie'] == $categorie->id)
-                                    <li><a href="{{ url('/boutique/filtre-categories?id_cat=' . $categorie->id) }}" class="active-filter">{{ $categorie->lib_cat }}</a></li>
+                                    <li><a href="{{ url('/boutique/filtre-categories?id_cat=' . $categorie->id_cat) }}" class="active-filter">{{ $categorie->lib_cat }}</a></li>
                                 @else
-                                    <li><a href="{{ url('/boutique/filtre-categories?id_cat=' . $categorie->id) }}">{{ $categorie->lib_cat }}</a></li>
+                                    <li><a href="{{ url('/boutique/filtre-categories?id_cat=' . $categorie->id_cat) }}">{{ $categorie->lib_cat }}</a></li>
                                 @endif
                             @endforeach
                         </ul>

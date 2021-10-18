@@ -89,7 +89,7 @@ class ProduitController extends Controller
     public function search(){
 
         $request = request()->input('q') ;
-        dd($request) ;
+        //dd($request) ;
 
         //$produits = Produit::where('designation', 'Like', "$q");
 
