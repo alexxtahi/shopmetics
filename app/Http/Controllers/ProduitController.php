@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Produit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB ;
+use Illuminate\Routing\Controller ;
+
+
 
 class ProduitController extends Controller
 {

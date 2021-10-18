@@ -67,7 +67,7 @@
                                     <!-- <span>1</span> -->
                                 </a>
                             </li>
-                        @endif
+
                         <li class="heart-icon">
                             <a href="#">
                                 <i class="icon_heart_alt"></i>
@@ -120,6 +120,7 @@
                                     <a href="#" class="primary-btn view-card">Valider la commande</a>
                                 </div>
                             </div>
+                        @endif
                         </li>
                         <!-- <li class="cart-price">$150.00</li> -->
                     </ul>

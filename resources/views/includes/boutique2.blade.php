@@ -44,11 +44,7 @@
                         <ul class="filter-catagories">
                             <!-- Récupération des catégories depuis la base de données -->
                             @foreach ($categories as $categorie)
-                                @if (isset($_GET['categorie']) && !empty($_GET['categorie']) && $_GET['categorie'] == $categorie->id)
-                                    <li><a href="{{ url('/boutique/filtre-categories?id_cat=' . $categorie->id) }}" class="active-filter">{{ $categorie->lib_cat }}</a></li>
-                                @else
-                                    <li><a href="{{ url('/boutique/filtre-categories?id_cat=' . $categorie->id) }}">{{ $categorie->lib_cat }}</a></li>
-                                @endif
+                            <li><a href="#">{{ $categorie->lib_cat }}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -80,41 +76,24 @@
                         </div>
                     </div>
                     -->
-                    <form action="{{ route('boutique.filtre-prix') }}" method="GET" class="filter-widget">
+                    <div class="filter-widget">
                         <h4 class="fw-title">Prix</h4>
                         <div class="filter-range-wrap">
                             <div class="range-slider">
                                 <div class="price-input">
-                                    <!-- Si le filtre de prix min a été appliqué -->
-                                    @if (isset($priceFilterMin) && !empty($priceFilterMin))
-                                        <input type="text" id="minamount" name="minamount" value="{{ $priceFilterMin }}">
-                                    @else
-                                        <input type="text" id="minamount" name="minamount">
-                                    @endif
-                                    <!-- Si le filtre de prix max a été appliqué -->
-                                    @if (isset($priceFilterMax) && !empty($priceFilterMax))
-                                        <input type="text" id="maxamount" name="maxamount" value="{{ $priceFilterMax }}">
-                                    @else
-                                        <input type="text" id="maxamount" name="maxamount">
-                                    @endif
+                                    <input type="text" id="minamount">
+                                    <input type="text" id="maxamount">
                                 </div>
                             </div>
-                            @if ((isset($priceFilterMin) &&isset($priceFilterMax)) &&
-                                (!empty($priceFilterMin) && !empty($priceFilterMax)))
-                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                    data-min="{{ $priceFilterMin }}" data-max="{{ $priceFilterMax }}" id="price-filter">
-                            @else
-                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                    data-min="0" data-max="100000" id="price-filter">
-                            @endif
+                            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                data-min="30" data-max="5000">
                                 <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                             </div>
                         </div>
-                        <button type="submit" class="filter-btn">Filtrer</button>
-                        <a href="{{ route("boutique") }}" class="filter-btn">Réinitialiser</a>
-                    </form>
+                        <a href="#" class="filter-btn">Filtrer</a>
+                    </div>
                     <!--
                     <div class="filter-widget">
                         <h4 class="fw-title">Color</h4>
@@ -170,13 +149,11 @@
                     <div class="filter-widget">
                         <h4 class="fw-title">Tags</h4>
                         <div class="fw-tags">
-                            @foreach ($tags as $tag)
-                                @if (isset($selectedTag) && !empty($selectedTag) && $selectedTag == $tag->lib_tag)
-                                    <a href="{{ url('/boutique/filtre-tags?tag=' . $tag->lib_tag) }}" class="active-tag">{{ $tag->lib_tag }}</a>
-                                @else
-                                    <a href="{{ url('/boutique/filtre-tags?tag=' . $tag->lib_tag) }}">{{ $tag->lib_tag }}</a>
-                                @endif
-                            @endforeach
+                            <a href="#">Pommade</a>
+                            <a href="#">Crème</a>
+                            <a href="#">Savon</a>
+                            <a href="#">Thé</a>
+                            <a href="#">Huile</a>
                         </div>
                     </div>
                 </div>
@@ -185,20 +162,16 @@
                         <div class="row">
                             <div class="col-lg-7 col-md-7">
                                 <div class="select-option">
-                                    <select class="sorting" id="sorting" name="sorting">
+                                    <select class="sorting">
                                         <option value="">Tri par défaut</option>
-                                        <option value="tri-par-nom">Tri par nom</option>
-                                        <option value="tri-par-prix">Tri par prix</option>
                                     </select>
-                                    <!--<select class="p-show">
+                                    <select class="p-show">
                                         <option value="">Afficher:</option>
-                                        <option value="9">Afficher: 9 Produits</option>
-                                        <option value="12">Afficher: 12 Produits</option>
-                                    </select>-->
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-5 text-right">
-                                <p><strong>{{ $produits->count() }}</strong> Produits</p>
+                                <p>Afficher 01-09 Sur 36 Produits</p>
                             </div>
                         </div>
                     </div>
@@ -209,7 +182,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src= "{{ asset($produit->img_prod) }}"  alt="">
+                                        <img src= "{{ asset('fashi/' . $produit->img_prod) }}"  alt="">
                                         <!-- Afficher la bannière promo si le produit est en promotion -->
                                         @if ($produit->en_promo == true)
                                         <div class="sale pp-sale">Sale</div>
@@ -234,16 +207,17 @@
                                         </a>
                                         <div class="product-price">
                                             <!-- Prix actuel -->
-                                            {{ number_format($produit->prix_prod, 0, ',', ' ') }} FCFA
+                                            {{ $produit->prix_prod }} FCFA
                                             <!-- Ancien prix -->
                                             @if ($produit->ancien_prix != $produit->prix_prod)
-                                            <span>{{ number_format($produit->ancien_prix, 0, ',', ' ') }} FCFA</span>
+                                            <span>{{ $produit->ancien_prix }} FCFA</span>
                                             @endif
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             @endforeach
+                            {{ $products ->appends(request()->input())->links() }}
                         </div>
                     </div>
                 </div>
