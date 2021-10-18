@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MoyenPaiement extends Model
 {
-    // use HasFactory;
+    //use HasFactory;
 
     protected $fillable = [
 

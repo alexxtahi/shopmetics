@@ -7,7 +7,7 @@ var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
 
-if(mm == 12) {
+if (mm == 12) {
     mm = '01';
     yyyy = yyyy + 1;
 } else {
@@ -25,4 +25,14 @@ console.log(timerdate);
 
 $("#countdown").countdown(timerdate, function(event) {
     $(this).html(event.strftime("<div class='cd-item'><span>%D</span> <p>Jours</p> </div>" + "<div class='cd-item'><span>%H</span> <p>Hrs</p> </div>" + "<div class='cd-item'><span>%M</span> <p>Mins</p> </div>" + "<div class='cd-item'><span>%S</span> <p>Secs</p> </div>"));
+});
+
+function triProdByPrix() {
+    //var filter = $('#sorting');
+    alert('Filtre par prix');
+}
+
+$('#sorting').change(function name(params) {
+    alert('Filtre par prix');
+
 });

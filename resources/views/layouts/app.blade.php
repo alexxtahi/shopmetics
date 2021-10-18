@@ -1,43 +1,36 @@
 <!DOCTYPE html>
-<html lang="FR">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<head>
-    <!-- Metas -->
-    @include('includes.meta')
-    <!-- Css Styles -->
-    @include('includes.css')
-</head>
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
-<body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+        <!-- Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
-    <!-- Header Section Begin -->
-    @include('includes.header')
-    <!-- Header End -->
+        <!-- Styles -->
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-    <!-- Hero Section Begin -->
-    @include('layouts.hero')
-    <!-- Hero Section End -->
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
+    </head>
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100">
+            @include('layouts.navigation')
 
-    <!-- Banner Section Begin -->
-    @include('layouts.banner')
-    <!-- Banner Section End -->
+            <!-- Page Heading -->
+            <header class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
 
-    <!-- Content Section Begin -->
-    <!-- include('includes.content') Ne pas utiliser-->
-    @yield('content')
-    <!-- Content Section End -->
-
-    <!-- Footer Section Begin -->
-    @include('includes.footer')
-    <!-- Footer Section End -->
-
-    <!-- Js Plugins -->
-    @include('includes.js')
-
-</body>
-
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+            </main>
+        </div>
+    </body>
 </html>

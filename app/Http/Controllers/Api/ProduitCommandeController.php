@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Produit;
 use Illuminate\Http\Request;
 use App\Models\ProduitCommande ;
 
@@ -15,10 +16,7 @@ class ProduitCommandeController extends Controller
      */
     public function index()
     {
-        $produitCommande = ProduitCommande::All() ;
-        $array = Response()->json($produitCommande) ;
-        $reponse = compact("array") ;
-        return $reponse ;
+        return response()->json(ProduitCommande::all()) ;
     }
 
     /**
@@ -100,8 +98,6 @@ class ProduitCommandeController extends Controller
      */
     public function destroy(ProduitCommande $produitCommande)
     {
-        $produitCommande->deleteProfilePhoto() ;
-        $produitCommande->tokens->each->delete() ;
         $produitCommande->delete() ;
     }
 }

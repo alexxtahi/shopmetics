@@ -8,3 +8,5 @@
 <script src="{{ asset('fashi/js/jquery.slicknav.js') }}"></script>
 <script src="{{ asset('fashi/js/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('fashi/js/main.js') }}"></script>
+<!-- Custom Script File -->
+<script src="{{ asset('assets/script.js') }}"></script>

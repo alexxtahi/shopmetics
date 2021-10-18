@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="FR">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <!-- Metas -->
@@ -42,7 +42,7 @@
                         <h2>Connexion</h2>
                         <form action="#">
                             <div class="group-input">
-                                <label for="username">Nom d'utilisateur / Adresse Mail *</label>
+                                <label for="username">Adresse Mail *</label>
                                 <input type="text" id="username">
                             </div>
                             <div class="group-input">

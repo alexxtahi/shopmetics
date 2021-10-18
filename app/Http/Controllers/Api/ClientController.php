@@ -11,10 +11,7 @@ class ClientController extends Controller
 {
     public function index()
     {
-        $client = Client::All() ;
-        $array = Response()->json($client) ;
-        $reponse = compact("array") ;
-        return $reponse ;
+        return response()->json(Client::all()) ;
     }
 
     /**
@@ -100,11 +97,11 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
+
     public function destroy(Client $client)
     {
-        $client->deleteProfilePhoto() ;
-        $client->tokens->each->delete() ;
         $client->delete() ;
+
     }
 
 }

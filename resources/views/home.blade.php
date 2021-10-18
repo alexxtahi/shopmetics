@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 @section('content')
     <!-- Women Banner Section Begin -->
     <section class="women-banner spad">

@@ -3,15 +3,14 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ClientController;
-use App\Http\Controllers\Api\AdminController ;
-use App\Http\Controllers\Api\CartController ;
-use App\Http\Controllers\Api\CommandeController ;
-use App\Http\Controllers\Api\LivraisonController ;
-
-use App\Http\Controllers\Api\MoyenPaiementController ;
-use App\Http\Controllers\Api\ProduitController ;
-use App\Http\Controllers\Api\ProduitCommandeController ;
-use App\Http\Controllers\Api\SousCategorieController ;
+use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\CommandeController;
+use App\Http\Controllers\Api\LivraisonController;
+use App\Http\Controllers\Api\MoyenPaiementController;
+use App\Http\Controllers\Api\ProduitController;
+use App\Http\Controllers\Api\ProduitCommandeController;
+use App\Http\Controllers\Api\SousCategorieController;
 
 
 
@@ -50,4 +49,3 @@ Route::apiResource('Produit', ProduitController::class);
 Route::apiResource('ProduitCommande', ProduitCommandeController::class);
 // route pour le sous categorie
 Route::apiResource('SousCategorie', SousCategorieController::class);
-

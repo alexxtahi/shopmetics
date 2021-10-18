@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Commande extends Model
 {
-    // use HasFactory;
+    use HasFactory;
 
     protected $fillable = [
 

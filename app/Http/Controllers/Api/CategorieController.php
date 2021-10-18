@@ -15,10 +15,7 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        $categorie = Categorie::All() ;
-        $array = Response()->json($categorie) ;
-        $reponse = compact("array") ;
-        return $reponse ;
+        return response()->json(Categorie::all()) ;
     }
 
     /**
@@ -90,8 +87,6 @@ class CategorieController extends Controller
      */
     public function destroy(Categorie $categorie)
     {
-        $categorie->deleteProfilePhoto() ;
-        $categorie->tokens->each->delete() ;
         $categorie->delete() ;
     }
 }

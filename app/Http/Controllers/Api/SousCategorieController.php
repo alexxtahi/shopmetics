@@ -15,10 +15,7 @@ class SousCategorieController extends Controller
      */
     public function index()
     {
-        $sousCategorie = SousCategorie::All() ;
-        $array = Response()->json($sousCategorie) ;
-        $reponse = compact("array") ;
-        return $reponse ;
+        return response()->json(SousCategorie::all()) ;
     }
 
     /**
@@ -95,8 +92,6 @@ class SousCategorieController extends Controller
      */
     public function destroy(SousCategorie $sousCategorie)
     {
-        $sousCategorie->deleteProfilePhoto() ;
-        $sousCategorie->tokens->each->delete() ;
         $sousCategorie->delete() ;
     }
 }

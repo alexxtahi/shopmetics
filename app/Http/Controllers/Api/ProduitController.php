@@ -15,10 +15,7 @@ class ProduitController extends Controller
      */
     public function index()
     {
-        $produit = Produit::All() ;
-        $array = Response()->json($produit) ;
-        $reponse = compact("array") ;
-        return $reponse ;
+        return response()->json(Produit::all()) ;
     }
 
     /**
@@ -106,8 +103,6 @@ class ProduitController extends Controller
      */
     public function destroy(Produit $produit)
     {
-        $produit->deleteProfilePhoto() ;
-        $produit->tokens->each->delete() ;
         $produit->delete() ;
     }
 }

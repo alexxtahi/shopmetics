@@ -1,21 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BoutiqueController;
-use App\Http\Controllers\UserController;
+// Importation des routes externes
+require __DIR__ . '/auth.php';
+require __DIR__ . '/shop.php';
 
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CategorieController;
-use App\Http\Controllers\CommandeController;
-use App\Http\Controllers\LivraisonController;
-use App\Http\Controllers\MoyenPaiementController;
-use App\Http\Controllers\ProduitCommandeController;
-use App\Http\Controllers\ProduitController;
-use App\Http\Controllers\SousCategorieController;
-use App\Http\Controllers\Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +21,9 @@ use App\Http\Controllers\Controller;
 
 // ! Route vers l'accueil
 Route::get('/', [HomeController::class, 'index'])->name('home');
-//Route::get('/', 'HomeController@index');
+
+// ! Route vers le tableau de bord
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 Route::get('/search', [ProduitController::class, 'search'])->name('products.search') ;
 
@@ -48,16 +42,6 @@ Route::view('/panier', 'panier')->name('panier');
 // ! Route vers la foire aux questions
 Route::view('/faq', 'faq')->name('faq');
 
-// ! Route vers la page de connexion
-Route::view('/connexion', 'login')->name('login');
-
-// ! Route vers la page d'inscription
-Route::view('/inscription', 'register')->name('register'); // Page d'sincription
-Route::post('/inscription', [UserController::class, 'store'])->name('register.store'); // Enregistrer un compte
-
 /* Route pour le panier
 
 Route :: post('/panier/ajouter', 'CartController@store')-->name('cart.store') ; */
-
-// ! Route vers le tableau de bord
-Route::view('/admin', 'admin/admin-dashboard')->name('admin');

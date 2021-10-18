@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="FR">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <!-- Metas -->
@@ -46,6 +46,7 @@
                                 @case('success')
                                     <div class="alert alert-success" role="alert">
                                         {{ $register_message }}
+                                        <a href="{{ route('login') }}">Cliquez ici</a> pour vous connecter.
                                     </div>
                                     @break
                                 @case('warning')
