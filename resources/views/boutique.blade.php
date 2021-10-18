@@ -201,7 +201,7 @@
                                         </ul>
                                     </div>
                                     <div class="pi-text">
-                                        <div class="catagory-name">{{ $produit->lib_cat }}</div>
+                                        <div class="catagory-name">// { $produit->lib_cat }}</div>
                                         <a href="#">
                                             <h5>{{ $produit->designation }}</h5>
                                         </a>
