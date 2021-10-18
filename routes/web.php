@@ -28,7 +28,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 // ! Route pour faire une recherche
-Route::get('/search', [ProduitController::class, 'search'])->name('products.search') ;
+Route::get('/search', 'ProduitController@search')->name('products.search') ;
 
 // ! Route pour faire une recherche selon la categorie
 Route::get('/categorie', 'ProduitController@cat')->name('products.categorie');

@@ -56,16 +56,18 @@
                 </div>
 
                 <div class="col-lg-7 col-md-7">
-                    <form action="{{ route('products.search')}} " >
+
                     <div class="advanced-search">
                         <button type="button" class="category-btn">Catégories</button>
                         <div class="input-group">
-                            <input type="text" name="q" placeholder="Que cherchez vous ? ">
-                            <button type="button"><i class="ti-search"></i></button>
+                            <form action="{{ route('products.search') }} " >
+                                <input type="text" name="q" placeholder="Que cherchez vous ? ">
+                                <button type="button"><i class="ti-search"></i></button>
+                        </form>
                         </div>
 
                     </div>
-                </form>
+
                 </div>
 
                 <div class="col-lg-3 text-right col-md-3">
