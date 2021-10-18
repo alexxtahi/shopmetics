@@ -97,7 +97,7 @@ class ProduitController extends Controller
         $categories = DB::table('categories')->get();
 
 
-        //return view('boutique')->with('produits', $produits)->with('categories', $categories);
+        return view('boutique')->with('produits', $produits)->with('categories', $categories);
 
     }
 
