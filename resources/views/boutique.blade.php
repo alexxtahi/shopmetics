@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="FR">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <!-- Metas -->
@@ -45,9 +45,9 @@
                             <!-- Récupération des catégories depuis la base de données -->
                             @foreach ($categories as $categorie)
                                 @if (isset($_GET['categorie']) && !empty($_GET['categorie']) && $_GET['categorie'] == $categorie->id)
-                                    <li><a href="{{ url('/boutique/filtre-categories?id_cat=' . $categorie->id_cat) }}" class="active-filter">{{ $categorie->lib_cat }}</a></li>
+                                    <li><a href="{{ url('/boutique/filtre-categories?id_cat=' . $categorie->id) }}" class="active-filter">{{ $categorie->lib_cat }}</a></li>
                                 @else
-                                    <li><a href="{{ url('/boutique/filtre-categories?id_cat=' . $categorie->id_cat) }}">{{ $categorie->lib_cat }}</a></li>
+                                    <li><a href="{{ url('/boutique/filtre-categories?id_cat=' . $categorie->id) }}">{{ $categorie->lib_cat }}</a></li>
                                 @endif
                             @endforeach
                         </ul>
@@ -218,17 +218,16 @@
                                             <i class="icon_heart_alt"></i>
                                         </div>
                                         <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-
                                             <!-- Rajouter les accolades pour que ça marche -->
                                             <form action="{ route('cart.store') }" method="POST">
+                                                <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
                                                 <li class="quick-view"><a href="#">+ Ajouter au panier</a></li>
                                             </form>
 
                                         </ul>
                                     </div>
                                     <div class="pi-text">
-                                        <div class="catagory-name">{{ $produit->lib_cat }}</div>
+                                        <div class="catagory-name"><!-- {$produit->lib_cat }--></div>
                                         <a href="#">
                                             <h5>{{ $produit->designation }}</h5>
                                         </a>
