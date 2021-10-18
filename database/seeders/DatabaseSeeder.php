@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         //\App\Models\Client::factory(10)->create();
         $this->call(MoyenPaiementSeeder::class);
         \App\Models\Produit::factory(50)->create();
+        $this->call(TagSeeder::class);
     }
 }

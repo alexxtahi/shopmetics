@@ -9,4 +9,4 @@
 <script src="{{ asset('fashi/js/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('fashi/js/main.js') }}"></script>
 <!-- Custom Script File -->
-<script src="{{ asset('asset/script.js') }}"></script>
+<script src="{{ asset('assets/script.js') }}"></script>
