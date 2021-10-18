@@ -29,7 +29,7 @@ class ProduitFactory extends Factory
         foreach ($filesInFolder as $path) {
             $file = pathinfo($path);
             $imgList[] = 'fashi/img/products/' . $file['basename'];
-            echo $file['basename'];
+            //echo $file['basename'];
         }
         return [
             // ! Properties of fakes datas

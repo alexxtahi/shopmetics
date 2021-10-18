@@ -31,3 +31,8 @@ function triProdByPrix() {
     //var filter = $('#sorting');
     alert('Filtre par prix');
 }
+
+$('#sorting').change(function name(params) {
+    alert('Filtre par prix');
+
+});

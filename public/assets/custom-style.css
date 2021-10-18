@@ -55,6 +55,13 @@
     border: none;
 }
 
-.active-filter {
+.active-filter,
+.filter-catagories li a:hover {
     color: #e7ab3c !important;
+}
+
+.active-tag {
+    color: #e7ab3c !important;
+    border-color: #e7ab3c !important;
+    background-color: #e7ab3c26 !important;
 }

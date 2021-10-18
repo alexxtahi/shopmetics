@@ -45,9 +45,9 @@
                             <!-- Récupération des catégories depuis la base de données -->
                             @foreach ($categories as $categorie)
                                 @if (isset($_GET['categorie']) && !empty($_GET['categorie']) && $_GET['categorie'] == $categorie->id)
-                                    <li><a href="{{ url('/boutique/filtre-categories?categorie=' . $categorie->id) }}" class="active-filter">{{ $categorie->lib_cat }}</a></li>
+                                    <li><a href="{{ url('/boutique/filtre-categories?id_cat=' . $categorie->id) }}" class="active-filter">{{ $categorie->lib_cat }}</a></li>
                                 @else
-                                    <li><a href="{{ url('/boutique/filtre-categories?categorie=' . $categorie->id) }}">{{ $categorie->lib_cat }}</a></li>
+                                    <li><a href="{{ url('/boutique/filtre-categories?id_cat=' . $categorie->id) }}">{{ $categorie->lib_cat }}</a></li>
                                 @endif
                             @endforeach
                         </ul>
@@ -86,21 +86,27 @@
                             <div class="range-slider">
                                 <div class="price-input">
                                     <!-- Si le filtre de prix min a été appliqué -->
-                                    @if (isset($_GET['minamount']) && !empty($_GET['minamount']))
-                                        <input type="text" id="minamount" name="minamount" value="{{ $_GET['minamount'] }}">
+                                    @if (isset($priceFilterMin) && !empty($priceFilterMin))
+                                        <input type="text" id="minamount" name="minamount" value="{{ $priceFilterMin }}">
                                     @else
                                         <input type="text" id="minamount" name="minamount">
                                     @endif
                                     <!-- Si le filtre de prix max a été appliqué -->
-                                    @if (isset($_GET['maxamount']) && !empty($_GET['maxamount']))
-                                        <input type="text" id="maxamount" name="maxamount" value="{{ $_GET['maxamount'] }}">
+                                    @if (isset($priceFilterMax) && !empty($priceFilterMax))
+                                        <input type="text" id="maxamount" name="maxamount" value="{{ $priceFilterMax }}">
                                     @else
                                         <input type="text" id="maxamount" name="maxamount">
                                     @endif
                                 </div>
                             </div>
-                            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="0" data-max="100000" id="price-filter">
+                            @if ((isset($priceFilterMin) &&isset($priceFilterMax)) &&
+                                (!empty($priceFilterMin) && !empty($priceFilterMax)))
+                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                    data-min="{{ $priceFilterMin }}" data-max="{{ $priceFilterMax }}" id="price-filter">
+                            @else
+                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                    data-min="0" data-max="100000" id="price-filter">
+                            @endif
                                 <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
@@ -164,11 +170,13 @@
                     <div class="filter-widget">
                         <h4 class="fw-title">Tags</h4>
                         <div class="fw-tags">
-                            <a href="#">Pommade</a>
-                            <a href="#">Crème</a>
-                            <a href="#">Savon</a>
-                            <a href="#">Thé</a>
-                            <a href="#">Huile</a>
+                            @foreach ($tags as $tag)
+                                @if (isset($selectedTag) && !empty($selectedTag) && $selectedTag == $tag->lib_tag)
+                                    <a href="{{ url('/boutique/filtre-tags?tag=' . $tag->lib_tag) }}" class="active-tag">{{ $tag->lib_tag }}</a>
+                                @else
+                                    <a href="{{ url('/boutique/filtre-tags?tag=' . $tag->lib_tag) }}">{{ $tag->lib_tag }}</a>
+                                @endif
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -179,8 +187,8 @@
                                 <div class="select-option">
                                     <select class="sorting" id="sorting" name="sorting">
                                         <option value="">Tri par défaut</option>
-                                        <option value="tri-par-nom" onclick="triProdByPrix()">Tri par nom</option>
-                                        <option value="tri-par-prix" onclick="triProdByPrix()">Tri par prix</option>
+                                        <option value="tri-par-nom">Tri par nom</option>
+                                        <option value="tri-par-prix">Tri par prix</option>
                                     </select>
                                     <!--<select class="p-show">
                                         <option value="">Afficher:</option>
