@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 
 <head>
     <!-- Metas -->
-    @include('includes.meta')
+    <?php echo $__env->make('includes.meta', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!-- Css Styles -->
-    @include('includes.css')
+    <?php echo $__env->make('includes.css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </head>
 
 <body>
@@ -15,7 +15,7 @@
     </div>
 
     <!-- Header Section Begin -->
-    @include('includes.header')
+    <?php echo $__env->make('includes.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!-- Header End -->
 
     <!-- Breadcrumb Section Begin -->
@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <a href="{{ route('home') }}"><i class="fa fa-home"></i> Accueil</a>
+                        <a href="<?php echo e(route('home')); ?>"><i class="fa fa-home"></i> Accueil</a>
                         <span>Inscription</span>
                     </div>
                 </div>
@@ -41,33 +41,47 @@
                     <div class="register-form">
                         <h2>Inscription</h2>
                         <!-- Validation Errors -->
-                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                        <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'components.auth-validation-errors','data' => ['class' => 'mb-4','errors' => $errors]]); ?>
+<?php $component->withName('auth-validation-errors'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => 'mb-4','errors' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($errors)]); ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
                         <!-- Affichage d'un message en fonction du résultat de l'inscription -->
-                        @if (isset($register_state))
-                            @switch($register_state)
-                                @case('success')
+                        <?php if(isset($register_state)): ?>
+                            <?php switch($register_state):
+                                case ('success'): ?>
                                     <div class="alert alert-success" role="alert">
-                                        {{ $register_message }}
-                                        <a href="{{ route('login') }}">Cliquez ici</a> pour vous connecter.
+                                        <?php echo e($register_message); ?>
+
+                                        <a href="<?php echo e(route('login')); ?>">Cliquez ici</a> pour vous connecter.
                                     </div>
-                                    @break
-                                @case('warning')
+                                    <?php break; ?>
+                                <?php case ('warning'): ?>
                                     <div class="alert alert-warning" role="alert">
-                                        {{ $register_message }}
+                                        <?php echo e($register_message); ?>
+
                                     </div>
-                                    @break
-                                @case('error')
+                                    <?php break; ?>
+                                <?php case ('error'): ?>
                                     <div class="alert alert-danger" role="alert">
-                                        {{ $register_message }}
+                                        <?php echo e($register_message); ?>
+
                                     </div>
-                                    @break
-                                @default
-                            @endswitch
-                        @endif
+                                    <?php break; ?>
+                                <?php default: ?>
+                            <?php endswitch; ?>
+                        <?php endif; ?>
                         <!-- Formulaire d'inscription -->
-                        <form method="POST" action="{{ route('register') }}">
-                        @method('POST')
-                        @csrf
+                        <form method="POST" action="<?php echo e(route('register')); ?>">
+                        <?php echo method_field('POST'); ?>
+                        <?php echo csrf_field(); ?>
                             <!-- Nom -->
                             <div class="group-input">
                                 <label for="nom">Nom</label>
@@ -117,7 +131,7 @@
                         </form>
                         <!-- Se connecter -->
                         <div class="switch-login">
-                            <a href="{{ route('login') }}" class="or-login">Ou Se Connecter</a>
+                            <a href="<?php echo e(route('login')); ?>" class="or-login">Ou Se Connecter</a>
                         </div>
                     </div>
                 </div>
@@ -161,9 +175,10 @@
     <!-- Partner Logo Section End -->
 
     <!-- Footer Section -->
-    @include('includes.footer')
+    <?php echo $__env->make('includes.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!-- Js Plugins -->
-    @include('includes.js')
+    <?php echo $__env->make('includes.js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </body>
 
 </html>
+<?php /**PATH C:\Users\bouad\Documents\GitHub\shopmetics\resources\views/auth/register.blade.php ENDPATH**/ ?>

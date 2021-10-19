@@ -12,26 +12,26 @@
                 </div>
             </div>
             <div class="ht-right">
-                @if (Auth::check()) <!-- Si l'utilisateur est connecté -->
+                <?php if(Auth::check()): ?> <!-- Si l'utilisateur est connecté -->
                     <!-- Formulaire de déconnexion -->
-                    <form method="POST" action="{{ route('logout') }}" class="login-panel logout-btn">
-                        @method('POST')
-                        @csrf
+                    <form method="POST" action="<?php echo e(route('logout')); ?>" class="login-panel logout-btn">
+                        <?php echo method_field('POST'); ?>
+                        <?php echo csrf_field(); ?>
                         <a href="" class="logout-btn" onclick="event.preventDefault(); this.closest('form').submit();">
                             <i class="fa fa-sign-out"></i> Se déconnecter
                         </a>
                     </form>
-                    <a href="#" class="login-panel"><i class="fa fa-user"></i>Bonjour, {{ Auth::user()->nom }} !</a>
-                @else
-                    <a href="{{ route('login') }}" class="login-panel"><i class="fa fa-user"></i>Connexion</a>
-                @endif
+                    <a href="#" class="login-panel"><i class="fa fa-user"></i>Bonjour, <?php echo e(Auth::user()->nom); ?> !</a>
+                <?php else: ?>
+                    <a href="<?php echo e(route('login')); ?>" class="login-panel"><i class="fa fa-user"></i>Connexion</a>
+                <?php endif; ?>
                 <div class="lan-selector">
                 </div>
                 <div class="lan-selector">
                     <select class="language_drop" name="countries" id="countries" style="width:300px;">
-                        <option value='yu' data-image="{{ asset('fashi/img/flag-4.png') }}" data-imagecss="flag yu"
+                        <option value='yu' data-image="<?php echo e(asset('fashi/img/flag-4.png')); ?>" data-imagecss="flag yu"
                             data-title="Français">Français</option>
-                        <option value='yt' data-image="{{ asset('fashi/img/flag-1.jpg') }}" data-imagecss="flag yt"
+                        <option value='yt' data-image="<?php echo e(asset('fashi/img/flag-1.jpg')); ?>" data-imagecss="flag yt"
                             data-title="English">English</option>
                     </select>
                 </div>
@@ -49,25 +49,25 @@
             <div class="row">
                 <div class="col-lg-2 col-md-2">
                     <div class="logo">
-                        <a href="{{ route('home') }}">
+                        <a href="<?php echo e(route('home')); ?>">
                             <p class="logo-text">Shopmetics<span>.</span></p>
                         </a>
                     </div>
                 </div>
                 <!-- Barre de recherche -->
-                @include('partials.search')
+                <?php echo $__env->make('partials.search', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 <!-- Fin Barre de recherche -->
                 <div class="col-lg-3 text-right col-md-3">
                     <ul class="nav-right">
                         <!-- Si l'admin est connecté -->
-                        @if (Auth::check() && (Auth::user()->role == "Administrateur" || Auth::user()->role == "Dev"))
+                        <?php if(Auth::check() && (Auth::user()->role == "Administrateur" || Auth::user()->role == "Dev")): ?>
                             <li class="heart-icon">
-                                <a href="{{ route('dashboard') }}">
+                                <a href="<?php echo e(route('dashboard')); ?>">
                                     <i class="icon_toolbox_alt"></i>
                                     <!-- <span>1</span> -->
                                 </a>
                             </li>
-                        @endif
+                        <?php endif; ?>
                         <li class="heart-icon">
                             <a href="#">
                                 <i class="icon_heart_alt"></i>
@@ -75,7 +75,7 @@
                             </a>
                         </li>
                         <li class="cart-icon">
-                            <a href="{{ route('panier') }}">
+                            <a href="<?php echo e(route('panier')); ?>">
                                 <i class="icon_bag_alt"></i>
                                 <!--  <span>3</span> -->
                             </a>
@@ -85,7 +85,7 @@
                                     <table>
                                         <tbody>
                                             <tr>
-                                                <td class="si-pic"><img src="{{ asset('fashi/img/select-product-1.jpg') }}" alt=""></td>
+                                                <td class="si-pic"><img src="<?php echo e(asset('fashi/img/select-product-1.jpg')); ?>" alt=""></td>
                                                 <td class="si-text">
                                                     <div class="product-selected">
                                                         <p>$60.00 x 1</p>
@@ -97,7 +97,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="si-pic"><img src="{{ asset('fashi/img/select-product-2.jpg') }}" alt=""></td>
+                                                <td class="si-pic"><img src="<?php echo e(asset('fashi/img/select-product-2.jpg')); ?>" alt=""></td>
                                                 <td class="si-text">
                                                     <div class="product-selected">
                                                         <p>$60.00 x 1</p>
@@ -148,12 +148,12 @@
             <nav class="nav-menu mobile-menu">
                 <ul>
                     <!-- Bouton Accueil -->
-                    <li @if ($view_name == 'home') class="active" @endif>
-                        <a href="{{ route('home') }}">Acceuil</a>
+                    <li <?php if($view_name == 'home'): ?> class="active" <?php endif; ?>>
+                        <a href="<?php echo e(route('home')); ?>">Acceuil</a>
                     </li>
                     <!-- Bouton Boutique -->
-                    <li @if ($view_name == 'boutique') class="active" @endif>
-                        <a href="{{ route('boutique') }}">Boutique</a>
+                    <li <?php if($view_name == 'boutique'): ?> class="active" <?php endif; ?>>
+                        <a href="<?php echo e(route('boutique')); ?>">Boutique</a>
                     </li>
                     <!-- Bouton Accueil -->
                     <li><a href="#">Collection</a>
@@ -164,27 +164,27 @@
                         </ul>
                     </li>
                     <!-- Bouton Blog -->
-                    <li @if ($view_name == 'blog') class="active" @endif>
-                        <a href="{{ route('blog') }}">Blog</a>
+                    <li <?php if($view_name == 'blog'): ?> class="active" <?php endif; ?>>
+                        <a href="<?php echo e(route('blog')); ?>">Blog</a>
                     </li>
                     <!-- Bouton Contact -->
-                    <li @if ($view_name == 'contact') class="active" @endif>
-                        <a href="{{ route('contact') }}">Contact</a>
+                    <li <?php if($view_name == 'contact'): ?> class="active" <?php endif; ?>>
+                        <a href="<?php echo e(route('contact')); ?>">Contact</a>
                     </li>
                     <li><a href="#">Pages</a>
                         <ul class="dropdown">
                             <!-- Affichage du bouton dashboard si l'utilisateur connecté est un Admin -->
-                            @if (Auth::check())
+                            <?php if(Auth::check()): ?>
                                 <li><a href="#">Mon compte</a></li>
-                                @if (Auth::user()->role == "Administrateur" || Auth::user()->role == "Dev")
-                                    <li><a href="{{ route('dashboard') }}">Tableau de bord</a></li>
-                                @endif
-                            @else
-                                <li><a href="{{ route('register') }}">Inscription</a></li>
-                                <li><a href="{{ route('login') }}">Connexion</a></li>
-                            @endif
-                            <li><a href="{{ route('panier') }}">Panier</a></li>
-                            <li><a href="{{ route('faq') }}">F.A.Q</a></li>
+                                <?php if(Auth::user()->role == "Administrateur" || Auth::user()->role == "Dev"): ?>
+                                    <li><a href="<?php echo e(route('dashboard')); ?>">Tableau de bord</a></li>
+                                <?php endif; ?>
+                            <?php else: ?>
+                                <li><a href="<?php echo e(route('register')); ?>">Inscription</a></li>
+                                <li><a href="<?php echo e(route('login')); ?>">Connexion</a></li>
+                            <?php endif; ?>
+                            <li><a href="<?php echo e(route('panier')); ?>">Panier</a></li>
+                            <li><a href="<?php echo e(route('faq')); ?>">F.A.Q</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -193,3 +193,4 @@
         </div>
     </div>
 </header>
+<?php /**PATH C:\Users\bouad\Documents\GitHub\shopmetics\resources\views/includes/header.blade.php ENDPATH**/ ?>
