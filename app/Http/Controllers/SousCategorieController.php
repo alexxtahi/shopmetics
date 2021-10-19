@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProduitTag;
+use App\Models\SousCategorie;
 use Illuminate\Http\Request;
 
-class ProduitTagController extends Controller
+class SousCategorieController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ProduitTagController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ProduitTag  $produitTag
+     * @param  \App\Models\SousCategorie  $sousCategorie
      * @return \Illuminate\Http\Response
      */
-    public function show(ProduitTag $produitTag)
+    public function show(SousCategorie $sousCategorie)
     {
         //
     }
@@ -52,10 +52,10 @@ class ProduitTagController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ProduitTag  $produitTag
+     * @param  \App\Models\SousCategorie  $sousCategorie
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProduitTag $produitTag)
+    public function edit(SousCategorie $sousCategorie)
     {
         //
     }
@@ -64,10 +64,10 @@ class ProduitTagController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ProduitTag  $produitTag
+     * @param  \App\Models\SousCategorie  $sousCategorie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProduitTag $produitTag)
+    public function update(Request $request, SousCategorie $sousCategorie)
     {
         //
     }
@@ -75,10 +75,10 @@ class ProduitTagController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ProduitTag  $produitTag
+     * @param  \App\Models\SousCategorie  $sousCategorie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProduitTag $produitTag)
+    public function destroy(SousCategorie $sousCategorie)
     {
         //
     }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\ProduitTag;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ProduitTagController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ProduitTagController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ProduitTag  $produitTag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(ProduitTag $produitTag)
+    public function show($id)
     {
         //
     }
@@ -52,10 +52,10 @@ class ProduitTagController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ProduitTag  $produitTag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProduitTag $produitTag)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +64,10 @@ class ProduitTagController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ProduitTag  $produitTag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProduitTag $produitTag)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +75,10 @@ class ProduitTagController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ProduitTag  $produitTag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProduitTag $produitTag)
+    public function destroy($id)
     {
         //
     }

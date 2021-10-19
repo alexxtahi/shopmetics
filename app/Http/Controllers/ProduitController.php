@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Produit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB ;
-use Illuminate\Routing\Controller ;
 
 class ProduitController extends Controller
 {
@@ -87,12 +86,7 @@ class ProduitController extends Controller
 
     public function search(){
 
-<<<<<<< HEAD
-        $request = request()->input('q') ;
-        //dd($request) ;
-=======
         $q = request()->input('q') ;
->>>>>>> olivier-dev
 
         //$produits = Produit::where('designation', 'Like', "$q");
 
@@ -104,7 +98,4 @@ class ProduitController extends Controller
 
 
     }
-
-
-
 }
