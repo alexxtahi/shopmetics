@@ -19,6 +19,7 @@ use App\Http\Controllers\ProduitController;
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 // ! Route vers les produits du tableau de bord
-Route::get('/dashboard/produits', [DashboardController::class, 'produitsIndex'])->middleware(['auth'])->name('admin.produits');
+Route::get('/dashboard/produits', [ProduitController::class, 'index'])->middleware(['auth'])->name('admin.produits');
 Route::get('/dashboard/produits/create', [ProduitController::class, 'create'])->middleware(['auth'])->name('admin.produits.create');
 Route::post('/dashboard/produits/store', [ProduitController::class, 'store'])->middleware(['auth'])->name('admin.produits.store');
+Route::get('/dashboard/produits/delete/{id}', [ProduitController::class, 'destroy'])->middleware(['auth'])->name('admin.produits.delete');

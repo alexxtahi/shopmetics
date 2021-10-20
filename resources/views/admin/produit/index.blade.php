@@ -11,6 +11,27 @@
                 </div>
             </div>
             <div class="card-body">
+                <!-- Message après opération -->
+                @if (isset($result) && !empty($result))
+                    @switch($result['state'])
+                        @case('success')
+                            <div class="alert alert-success" role="alert">
+                                {{ $result['message'] }}
+                            </div>
+                            @break
+                        @case('warning')
+                            <div class="alert alert-warning" role="alert">
+                                {{ $result['message'] }}
+                            </div>
+                            @break
+                        @case('error')
+                            <div class="alert alert-danger" role="alert">
+                                {{ $result['message'] }}
+                            </div>
+                            @break
+                        @default
+                    @endswitch
+                @endif
                 <table class="table table-striped custom-table">
                     <thead>
                         <tr  class="no-wrap-line">
@@ -34,7 +55,7 @@
                             <td>{{ $produit->qte_prod }}</td>
                             <td class="no-wrap-line">
                                 <a href="#" class="btn btn-primary actions-btn"><i class="fa fa-edit"></i></a>
-                                <a href="#" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                                <a href="{{ url('/dashboard/produits/delete/' . $produit->id) }}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
                             </td>
                         </tr>
                         @endforeach

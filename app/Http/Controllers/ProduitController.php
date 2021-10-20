@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorie;
 use App\Models\Produit;
-use App\Models\SousCategorie;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB ;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -15,11 +15,22 @@ class ProduitController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // Récupération des produits
+        $produits = Produit::join('categories', 'categories.id', '=', 'produits.id_cat')
+            ->select('produits.*', 'categories.lib_cat as lib_cat')
+            ->where('produits.deleted_at', null)
+            ->get();
+        // Récupération des résultats d'opération sur le formulaire si existants
+        $data = $request->all();
+        $result = [];
+        if (isset($data['result'])) $result = $request->get('result');
+        // Affichage
+        return view('admin.produit.index', compact('produits', 'result'));
     }
 
     /**
@@ -139,12 +150,36 @@ class ProduitController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Produit  $produit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Produit $produit)
+    public function destroy($id)
     {
-        //
+        // Recherche et récupération du produit
+        $produit = Produit::find($id);
+        $result = [
+            'state' => 'success',
+            'message' => 'Le produit a bien été supprimé'
+        ];
+        // dd($produit);
+        try {
+            if ($produit != null) { // Suppression
+                $produit->deleted_at = now();
+                $produit->deleted_by = Auth::user()->id;
+                $produit->save();
+            } else {
+                $result = [
+                    'state' => 'warning',
+                    'message' => "Produit introuvable",
+                ];
+            }
+        } catch (Exception $error) {
+            $result = [
+                'state' => 'error',
+                'message' => "Une erreur est survenue",
+            ];
+        }
+        // Redirection
+        return redirect()-> route('admin.produits', compact('result'));
     }
 
     public function search(){

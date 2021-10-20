@@ -28,19 +28,4 @@ class DashboardController extends Controller
         // Appel de la vue
         return view('admin.index', compact('commandes', 'produits', 'meilleursProduits', 'top5Produits', 'besoins'));
     }
-    /**
-     * Affiche l'accueil du tableau de bord
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function produitsIndex()
-    {
-        // Récupération des produits
-        $produits = Produit::join('categories', 'categories.id', '=', 'produits.id_cat')
-            ->select('produits.*', 'categories.lib_cat as lib_cat')
-            ->where('produits.deleted_at', null)
-            ->get();
-        // Appel de la vue
-        return view('admin.produit.index', compact('produits'));
-    }
 }
