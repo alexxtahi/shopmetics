@@ -92,3 +92,8 @@
     table-layout: fixed !important;
     /* even columns width , fix width of table too*/
 }
+
+.form-footer {
+    display: flex;
+    justify-content: right;
+}

@@ -19,11 +19,11 @@ class CreateProduitsTable extends Migration
             $table->string('code_prod');
             $table->string('designation');
             $table->string('description')->nullable();
-            $table->integer('qte_prod');
+            $table->integer('qte_prod')->default(0);
             $table->string('img_prod')->nullable();
             $table->integer('prix_prod');
             $table->integer('ancien_prix')->nullable();
-            $table->boolean('en_promo');
+            $table->boolean('en_promo')->nullable();
             // ! Clés étrangères
             $table->integer('id_cat')->unsigned();
             $table->integer('id_sous_cat')->unsigned()->nullable();

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use App\Models\Produit;
+use App\Models\SousCategorie;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB ;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ProduitController extends Controller
 {
@@ -21,11 +25,19 @@ class ProduitController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        // Récupération des categories et des sous catégories
+        $categories = Categorie::where('deleted_at', null)->get();
+        // Récupération des résultats d'opération sur le formulaire si existants
+        $data = $request->all();
+        $result = [];
+        if (isset($data['result'])) $result = $request->get('result');
+        // Affichage de la vue
+        return view('admin.produit.create', compact('categories', 'result'));
     }
 
     /**
@@ -36,7 +48,58 @@ class ProduitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // ! Contrôles
+        $result = ['register_state' => 'error', 'register_message' => 'Une erreur est survenue.'];
+        if ($request->isMethod('POST')) {
+
+            //dd($request); //die and dump (Voir le contenu de la requête)
+
+            // ? Récupération de tous les résultats de la requête
+            $data = $request->all();
+
+            // ? Validation de la requête
+            $request->validate([
+                'code_prod' => 'required',
+                'designation' => 'required',
+                'prix_prod' => 'required',
+                'id_cat' => 'required',
+            ]);
+
+            // ? Vérifier si le code du produit est déjà dans la base de données
+            $prodExist = Produit::where('code_prod', $data['code_prod'])->orWhere('designation', $data['designation'])->first();
+            if ($prodExist != null) { // Si le produit existe déjà
+                // Message au cas où le produit existe déjà
+                $result['register_state'] = 'warning';
+                $result['register_message'] = 'Ce produit existe déjà. Changer le code ou la désignation.';
+            } else { // Si le produit n'existe pas alors on le crée
+                try {
+                    // Création d'un nouveau produit
+                    $produit = new Produit;
+                    $produit->code_prod = $data['code_prod'];
+                    $produit->designation = $data['designation'];
+                    $produit->prix_prod = $data['prix_prod'];
+                    $produit->id_cat = $data['id_cat'];
+                    $produit->qte_prod = $data['qte_prod'];
+                    $produit->description = (isset($data['description']) && !empty($data['description'])) ? $data['description'] : null;
+                    // Enregistrement de l'image du produit s'il y'en a
+                    if (isset($data['img_prod']) && !empty($data['img_prod'])) {
+                        $produit->img_prod = 'assets/img/produits/' . $data['img_prod'];
+                        $img_prod = Image::make($data['img_prod']->getRealPath());
+                        $img_prod->resize(300, 300);
+                        $img_prod->save(public_path('/assets/img/produits/' . $data['img_prod']->getClientOriginalName()));
+                    }
+                    $produit->created_at = now();
+                    $produit->save(); // Sauvegarde
+                    // Message de success
+                    $result['register_state'] = 'success';
+                    $result['register_message'] = 'Le produit a bien été enregistré.';
+                } catch (Exception $exc) { // ! En cas d'erreur
+                    $result['register_message'] = $exc->getMessage();
+                }
+            }
+        }
+        // ? Redirection
+        return redirect()->route('admin.produits.create', compact('result'));
     }
 
     /**

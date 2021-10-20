@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\ProduitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,5 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 
 // ! Route vers les produits du tableau de bord
 Route::get('/dashboard/produits', [DashboardController::class, 'produitsIndex'])->middleware(['auth'])->name('admin.produits');
+Route::get('/dashboard/produits/create', [ProduitController::class, 'create'])->middleware(['auth'])->name('admin.produits.create');
+Route::post('/dashboard/produits/store', [ProduitController::class, 'store'])->middleware(['auth'])->name('admin.produits.store');
