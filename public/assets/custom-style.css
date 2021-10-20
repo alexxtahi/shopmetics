@@ -65,3 +65,30 @@
     border-color: #e7ab3c !important;
     background-color: #e7ab3c26 !important;
 }
+
+.table-card-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.no-wrap-line {
+    white-space: nowrap !important;
+}
+
+.actions-btn {
+    width: min-content !important;
+    height: min-content !important;
+}
+
+.custom-table tbody {
+    display: block !important;
+    height: 500px !important;
+    overflow: auto !important;
+}
+
+.custom-table thead {
+    display: table !important;
+    width: 100% !important;
+    table-layout: fixed !important;
+    /* even columns width , fix width of table too*/
+}
