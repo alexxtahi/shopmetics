@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BoutiqueController;
 // Importation des routes externes
 require __DIR__ . '/auth.php';
+require __DIR__ . '/admin.php';
 require __DIR__ . '/shop.php';
 
 /*
@@ -21,9 +21,6 @@ require __DIR__ . '/shop.php';
 
 // ! Route vers l'accueil
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-// ! Route vers le tableau de bord
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 Route::get('/search', [ProduitController::class, 'search'])->name('products.search') ;
 

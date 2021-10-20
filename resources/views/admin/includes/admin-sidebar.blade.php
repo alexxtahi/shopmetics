@@ -11,16 +11,19 @@
             <li><a class="nav-link" href="{{ route('dashboard') }}"><i class="fa fa-home"></i> <span>Accueil</span></a></li>
             <li><a class="nav-link" href="{{ route('home') }}"><i class="fa fa-shopping-cart"></i> <span>Revenir à la boutique</span></a></li>
 
-            <li class="menu-header">Starter</li>
-            <li class="nav-item dropdown">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
-            <ul class="dropdown-menu">
-                <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
-                <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
-                <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
-            </ul>
-            </li>
-            <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
+            <li class="menu-header">Boutique</li>
+            {{-- <li class="nav-item dropdown">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Produits</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="layout-default.html">Ajouter</a></li>
+                    <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
+                    <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
+                </ul>
+            </li> --}}
+            <li><a class="nav-link" href="{{ route('admin.produits') }}"><i class="fas fa-cube"></i> <span>Produits</span></a></li>
+            <li><a class="nav-link" href="blank.html"><i class="fas fa-th"></i> <span>Catégories</span></a></li>
+            <li><a class="nav-link" href="blank.html"><i class="fas fa-bars"></i> <span>Sous Catégories</span></a></li>
+            <li><a class="nav-link" href="blank.html"><i class="fas fa-cube"></i> <span>Sous Catégories</span></a></li>
             <li class="nav-item dropdown">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Bootstrap</span></a>
             <ul class="dropdown-menu">

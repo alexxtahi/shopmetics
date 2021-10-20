@@ -148,7 +148,7 @@
             <div class="col-md-7">
               <div class="card">
                 <div class="card-header">
-                  <h4>Meilleurs Pproduits</h4>
+                  <h4>Meilleurs Produits</h4>
                 </div>
                 <div class="card-body">
                   <div class="owl-carousel owl-theme best-products-div" id="products-carousel">
@@ -169,7 +169,7 @@
                             </div>
                             <div class="text-muted text-small">67 Sales</div>
                             <div class="product-cta">
-                                <a href="#" class="btn btn-primary">Detail</a>
+                                <a href="#" class="btn btn-primary">Détails</a>
                             </div>
                             </div>
                         </div>
@@ -180,17 +180,17 @@
               </div>
             </div>
           </div>
+          <!--
           <div class="row">
-
             <div class="col-md-6">
               <div class="card">
                 <div class="card-header">
-                  <h4>Top Countries</h4>
+                  <h4>Ventes par quartier</h4>
                 </div>
                 <div class="card-body">
                   <div class="row">
                     <div class="col-sm-6">
-                      <div class="text-title mb-2">July</div>
+                      <div class="text-title mb-2">{{ date('F', strtotime("-1 month")); }}</div>
                       <ul class="list-unstyled list-unstyled-border list-unstyled-noborder mb-0">
                         <li class="media">
                           <img class="img-fluid mt-1 img-shadow" src="{{ asset('stisla/node_modules/flag-icon-css/flags/4x3/id.svg') }}" alt="image" width="40">
@@ -216,7 +216,7 @@
                       </ul>
                     </div>
                     <div class="col-sm-6 mt-sm-0 mt-4">
-                      <div class="text-title mb-2">August</div>
+                      <div class="text-title mb-2">{{ date('F') }}</div>
                       <ul class="list-unstyled list-unstyled-border list-unstyled-noborder mb-0">
                         <li class="media">
                           <img class="img-fluid mt-1 img-shadow" src="{{ asset('stisla/node_modules/flag-icon-css/flags/4x3/id.svg') }}" alt="image" width="40">
@@ -245,71 +245,53 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div>-->
           <div class="row">
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header">
-                  <h4>Invoices</h4>
+                  <h4>Actualité des commandes</h4>
                   <div class="card-header-action">
-                    <a href="#" class="btn btn-danger">View More <i class="fas fa-chevron-right"></i></a>
+                    <a href="#" class="btn btn-danger">Voir plus <i class="fas fa-chevron-right"></i></a>
                   </div>
                 </div>
                 <div class="card-body p-0">
                   <div class="table-responsive table-invoice">
                     <table class="table table-striped">
-                      <tr>
-                        <th>Invoice ID</th>
-                        <th>Customer</th>
-                        <th>Status</th>
-                        <th>Due Date</th>
-                        <th>Action</th>
-                      </tr>
-                      <tr>
-                        <td><a href="#">INV-87239</a></td>
-                        <td class="font-weight-600">Kusnadi</td>
-                        <td><div class="badge badge-warning">Unpaid</div></td>
-                        <td>July 19, 2018</td>
-                        <td>
-                          <a href="#" class="btn btn-primary">Detail</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">INV-48574</a></td>
-                        <td class="font-weight-600">Hasan Basri</td>
-                        <td><div class="badge badge-success">Paid</div></td>
-                        <td>July 21, 2018</td>
-                        <td>
-                          <a href="#" class="btn btn-primary">Detail</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">INV-76824</a></td>
-                        <td class="font-weight-600">Muhamad Nuruzzaki</td>
-                        <td><div class="badge badge-warning">Unpaid</div></td>
-                        <td>July 22, 2018</td>
-                        <td>
-                          <a href="#" class="btn btn-primary">Detail</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">INV-84990</a></td>
-                        <td class="font-weight-600">Agung Ardiansyah</td>
-                        <td><div class="badge badge-warning">Unpaid</div></td>
-                        <td>July 22, 2018</td>
-                        <td>
-                          <a href="#" class="btn btn-primary">Detail</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">INV-87320</a></td>
-                        <td class="font-weight-600">Ardian Rahardiansyah</td>
-                        <td><div class="badge badge-success">Paid</div></td>
-                        <td>July 28, 2018</td>
-                        <td>
-                          <a href="#" class="btn btn-primary">Detail</a>
-                        </td>
-                      </tr>
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Client</th>
+                                <th>Statut</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    <tbody>
+                        @if (empty($commandes))
+                            <tr>
+                                <td colspan="5">Aucune commande pour le moment.</td>
+                            </tr>
+                        @else
+                            @foreach ($commandes as $commande)
+                                <tr>
+                                    <td><a href="#">{{ $commande->code_cmd }}</a></td>
+                                    <td class="font-weight-600">{{ $commande->nom_client }}</td>
+                                    @if ($commande->statut_cmd == "En attente")
+                                        <td><div class="badge badge-warning">{{ $commande->statut_cmd }}</div></td>
+                                    @elseif ($commande->statut_cmd == "Terminée")
+                                        <td><div class="badge badge-success">{{ $commande->statut_cmd }}</div></td>
+                                    @elseif ($commande->statut_cmd == "Annulée")
+                                        <td><div class="badge badge-danger">{{ $commande->statut_cmd }}</div></td>
+                                    @endif
+                                    <td>{{ $commande->date_cmd }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-primary">Détails</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    </tbody>
                     </table>
                   </div>
                 </div>
@@ -321,44 +303,29 @@
                   <div class="card-icon">
                     <i class="far fa-question-circle"></i>
                   </div>
-                  <h4>14</h4>
-                  <div class="card-description">Customers need help</div>
+                  <h4>{{ $besoins->count() }}</h4>
+                  <div class="card-description">Besoins des clients</div>
                 </div>
                 <div class="card-body p-0">
                   <div class="tickets-list">
-                    <a href="#" class="ticket-item">
-                      <div class="ticket-title">
-                        <h4>My order hasn't arrived yet</h4>
-                      </div>
-                      <div class="ticket-info">
-                        <div>Laila Tazkiah</div>
-                        <div class="bullet"></div>
-                        <div class="text-primary">1 min ago</div>
-                      </div>
-                    </a>
-                    <a href="#" class="ticket-item">
-                      <div class="ticket-title">
-                        <h4>Please cancel my order</h4>
-                      </div>
-                      <div class="ticket-info">
-                        <div>Rizal Fakhri</div>
-                        <div class="bullet"></div>
-                        <div>2 hours ago</div>
-                      </div>
-                    </a>
-                    <a href="#" class="ticket-item">
-                      <div class="ticket-title">
-                        <h4>Do you see my mother?</h4>
-                      </div>
-                      <div class="ticket-info">
-                        <div>Syahdan Ubaidillah</div>
-                        <div class="bullet"></div>
-                        <div>6 hours ago</div>
-                      </div>
-                    </a>
-                    <a href="features-tickets.html" class="ticket-item ticket-more">
-                      View All <i class="fas fa-chevron-right"></i>
-                    </a>
+                      <!-- Chargement des besoins -->
+                    @foreach ($besoins as $besoin)
+                        <a href="#" class="ticket-item">
+                            <div class="ticket-title">
+                                <h4>{{ $besoin->titre }}</h4>
+                            </div>
+                            <div class="ticket-info">
+                                <div>Laila Tazkiah</div>
+                                <div class="bullet"></div>
+                                <div class="text-primary">1 min ago</div>
+                            </div>
+                        </a>
+                    @endforeach
+                    @if (!empty($besoins))
+                        <a href="features-tickets.html" class="ticket-item ticket-more">
+                        Voir tout <i class="fas fa-chevron-right"></i>
+                        </a>
+                    @endif
                   </div>
                 </div>
               </div>
