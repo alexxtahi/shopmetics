@@ -7,7 +7,7 @@
                 <h4>Liste des produits</h4>
                 <div class="table-card-action-btn">
                     <a href="{{ route('admin.produits.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Ajouter un produit</a>
-                    <a href="#" class="btn btn-warning" style="margin-left: 10px"><i class="fa fa-print"></i> Imprimer</a>
+                    <a href="{{ route('admin.produits.etat') }}" class="btn btn-warning" style="margin-left: 10px"><i class="fa fa-print"></i> Imprimer</a>
                 </div>
             </div>
             <div class="card-body">

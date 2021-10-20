@@ -18,3 +18,6 @@
 
 <!-- Page Specific JS File -->
 <script src="{{ asset('stisla/assets/js/page/index.js') }}"></script>
+
+<!-- Custom Script File -->
+<script src="{{ asset('assets/script.js') }}"></script>
