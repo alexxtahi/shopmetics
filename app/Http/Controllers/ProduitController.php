@@ -26,11 +26,13 @@ class ProduitController extends Controller
             ->where('produits.deleted_at', null)
             ->get();
         // Récupération des résultats d'opération sur le formulaire si existants
-        $data = $request->all();
         $result = [];
-        if (isset($data['result'])) $result = $request->get('result');
+        if ($request->exists('result')) {
+            $result = $request->get('result');
+            $result['type'] = 'table';
+        }
         // Affichage
-        return view('admin.produit.index', compact('produits', 'result'));
+        return view('admin.pages.produit.index', compact('produits', 'result'));
     }
 
     /**
@@ -44,9 +46,13 @@ class ProduitController extends Controller
         // Récupération des categories et des sous catégories
         $categories = Categorie::where('deleted_at', null)->get();
         // Récupération des résultats d'opération sur le formulaire si existants
-        $result = ($request->exists('result')) ? $request->get('result') : [];
+        $result = [];
+        if ($request->exists('result')) {
+            $result = $request->get('result');
+            $result['type'] = 'table';
+        }
         // Affichage de la vue
-        return view('admin.produit.create', compact('categories', 'result'));
+        return view('admin.pages.produit.create', compact('categories', 'result'));
     }
 
     /**
@@ -58,7 +64,7 @@ class ProduitController extends Controller
     public function store(Request $request)
     {
         // ! Contrôles
-        $result = ['state' => 'error', 'message' => 'Une erreur est survenue.'];
+        $result = ['state' => 'error', 'message' => 'Une erreur est survenue'];
         if ($request->isMethod('POST')) {
 
             //dd($request); //die and dump (Voir le contenu de la requête)
@@ -75,11 +81,22 @@ class ProduitController extends Controller
             ]);
 
             // Vérifier si le code du produit est déjà dans la base de données
-            $prodExist = Produit::where('code_prod', $data['code_prod'])->orWhere('designation', $data['designation'])->first();
-            if ($prodExist != null) { // Si le produit existe déjà
-                // Message au cas où le produit existe déjà
-                $result['state'] = 'warning';
-                $result['message'] = 'Ce produit existe déjà. Changer le code ou la désignation.';
+            $existant = Produit::where('code_prod', $data['code_prod'])->orWhere('designation', $data['designation'])->first();
+            if ($existant != null) { // Si le produit existe déjà
+                if ($existant->deleted_at == null) {
+                    // Message au cas où le produit existe déjà
+                    $result['state'] = 'warning';
+                    $result['message'] = 'Ce produit existe déjà. Changer le code ou la désignation.';
+                } else { // Au cas ou la catégorie avait été supprimée
+                    $existant->deleted_at = null;
+                    $existant->deleted_by = null;
+                    $existant->created_at = now();
+                    $existant->created_by = Auth::user()->id;
+                    $existant->save();
+                    // Message de success
+                    $result['state'] = 'success';
+                    $result['message'] = 'Le produit a bien été enregistré.';
+                }
             } else { // Si le produit n'existe pas alors on le crée
                 try {
                     // Création d'un nouveau produit
@@ -98,6 +115,7 @@ class ProduitController extends Controller
                         $img_prod->save(public_path('/assets/img/produits/' . $data['img_prod']->getClientOriginalName()));
                     }
                     $produit->created_at = now();
+                    $existant->created_by = Auth::user()->id;
                     $produit->save(); // Sauvegarde
                     // Message de success
                     $result['state'] = 'success';
@@ -108,7 +126,7 @@ class ProduitController extends Controller
             }
         }
         // Redirection
-        return redirect()->route('admin.produits.create', compact('result'));
+        return redirect()->route('admin.pages.produits.create', compact('result'));
     }
 
     /**
@@ -137,7 +155,7 @@ class ProduitController extends Controller
         // Récupération des categories et des sous catégories
         $categories = Categorie::where('deleted_at', null)->get();
         // Affichage de la vue
-        return view('admin.produit.edit', compact('produit', 'categories'));
+        return view('admin.pages.produit.edit', compact('produit', 'categories'));
     }
 
     /**
@@ -172,7 +190,8 @@ class ProduitController extends Controller
                         $img_prod->resize(300, 300);
                         $img_prod->save(public_path('/assets/img/produits/' . $data['img_prod']->getClientOriginalName()));
                     }
-                    $produit->created_at = now();
+                    $produit->updated_by = Auth::user()->id;
+                    $produit->updated_at = now();
                     $produit->save(); // Sauvegarde
                     // Message de success
                     $result['state'] = 'success';
@@ -186,7 +205,7 @@ class ProduitController extends Controller
             }
         }
         // Redirection
-        return redirect()->route('admin.produits', compact('result'));
+        return redirect()->route('admin.pages.produits', compact('result'));
     }
 
     /**
@@ -221,7 +240,7 @@ class ProduitController extends Controller
             ];
         }
         // Redirection
-        return redirect()-> route('admin.produits', compact('result'));
+        return redirect()-> route('admin.pages.produits', compact('result'));
     }
 
     public function search(){

@@ -34,13 +34,36 @@ function triProdByPrix() {
 
 $('#sorting').change(function name(params) {
     alert('Filtre par prix');
-
 });
 
+/**
+ * Lancer l'impression des vues pour générer des états
+ */
 function imprimeEtat() {
     // Lancer l'impression
     window.print();
     window.onafterprint = function() {
         window.close();
     }
+}
+/**
+ * Lancer la modification d'un élément
+ */
+function launchEdit(lib_cat) {
+    // Indexation des balises
+    var editForm = document.getElementById('edit-form');
+    var oldLibCat = document.getElementById('old_lib_cat');
+    var newLibCat = document.getElementById('new_lib_cat');
+    var validateBtn = document.getElementById('validate-btn');
+    var eraseBtn = document.getElementById('erase-btn');
+    // Modification des propriétés
+    newLibCat.disabled = false;
+    validateBtn.disabled = false;
+    eraseBtn.disabled = false;
+    // Remplissage des champs
+    oldLibCat.value = lib_cat
+    newLibCat.value = lib_cat
+    editForm.action = editForm.action.replace('%7Blib_cat%7D', lib_cat);
+    // Redirection vers le formulaire
+    window.location = window.location.href.replace('#main-content', '') + '#main-content';
 }

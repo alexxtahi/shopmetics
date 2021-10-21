@@ -7,7 +7,7 @@
             <div class="card-header table-card-header">
                 <h4>Informations un produit</h4>
                 <div class="table-card-action-btn">
-                    <a href="{{ route('admin.produits') }}" class="btn btn-danger"><i class="fas fa-angle-left"></i> Revenir</a>
+                    <a href="{{ route('admin.pages.produits') }}" class="btn btn-danger"><i class="fas fa-angle-left"></i> Revenir</a>
                 </div>
             </div>
             <!-- Corps -->
@@ -18,7 +18,7 @@
                         @case('success')
                             <div class="alert alert-success" role="alert">
                                 {{ $result['message'] }}
-                                <a href="{{ route('admin.produits') }}">Cliquez ici</a> pour revenir à la liste.
+                                <a href="{{ route('admin.pages.produits') }}">Cliquez ici</a> pour revenir à la liste.
                             </div>
                             @break
                         @case('warning')

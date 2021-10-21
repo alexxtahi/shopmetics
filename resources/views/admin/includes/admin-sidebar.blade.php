@@ -20,8 +20,8 @@
                     <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
                 </ul>
             </li> --}}
-            <li><a class="nav-link" href="{{ route('admin.produits') }}"><i class="fas fa-cube"></i> <span>Produits</span></a></li>
-            <li><a class="nav-link" href="blank.html"><i class="fas fa-th"></i> <span>Catégories</span></a></li>
+            <li><a class="nav-link" href="{{ route('admin.pages.produits') }}"><i class="fas fa-cube"></i> <span>Produits</span></a></li>
+            <li><a class="nav-link" href="{{ route('admin.pages.categories') }}"><i class="fas fa-th"></i> <span>Catégories</span></a></li>
             <li><a class="nav-link" href="blank.html"><i class="fas fa-bars"></i> <span>Sous Catégories</span></a></li>
             <li><a class="nav-link" href="blank.html"><i class="fas fa-cube"></i> <span>Sous Catégories</span></a></li>
             <li class="nav-item dropdown">
