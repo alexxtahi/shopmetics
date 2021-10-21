@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\CategorieController;
 
@@ -30,9 +31,16 @@ Route::post('/dashboard/produits/update/{id}', [ProduitController::class, 'updat
 
 // ! Route vers les catégories du tableau de bord
 Route::get('/dashboard/categories', [CategorieController::class, 'index'])->middleware(['auth'])->name('admin.pages.categories');
-Route::get('/dashboard/categories/create', [CategorieController::class, 'create'])->middleware(['auth'])->name('admin.pages.categories.create');
 Route::post('/dashboard/categories/store', [CategorieController::class, 'store'])->middleware(['auth'])->name('admin.pages.categories.store');
 Route::get('/dashboard/categories/delete/{id}', [CategorieController::class, 'destroy'])->middleware(['auth'])->name('admin.pages.categories.delete');
 Route::get('/dashboard/categories/etat', [CategorieController::class, 'etat'])->middleware(['auth'])->name('admin.pages.categories.etat');
-Route::get('/dashboard/categories/edit/{id}', [CategorieController::class, 'edit'])->middleware(['auth'])->name('admin.pages.categories.edit');
 Route::post('/dashboard/categories/update/{lib_cat}', [CategorieController::class, 'update'])->middleware(['auth'])->name('admin.pages.categories.update');
+
+// ! Route vers les clients du tableau de bord
+Route::get('/dashboard/clients', [ClientController::class, 'index'])->middleware(['auth'])->name('admin.pages.clients');
+Route::get('/dashboard/clients/create', [ClientController::class, 'create'])->middleware(['auth'])->name('admin.pages.clients.create');
+Route::post('/dashboard/clients/store', [ClientController::class, 'store'])->middleware(['auth'])->name('admin.pages.clients.store');
+Route::get('/dashboard/clients/delete/{id}', [ClientController::class, 'destroy'])->middleware(['auth'])->name('admin.pages.clients.delete');
+Route::get('/dashboard/clients/etat', [ClientController::class, 'etat'])->middleware(['auth'])->name('admin.pages.clients.etat');
+Route::get('/dashboard/clients/edit/{id}', [ClientController::class, 'edit'])->middleware(['auth'])->name('admin.pages.clients.edit');
+Route::post('/dashboard/clients/update/{id}', [ClientController::class, 'update'])->middleware(['auth'])->name('admin.pages.clients.update');

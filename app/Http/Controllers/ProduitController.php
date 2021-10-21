@@ -20,7 +20,7 @@ class ProduitController extends Controller
      */
     public function index(Request $request)
     {
-        // Récupération des produits
+        // Récupération des données de l'entité
         $produits = Produit::join('categories', 'categories.id', '=', 'produits.id_cat')
             ->select('produits.*', 'categories.lib_cat as lib_cat')
             ->where('produits.deleted_at', null)
@@ -32,7 +32,7 @@ class ProduitController extends Controller
             $result['type'] = 'table';
         }
         // Affichage
-        return view('admin.pages.produit.index', compact('produits', 'result'));
+        return view('admin.pages.produits.index', compact('produits', 'result'));
     }
 
     /**
@@ -52,7 +52,7 @@ class ProduitController extends Controller
             $result['type'] = 'table';
         }
         // Affichage de la vue
-        return view('admin.pages.produit.create', compact('categories', 'result'));
+        return view('admin.pages.produits.create', compact('categories', 'result'));
     }
 
     /**
@@ -115,7 +115,7 @@ class ProduitController extends Controller
                         $img_prod->save(public_path('/assets/img/produits/' . $data['img_prod']->getClientOriginalName()));
                     }
                     $produit->created_at = now();
-                    $existant->created_by = Auth::user()->id;
+                    $produit->created_by = Auth::user()->id;
                     $produit->save(); // Sauvegarde
                     // Message de success
                     $result['state'] = 'success';
@@ -155,7 +155,7 @@ class ProduitController extends Controller
         // Récupération des categories et des sous catégories
         $categories = Categorie::where('deleted_at', null)->get();
         // Affichage de la vue
-        return view('admin.pages.produit.edit', compact('produit', 'categories'));
+        return view('admin.pages.produits.edit', compact('produit', 'categories'));
     }
 
     /**

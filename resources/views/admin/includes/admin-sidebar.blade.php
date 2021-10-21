@@ -7,10 +7,11 @@
         <a href="{{ route('dashboard') }}">SM</a>
         </div>
         <ul class="sidebar-menu">
+            <!-- Tableau de bord -->
             <li class="menu-header">Tableau de bord</li>
-            <li><a class="nav-link" href="{{ route('dashboard') }}"><i class="fa fa-home"></i> <span>Accueil</span></a></li>
-            <li><a class="nav-link" href="{{ route('home') }}"><i class="fa fa-shopping-cart"></i> <span>Revenir à la boutique</span></a></li>
-
+            <li><a class="nav-link" href="{{ route('dashboard') }}"><i class="fas fa-home"></i> <span>Accueil</span></a></li>
+            <li><a class="nav-link" href="{{ route('home') }}"><i class="fas fa-shopping-cart"></i> <span>Revenir à la boutique</span></a></li>
+            <!-- Boutique -->
             <li class="menu-header">Boutique</li>
             {{-- <li class="nav-item dropdown">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Produits</span></a>
@@ -20,10 +21,10 @@
                     <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
                 </ul>
             </li> --}}
+            <li><a class="nav-link" href="{{ route('admin.pages.clients') }}"><i class="fas fa-users"></i> <span>Clients</span></a></li>
             <li><a class="nav-link" href="{{ route('admin.pages.produits') }}"><i class="fas fa-cube"></i> <span>Produits</span></a></li>
             <li><a class="nav-link" href="{{ route('admin.pages.categories') }}"><i class="fas fa-th"></i> <span>Catégories</span></a></li>
-            <li><a class="nav-link" href="blank.html"><i class="fas fa-bars"></i> <span>Sous Catégories</span></a></li>
-            <li><a class="nav-link" href="blank.html"><i class="fas fa-cube"></i> <span>Sous Catégories</span></a></li>
+            <li><a class="nav-link" href="{ route('admin.pages.moyen-paiement') }"><i class="fas fa-wallet"></i> <span>Moyens de paiement</span></a></li>
             <li class="nav-item dropdown">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Bootstrap</span></a>
             <ul class="dropdown-menu">

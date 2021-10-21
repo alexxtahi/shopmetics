@@ -99,7 +99,7 @@
                                     @endif
                                 </div>
                             </div>
-                            @if ((isset($priceFilterMin) &&isset($priceFilterMax)) &&
+                            @if ((isset($priceFilterMin) && isset($priceFilterMax)) &&
                                 (!empty($priceFilterMin) && !empty($priceFilterMax)))
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                                     data-min="{{ $priceFilterMin }}" data-max="{{ $priceFilterMax }}" id="price-filter">

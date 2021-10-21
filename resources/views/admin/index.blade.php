@@ -120,11 +120,11 @@
                                 <div class="mt-1">
                                 <div class="budget-price">
                                     <div class="budget-price-square bg-primary" data-width="64%"></div>
-                                    <div class="budget-price-label">{{ $produit->prix_prod }} FCFA</div>
+                                    <div class="budget-price-label">{{ number_format($produit->prix_prod, 0, ',', ' ') }} FCFA</div>
                                 </div>
                                 <div class="budget-price">
                                     <div class="budget-price-square bg-danger" data-width="43%"></div>
-                                    <div class="budget-price-label">{{ $produit->prix_prod }} FCFA</div>
+                                    <div class="budget-price-label">{{ number_format($produit->prix_prod, 0, ',', ' ') }} FCFA</div>
                                 </div>
                                 </div>
                             </div>

@@ -24,7 +24,7 @@
                         @foreach ($produits as $produit)
                         <div class="product-item">
                             <div class="pi-pic">
-                                <img src="{{ asset('fashi/img/products/women-2.jpg') }}" alt="">
+                                <img src="{{ asset($produit->img_prod) }}" alt="">
                                 <div class="icon">
                                     <i class="icon_heart_alt"></i>
                                 </div>
@@ -35,14 +35,14 @@
                                 </ul>
                             </div>
                             <div class="pi-text">
-                                <div class="catagory-name">Shoes</div>
+                                <div class="catagory-name">{{ $produit->lib_cat }}</div>
                                 <!-- Désignation du produti -->
                                 <a href="#">
                                     <h5>{{ $produit->designation }}</h5>
                                 </a>
                                 <!-- Prix du produti -->
                                 <div class="product-price">
-                                    {{ $produit->prix_prod }} FCFA
+                                    {{ number_format($produit->prix_prod, 0, ',', ' ') }} FCFA
                                 </div>
                             </div>
                         </div>

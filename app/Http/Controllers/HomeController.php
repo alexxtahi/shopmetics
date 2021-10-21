@@ -15,7 +15,10 @@ class HomeController extends Controller
     public function index()
     {
         // Récupération des produits
-        $produits = Produit::where('deleted_at', null)->get();
+        $produits = Produit::join('categories', 'categories.id', '=', 'produits.id_cat')
+            ->select('produits.*', 'categories.lib_cat as lib_cat')
+            ->where('produits.deleted_at', null)
+            ->get();
         // Appel de la vue
         return view('home', ['produits' => $produits]);
     }

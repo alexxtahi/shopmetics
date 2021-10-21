@@ -25,7 +25,7 @@ class CategorieController extends Controller
             $result = $request->get('result');
         }
         // Affichage
-        return view('admin.pages.categorie.index', compact('categories', 'result'));
+        return view('admin.pages.categories.index', compact('categories', 'result'));
     }
 
     /**
@@ -87,7 +87,7 @@ class CategorieController extends Controller
                     $categorie = new Categorie;
                     $categorie->lib_cat = $data['lib_cat'];
                     $categorie->created_at = now();
-                    //$existant->created_by = Auth::user()->id;
+                    $categorie->created_by = Auth::user()->id;
                     $categorie->save(); // Sauvegarde
                     // Message de success
                     $result['state'] = 'success';

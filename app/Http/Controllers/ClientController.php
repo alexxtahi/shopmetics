@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
@@ -12,9 +15,22 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $client = Client::All() ;
+        // Récupération des données de l'entité
+        $clients = Client::join('users', 'users.id', '=', 'clients.id_user')
+            ->select('clients.*', 'users.*')
+            ->where('clients.deleted_at', null)
+            ->get();
+        //dd($clients);
+        // Récupération des résultats d'opération sur le formulaire si existants
+        $result = [];
+        if ($request->exists('result')) {
+            $result = $request->get('result');
+            $result['type'] = 'table';
+        }
+        // Affichage
+        return view('admin.pages.clients.index', compact('clients', 'result'));
     }
 
     /**
@@ -22,9 +38,18 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        // Récupération des données de l'ntité se=électionnée
+        $clients = Client::where('deleted_at', null)->get();
+        // Récupération des résultats d'opération sur le formulaire si existants
+        $result = [];
+        if ($request->exists('result')) {
+            $result = $request->get('result');
+            $result['type'] = 'table';
+        }
+        // Affichage de la vue
+        return view('admin.pages.clients.create', compact('clients', 'result'));
     }
 
     /**
@@ -33,30 +58,76 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
-    public function store(Request $input)
+    public function store(Request $request)
     {
-        $input ->Validate([
+        // ! Contrôles
+        $result = ['state' => 'error', 'message' => 'Une erreur est survenue'];
+        if ($request->isMethod('POST')) {
 
-            "nom_client" => "required|string|max:255|unique:Client,name",
-            "prenom_client" => "required|string|max:255|unique:Client,name",
-            "contact_client" => "required|string|max:20",
-            "email_client" => "required|email|max:255|unique:Client,email",
-            "ville" => "required|string|max:225",
-            "commune" => "required|string|max:255",
+            //dd($request); //die and dump (Voir le contenu de la requête)
 
-        ]) ;
+            // Récupération de tous les résultats de la requête
+            $data = $request->all();
 
-        Client::create([
+            // Validation de la requête
+            $request->validate([
+                "nom" => "required|string",
+                "prenom" => "required|string",
+                "contact" => "required|string",
+                "email" => "required|email",
+                "password" => "required|string",
+                "ville" => "required|string",
+                "commune" => "required|string",
+            ]);
 
-            "nom_client" => $input -> nom_client,
-            "prenom_client" => $input -> prenom_client,
-            "contact_client" => $input -> contact_client,
-            "email_client" => $input -> email_client,
-            "ville" => $input -> ville ,
-            "commune" => $input -> commune ,
-
-        ]);
+            // Vérifier si l'entité est déjà dans la base de données
+            $existant = User::where('email', $data['email'])->first();
+            if ($existant != null) { // Si l'entité existe déjà
+                if ($existant->deleted_at == null) {
+                    // Message au cas où l'entité existe déjà
+                    $result['state'] = 'warning';
+                    $result['message'] = 'Un compte client avec cette adresse mail existe déjà.';
+                } else { // Au cas ou l'entité avait été supprimée
+                    $existant->deleted_at = null;
+                    $existant->deleted_by = null;
+                    $existant->created_at = now();
+                    $existant->created_by = Auth::user()->id;
+                    $existant->save();
+                    // Message de success
+                    $result['state'] = 'success';
+                    $result['message'] = 'Le client a bien été enregistré.';
+                }
+            } else { // Si le produit n'existe pas alors on le crée
+                try {
+                    // Création d'un nouvel utilisateur
+                    $user = new User;
+                    $user->nom = $data['nom'];
+                    $user->prenom = $data['prenom'];
+                    $user->contact = (isset($data['contact']) && !empty($data['contact'])) ? $data['contact'] : null;
+                    $user->email = $data['email'];
+                    $user->password = bcrypt($data['password']);
+                    $user->role = 'Client';
+                    $user->created_at = now();
+                    $user->created_by = Auth::user()->id;
+                    $user->save(); // Sauvegarde
+                    // Association de l'utilisateur au client
+                    $client = new Client;
+                    $client->ville = $data['ville'];
+                    $client->commune = $data['commune'];
+                    $client->id_user = $user->id;
+                    $client->created_at = now();
+                    $client->created_by = Auth::user()->id;
+                    $client->save(); // Sauvegarde
+                    // Message de success
+                    $result['state'] = 'success';
+                    $result['message'] = 'Le client a bien été enregistré.';
+                } catch (Exception $exc) { // ! En cas d'erreur
+                    $result['message'] = $exc->getMessage();
+                }
+            }
+        }
+        // Redirection
+        return redirect()->route('admin.pages.clients.create', compact('result'));
     }
 
 

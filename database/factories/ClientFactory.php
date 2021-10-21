@@ -21,16 +21,14 @@ class ClientFactory extends Factory
      */
     public function definition()
     {
-        /*
         return [
             // ! Properties of fakes datas
-            'nom_client' => $this->faker->name(),
+            /*'nom_client' => $this->faker->name(),
             'prenom_client' => $this->faker->lastName(),
             'contact_client' => $this->faker->phoneNumber(),
-            'email_client' => $this->faker->unique()->safeEmail(),
+            'email_client' => $this->faker->unique()->safeEmail(),*/
             'ville' => $this->faker->country(),
             'commune' => $this->faker->city(),
         ];
-        */
     }
 }
