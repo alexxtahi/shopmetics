@@ -18,15 +18,15 @@ class UserController extends Controller
     public function store(Request $request)
     {
         // ! Contrôles
-        $result = ['register_state' => 'error', 'register_message' => 'Une erreur est survenue.'];
+        $result = ['state' => 'error', 'message' => 'Une erreur est survenue.'];
         if ($request->isMethod('POST')) {
 
             //dd($request); //die and dump (Voir le contenu de la requête)
 
-            // ? Récupération de tous les résultats de la requête
+            // Récupération de tous les résultats de la requête
             $data = $request->all();
 
-            // ? Validation de la requête
+            // Validation de la requête
             $request->validate([
                 'name' => 'required',
                 'lastname' => 'required',
@@ -37,16 +37,16 @@ class UserController extends Controller
                 'commune' => 'required',
             ]);
 
-            // ? Vérifier si l'adresse mail est déjà dans la base de données
+            // Vérifier si l'adresse mail est déjà dans la base de données
             $userExist = User::where('email', $data['email'])->first();
             if ($userExist != null) { // Si le compte existe alors on informe l'utilisateur
                 // Message au cas où le compte existe déjà
-                $result['register_state'] = 'warning';
-                $result['register_message'] = 'Ce compte existe déjà.';
+                $result['state'] = 'warning';
+                $result['message'] = 'Ce compte existe déjà.';
             } else if ($data['password'] != $data['confirm-password']) {
                 // Message au cas où les mots de passe diffèrent
-                $result['register_state'] = 'warning';
-                $result['register_message'] = 'Les mots de passe saisis diffèrent.';
+                $result['state'] = 'warning';
+                $result['message'] = 'Les mots de passe saisis diffèrent.';
             } else { // Si le compte n'existe pas alors on le crée
                 try {
                     // Création d'un nouvel utilisateur
@@ -67,14 +67,14 @@ class UserController extends Controller
                     $client->created_at = now();
                     $client->save(); // Sauvegarde du client
                     // Message de success
-                    $result['register_state'] = 'success';
-                    $result['register_message'] = 'Votre compte a bien été enregistré.';
+                    $result['state'] = 'success';
+                    $result['message'] = 'Votre compte a bien été enregistré.';
                 } catch (Exception $exc) { // ! En cas d'erreur
-                    $result['register_message'] = $exc->getMessage();
+                    $result['message'] = $exc->getMessage();
                 }
             }
         }
-        // ? Redirection
+        // Redirection
         return view('register', $result);
     }
 }

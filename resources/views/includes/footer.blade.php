@@ -47,7 +47,7 @@
                                 @endif
                                 <li> <!-- Formulaire de déconnexion -->
                                     <form method="POST" action="{{ route('logout') }}">
-                                        @method('POST')
+
                                         @csrf
                                         <a href="" style="color: #b2b2b2;" onclick="event.preventDefault(); this.closest('form').submit();">
                                             Déconnexion

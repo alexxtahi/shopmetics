@@ -44,9 +44,7 @@ class ProduitController extends Controller
         // Récupération des categories et des sous catégories
         $categories = Categorie::where('deleted_at', null)->get();
         // Récupération des résultats d'opération sur le formulaire si existants
-        $data = $request->all();
-        $result = [];
-        if (isset($data['result'])) $result = $request->get('result');
+        $result = ($request->exists('result')) ? $request->get('result') : [];
         // Affichage de la vue
         return view('admin.produit.create', compact('categories', 'result'));
     }
@@ -60,15 +58,15 @@ class ProduitController extends Controller
     public function store(Request $request)
     {
         // ! Contrôles
-        $result = ['register_state' => 'error', 'register_message' => 'Une erreur est survenue.'];
+        $result = ['state' => 'error', 'message' => 'Une erreur est survenue.'];
         if ($request->isMethod('POST')) {
 
             //dd($request); //die and dump (Voir le contenu de la requête)
 
-            // ? Récupération de tous les résultats de la requête
+            // Récupération de tous les résultats de la requête
             $data = $request->all();
 
-            // ? Validation de la requête
+            // Validation de la requête
             $request->validate([
                 'code_prod' => 'required',
                 'designation' => 'required',
@@ -76,12 +74,12 @@ class ProduitController extends Controller
                 'id_cat' => 'required',
             ]);
 
-            // ? Vérifier si le code du produit est déjà dans la base de données
+            // Vérifier si le code du produit est déjà dans la base de données
             $prodExist = Produit::where('code_prod', $data['code_prod'])->orWhere('designation', $data['designation'])->first();
             if ($prodExist != null) { // Si le produit existe déjà
                 // Message au cas où le produit existe déjà
-                $result['register_state'] = 'warning';
-                $result['register_message'] = 'Ce produit existe déjà. Changer le code ou la désignation.';
+                $result['state'] = 'warning';
+                $result['message'] = 'Ce produit existe déjà. Changer le code ou la désignation.';
             } else { // Si le produit n'existe pas alors on le crée
                 try {
                     // Création d'un nouveau produit
@@ -102,14 +100,14 @@ class ProduitController extends Controller
                     $produit->created_at = now();
                     $produit->save(); // Sauvegarde
                     // Message de success
-                    $result['register_state'] = 'success';
-                    $result['register_message'] = 'Le produit a bien été enregistré.';
+                    $result['state'] = 'success';
+                    $result['message'] = 'Le produit a bien été enregistré.';
                 } catch (Exception $exc) { // ! En cas d'erreur
-                    $result['register_message'] = $exc->getMessage();
+                    $result['message'] = $exc->getMessage();
                 }
             }
         }
-        // ? Redirection
+        // Redirection
         return redirect()->route('admin.produits.create', compact('result'));
     }
 
@@ -127,12 +125,19 @@ class ProduitController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Produit  $produit
      * @return \Illuminate\Http\Response
      */
-    public function edit(Produit $produit)
+    public function edit($id)
     {
-        //
+        // Recherche et récupération du produit
+        $produit = Produit::join('categories', 'categories.id', '=', 'produits.id_cat')
+            ->select('produits.*', 'categories.lib_cat as lib_cat')
+            ->where([['produits.deleted_at', null], ['produits.id', $id]])
+            ->first();
+        // Récupération des categories et des sous catégories
+        $categories = Categorie::where('deleted_at', null)->get();
+        // Affichage de la vue
+        return view('admin.produit.edit', compact('produit', 'categories'));
     }
 
     /**
@@ -142,9 +147,46 @@ class ProduitController extends Controller
      * @param  \App\Models\Produit  $produit
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Produit $produit)
+    public function update($id, Request $request)
     {
-        //
+        // ! Contrôles
+        $result = ['state' => 'error', 'message' => 'Une erreur est survenue'];
+        if ($request->isMethod('POST')) {
+            // Récupération de tous les résultats de la requête
+            $data = $request->all();
+            // Recherche et récupération du produit
+            $produit = Produit::find($id);
+            // Mise à jour
+            if ($produit != null) {
+                try {
+                    $produit->code_prod = $data['code_prod'];
+                    $produit->designation = $data['designation'];
+                    $produit->prix_prod = $data['prix_prod'];
+                    $produit->id_cat = $data['id_cat'];
+                    $produit->qte_prod = $data['qte_prod'];
+                    $produit->description = (isset($data['description']) && !empty($data['description'])) ? $data['description'] : null;
+                    // Enregistrement de l'image du produit s'il y'en a
+                    if (isset($data['img_prod']) && !empty($data['img_prod'])) {
+                        $produit->img_prod = 'assets/img/produits/' . $data['img_prod'];
+                        $img_prod = Image::make($data['img_prod']->getRealPath());
+                        $img_prod->resize(300, 300);
+                        $img_prod->save(public_path('/assets/img/produits/' . $data['img_prod']->getClientOriginalName()));
+                    }
+                    $produit->created_at = now();
+                    $produit->save(); // Sauvegarde
+                    // Message de success
+                    $result['state'] = 'success';
+                    $result['message'] = 'Modification réussie';
+                } catch (Exception $exc) { // ! En cas d'erreur
+                    $result['message'] = $exc->getMessage();
+                }
+            } else {
+                $result['state'] = 'warning';
+                $result['message'] = 'Le produit est introuvable';
+            }
+        }
+        // Redirection
+        return redirect()->route('admin.produits', compact('result'));
     }
 
     /**

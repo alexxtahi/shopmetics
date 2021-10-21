@@ -48,12 +48,12 @@ class BoutiqueController extends Controller
     public function filterProdByPrice(Request $request)
     {
         //dd($request);
-        // ? Récupération de tous les résultats de la requête
+        // Récupération de tous les résultats de la requête
         $data = $request->all();
         //dd($data);
         $priceFilterMin = $data['minamount'] = (int) str_replace('$', '', $data['minamount']);
         $priceFilterMax = $data['maxamount'] = (int) str_replace('$', '', $data['maxamount']);
-        // ? Récupération des produits
+        // Récupération des produits
         $produits = Produit::join('categories', 'categories.id', '=', 'produits.id_cat') // Jointure avec les catégories
             ->select('produits.*', 'categories.lib_cat as lib_cat') // Choix de ce qu'on veut récupérer dans la requête
             ->where([['produits.deleted_at', null], ['produits.prix_prod', '>=', $priceFilterMin], ['produits.prix_prod', '<=', $priceFilterMax]]) // Condition
@@ -86,9 +86,9 @@ class BoutiqueController extends Controller
     public function filterProdByCategorie(Request $request)
     {
         //dd($request);
-        // ? Récupération de tous les résultats de la requête
+        // Récupération de tous les résultats de la requête
         $data = $request->all();
-        // ? Récupération des produits
+        // Récupération des produits
         $produits = Produit::join('categories', 'categories.id', '=', 'produits.id_cat') // Jointure avec les catégories
             ->select('produits.*', 'categories.lib_cat as lib_cat') // Choix de ce qu'on veut récupérer dans la requête
             ->where([['produits.deleted_at', null], ['categories.id', $data['id_cat']]]) // Condition
@@ -120,9 +120,9 @@ class BoutiqueController extends Controller
     public function filterProdByTags(Request $request)
     {
         //dd($request);
-        // ? Récupération de tous les résultats de la requête
+        // Récupération de tous les résultats de la requête
         $data = $request->all();
-        // ? Récupération des produits
+        // Récupération des produits
         $produits = Produit::join('categories', 'categories.id', '=', 'produits.id_cat') // Jointure avec les catégories
             ->select('produits.*', 'categories.lib_cat as lib_cat') // Choix de ce qu'on veut récupérer dans la requête
             ->where([['produits.deleted_at', null], ['produits.description', 'like', '%' . $data['tag'] . '%']]) // Condition

@@ -24,3 +24,5 @@ Route::get('/dashboard/produits/create', [ProduitController::class, 'create'])->
 Route::post('/dashboard/produits/store', [ProduitController::class, 'store'])->middleware(['auth'])->name('admin.produits.store');
 Route::get('/dashboard/produits/delete/{id}', [ProduitController::class, 'destroy'])->middleware(['auth'])->name('admin.produits.delete');
 Route::get('/dashboard/produits/etat', [ProduitController::class, 'etat'])->middleware(['auth'])->name('admin.produits.etat');
+Route::get('/dashboard/produits/edit/{id}', [ProduitController::class, 'edit'])->middleware(['auth'])->name('admin.produits.edit');
+Route::post('/dashboard/produits/update/{id}', [ProduitController::class, 'update'])->middleware(['auth'])->name('admin.produits.update');

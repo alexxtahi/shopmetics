@@ -15,7 +15,7 @@
                 @if (Auth::check()) <!-- Si l'utilisateur est connecté -->
                     <!-- Formulaire de déconnexion -->
                     <form method="POST" action="{{ route('logout') }}" class="login-panel logout-btn">
-                        @method('POST')
+
                         @csrf
                         <a href="" class="logout-btn" onclick="event.preventDefault(); this.closest('form').submit();">
                             <i class="fa fa-sign-out"></i> Se déconnecter

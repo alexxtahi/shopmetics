@@ -1,15 +1,16 @@
 @props(['errors'])
 
 @if ($errors->any())
-    <div {{ $attributes }}>
-        <div class="font-medium text-red-600">
-            {{ __('Whoops! Something went wrong.') }}
-        </div>
-
-        <ul class="mt-3 list-disc list-inside text-sm text-red-600">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+    @foreach ($errors->all() as $error)
+        <!-- Affichage d'un message en fonction du résultat de l'inscription -->
+        @if ($error == "These credentials do not match our records.")
+            <div class="alert alert-warning" role="alert">
+                Vos identifiants sont incorrects
+            </div>
+        @else
+            <div class="alert alert-danger" role="alert">
+                {{ $errors }}
+            </div>
+        @endif
+    @endforeach
 @endif

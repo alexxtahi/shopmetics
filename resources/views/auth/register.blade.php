@@ -43,22 +43,22 @@
                         <!-- Validation Errors -->
                         <x-auth-validation-errors class="mb-4" :errors="$errors" />
                         <!-- Affichage d'un message en fonction du résultat de l'inscription -->
-                        @if (isset($register_state))
-                            @switch($register_state)
+                        @if (isset($state))
+                            @switch($state)
                                 @case('success')
                                     <div class="alert alert-success" role="alert">
-                                        {{ $register_message }}
+                                        {{ $message }}
                                         <a href="{{ route('login') }}">Cliquez ici</a> pour vous connecter.
                                     </div>
                                     @break
                                 @case('warning')
                                     <div class="alert alert-warning" role="alert">
-                                        {{ $register_message }}
+                                        {{ $message }}
                                     </div>
                                     @break
                                 @case('error')
                                     <div class="alert alert-danger" role="alert">
-                                        {{ $register_message }}
+                                        {{ $message }}
                                     </div>
                                     @break
                                 @default
@@ -66,7 +66,7 @@
                         @endif
                         <!-- Formulaire d'inscription -->
                         <form method="POST" action="{{ route('register') }}">
-                        @method('POST')
+
                         @csrf
                             <!-- Nom -->
                             <div class="group-input">

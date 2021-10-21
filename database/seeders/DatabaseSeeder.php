@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // ? Create default users
+        // Create default users
         $this->call(UserSeeder::class);
         // ! Generate fakes datas
         \App\Models\Categorie::factory(5)->create();

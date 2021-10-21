@@ -54,7 +54,7 @@
                             <td class="no-wrap-line">{{ number_format($produit->prix_prod, 0, ',', ' ') }}</td>
                             <td>{{ $produit->qte_prod }}</td>
                             <td class="no-wrap-line">
-                                <a href="#" class="btn btn-primary actions-btn"><i class="fa fa-edit"></i></a>
+                                <a href="{{ url('/dashboard/produits/edit/' . $produit->id) }}" class="btn btn-primary actions-btn"><i class="fa fa-edit"></i></a>
                                 <a href="{{ url('/dashboard/produits/delete/' . $produit->id) }}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
                             </td>
                         </tr>
