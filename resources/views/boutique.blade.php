@@ -219,10 +219,10 @@
                                         </div>
                                         <ul>
                                             <!-- Rajouter les accolades pour que ça marche -->
-                                            <form action="{ route('cart.store') }" method="POST">
+                                            <div>
                                                 <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                                <li class="quick-view"><a href="#">+ Ajouter au panier</a></li>
-                                            </form>
+                                                <li class="quick-view"><a href="{{route('cart.panier', ['id'=> $produit->id]) }}">+ Ajouter au panier</a></li>  
+                                            </div>
 
                                         </ul>
                                     </div>

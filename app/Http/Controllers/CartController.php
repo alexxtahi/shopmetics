@@ -35,6 +35,9 @@ class CartController extends Controller
     public function store(Request $request)
     {
         //
+        $valeur = $id ;
+        $panier = $request->all() ;
+        dd($panier) ;
     }
 
     /**
@@ -80,5 +83,9 @@ class CartController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function create1(){
+
     }
 }

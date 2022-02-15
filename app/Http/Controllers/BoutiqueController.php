@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+
+
 use App\Models\Categorie;
 use App\Models\Produit;
 use App\Models\Promotion;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Cart ;
 include_once(app_path() . "/number-to-letters/nombre_en_lettre.php");
 
 class BoutiqueController extends Controller
@@ -30,6 +33,8 @@ class BoutiqueController extends Controller
         // Récupération des promotions
         $promotions = Promotion::where('deleted_at', null)->get();
         // Appel de la vue en passant les données
+
+
         return view(
             'boutique',
             [
@@ -145,5 +150,67 @@ class BoutiqueController extends Controller
                 'selectedTag' => $data['tag'],
             ]
         );
+    }
+
+    public function searchProduct(Request $request){
+
+        // Récupération des produits
+        $produits = Produit::where('produits.deleted_at', null)
+        ->join('categories', 'categories.id', '=', 'produits.id_cat') // Jointure avec les catégories
+        ->select('produits.*', 'categories.lib_cat as lib_cat') // Choix de ce qu'on veut récupérer dans la requête
+        ->get();
+        // Récupération des categories
+        $categories = Categorie::where('deleted_at', null)->get();
+        // Récupération des tags
+        $tags = Tag::where('deleted_at', null)->get();
+        // Récupération des promotions
+        $promotions = Promotion::where('deleted_at', null)->get();
+        // Appel de la vue en passant les données
+
+
+        $input = $request->input('q') ;
+        //dd($input) ;
+        $produit = Produit::where('designation', $input)->get() ;
+        //dd($produit) ;
+
+        return view ('boutique', [
+            'produits' => $produit,
+            'categories' => $categories,
+            'tags' => $tags,
+            'promotions' => $promotions,
+        ]) ;
+        
+
+
+    }
+
+    public function addStore($id){
+
+        $product = Produit::find($id) ;
+
+        $product_id   = $product->id ;
+        $product_name = $product->designation ;
+        $product_price = $product->prix_prod ;
+        $product_image =  $product->img_prod ;
+
+        $newcart = Cart::add($product_id, $product_name,1,$product_price,['image' => $product_image])->associate('App\Models\Produit');
+
+
+   
+        return redirect()->route('boutique');
+
+        //response()->json($newcart)
+
+                    
+       
+    }
+
+    public function viewStore($id){
+
+        dd($id) ;
+
+        return redirect()->route('boutique');
+        
+      
     }
 }
