@@ -52,13 +52,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (Cart::content() as $item) 
+                                    @foreach (Cart::content() as $produit) 
                                         <tr>
-                                            <td class="cart-pic first-row"><img src= "{{asset($item->img_prod ? $item->img_prod: 'fashi/img/products/product-2.jpg' ) }}" alt=""></td>
+                                            item
+                                            <td class="cart-pic first-row"><img src= "{{asset($produit->options->photo)}}" alt=""></td>
                                             <td class="cart-title first-row">
-                                                <h5>{{$item->name}}</h5>
+                                                <h5>{{$produit->name}}</h5>
                                             </td>
-                                            <td class="p-price first-row">{{$item->price}} Fcfa</td>
+                                            <td class="p-price first-row">{{$produit->price}} Fcfa</td>
                                             <td class="qua-col first-row">
                                                 <div class="quantity">
                                                     <div class="pro-qty">
@@ -66,8 +67,8 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="total-price first-row">{{$item->price}} Fcfa</td>
-                                            <td class="close-td first-row"><i class="ti-close"><a href="{{route('cart.store', ['id'=> $item->rowId]) }}"></a></i></td>
+                                            <td class="total-price first-row">{{$produit->price}} Fcfa</td>
+                                            <td class="close-td first-row"><i class="ti-close"><a href="{{route('cart.store', ['id'=> $produit->rowId]) }}"></a></i></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -95,7 +96,7 @@
                                         @if ("condition" == "Coupon de réduction")
                                         <li class="subtotal">Subtotal <span>$240.00</span></li>
                                         @endif
-                                        <li class="cart-total">Total <span>{{Cart::total()}} Fcfa</span></li>
+                                        <li class="cart-total">Total <span>{{Cart::subtotal()}} Fcfa (TTC)</span></li>
                                     </ul>
                                     <a href="#" class="proceed-btn">Valider la commande</a>
                                 </div>

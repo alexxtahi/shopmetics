@@ -81,40 +81,33 @@
                             </a>
                             <div class="cart-hover">
                                 <div class="select-items">
-                                    <!--
+                                    
                                     <table>
                                         <tbody>
-                                            <tr>
-                                                <td class="si-pic"><img src="{{ asset('fashi/img/select-product-1.jpg') }}" alt=""></td>
-                                                <td class="si-text">
-                                                    <div class="product-selected">
-                                                        <p>$60.00 x 1</p>
-                                                        <h6>Kabino Bedside Table</h6>
-                                                    </div>
-                                                </td>
-                                                <td class="si-close">
-                                                    <i class="ti-close"></i>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="si-pic"><img src="{{ asset('fashi/img/select-product-2.jpg') }}" alt=""></td>
-                                                <td class="si-text">
-                                                    <div class="product-selected">
-                                                        <p>$60.00 x 1</p>
-                                                        <h6>Kabino Bedside Table</h6>
-                                                    </div>
-                                                </td>
-                                                <td class="si-close">
-                                                    <i class="ti-close"></i>
-                                                </td>
-                                            </tr>
+                                            @foreach (Cart::content() as $item) 
+
+                                                <tr>
+                                                    <td class="si-pic"><img src="{{asset($item->options->photo)}}" alt=""></td>
+                                                    <td class="si-text">
+                                                        <div class="product-selected">
+                                                            <p>{{$item->price}} Fcfa</p>
+                                                            <h6>{{$item->name}}</h6>
+                                                        </div>
+                                                    </td>
+                                                    <td class="si-close">
+                                                        <i class="ti-close"></i>
+                                                    </td>
+                                                </tr>
+
+                                            @endforeach
+                                           
                                         </tbody>
                                     </table>
-                                -->
+                                
                                 </div>
                                 <div class="select-total">
-                                    <span>total:</span>
-                                    <!-- <h5>$120.00</h5> -->
+                                    <span>{{Cart::subtotal()}} HT</span>
+                                    <h5>{{Cart::total()}} TTC</h5>
                                 </div>
                                 <div class="select-button">
                                     <a href="#" class="primary-btn view-card">Valider la commande</a>

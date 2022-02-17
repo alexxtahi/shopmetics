@@ -186,20 +186,40 @@ class BoutiqueController extends Controller
 
     public function addStore($id){
 
+        $produit = new Produit() ;
+
         $product = Produit::find($id) ;
 
         $product_id   = $product->id ;
         $product_name = $product->designation ;
         $product_price = $product->prix_prod ;
         $product_image =  $product->img_prod ;
+       
 
-        $newcart = Cart::add($product_id, $product_name,1,$product_price,['image' => $product_image])->associate('App\Models\Produit');
+        $newproduit = Cart::add($product_id, $product_name,1,$product_price,[ 'size' => 'large','photo' =>$product->img_prod]);
+       
+      
 
+       
 
-   
+        //Cart::associate($cartItem->rowId, $produit);
+
+        //$cartItem->associate('Produit');
+
+        
+
+        
+
+        /*
+        $item = Cart::content() ;
+        dd($item->model->id);
+        */
+
+        
         return redirect()->route('boutique');
 
         //response()->json($newcart)
+        
 
                     
        
