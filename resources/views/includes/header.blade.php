@@ -95,7 +95,9 @@
                                                         </div>
                                                     </td>
                                                     <td class="si-close">
-                                                        <i class="ti-close"></i>
+                                                        <a href="{{route('cart.store', ['id'=> $item->rowId]) }}">
+                                                            <i class="ti-close"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
 
@@ -114,7 +116,7 @@
                                 </div>
                             </div>
                         </li>
-                        <!-- <li class="cart-price">$150.00</li> -->
+                        <li class="cart-price">{{Cart::subtotal()}} Fcfa</li>
                     </ul>
                 </div>
             </div>

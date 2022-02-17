@@ -68,7 +68,7 @@
                                                 </div>
                                             </td>
                                             <td class="total-price first-row">{{$produit->price}} Fcfa</td>
-                                            <td class="close-td first-row"><i class="ti-close"><a href="{{route('cart.store', ['id'=> $produit->rowId]) }}"></a></i></td>
+                                            <td class="close-td first-row"><a href="{{route('cart.store', ['id'=> $produit->rowId]) }}"><i class="ti-close"> </i></a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -80,6 +80,7 @@
                                     <a href="{{ route('boutique') }}" class="primary-btn continue-shop">Boutique</a>
                                     <a href="{{ route('panier') }}" class="primary-btn up-cart">Actualiser</a>
                                 </div>
+                                <!--
                                 <div class="discount-coupon">
                                     <h6>Coupon de réduction</h6>
                                     <form action="#" class="coupon-form">
@@ -87,6 +88,7 @@
                                         <button type="submit" class="site-btn coupon-btn">Appliquer</button>
                                     </form>
                                 </div>
+                                -->
                             </div>
                             <div class="col-lg-4 offset-lg-4">
                                 <div class="proceed-checkout">
