@@ -54,7 +54,7 @@
                                 <tbody>
                                     @foreach (Cart::content() as $produit) 
                                         <tr>
-                                            item
+                                       
                                             <td class="cart-pic first-row"><img src= "{{asset($produit->options->photo)}}" alt=""></td>
                                             <td class="cart-title first-row">
                                                 <h5>{{$produit->name}}</h5>
@@ -63,11 +63,11 @@
                                             <td class="qua-col first-row">
                                                 <div class="quantity">
                                                     <div class="pro-qty">
-                                                        <input type="text"  value="1">
+                                                        <input type="text"  value="{{$produit->qty}}">
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="total-price first-row">{{$produit->price}} Fcfa</td>
+                                            <td class="total-price first-row">{{$produit->price * $produit->qty}} Fcfa</td>
                                             <td class="close-td first-row"><a href="{{route('cart.store', ['id'=> $produit->rowId]) }}"><i class="ti-close"> </i></a></td>
                                         </tr>
                                     @endforeach
@@ -149,6 +149,7 @@
     @include('includes.footer')
     <!-- Js Plugins -->
     @include('includes.js')
+
 </body>
 
 </html>

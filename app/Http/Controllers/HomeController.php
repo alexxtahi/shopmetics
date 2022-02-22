@@ -17,6 +17,6 @@ class HomeController extends Controller
         // Récupération des produits
         $produits = Produit::where('deleted_at', null)->get();
         // Appel de la vue
-        return view('home', ['produits' => $produits]);
+        return view('description', ['produits' => $produits]);
     }
 }

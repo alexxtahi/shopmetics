@@ -36,7 +36,7 @@
 
     <!-- Product Shop Section Begin -->
     <section class="product-shop spad">
-        <div class="container">
+        <div class="container produit_data">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
                     <div class="filter-widget">
@@ -184,25 +184,14 @@
                     <div class="product-show-option">
                         <div class="row">
                             <div class="col-lg-7 col-md-7">
-                                <div class="select-option">
-                                    <select class="sorting" id="sorting" name="sorting">
-                                        <option value="">Tri par défaut</option>
-                                        <option value="tri-par-nom">Tri par nom</option>
-                                        <option value="tri-par-prix">Tri par prix</option>
-                                    </select>
-                                    <!--<select class="p-show">
-                                        <option value="">Afficher:</option>
-                                        <option value="9">Afficher: 9 Produits</option>
-                                        <option value="12">Afficher: 12 Produits</option>
-                                    </select>-->
-                                </div>
+                               
                             </div>
                             <div class="col-lg-5 col-md-5 text-right">
                                 <p><strong>{{ $produits->count() }}</strong> Produits</p>
                             </div>
                         </div>
                     </div>
-                    <div class="product-list">
+                    <div class="product-list ">
                         <div class="row">
                             <!-- Récupération des produits depuis la base de données -->
                             @foreach ($produits as $produit)
@@ -218,10 +207,10 @@
                                             <i class="icon_heart_alt"></i>
                                         </div>
                                         <ul>
-                                            <!-- Rajouter les accolades pour que ça marche -->
+                                            <!-- Rajouter les accolades pour que ça marche <button value="{$produit->id}}" id="cartBtn" class="btn_add">+ Ajouter au panier</button> -->
                                             <div>
                                                 <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                                <li class="quick-view"><a href="{{route('cart.panier', ['id'=> $produit->id]) }}">+ Ajouter au panier</a></li>  
+                                                <li class="quick-view"><a href="{{route('produit', ['id'=>$produit->id])}}">+ Aperçu rapide</a></li>
                                             </div>
 
                                         </ul>
@@ -288,6 +277,9 @@
     @include('includes.footer')
     <!-- Js Plugins -->
     @include('includes.js')
+
+
+
 </body>
 
 </html>

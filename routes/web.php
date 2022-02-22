@@ -45,11 +45,28 @@ Route::view('/panier', 'panier')->name('panier');
 Route::view('/faq', 'faq')->name('faq');
 
 
+
+// ! Route pour la description du produit
+
+Route::get('/produit/{id}', [BoutiqueController::class, 'ProduitApercu'])->name('produit') ;
+
+
+
+
+
+
+
+
+
 // Route pour le panier
 
 Route::get('/monpanier/{id}', [BoutiqueController::class, 'addStore'])->name('cart.panier') ;
 
 Route::get('/card/{id}', [BoutiqueController::class, 'viewStore'])->name('cart.store') ;
+
+Route::post('/test', [BoutiqueController::class, 'addTest']) ;
+
+
 
 /*
 Route::get('/boutique/ajout', [CartController::class, 'create'])->name('ajout.session') ;

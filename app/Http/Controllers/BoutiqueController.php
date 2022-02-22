@@ -186,6 +186,7 @@ class BoutiqueController extends Controller
 
     public function addStore($id){
 
+        
         $produit = new Produit() ;
 
         $product = Produit::find($id) ;
@@ -195,9 +196,9 @@ class BoutiqueController extends Controller
         $product_price = $product->prix_prod ;
         $product_image =  $product->img_prod ;
         $newproduit = Cart::add($product_id, $product_name,1,$product_price,[ 'size' => 'large','photo' =>$product->img_prod]);
-               
-        return redirect()->route('boutique');
 
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
+            
     }
 
     public function viewStore($id){
@@ -208,6 +209,65 @@ class BoutiqueController extends Controller
 
         return view('/panier');
         
-      
     }
+
+
+
+    public function addTest(Request $request){
+
+        $id = $request->input('prod_id') ;
+        $qt = $request->input('prod_qt') ;
+       
+        
+      
+        $produit = new Produit() ;
+
+        $product = Produit::find($id) ;
+
+        $product_id   = $product->id ;
+        $product_name = $product->designation ;
+        $product_price = $product->prix_prod ;
+        $product_image =  $product->img_prod ;
+        Cart::add($product_id, $product_name,$qt,$product_price,[ 'size' => 'large','photo' =>$product->img_prod]);
+
+        return response()->json(['status' => 'ajouter']) ;
+
+    }
+
+
+
+    public function ProduitApercu($id){
+        
+        //Récuperation de tous les produits
+        $produits = Produit::where('produits.deleted_at', null)
+        ->join('categories', 'categories.id', '=', 'produits.id_cat') // Jointure avec les catégories
+        ->select('produits.*', 'categories.lib_cat as lib_cat') // Choix de ce qu'on veut récupérer dans la requête
+        ->get();
+        // Récuperation des catégories
+        $categories = Categorie::where('deleted_at', null)->get();
+        // Récupération des tags
+        $tags = Tag::where('deleted_at', null)->get();
+
+        // Récupération du produit spécifique
+
+        //->join('categories', 'categories.id', '=', 'produits.id_cat')
+
+        $MonProduits = Produit::find($id) ;
+        $MesCategories = Categorie::find($MonProduits->id_cat) ;
+        
+       
+
+
+
+        return view ('description',[
+            'produits' => $produits,
+            'categories' => $categories,
+            'tags' => $tags,
+            'MonProduits' => $MonProduits,
+            'MesCategories' => $MesCategories,
+        ]) ;
+    }
+
+
+    
 }

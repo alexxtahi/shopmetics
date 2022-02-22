@@ -84,18 +84,5 @@ class ProduitController extends Controller
         //
     }
 
-    public function search(){
-
-        $q = request()->input('q') ;
-
-        //$produits = Produit::where('designation', 'Like', "$q");
-
-        $produits = DB::table('produits')->where('designation', 'Like', "%$q%")->get();
-        $categories = DB::table('categories')->get();
-
-
-        return view('boutique')->with('produits', $produits)->with('categories', $categories);
-
-
-    }
+   
 }

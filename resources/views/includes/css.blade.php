@@ -12,3 +12,6 @@
 <link rel="stylesheet" href="{{ asset('fashi/css/style.css') }}" type="text/css">
 <!-- App styles -->
 <link rel="stylesheet" href="{{ asset('assets/custom-style.css') }}" type="text/css">
+
+
+
