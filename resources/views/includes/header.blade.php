@@ -79,42 +79,7 @@
                                 <i class="icon_bag_alt"></i>
                                 <span>{{Cart::count()}}</span>
                             </a>
-                            <div class="cart-hover">
-                                <div class="select-items">
-                                    
-                                    <table>
-                                        <tbody>
-                                            @foreach (Cart::content() as $item) 
-
-                                                <tr>
-                                                    <td class="si-pic"><img src="{{asset($item->options->photo)}}" alt=""></td>
-                                                    <td class="si-text">
-                                                        <div class="product-selected">
-                                                            <p>{{$item->price}} Fcfa</p>
-                                                            <h6>{{$item->name}}</h6>
-                                                        </div>
-                                                    </td>
-                                                    <td class="si-close">
-                                                        <a href="{{route('cart.store', ['id'=> $item->rowId]) }}">
-                                                            <i class="ti-close"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-
-                                            @endforeach
-                                           
-                                        </tbody>
-                                    </table>
-                                
-                                </div>
-                                <div class="select-total">
-                                    <span>{{Cart::subtotal()}} HT</span>
-                                    <h5>{{Cart::total()}} TTC</h5>
-                                </div>
-                                <div class="select-button">
-                                    <a href="#" class="primary-btn view-card">Valider la commande</a>
-                                </div>
-                            </div>
+                            
                         </li>
                         <li class="cart-price">{{Cart::subtotal()}} Fcfa</li>
                     </ul>

@@ -150,6 +150,9 @@
     <!-- Js Plugins -->
     @include('includes.js')
 
+
+    
+
 </body>
 
 </html>

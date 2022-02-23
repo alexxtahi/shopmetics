@@ -139,6 +139,12 @@
     border-color: #e7ab3c;
     border-radius: 5px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.btn-destroy{
+    border: none;
+    background-color: white;
 }
 
 

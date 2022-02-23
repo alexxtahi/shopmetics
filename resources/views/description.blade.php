@@ -387,8 +387,6 @@
                         }
                     });
 
-                   
-                    
                     $.ajax({
                         method: "POST",
                         url : "/test",

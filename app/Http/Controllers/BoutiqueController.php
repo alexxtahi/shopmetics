@@ -213,13 +213,12 @@ class BoutiqueController extends Controller
 
 
 
-    public function addTest(Request $request){
+    public function addProduit(Request $request){
 
         $id = $request->input('prod_id') ;
         $qt = $request->input('prod_qt') ;
+
        
-        
-      
         $produit = new Produit() ;
 
         $product = Produit::find($id) ;
@@ -254,10 +253,11 @@ class BoutiqueController extends Controller
 
         $MonProduits = Produit::find($id) ;
         $MesCategories = Categorie::find($MonProduits->id_cat) ;
-        
-       
 
-
+        //$users = Produit::all();
+        //$users = $users->intersect(Produit::whereIn('id', [1, 2, 3])->get());
+        //$users = rand(10,25) ;
+        //dd($users) ;
 
         return view ('description',[
             'produits' => $produits,

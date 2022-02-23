@@ -64,7 +64,7 @@ Route::get('/monpanier/{id}', [BoutiqueController::class, 'addStore'])->name('ca
 
 Route::get('/card/{id}', [BoutiqueController::class, 'viewStore'])->name('cart.store') ;
 
-Route::post('/test', [BoutiqueController::class, 'addTest']) ;
+Route::post('/test', [BoutiqueController::class, 'addProduit']) ;
 
 
 
