@@ -148,13 +148,14 @@
                                         </h4>
                                     </div>
                                     
-                                    
+                
                                     <div class="quantity">
                                         <div class="pro-qty">
-                                            <input class="prod_qt" type="text" value="1">
+                                            <input class="prod_qt" type="text" value="1">  
                                         </div>
                                         <button id="cartBtn" class="primary-btn pd-cart prod_id" value="{{$MonProduits->id}}">Ajouter au panier</button>
                                     </div>
+                                    
                                     <ul class="pd-tags">
                                         <li><span>CATEGORIES</span>: {{$MesCategories->lib_cat}}</li>
                                         <li><span>TAGS</span> : Aucun Tags <!-- Récupérer les tags --> </li>
@@ -236,7 +237,7 @@
                                                 <tr>
                                                     <td class="p-catagory">Poids</td>
                                                     <td>
-                                                        <div class="p-weight">1,3kg</div>
+                                                        <div class="p-weight">{{$MonProduits->caracteristique ? $MonProduits->caracteristique->poids: 'none'}}</div>
                                                     </td>
                                                 </tr>
                                                
@@ -283,16 +284,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="personal-rating">
-                                                <h6>Your Ratind</h6>
-                                                <div class="rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </div>
-                                            </div>
+                                            
                                             <div class="leave-comment">
                                                 <h4>Laissez un commentaire
                                                 </h4>
@@ -370,46 +362,6 @@
         @include('includes.footer')
         <!-- Js Plugins -->
         @include('includes.js')
-
-
-        <script type="text/javascript">
-
-            $(document).ready(function(){
-                $('#cartBtn').click(function(){
-                    
-                    var prod_id = $(this).closest('.prod_cont').find('.prod_id').val();
-                    var prod_qt = $(this).closest('.prod_cont').find('.prod_qt').val();
-                 
-    
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-
-                    $.ajax({
-                        method: "POST",
-                        url : "/test",
-                        data:{
-                            'prod_id': prod_id,
-                            'prod_qt': prod_qt,
-                        },
-                       success: function(response){
-                        window.location.reload() ;  
-                                        
-                       }
-                    });
-                });
-            });
-    
-    
-        </script>
-    
-
-
-
-
-       
 
     </body>
 

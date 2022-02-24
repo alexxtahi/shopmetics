@@ -36,7 +36,7 @@
 
     <!-- Shopping Cart Section Begin -->
     <section class="shopping-cart spad">
-        <div class="container">
+        <div class="container prod_general">
             <div class="row">      
                     <div class="col-lg-12">
                         <div class="cart-table">
@@ -52,25 +52,39 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (Cart::content() as $produit) 
+                                    @php
+                                        $total = 0 ;
+                                    @endphp
+                                    @forelse ($cart as $items) 
                                         <tr>
                                        
-                                            <td class="cart-pic first-row"><img src= "{{asset($produit->options->photo)}}" alt=""></td>
+                                            <td class="cart-pic first-row"><img src= "{{asset($items->produits->img_prod)}}" alt="none"></td>
                                             <td class="cart-title first-row">
-                                                <h5>{{$produit->name}}</h5>
+                                                <h5>{{$items->produits->designation}}</h5>
                                             </td>
-                                            <td class="p-price first-row">{{$produit->price}} Fcfa</td>
+                                            <td class="p-price first-row">{{$items->produits->prix_prod}} Fcfa</td>
+                                            <input type="hidden" class="qt-dest" value="{{$items->id_prod}}">
                                             <td class="qua-col first-row">
                                                 <div class="quantity">
                                                     <div class="pro-qty">
-                                                        <input type="text"  value="{{$produit->qty}}">
+                                                        <input type="text" value="{{$items->qt_prod}}">
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="total-price first-row">{{$produit->price * $produit->qty}} Fcfa</td>
-                                            <td class="close-td first-row"><a href="{{route('cart.store', ['id'=> $produit->rowId]) }}"><i class="ti-close"> </i></a></td>
+                                            <td class="total-price first-row">{{$items->produits->prix_prod * $items->qt_prod}} Fcfa</td>
+                                            <td class="close-td first-row"><a href="#">
+                                                <a href="{{route('produit.destroy', ['id'=> $items->id_prod]) }}"><i class="ti-close"> </i></a>
+                                            </td>
                                         </tr>
-                                    @endforeach
+                                        @php
+                                            $total+= $items->produits->prix_prod * $items->qt_prod ;
+                                        @endphp
+                                    @empty
+
+                                    @endforelse
+
+
+
                                 </tbody>
                             </table>
                         </div>
@@ -96,9 +110,9 @@
                                     <ul>
                                         <!-- Affichage du total de base au cas ou il y'a un couon de réduction -->
                                         @if ("condition" == "Coupon de réduction")
-                                        <li class="subtotal">Subtotal <span>$240.00</span></li>
+                                        <li class="subtotal">Subtotal <span>{{$total}}</span></li>
                                         @endif
-                                        <li class="cart-total">Total <span>{{Cart::subtotal()}} Fcfa (TTC)</span></li>
+                                        <li class="cart-total">Total <span>{{$total}} Fcfa (TTC)</span></li>
                                     </ul>
                                     <a href="#" class="proceed-btn">Valider la commande</a>
                                 </div>

@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Produit;
+use App\Models\Commentaire;
+use App\Models\Caracteristique;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Produit extends Model
 {
@@ -22,4 +26,12 @@ class Produit extends Model
         'id_sous_cat',
 
     ] ;
+
+    public function caracteristique (){
+        return $this->hasOne(Caracteristique::class) ;
+    }
+
+    public function commentaires(){
+        return $this->hasMany(Commentaire::class) ;
+    }
 }

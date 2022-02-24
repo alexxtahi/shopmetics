@@ -38,8 +38,12 @@ Route::view('/contact', 'contact')->name('contact');
 // ! Route vers le blog
 Route::view('/blog', 'blog')->name('blog');
 
+
+
 // ! Route vers le panier
-Route::view('/panier', 'panier')->name('panier');
+Route::get('/monpanier', [BoutiqueController::class, 'viewproduit'])->name('panier');
+
+
 
 // ! Route vers la foire aux questions
 Route::view('/faq', 'faq')->name('faq');
@@ -62,9 +66,13 @@ Route::get('/produit/{id}', [BoutiqueController::class, 'ProduitApercu'])->name(
 
 Route::get('/monpanier/{id}', [BoutiqueController::class, 'addStore'])->name('cart.panier') ;
 
-Route::get('/card/{id}', [BoutiqueController::class, 'viewStore'])->name('cart.store') ;
 
+// ! Route pour ajouter un produit
 Route::post('/test', [BoutiqueController::class, 'addProduit']) ;
+
+// ! Route pour supprimer un produit
+Route::get('/destroy-product/{id}', [BoutiqueController::class, 'destroyproduit'])->name('produit.destroy') ;
+
 
 
 

@@ -17,3 +17,6 @@
 <script src="{{ asset('assets/chosen.jquery.min.js') }}"></script>
 <script src="{{ asset('assets/jquery.sticky.js') }}"></script>
 <script src="{{ asset('assets/functions.js') }}"></script>
+
+
+<script src="{{ asset('assets/ajax.js') }}"></script>

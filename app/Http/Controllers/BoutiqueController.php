@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 
 
-use App\Models\Categorie;
-use App\Models\Produit;
-use App\Models\Promotion;
+//use Cart ;
 use App\Models\Tag;
+use App\Models\Cart;
+use App\Models\Panier;
+use App\Models\Produit;
+use App\Models\Categorie;
+use App\Models\Promotion;
 use Illuminate\Http\Request;
-use Cart ;
+use Illuminate\Support\Facades\Auth;
 include_once(app_path() . "/number-to-letters/nombre_en_lettre.php");
 
 class BoutiqueController extends Controller
@@ -184,53 +187,47 @@ class BoutiqueController extends Controller
 
     }
 
-    public function addStore($id){
+   
 
-        
-        $produit = new Produit() ;
-
-        $product = Produit::find($id) ;
-
-        $product_id   = $product->id ;
-        $product_name = $product->designation ;
-        $product_price = $product->prix_prod ;
-        $product_image =  $product->img_prod ;
-        $newproduit = Cart::add($product_id, $product_name,1,$product_price,[ 'size' => 'large','photo' =>$product->img_prod]);
-
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
-            
-    }
-
-    public function viewStore($id){
-
-        $rowId = $id;
-
-        Cart::remove($rowId);
-
-        return view('/panier');
-        
-    }
-
+   
 
 
     public function addProduit(Request $request){
 
         $id = $request->input('prod_id') ;
-        $qt = $request->input('prod_qt') ;
+        $qt = $request->input('prod_qt') ; //$request->input('prod_qt') ;
 
        
-        $produit = new Produit() ;
-
-        $product = Produit::find($id) ;
-
-        $product_id   = $product->id ;
+        /*$product_id   = $product->id ;
         $product_name = $product->designation ;
         $product_price = $product->prix_prod ;
-        $product_image =  $product->img_prod ;
-        Cart::add($product_id, $product_name,$qt,$product_price,[ 'size' => 'large','photo' =>$product->img_prod]);
+        $product_image =  $product->img_prod ;*/
 
-        return response()->json(['status' => 'ajouter']) ;
 
+        if (Auth::check()){
+
+            $product = Produit::where('id', $id)->first() ;
+
+            if ($product){
+
+                if (Panier::where('id_prod',$id)->where('id_user', Auth::id())->exists()){
+                    return response()->json(['status' => 'deja dans le panier']) ;
+
+                }else{
+                    $cart = new Panier() ;
+                    $cart->id_prod = $id ;
+                    $cart->id_user = Auth::id();
+                    $cart->qt_prod = $qt ;
+                    $cart->save() ;
+                    return response()->json(['status' => 'ajouter']) ;    
+                }
+            }
+        }
+        else{
+            return response()->json(['status' => "Connectez vous pour continuer !"]);
+        }
+ 
+        //Cart::add($product_id, $product_name,$qt,$product_price);
     }
 
 
@@ -267,6 +264,36 @@ class BoutiqueController extends Controller
             'MesCategories' => $MesCategories,
         ]) ;
     }
+
+
+    public function viewproduit(){
+
+        $cart = Panier::where('id_user', Auth::id())->get() ;
+        return view('panier',compact('cart'));
+
+    }
+
+    public function destroyproduit($id){
+
+       $prod_id = $id;
+       
+       if (Auth::check()){
+
+        if(Panier::where('id_prod', $prod_id)->where('id_user', Auth::id())->exists()){
+
+            $items = Panier::where('id_prod', $prod_id)->where('id_user', Auth::id())->first() ;
+            $items->delete() ;
+
+            return back();
+        }
+
+       }else{
+
+       }
+       
+        
+    }
+
 
 
     

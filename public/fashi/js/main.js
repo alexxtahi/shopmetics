@@ -235,15 +235,27 @@
     var proQty = $('.pro-qty');
     proQty.prepend('<span class="dec qtybtn">-</span>');
     proQty.append('<span class="inc qtybtn">+</span>');
+
     proQty.on('click', '.qtybtn', function() {
+        var prod_id = $(this).closest('.prod_general').find('.qt-dest').val();
         var $button = $(this);
         var oldValue = $button.parent().find('input').val();
+        alert(prod_id) ;
         if ($button.hasClass('inc')) {
             var newVal = parseFloat(oldValue) + 1;
+
+
+            alert(newVal) ;
         } else {
             // Don't allow decrementing below zero
             if (oldValue > 0) {
                 var newVal = parseFloat(oldValue) - 1;
+                alert(newVal) ;
+
+
+
+
+                
             } else {
                 newVal = 0;
             }
