@@ -36,7 +36,7 @@
 
     <!-- Shopping Cart Section Begin -->
     <section class="shopping-cart spad">
-        <div class="container prod_general">
+        <div class="container ">
             <div class="row">      
                     <div class="col-lg-12">
                         <div class="cart-table">
@@ -51,35 +51,46 @@
                                         <th><i class="ti-close"></i></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody >
                                     @php
                                         $total = 0 ;
                                     @endphp
                                     @forelse ($cart as $items) 
-                                        <tr>
-                                       
+                                        <tr class="prod_general">
                                             <td class="cart-pic first-row"><img src= "{{asset($items->produits->img_prod)}}" alt="none"></td>
+                                            
                                             <td class="cart-title first-row">
                                                 <h5>{{$items->produits->designation}}</h5>
                                             </td>
-                                            <td class="p-price first-row">{{$items->produits->prix_prod}} Fcfa</td>
+
+                                            <td class="p-price first-row"> {{ number_format($items->produits->prix_prod, 0, ',', ' ') }} Fcfa</td>
+
                                             <input type="hidden" class="qt-dest" value="{{$items->id_prod}}">
+                                            
                                             <td class="qua-col first-row">
                                                 <div class="quantity">
                                                     <div class="pro-qty">
-                                                        <input type="text" value="{{$items->qt_prod}}">
+                                                        <span class="qtybtn change_qt decr">-</span>
+                                                        <input type="text" class="prod_qt" value="{{$items->qt_prod}}" disabled='true'>
+                                                        <span class="qtybtn change_qt incr">+</span>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="total-price first-row">{{$items->produits->prix_prod * $items->qt_prod}} Fcfa</td>
+                                            
+                                            <td class="total-price first-row">{{ number_format($items->produits->prix_prod * $items->qt_prod, 0, ',', ' ') }} Fcfa</td>
+                                            
                                             <td class="close-td first-row"><a href="#">
                                                 <a href="{{route('produit.destroy', ['id'=> $items->id_prod]) }}"><i class="ti-close"> </i></a>
                                             </td>
                                         </tr>
+
+                                        
                                         @php
                                             $total+= $items->produits->prix_prod * $items->qt_prod ;
                                         @endphp
+                                    
                                     @empty
+
 
                                     @endforelse
 
@@ -112,9 +123,9 @@
                                         @if ("condition" == "Coupon de réduction")
                                         <li class="subtotal">Subtotal <span>{{$total}}</span></li>
                                         @endif
-                                        <li class="cart-total">Total <span>{{$total}} Fcfa (TTC)</span></li>
+                                        <li class="cart-total">Total <span> {{ number_format($total, 0, ',', ' ') }} (TTC)</span></li>
                                     </ul>
-                                    <a href="#" class="proceed-btn">Valider la commande</a>
+                                    <a href="{{route('verification')}}" class="proceed-btn">Valider la commande</a>
                                 </div>
                             </div>
                         </div>
@@ -123,41 +134,9 @@
                 
             </div>
     </section>
-    <!-- Shopping Cart Section End -->
 
-    <!-- Partner Logo Section Begin -->
-    <div class="partner-logo">
-        <div class="container">
-            <div class="logo-carousel owl-carousel">
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-1.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-2.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-3.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-4.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-5.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Partner Logo Section End -->
+
+
 
     <!-- Footer Section -->
     @include('includes.footer')
@@ -165,7 +144,6 @@
     @include('includes.js')
 
 
-    
 
 </body>
 

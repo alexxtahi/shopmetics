@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 //use Cart ;
 use App\Models\Tag;
 use App\Models\Cart;
+use App\Models\User;
 use App\Models\Panier;
 use App\Models\Produit;
 use App\Models\Categorie;
@@ -291,7 +292,39 @@ class BoutiqueController extends Controller
 
        }
        
-        
+    }
+
+    public function updatequantite (Request $request){
+
+        $id_prod = $request->input('prod_id');
+        $qt_prod = $request->input('prod_qt');
+
+        if (Auth::check()){
+
+            if(Panier::where('id_prod',$id_prod)->where('id_user', Auth::id())->exists()){
+
+                $items = Panier::where('id_prod',$id_prod)->where('id_user', Auth::id())->first();
+                $items->qt_prod = $qt_prod ;
+                $items->update() ;
+                return response()->json(['status' => "Quantité mis à jour !"]);
+            }
+        }
+
+    }
+
+    public function ValidateCommand(){
+
+        if(Auth::check()){
+
+            $cart = Panier::where('id_user', Auth::id())->get() ;
+            $user_info = User::find(Auth::id());
+            
+            return view('check', [
+                'cart' => $cart,
+                'user_info' => $user_info,
+            ]) ;
+        }
+      
     }
 
 

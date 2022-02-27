@@ -20,3 +20,6 @@
 
 
 <script src="{{ asset('assets/ajax.js') }}"></script>
+
+<!-- Paiement paypal -->
+<script src="https://www.paypal.com/sdk/js?client-id=AbBuktnYFMMX-ppZloX_wnhdqux0Mr-Y3TBkxfgY6YJejeK1KYvhV2retZg0PEwsqM99AOe-pchecbjF&currency=USD"></script>

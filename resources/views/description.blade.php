@@ -148,13 +148,25 @@
                                         </h4>
                                     </div>
                                     
-                
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input class="prod_qt" type="text" value="1">  
+                                    @if ($MonProduits->qte_prod > 0) <!-- Si la quantité du produit est suppérieur à 0 -->
+
+                                        <div class="quantity">
+                                            <div class="pro-qty">
+                                                <span class="dec qtybtn">-</span>
+                                                <input class="prod_qt" type="text" value="1">  
+                                                <span class="inc qtybtn">+</span>
+                                            </div>
+                                            <button id="cartBtn" class="primary-btn pd-cart prod_id" value="{{$MonProduits->id}}">Ajouter au panier</button>
                                         </div>
-                                        <button id="cartBtn" class="primary-btn pd-cart prod_id" value="{{$MonProduits->id}}">Ajouter au panier</button>
+                                         
+                                    @else
+
+                                    <div class="quantity">
+                                        <button class="primary-btn pd-cart no_stock"  disabled="true">En rupture de stock </button>
                                     </div>
+                                         
+                                    @endif
+                                    
                                     
                                     <ul class="pd-tags">
                                         <li><span>CATEGORIES</span>: {{$MesCategories->lib_cat}}</li>

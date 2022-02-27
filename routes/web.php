@@ -70,8 +70,15 @@ Route::get('/monpanier/{id}', [BoutiqueController::class, 'addStore'])->name('ca
 // ! Route pour ajouter un produit
 Route::post('/test', [BoutiqueController::class, 'addProduit']) ;
 
+// ! Route pour mettre a jour la quantite du produit
+
+Route::post('/update', [BoutiqueController::class, 'updatequantite'])->name('update') ;
+
 // ! Route pour supprimer un produit
 Route::get('/destroy-product/{id}', [BoutiqueController::class, 'destroyproduit'])->name('produit.destroy') ;
+
+// ! Route vers la page de commande
+Route::get('/verification', [BoutiqueController::class, 'ValidateCommand'])->name('verification') ;
 
 
 

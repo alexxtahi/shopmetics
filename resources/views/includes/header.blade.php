@@ -81,7 +81,7 @@
                             </a>
                             
                         </li>
-                        <li class="cart-price">{{Cart::subtotal()}} Fcfa</li>
+                     
                     </ul>
                 </div>
             </div>
