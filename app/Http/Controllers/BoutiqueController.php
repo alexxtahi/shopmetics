@@ -36,9 +36,21 @@ class BoutiqueController extends Controller
         $tags = Tag::where('deleted_at', null)->get();
         // Récupération des promotions
         $promotions = Promotion::where('deleted_at', null)->get();
+        // Récupération du nombre total de produit dans le panier
+        if(Auth::check()){
+            $cart = Panier::where('id_user', Auth::id())->get() ;
+            $val = 0 ;
+            foreach ($cart as $key) {
+                $var = 1 * $key->qt_prod ;
+                $val = $val +$var ;
+            }
+
+            $nombre_prod = $val ;
+        }
+        else{
+            $nombre_prod = 0 ;
+        }
         // Appel de la vue en passant les données
-
-
         return view(
             'boutique',
             [
@@ -46,6 +58,7 @@ class BoutiqueController extends Controller
                 'categories' => $categories,
                 'tags' => $tags,
                 'promotions' => $promotions,
+                'nombre_prod'=> $nombre_prod,
             ]
         );
     }
@@ -74,6 +87,20 @@ class BoutiqueController extends Controller
         $tags = Tag::where('deleted_at', null)->get();
         // Récupération des promotions
         $promotions = Promotion::where('deleted_at', null)->get();
+        // Récupération du nombre total de produit dans le panier
+        if(Auth::check()){
+            $cart = Panier::where('id_user', Auth::id())->get() ;
+            $val = 0 ;
+            foreach ($cart as $key) {
+                $var = 1 * $key->qt_prod ;
+                $val = $val +$var ;
+            }
+
+            $nombre_prod = $val ;
+        }
+        else{
+            $nombre_prod = 0 ;
+        }
         // Appel de la vue en passant les données
         return view(
             'boutique',
@@ -84,6 +111,7 @@ class BoutiqueController extends Controller
                 'promotions' => $promotions,
                 'priceFilterMin' => $priceFilterMin,
                 'priceFilterMax' => $priceFilterMax,
+                'nombre_prod'=> $nombre_prod,
             ]
         );
     }
@@ -109,6 +137,20 @@ class BoutiqueController extends Controller
         $tags = Tag::where('deleted_at', null)->get();
         // Récupération des promotions
         $promotions = Promotion::where('deleted_at', null)->get();
+        // Récupération du nombre total de produit dans le panier
+        if(Auth::check()){
+            $cart = Panier::where('id_user', Auth::id())->get() ;
+            $val = 0 ;
+            foreach ($cart as $key) {
+                $var = 1 * $key->qt_prod ;
+                $val = $val +$var ;
+            }
+
+            $nombre_prod = $val ;
+        }
+        else{
+            $nombre_prod = 0 ;
+        }
         // Appel de la vue en passant les données
         return view(
             'boutique',
@@ -118,6 +160,7 @@ class BoutiqueController extends Controller
                 'tags' => $tags,
                 'promotions' => $promotions,
                 'selectedCategorie' => $data['id_cat'],
+                'nombre_prod' => $nombre_prod,
             ]
         );
     }
@@ -143,6 +186,20 @@ class BoutiqueController extends Controller
         $promotions = Promotion::where('deleted_at', null)->get();
         // Récupération des tags
         $tags = Tag::where('deleted_at', null)->get();
+        // Récupération du nombre total de produit dans le panier
+        if(Auth::check()){
+            $cart = Panier::where('id_user', Auth::id())->get() ;
+            $val = 0 ;
+            foreach ($cart as $key) {
+                $var = 1 * $key->qt_prod ;
+                $val = $val +$var ;
+            }
+
+            $nombre_prod = $val ;
+        }
+        else{
+            $nombre_prod = 0 ;
+        }
         // Appel de la vue en passant les données
         return view(
             'boutique',
@@ -152,6 +209,7 @@ class BoutiqueController extends Controller
                 'tags' => $tags,
                 'promotions' => $promotions,
                 'selectedTag' => $data['tag'],
+                'nombre_prod'=> $nombre_prod,
             ]
         );
     }
@@ -169,19 +227,31 @@ class BoutiqueController extends Controller
         $tags = Tag::where('deleted_at', null)->get();
         // Récupération des promotions
         $promotions = Promotion::where('deleted_at', null)->get();
-        // Appel de la vue en passant les données
-
-
+        // Récuperation du produit saisie
         $input = $request->input('q') ;
-        //dd($input) ;
+        //Recherche du produit
         $produit = Produit::where('designation', $input)->get() ;
-        //dd($produit) ;
+        // Récupération du nombre total de produit dans le panier
+        if(Auth::check()){
+            $cart = Panier::where('id_user', Auth::id())->get() ;
+            $val = 0 ;
+            foreach ($cart as $key) {
+                $var = 1 * $key->qt_prod ;
+                $val = $val +$var ;
+            }
 
+            $nombre_prod = $val ;
+        }
+        else{
+            $nombre_prod = 0 ;
+        }
+        // Appel de la vue en passant les données
         return view ('boutique', [
             'produits' => $produit,
             'categories' => $categories,
             'tags' => $tags,
             'promotions' => $promotions,
+            'nombre_prod'=> $nombre_prod,
         ]) ;
         
 
@@ -193,28 +263,24 @@ class BoutiqueController extends Controller
    
 
 
-    public function addProduit(Request $request){
+    public function addProduit(Request $request){  // Fonction AJAX
 
+        //Récupération de l'Id et la quantité de produit
         $id = $request->input('prod_id') ;
-        $qt = $request->input('prod_qt') ; //$request->input('prod_qt') ;
+        $qt = $request->input('prod_qt') ; 
 
-       
-        /*$product_id   = $product->id ;
-        $product_name = $product->designation ;
-        $product_price = $product->prix_prod ;
-        $product_image =  $product->img_prod ;*/
-
-
+        // Le client est-il connecté ?
         if (Auth::check()){
-
-            $product = Produit::where('id', $id)->first() ;
+            // Récupération du produit dans la BD ainsi que toutes ses caractérristique
+            $product = Produit::where('id', $id)->first() ; 
 
             if ($product){
-
+                // Vérification de l'existance du produit dans le panier
                 if (Panier::where('id_prod',$id)->where('id_user', Auth::id())->exists()){
                     return response()->json(['status' => 'deja dans le panier']) ;
 
                 }else{
+                    // Ajout du produit dans la BD
                     $cart = new Panier() ;
                     $cart->id_prod = $id ;
                     $cart->id_user = Auth::id();
@@ -257,54 +323,89 @@ class BoutiqueController extends Controller
         //$users = rand(10,25) ;
         //dd($users) ;
 
+        // Récupération du nombre total de produit dans le panier
+        if(Auth::check()){
+            $cart = Panier::where('id_user', Auth::id())->get() ;
+            $val = 0 ;
+            foreach ($cart as $key) {
+                $var = 1 * $key->qt_prod ;
+                $val = $val +$var ;
+            }
+
+            $nombre_prod = $val ;
+        }
+        else{
+            $nombre_prod = 0 ;
+        }
+        // Appel de la vue en passant les données
         return view ('description',[
             'produits' => $produits,
             'categories' => $categories,
             'tags' => $tags,
             'MonProduits' => $MonProduits,
             'MesCategories' => $MesCategories,
+            'nombre_prod'=> $nombre_prod,
         ]) ;
     }
 
 
     public function viewproduit(){
-
+        // Récuperation des élements concernant le client connecté
         $cart = Panier::where('id_user', Auth::id())->get() ;
-        return view('panier',compact('cart'));
+        // Récupération du nombre total de produit dans le panier
+        if(Auth::check()){
+            $cart = Panier::where('id_user', Auth::id())->get() ;
+            $val = 0 ;
+            foreach ($cart as $key) {
+                $var = 1 * $key->qt_prod ;
+                $val = $val +$var ;
+            }
+
+            $nombre_prod = $val ;
+        }
+        else{
+            $nombre_prod = 0 ;
+        }
+        // Appel de la vue en passant les données
+        return view('panier',[
+            'cart' => $cart,
+            'nombre_prod'=> $nombre_prod,
+        ]);
 
     }
 
-    public function destroyproduit($id){
-
+    public function destroyproduit($id){ 
+        // Récupération de l'Id du produit
        $prod_id = $id;
        
        if (Auth::check()){
 
         if(Panier::where('id_prod', $prod_id)->where('id_user', Auth::id())->exists()){
-
+            //Récupération du produit concerné
             $items = Panier::where('id_prod', $prod_id)->where('id_user', Auth::id())->first() ;
+            //Suppression du produit
             $items->delete() ;
 
             return back();
         }
-
-       }else{
-
-       }
-       
+       }  
     }
 
-    public function updatequantite (Request $request){
+    public function updatequantite (Request $request){ // Fonction Ajax
 
+        // Récupération de l'Id du produit
         $id_prod = $request->input('prod_id');
+        //Récupération de la quantité du produit
         $qt_prod = $request->input('prod_qt');
 
         if (Auth::check()){
-
+            // Le produit existe-il ?
             if(Panier::where('id_prod',$id_prod)->where('id_user', Auth::id())->exists()){
-
+                //Récupération du produit en question
                 $items = Panier::where('id_prod',$id_prod)->where('id_user', Auth::id())->first();
+                //Ajout de la nouvelle quantité
                 $items->qt_prod = $qt_prod ;
+                //Mise à jour dans la BD
                 $items->update() ;
                 return response()->json(['status' => "Quantité mis à jour !"]);
             }
@@ -313,15 +414,29 @@ class BoutiqueController extends Controller
     }
 
     public function ValidateCommand(){
-
         if(Auth::check()){
-
+            //Récupération de tous les produit concernants le clients connecté
             $cart = Panier::where('id_user', Auth::id())->get() ;
+            //Récuperation des information du client
             $user_info = User::find(Auth::id());
-            
+            // Récupération du nombre total de produit dans le panier
+            if(Auth::check()){
+                $val = 0 ;
+                foreach ($cart as $key) {
+                    $var = 1 * $key->qt_prod ;
+                    $val = $val +$var ;
+                }
+
+                $nombre_prod = $val ;
+            }
+            else{
+                $nombre_prod = 0 ;
+            }
+            // Appel de la vue en passant les données
             return view('check', [
                 'cart' => $cart,
                 'user_info' => $user_info,
+                'nombre_prod'=> $nombre_prod,
             ]) ;
         }
       

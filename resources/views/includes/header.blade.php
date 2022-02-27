@@ -77,11 +77,9 @@
                         <li class="cart-icon">
                             <a href="{{ route('panier') }}">
                                 <i class="icon_bag_alt"></i>
-                                <span>{{Cart::count()}}</span>
-                            </a>
-                            
-                        </li>
-                     
+                                <span>{{$nombre_prod}}</span>
+                            </a>       
+                        </li> 
                     </ul>
                 </div>
             </div>
