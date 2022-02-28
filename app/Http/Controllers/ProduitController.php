@@ -243,31 +243,5 @@ class ProduitController extends Controller
         return redirect()-> route('admin.pages.produits', compact('result'));
     }
 
-    public function search(){
 
-        $q = request()->input('q') ;
-
-        //$produits = Produit::where('designation', 'Like', "$q");
-
-        $produits = DB::table('produits')->where('designation', 'Like', "%$q%")->get();
-        $categories = DB::table('categories')->get();
-
-
-        return view('boutique')->with('produits', $produits)->with('categories', $categories);
-    }
-    /**
-     * Print list of all articles.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function etat()
-    {
-        // Récupération des produits
-        $produits = Produit::join('categories', 'categories.id', '=', 'produits.id_cat')
-            ->select('produits.*', 'categories.lib_cat as lib_cat')
-            ->where('produits.deleted_at', null)
-            ->get();
-        // Affichage
-        return view('admin.etats.liste-produits', compact('produits'));
-    }
 }

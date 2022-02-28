@@ -22,7 +22,12 @@ require __DIR__ . '/shop.php';
 // ! Route vers l'accueil
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/search', [ProduitController::class, 'search'])->name('products.search') ;
+// ! Route vers le tableau de bord
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
+
+// ! Route vers la recherche d'un article
+
+Route::get('/boutique/recherche', [BoutiqueController::class, 'searchProduct'])->name('products.recherche') ;
 
 // ! Route vers la boutique
 Route::get('/boutique', [BoutiqueController::class, 'index'])->name('boutique');
@@ -33,12 +38,53 @@ Route::view('/contact', 'contact')->name('contact');
 // ! Route vers le blog
 Route::view('/blog', 'blog')->name('blog');
 
+
+
 // ! Route vers le panier
-Route::view('/panier', 'panier')->name('panier');
+Route::get('/monpanier', [BoutiqueController::class, 'viewproduit'])->name('panier');
+
+
 
 // ! Route vers la foire aux questions
 Route::view('/faq', 'faq')->name('faq');
 
-/* Route pour le panier
 
-Route :: post('/panier/ajouter', 'CartController@store')-->name('cart.store') ; */
+
+// ! Route pour la description du produit
+
+Route::get('/produit/{id}', [BoutiqueController::class, 'ProduitApercu'])->name('produit') ;
+
+
+
+
+
+
+
+
+
+// Route pour le panier
+
+Route::get('/monpanier/{id}', [BoutiqueController::class, 'addStore'])->name('cart.panier') ;
+
+
+// ! Route pour ajouter un produit
+Route::post('/test', [BoutiqueController::class, 'addProduit']) ;
+
+// ! Route pour mettre a jour la quantite du produit
+
+Route::post('/update', [BoutiqueController::class, 'updatequantite'])->name('update') ;
+
+// ! Route pour supprimer un produit
+Route::get('/destroy-product/{id}', [BoutiqueController::class, 'destroyproduit'])->name('produit.destroy') ;
+
+// ! Route vers la page de commande
+Route::get('/verification', [BoutiqueController::class, 'ValidateCommand'])->name('verification') ;
+
+
+
+
+/*
+Route::get('/boutique/ajout', [CartController::class, 'create'])->name('ajout.session') ;
+
+Route::get('/boutique/destroy', [CartController::class, 'create1'])->name('destroy.session') ;
+*/
