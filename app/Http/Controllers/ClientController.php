@@ -41,7 +41,8 @@ class ClientController extends Controller
     public function create(Request $request)
     {
         // Récupération des données de l'ntité se=électionnée
-        $clients = Client::where('deleted_at', null)->get();
+        $clients = Client::where('deleted_at', null)
+            ->get();
         // Récupération des résultats d'opération sur le formulaire si existants
         $result = [];
         if ($request->exists('result')) {
@@ -81,7 +82,8 @@ class ClientController extends Controller
             ]);
 
             // Vérifier si l'entité est déjà dans la base de données
-            $existant = User::where('email', $data['email'])->first();
+            $existant = User::where('email', $data['email'])
+                ->first();
             if ($existant != null) { // Si l'entité existe déjà
                 if ($existant->deleted_at == null) {
                     // Message au cas où l'entité existe déjà
@@ -91,7 +93,8 @@ class ClientController extends Controller
                     $existant->deleted_at = null;
                     $existant->deleted_by = null;
                     $existant->created_at = now();
-                    $existant->created_by = Auth::user()->id;
+                    $existant->created_by = Auth::user()
+                        ->id;
                     $existant->save();
                     // Message de success
                     $result['state'] = 'success';
@@ -108,7 +111,8 @@ class ClientController extends Controller
                     $user->password = bcrypt($data['password']);
                     $user->role = 'Client';
                     $user->created_at = now();
-                    $user->created_by = Auth::user()->id;
+                    $user->created_by = Auth::user()
+                        ->id;
                     $user->save(); // Sauvegarde
                     // Association de l'utilisateur au client
                     $client = new Client;
@@ -116,7 +120,8 @@ class ClientController extends Controller
                     $client->commune = $data['commune'];
                     $client->id_user = $user->id;
                     $client->created_at = now();
-                    $client->created_by = Auth::user()->id;
+                    $client->created_by = Auth::user()
+                        ->id;
                     $client->save(); // Sauvegarde
                     // Message de success
                     $result['state'] = 'success';
@@ -127,7 +132,8 @@ class ClientController extends Controller
             }
         }
         // Redirection
-        return redirect()->route('admin.pages.clients.create', compact('result'));
+        return redirect()
+            ->route('admin.pages.clients.create', compact('result'));
     }
 
 
@@ -143,7 +149,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        return $client ;
+        return $client;
     }
 
 
@@ -174,7 +180,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        $client->update($request->all()) ;
+        $client->update($request->all());
     }
 
 
@@ -189,12 +195,8 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        $client->deleteProfilePhoto() ;
-        $client->tokens->each->delete() ;
-        $client->delete() ;
+        $client->deleteProfilePhoto();
+        $client->tokens->each->delete();
+        $client->delete();
     }
-
-
 }
-
-

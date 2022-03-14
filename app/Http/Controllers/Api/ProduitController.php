@@ -4,18 +4,19 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Produit ;
+use App\Models\Produit;
 
 class ProduitController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return response()->json(Produit::all()) ;
+        return response()
+            ->json(Produit::all());
     }
 
     /**
@@ -36,29 +37,28 @@ class ProduitController extends Controller
      */
     public function store(Request $input)
     {
-        $input ->validate([
+        $input->validate([
 
             "nom_admin" => "required|string|max:255",
             "prenom_admin" => "required|string|max:255",
             "contact_admin" => "required|string|max:20",
             "email_admin" => "required|email|max:255",
 
-        ]) ;
+        ]);
 
         Produit::create([
 
-            "code_pro" => $input -> code_pro,
-            "designation" => $input -> designation,
-            "description" => $input -> description,
-            "qte_produit" => $input -> qte_produit,
-            "img_prod" => $input -> img_prod,
-            "prix_prod" => $input -> prix_prod,
-            "ancien_prod" => $input -> ancien_prod,
-            "id_cat" => $input -> id_cat,
-            "id_sous_cat" => $input -> id_sous_cat,
+            "code_pro" => $input->code_pro,
+            "designation" => $input->designation,
+            "description" => $input->description,
+            "qte_produit" => $input->qte_produit,
+            "img_prod" => $input->img_prod,
+            "prix_prod" => $input->prix_prod,
+            "ancien_prod" => $input->ancien_prod,
+            "id_cat" => $input->id_cat,
+            "id_sous_cat" => $input->id_sous_cat,
 
         ]);
-
     }
 
     /**
@@ -69,7 +69,7 @@ class ProduitController extends Controller
      */
     public function show(Produit $produit)
     {
-        return $produit ;
+        return $produit;
     }
 
     /**
@@ -92,7 +92,7 @@ class ProduitController extends Controller
      */
     public function update(Request $request, Produit $produit)
     {
-        $produit->update($request->all()) ;
+        $produit->update($request->all());
     }
 
     /**
@@ -103,6 +103,6 @@ class ProduitController extends Controller
      */
     public function destroy(Produit $produit)
     {
-        $produit->delete() ;
+        $produit->delete();
     }
 }

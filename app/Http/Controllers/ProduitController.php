@@ -7,7 +7,7 @@ use App\Models\Produit;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB ;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class ProduitController extends Controller
@@ -44,7 +44,8 @@ class ProduitController extends Controller
     public function create(Request $request)
     {
         // Récupération des categories et des sous catégories
-        $categories = Categorie::where('deleted_at', null)->get();
+        $categories = Categorie::where('deleted_at', null)
+            ->get();
         // Récupération des résultats d'opération sur le formulaire si existants
         $result = [];
         if ($request->exists('result')) {
@@ -81,7 +82,9 @@ class ProduitController extends Controller
             ]);
 
             // Vérifier si le code du produit est déjà dans la base de données
-            $existant = Produit::where('code_prod', $data['code_prod'])->orWhere('designation', $data['designation'])->first();
+            $existant = Produit::where('code_prod', $data['code_prod'])
+                ->orWhere('designation', $data['designation'])
+                ->first();
             if ($existant != null) { // Si le produit existe déjà
                 if ($existant->deleted_at == null) {
                     // Message au cas où le produit existe déjà
@@ -91,7 +94,8 @@ class ProduitController extends Controller
                     $existant->deleted_at = null;
                     $existant->deleted_by = null;
                     $existant->created_at = now();
-                    $existant->created_by = Auth::user()->id;
+                    $existant->created_by = Auth::user()
+                        ->id;
                     $existant->save();
                     // Message de success
                     $result['state'] = 'success';
@@ -115,7 +119,8 @@ class ProduitController extends Controller
                         $img_prod->save(public_path('/assets/img/produits/' . $data['img_prod']->getClientOriginalName()));
                     }
                     $produit->created_at = now();
-                    $produit->created_by = Auth::user()->id;
+                    $produit->created_by = Auth::user()
+                        ->id;
                     $produit->save(); // Sauvegarde
                     // Message de success
                     $result['state'] = 'success';
@@ -126,7 +131,8 @@ class ProduitController extends Controller
             }
         }
         // Redirection
-        return redirect()->route('admin.pages.produits.create', compact('result'));
+        return redirect()
+            ->route('admin.pages.produits.create', compact('result'));
     }
 
     /**
@@ -153,7 +159,8 @@ class ProduitController extends Controller
             ->where([['produits.deleted_at', null], ['produits.id', $id]])
             ->first();
         // Récupération des categories et des sous catégories
-        $categories = Categorie::where('deleted_at', null)->get();
+        $categories = Categorie::where('deleted_at', null)
+            ->get();
         // Affichage de la vue
         return view('admin.pages.produits.edit', compact('produit', 'categories'));
     }
@@ -190,7 +197,8 @@ class ProduitController extends Controller
                         $img_prod->resize(300, 300);
                         $img_prod->save(public_path('/assets/img/produits/' . $data['img_prod']->getClientOriginalName()));
                     }
-                    $produit->updated_by = Auth::user()->id;
+                    $produit->updated_by = Auth::user()
+                        ->id;
                     $produit->updated_at = now();
                     $produit->save(); // Sauvegarde
                     // Message de success
@@ -205,7 +213,8 @@ class ProduitController extends Controller
             }
         }
         // Redirection
-        return redirect()->route('admin.pages.produits', compact('result'));
+        return redirect()
+            ->route('admin.pages.produits', compact('result'));
     }
 
     /**
@@ -225,7 +234,8 @@ class ProduitController extends Controller
         try {
             if ($produit != null) { // Suppression
                 $produit->deleted_at = now();
-                $produit->deleted_by = Auth::user()->id;
+                $produit->deleted_by = Auth::user()
+                    ->id;
                 $produit->save();
             } else {
                 $result = [
@@ -240,8 +250,7 @@ class ProduitController extends Controller
             ];
         }
         // Redirection
-        return redirect()-> route('admin.pages.produits', compact('result'));
+        return redirect()
+            ->route('admin.pages.produits', compact('result'));
     }
-
-
 }

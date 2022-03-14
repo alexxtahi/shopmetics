@@ -21,25 +21,26 @@ class HomeController extends Controller
             ->select('produits.*', 'categories.lib_cat as lib_cat')
             ->where('produits.deleted_at', null)
             ->get();
-        $produits = Produit::where('deleted_at', null)->get();
+        $produits = Produit::where('deleted_at', null)
+            ->get();
         // Récupération du nombre total de produit dans le panier
-        if(Auth::check()){
-            $cart = Panier::where('id_user', Auth::id())->get() ;
-            $val = 0 ;
+        if (Auth::check()) {
+            $cart = Panier::where('id_user', Auth::id())
+                ->get();
+            $val = 0;
             foreach ($cart as $key) {
-                $var = 1 * $key->qt_prod ;
-                $val = $val +$var ;
+                //$var = 1 * $key->qt_prod; //! inutile
+                $val = $val + $key->qt_prod;
             }
 
-            $nombre_prod = $val ;
-        }
-        else{
-            $nombre_prod = 0 ;
+            $nombre_prod = $val;
+        } else {
+            $nombre_prod = 0;
         }
         // Appel de la vue
         return view('home', [
             'produits' => $produits,
-            'nombre_prod'=> $nombre_prod,
+            'nombre_prod' => $nombre_prod,
         ]);
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\User;
-use App\Models\Produit;
 use App\Models\Commentaire;
 use App\Models\Caracteristique;
 use Illuminate\Database\Eloquent\Model;
@@ -25,13 +24,15 @@ class Produit extends Model
         'id_cat',
         'id_sous_cat',
 
-    ] ;
+    ];
 
-    public function caracteristique (){
-        return $this->hasOne(Caracteristique::class) ;
+    public function caracteristique()
+    {
+        return $this->hasOne(Caracteristique::class);
     }
 
-    public function commentaires(){
-        return $this->hasMany(Commentaire::class) ;
+    public function commentaires()
+    {
+        return $this->hasMany(Commentaire::class);
     }
 }

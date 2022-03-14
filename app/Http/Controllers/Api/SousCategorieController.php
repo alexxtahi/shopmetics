@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\SousCategorie ;
+use App\Models\SousCategorie;
 
 class SousCategorieController extends Controller
 {
@@ -15,7 +15,8 @@ class SousCategorieController extends Controller
      */
     public function index()
     {
-        return response()->json(SousCategorie::all()) ;
+        return response()
+            ->json(SousCategorie::all());
     }
 
     /**
@@ -36,18 +37,17 @@ class SousCategorieController extends Controller
      */
     public function store(Request $input)
     {
-        $input ->validate([
+        $input->validate([
 
             "lib_sous_cat" => "required|string|max:255",
             "id_cat" => "required|string|max:255",
 
-        ]) ;
-
-        SousCategorie::create([
-            "lib_sous_cat" => $input -> lib_sous_cat,
-            "id_cat" => $input -> id_cat,
         ]);
 
+        SousCategorie::create([
+            "lib_sous_cat" => $input->lib_sous_cat,
+            "id_cat" => $input->id_cat,
+        ]);
     }
 
     /**
@@ -58,7 +58,7 @@ class SousCategorieController extends Controller
      */
     public function show(SousCategorie $sousCategorie)
     {
-        return $sousCategorie ;
+        return $sousCategorie;
     }
 
     /**
@@ -81,7 +81,7 @@ class SousCategorieController extends Controller
      */
     public function update(Request $request, SousCategorie $sousCategorie)
     {
-        $sousCategorie->update($request->all()) ;
+        $sousCategorie->update($request->all());
     }
 
     /**
@@ -92,6 +92,6 @@ class SousCategorieController extends Controller
      */
     public function destroy(SousCategorie $sousCategorie)
     {
-        $sousCategorie->delete() ;
+        $sousCategorie->delete();
     }
 }

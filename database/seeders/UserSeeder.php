@@ -46,5 +46,16 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'created_at' => now(),
         ]);
+
+        // Default Admin
+        DB::table('users')->insert([
+            'nom' => "Testeur",
+            'prenom' => "Testeur",
+            'password' => bcrypt('Testeur'),
+            'role' => 'Client',
+            'email' => 'testeur@testeur.com',
+            'email_verified_at' => now(),
+            'created_at' => now(),
+        ]);
     }
 }

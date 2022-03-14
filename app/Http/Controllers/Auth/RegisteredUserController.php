@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use App\Models\Produit;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -53,10 +54,16 @@ class RegisteredUserController extends Controller
             'role' => $request->role,
         ]);
 
+        $client = new Client();
+        $client->ville = $request->ville;
+        $client->commune = $request->commune;
+        $client->id_user = $user->id;
+        $client->save();
+
         event(new Registered($user));
-
+        // auto connexion de l'utilisateur
         Auth::login($user);
-
+        // redirection sur la page d'accueil
         return redirect(RouteServiceProvider::HOME);
     }
 }

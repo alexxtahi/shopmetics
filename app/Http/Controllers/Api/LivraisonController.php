@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Livraison ;
+use App\Models\Livraison;
 
 class LivraisonController extends Controller
 {
@@ -17,7 +17,8 @@ class LivraisonController extends Controller
      */
     public function index()
     {
-        return response()->json(Livraison::all()) ;
+        return response()
+            ->json(Livraison::all());
     }
 
     /**
@@ -28,12 +29,12 @@ class LivraisonController extends Controller
      */
     public function store(Request $input)
     {
-        $input ->validate([
+        $input->validate([
             "code_livraison" => "required|string|max:255",
-        ]) ;
+        ]);
 
         Livraison::create([
-            "code_livraison" => $input -> code_livraison,
+            "code_livraison" => $input->code_livraison,
         ]);
     }
 

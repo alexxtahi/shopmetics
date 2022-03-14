@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Categorie ;
+use App\Models\Categorie;
 
 class CategorieController extends Controller
 {
@@ -15,7 +15,8 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        return response()->json(Categorie::all()) ;
+        return response()
+            ->json(Categorie::all());
     }
 
     /**
@@ -25,7 +26,6 @@ class CategorieController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -36,12 +36,12 @@ class CategorieController extends Controller
      */
     public function store(Request $input)
     {
-        $input ->validate([
+        $input->validate([
             "lib_cat" => "required|string|max:255",
-        ]) ;
+        ]);
 
         Categorie::create([
-            "lib_cat" => $input -> lib_cat,
+            "lib_cat" => $input->lib_cat,
         ]);
     }
 
@@ -64,7 +64,7 @@ class CategorieController extends Controller
      */
     public function edit(Categorie $categorie)
     {
-        return $categorie ;
+        return $categorie;
     }
 
     /**
@@ -76,7 +76,7 @@ class CategorieController extends Controller
      */
     public function update(Request $request, Categorie $categorie)
     {
-        $categorie->update($request->all()) ;
+        $categorie->update($request->all());
     }
 
     /**
@@ -87,6 +87,6 @@ class CategorieController extends Controller
      */
     public function destroy(Categorie $categorie)
     {
-        $categorie->delete() ;
+        $categorie->delete();
     }
 }

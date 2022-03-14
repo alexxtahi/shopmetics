@@ -44,30 +44,29 @@
                         <x-auth-validation-errors class="mb-4" :errors="$errors" />
                         <!-- Affichage d'un message en fonction du résultat de l'inscription -->
                         @if (isset($state))
-                            @switch($state)
-                                @case('success')
-                                    <div class="alert alert-success" role="alert">
-                                        {{ $message }}
-                                        <a href="{{ route('login') }}">Cliquez ici</a> pour vous connecter.
-                                    </div>
-                                    @break
-                                @case('warning')
-                                    <div class="alert alert-warning" role="alert">
-                                        {{ $message }}
-                                    </div>
-                                    @break
-                                @case('error')
-                                    <div class="alert alert-danger" role="alert">
-                                        {{ $message }}
-                                    </div>
-                                    @break
-                                @default
-                            @endswitch
+                        @switch($state)
+                        @case('success')
+                        <div class="alert alert-success" role="alert">
+                            {{ $message }}
+                            <a href="{{ route('login') }}">Cliquez ici</a> pour vous connecter.
+                        </div>
+                        @break
+                        @case('warning')
+                        <div class="alert alert-warning" role="alert">
+                            {{ $message }}
+                        </div>
+                        @break
+                        @case('error')
+                        <div class="alert alert-danger" role="alert">
+                            {{ $message }}
+                        </div>
+                        @break
+                        @default
+                        @endswitch
                         @endif
                         <!-- Formulaire d'inscription -->
-                        <form method="POST" action="{{ route('register') }}">
-
-                        @csrf
+                        <form method="POST" action="{{ route('register.post') }}">
+                            @csrf
                             <!-- Nom -->
                             <div class="group-input">
                                 <label for="nom">Nom</label>
@@ -101,7 +100,8 @@
                             <!-- Mot de passe -->
                             <div class="group-input">
                                 <label for="password">Mot de passe</label>
-                                <input type="password" id="password" name="password" autocomplete="new-password" required>
+                                <input type="password" id="password" name="password" autocomplete="new-password"
+                                    required>
                             </div>
                             <!-- Confirmer le mot de passe -->
                             <div class="group-input">

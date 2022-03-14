@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\MoyenPaiement ;
+use App\Models\MoyenPaiement;
 
 class MoyenPaiementController extends Controller
 {
@@ -15,10 +15,11 @@ class MoyenPaiementController extends Controller
      */
     public function index()
     {
-        return response()->json(MoyenPaiement::all()) ;
+        return response()
+            ->json(MoyenPaiement::all());
     }
 
-     /**
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -27,12 +28,12 @@ class MoyenPaiementController extends Controller
     public function store(Request $input)
     {
         //
-        $input ->validate([
+        $input->validate([
             "lib_moyen_paiement" => "required|string|max:255",
-        ]) ;
+        ]);
 
         MoyenPaiement::create([
-            "lib_moyen_paiement" => $input -> lib_moyen_paiement,
+            "lib_moyen_paiement" => $input->lib_moyen_paiement,
         ]);
     }
 
@@ -42,5 +43,4 @@ class MoyenPaiementController extends Controller
      * @param  \App\Models\MoyenPaiement  $moyenPaiement
      * @return \Illuminate\Http\Response
      */
-
 }

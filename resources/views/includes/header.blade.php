@@ -12,18 +12,18 @@
                 </div>
             </div>
             <div class="ht-right">
-                @if (Auth::check()) <!-- Si l'utilisateur est connecté -->
-                    <!-- Formulaire de déconnexion -->
-                    <form method="POST" action="{{ route('logout') }}" class="login-panel logout-btn">
-
-                        @csrf
-                        <a href="" class="logout-btn" onclick="event.preventDefault(); this.closest('form').submit();">
-                            <i class="fa fa-sign-out"></i> Se déconnecter
-                        </a>
-                    </form>
-                    <a href="#" class="login-panel"><i class="fa fa-user"></i>Bonjour, {{ Auth::user()->nom }} !</a>
+                @if (Auth::check())
+                <!-- Si l'utilisateur est connecté -->
+                <!-- Formulaire de déconnexion -->
+                <form method="POST" action="{{ route('logout') }}" class="login-panel logout-btn">
+                    @csrf
+                    <a href="" class="logout-btn" onclick="event.preventDefault(); this.closest('form').submit();">
+                        <i class="fa fa-sign-out"></i> Se déconnecter
+                    </a>
+                </form>
+                <a href="#" class="login-panel"><i class="fa fa-user"></i>Bonjour, {{ Auth::user()->nom }} !</a>
                 @else
-                    <a href="{{ route('login') }}" class="login-panel"><i class="fa fa-user"></i>Connexion</a>
+                <a href="{{ route('login') }}" class="login-panel"><i class="fa fa-user"></i>Connexion</a>
                 @endif
                 <div class="lan-selector">
                 </div>
@@ -60,26 +60,28 @@
                 <div class="col-lg-3 text-right col-md-3">
                     <ul class="nav-right">
                         <!-- Si l'admin est connecté -->
-                        @if (Auth::check() && (Auth::user()->role == "Administrateur" || Auth::user()->role == "Dev"))
-                            <li class="heart-icon">
-                                <a href="{{ route('dashboard') }}">
-                                    <i class="icon_toolbox_alt"></i>
-                                    <!-- <span>1</span> -->
-                                </a>
-                            </li>
+                        @if (Auth::check() && (Auth::user()->role == "Admin" || Auth::user()->role == "Dev"))
+                        <li class="heart-icon">
+                            <a href="{{ route('dashboard') }}" data-toggle="tooltip" title="Tableau de bord">
+                                <i class="icon_toolbox_alt"></i>
+                                <!-- <span>1</span> -->
+                            </a>
+                        </li>
                         @endif
                         <li class="heart-icon">
-                            <a href="#">
+                            <a href="#" data-toggle="tooltip" title="Mes favoris">
                                 <i class="icon_heart_alt"></i>
                                 <!-- <span>1</span> -->
                             </a>
                         </li>
                         <li class="cart-icon">
-                            <a href="{{ route('panier') }}">
+                            <a href="{{ route('panier') }}" data-toggle="tooltip" title="Panier">
                                 <i class="icon_bag_alt"></i>
-                                <span>{{$nombre_prod}}</span>
-                            </a>       
-                        </li> 
+                                @if (Auth::check())
+                                <span>{{ $nombre_prod }}</span>
+                                @endif
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -106,11 +108,11 @@
             <nav class="nav-menu mobile-menu">
                 <ul>
                     <!-- Bouton Accueil -->
-                    <li @if ($view_name == 'home') class="active" @endif>
+                    <li @if ($view_name=='home' ) class="active" @endif>
                         <a href="{{ route('home') }}">Acceuil</a>
                     </li>
                     <!-- Bouton Boutique -->
-                    <li @if ($view_name == 'boutique') class="active" @endif>
+                    <li @if ($view_name=='boutique' ) class="active" @endif>
                         <a href="{{ route('boutique') }}">Boutique</a>
                     </li>
                     <!-- Bouton Accueil -->
@@ -122,24 +124,24 @@
                         </ul>
                     </li>
                     <!-- Bouton Blog -->
-                    <li @if ($view_name == 'blog') class="active" @endif>
+                    <li @if ($view_name=='blog' ) class="active" @endif>
                         <a href="{{ route('blog') }}">Blog</a>
                     </li>
                     <!-- Bouton Contact -->
-                    <li @if ($view_name == 'contact') class="active" @endif>
+                    <li @if ($view_name=='contact' ) class="active" @endif>
                         <a href="{{ route('contact') }}">Contact</a>
                     </li>
                     <li><a href="#">Pages</a>
                         <ul class="dropdown">
                             <!-- Affichage du bouton dashboard si l'utilisateur connecté est un Admin -->
                             @if (Auth::check())
-                                <li><a href="#">Mon compte</a></li>
-                                @if (Auth::user()->role == "Administrateur" || Auth::user()->role == "Dev")
-                                    <li><a href="{{ route('dashboard') }}">Tableau de bord</a></li>
-                                @endif
+                            <li><a href="#">Mon compte</a></li>
+                            @if (Auth::user()->role == "Administrateur" || Auth::user()->role == "Dev")
+                            <li><a href="{{ route('dashboard') }}">Tableau de bord</a></li>
+                            @endif
                             @else
-                                <li><a href="{{ route('register') }}">Inscription</a></li>
-                                <li><a href="{{ route('login') }}">Connexion</a></li>
+                            <li><a href="{{ route('register') }}">Inscription</a></li>
+                            <li><a href="{{ route('login') }}">Connexion</a></li>
                             @endif
                             <li><a href="{{ route('panier') }}">Panier</a></li>
                             <li><a href="{{ route('faq') }}">F.A.Q</a></li>

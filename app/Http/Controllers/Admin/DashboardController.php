@@ -18,13 +18,19 @@ class DashboardController extends Controller
     public function index()
     {
         // Récupération des commandes
-        $commandes = Commande::where('deleted_at', null)->get();
+        $commandes = Commande::where('deleted_at', null)
+            ->get();
         // Récupération des produits
-        $produits = Produit::where('deleted_at', null)->get();
-        $meilleursProduits = Produit::where([['deleted_at', null]])->paginate(3); // Récupérer seulement 3 enregistrements
-        $top5Produits = Produit::where([['deleted_at', null]])->orderBy('prix_prod', 'DESC')->paginate(5); // Récupérer seulement 3 enregistrements
+        $produits = Produit::where('deleted_at', null)
+            ->get();
+        $meilleursProduits = Produit::where('deleted_at', null)
+            ->paginate(3); // Récupérer seulement 3 enregistrements
+        $top5Produits = Produit::where('deleted_at', null)
+            ->orderBy('prix_prod', 'DESC')
+            ->paginate(5); // Récupérer seulement 3 enregistrements
         // Récupération des besoins
-        $besoins = Besoin::where('deleted_at', null)->get();
+        $besoins = Besoin::where('deleted_at', null)
+            ->get();
         // Appel de la vue
         return view('admin.index', compact('commandes', 'produits', 'meilleursProduits', 'top5Produits', 'besoins'));
     }

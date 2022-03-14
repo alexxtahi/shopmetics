@@ -38,7 +38,8 @@ class UserController extends Controller
             ]);
 
             // Vérifier si l'adresse mail est déjà dans la base de données
-            $userExist = User::where('email', $data['email'])->first();
+            $userExist = User::where('email', $data['email'])
+                ->first();
             if ($userExist != null) { // Si le compte existe alors on informe l'utilisateur
                 // Message au cas où le compte existe déjà
                 $result['state'] = 'warning';

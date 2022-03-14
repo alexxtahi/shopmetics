@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Commande ;
+use App\Models\Commande;
 use Illuminate\Console\Command;
 
 class CommandeController extends Controller
@@ -16,7 +16,8 @@ class CommandeController extends Controller
      */
     public function index()
     {
-        return response()->json(Command::all()) ;
+        return response()
+            ->json(Command::all());
     }
 
     /**
@@ -26,7 +27,6 @@ class CommandeController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -37,21 +37,21 @@ class CommandeController extends Controller
      */
     public function store(Request $input)
     {
-        $input ->validate([
+        $input->validate([
 
             "date_cmd" => "required|string|max:255",
             "statut_cmd" => "required|string|max:255",
             "id_client" => "required|string|max:20",
             "id_moyen_paiement" => "required|email|max:255",
 
-        ]) ;
+        ]);
 
         Commande::create([
 
-            "date_cmd" => $input -> date_cmd,
-            "statut_cmd" => $input -> statut_cmd,
-            "id_client" => $input -> id_client,
-            "id_moyen_paiement" => $input -> id_moyen_paiement,
+            "date_cmd" => $input->date_cmd,
+            "statut_cmd" => $input->statut_cmd,
+            "id_client" => $input->id_client,
+            "id_moyen_paiement" => $input->id_moyen_paiement,
 
         ]);
     }
@@ -64,6 +64,6 @@ class CommandeController extends Controller
      */
     public function show(Commande $commande)
     {
-        return $commande ;
+        return $commande;
     }
 }

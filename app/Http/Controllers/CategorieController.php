@@ -18,7 +18,8 @@ class CategorieController extends Controller
     public function index(Request $request)
     {
         // Récupération des produits
-        $categories = Categorie::where('categories.deleted_at', null)->get();
+        $categories = Categorie::where('categories.deleted_at', null)
+            ->get();
         // Récupération des résultats d'opération sur le formulaire si existants
         $result = [];
         if ($request->exists('result')) {
@@ -65,17 +66,19 @@ class CategorieController extends Controller
             ]);
 
             // Vérifier si la catégorie est déjà dans la base de données
-            $existant = Categorie::where('lib_cat', $data['lib_cat'])->first();
+            $existant = Categorie::where('lib_cat', $data['lib_cat'])
+                ->first();
             if ($existant != null) { // Si la catégorie existe déjà
                 if ($existant->deleted_at == null) {
-                // Message au cas où la catégorie existe déjà
-                $result['state'] = 'warning';
-                $result['message'] = 'Cette catégorie existe déjà. Changer le libellé.';
+                    // Message au cas où la catégorie existe déjà
+                    $result['state'] = 'warning';
+                    $result['message'] = 'Cette catégorie existe déjà. Changer le libellé.';
                 } else { // Au cas ou la catégorie avait été supprimée
                     $existant->deleted_at = null;
                     $existant->deleted_by = null;
                     $existant->created_at = now();
-                    $existant->created_by = Auth::user()->id;
+                    $existant->created_by = Auth::user()
+                        ->id;
                     $existant->save();
                     // Message de success
                     $result['state'] = 'success';
@@ -87,7 +90,8 @@ class CategorieController extends Controller
                     $categorie = new Categorie;
                     $categorie->lib_cat = $data['lib_cat'];
                     $categorie->created_at = now();
-                    $categorie->created_by = Auth::user()->id;
+                    $categorie->created_by = Auth::user()
+                        ->id;
                     $categorie->save(); // Sauvegarde
                     // Message de success
                     $result['state'] = 'success';
@@ -98,7 +102,8 @@ class CategorieController extends Controller
             }
         }
         // Redirection
-        return redirect()->route('admin.pages.categories', compact('result'));
+        return redirect()
+            ->route('admin.pages.categories', compact('result'));
     }
 
     /**
@@ -142,12 +147,14 @@ class CategorieController extends Controller
             // Récupération de tous les résultats de la requête
             $data = $request->all();
             // Recherche et récupération
-            $categorie = Categorie::where('lib_cat', $lib_cat)->first();
+            $categorie = Categorie::where('lib_cat', $lib_cat)
+                ->first();
             // Mise à jour
             if ($categorie != null) {
                 try {
                     $categorie->lib_cat = $data['new_lib_cat'];
-                    $categorie->updated_by = Auth::user()->id;
+                    $categorie->updated_by = Auth::user()
+                        ->id;
                     $categorie->updated_at = now();
                     $categorie->save(); // Sauvegarde
                     // Message de success
@@ -162,7 +169,8 @@ class CategorieController extends Controller
             }
         }
         // Redirection
-        return redirect()->route('admin.pages.categories', compact('result'));
+        return redirect()
+            ->route('admin.pages.categories', compact('result'));
     }
 
     /**
@@ -183,7 +191,8 @@ class CategorieController extends Controller
         try {
             if ($categorie != null) { // Suppression
                 $categorie->deleted_at = now();
-                $categorie->deleted_by = Auth::user()->id;
+                $categorie->deleted_by = Auth::user()
+                    ->id;
                 $categorie->save();
             } else {
                 $result['state'] = 'warning';
@@ -194,6 +203,7 @@ class CategorieController extends Controller
             $result['message'] = 'Une erreur est survenue';
         }
         // Redirection
-        return redirect()->route('admin.pages.categories', compact('result'));
+        return redirect()
+            ->route('admin.pages.categories', compact('result'));
     }
 }

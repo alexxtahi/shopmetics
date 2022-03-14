@@ -19,7 +19,7 @@ class CreateClientsTable extends Migration
             $table->string('ville');
             $table->string('commune');
             // ! Clé étrangère
-            $table->bigInteger('id_user')->unsigned(); //->nullable();
+            $table->integer('id_user')->unsigned(); //->nullable();
             // ! Statistiques
             $table->dateTime('deleted_at')->nullable();
             $table->integer('updated_by')->unsigned()->nullable();

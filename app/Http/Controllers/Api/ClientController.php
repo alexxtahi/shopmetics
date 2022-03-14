@@ -4,14 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Client ;
+use App\Models\Client;
 
 
 class ClientController extends Controller
 {
     public function index()
     {
-        return response()->json(Client::all()) ;
+        return response()
+            ->json(Client::all());
     }
 
     /**
@@ -32,7 +33,7 @@ class ClientController extends Controller
      */
     public function store(Request $input)
     {
-        $input ->validate([
+        $input->validate([
 
             "nom_client" => "required|string|max:255",
             "prenom_client" => "required|string|max:255",
@@ -41,20 +42,18 @@ class ClientController extends Controller
             "ville" => "required|string|max:225",
             "commune" => "required|string|max:255",
 
-        ]) ;
+        ]);
 
         Client::create([
 
-            "nom_client" => $input -> nom_client,
-            "prenom_client" => $input -> prenom_client,
-            "contact_client" => $input -> contact_client,
-            "email_client" => $input -> email_client,
-            "ville" => $input -> ville ,
-            "commune" => $input -> commune ,
+            "nom_client" => $input->nom_client,
+            "prenom_client" => $input->prenom_client,
+            "contact_client" => $input->contact_client,
+            "email_client" => $input->email_client,
+            "ville" => $input->ville,
+            "commune" => $input->commune,
 
         ]);
-
-
     }
 
     /**
@@ -65,7 +64,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        return $client ;
+        return $client;
     }
 
     /**
@@ -88,7 +87,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        $client->update($request->all()) ;
+        $client->update($request->all());
     }
 
     /**
@@ -100,8 +99,6 @@ class ClientController extends Controller
 
     public function destroy(Client $client)
     {
-        $client->delete() ;
-
+        $client->delete();
     }
-
 }
