@@ -1,4 +1,12 @@
 <header class="header-section">
+
+    <!-- Message après opération -->
+    @if (isset($previous_result['welcome_text']) && !empty($previous_result['welcome_text']))
+    <div class="alert alert-success text-center" role="alert">
+        {{ $previous_result['welcome_text'] }}
+    </div>
+    @endif
+
     <div class="header-top">
         <div class="container">
             <div class="ht-left">

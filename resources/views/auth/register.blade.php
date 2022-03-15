@@ -65,7 +65,7 @@
                         @endswitch
                         @endif
                         <!-- Formulaire d'inscription -->
-                        <form method="POST" action="{{ route('register.post') }}">
+                        <form method="POST" action="{{ route('register') }}">
                             @csrf
                             <!-- Nom -->
                             <div class="group-input">

@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -30,11 +31,13 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
-        $request->session()
-            ->regenerate();
+        $request->session()->regenerate();
 
-        return redirect()
-            ->intended(RouteServiceProvider::HOME);
+        // redirection sur la page d'accueil
+        $welcome_text = "C'est un plaisir de vous revoir M./Mme. " . Auth::user()->nom . "!";
+        $home = new HomeController;
+        return $home->index(compact('welcome_text'));
+        // return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**

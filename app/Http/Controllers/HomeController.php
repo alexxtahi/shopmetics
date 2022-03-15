@@ -14,7 +14,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($previous_result = [])
     {
         // Récupération des produits
         $produits = Produit::join('categories', 'categories.id', '=', 'produits.id_cat')
@@ -41,6 +41,7 @@ class HomeController extends Controller
         return view('home', [
             'produits' => $produits,
             'nombre_prod' => $nombre_prod,
+            'previous_result' => $previous_result,
         ]);
     }
 }

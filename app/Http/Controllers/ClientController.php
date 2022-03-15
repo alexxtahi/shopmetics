@@ -136,11 +136,6 @@ class ClientController extends Controller
             ->route('admin.pages.clients.create', compact('result'));
     }
 
-
-
-
-
-
     /**
      * Display the specified resource.
      *
@@ -153,10 +148,6 @@ class ClientController extends Controller
     }
 
 
-
-
-
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -167,9 +158,6 @@ class ClientController extends Controller
     {
         //
     }
-
-
-
 
     /**
      * Update the specified resource in storage.
