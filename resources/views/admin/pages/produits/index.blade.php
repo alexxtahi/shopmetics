@@ -57,16 +57,15 @@
                             <td>{{ $produit->qte_prod }}</td>
                             <td class="no-wrap-line">
                                 {{-- Bouton Modifier --}}
-                                <a href="{{ url('/dashboard/produits/edit/' . $produit->id) }}"
-                                    class="btn btn-primary actions-btn"><i class="fa fa-edit"></i></a>
+                                <button onclick="window.location.replace('/dashboard/produits/edit/{{ $produit->id }}')"
+                                    class="btn btn-primary actions-btn"><i class="fa fa-edit"></i>
+                                </button>
                                 {{-- Bouton Supprimer --}}
                                 <button class="btn btn-danger"
                                     data-confirm="Etes-vous sûr(e) ?|Voulez vous vraiment supprimer le produit <strong>{{ $produit->designation }}</strong> ?"
                                     data-confirm-yes="window.location.replace('/dashboard/produits/delete/{{ $produit->id }}');">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
-                                {{-- <a href="{{ url('/dashboard/produits/delete/' . $produit->id) }}"
-                                    class="btn btn-danger"><i class="far fa-trash-alt"></i></a> --}}
                             </td>
                         </tr>
                         @endforeach

@@ -183,10 +183,6 @@ class ClientController extends Controller
         $client->update($request->all());
     }
 
-
-
-
-
     /**
      * Remove the specified resource from storage.
      *
@@ -195,7 +191,6 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        $client->deleteProfilePhoto();
         $client->tokens->each->delete();
         $client->delete();
     }

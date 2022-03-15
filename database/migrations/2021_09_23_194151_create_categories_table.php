@@ -17,9 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->string('lib_cat')->unique();
             // ! Statistiques
-
-
-            $table->dateTime('deleted_at')->nullable();
+            $table->timestamp('deleted_at')->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
             $table->integer('deleted_by')->unsigned()->nullable();
             $table->integer('created_by')->unsigned()->nullable();
