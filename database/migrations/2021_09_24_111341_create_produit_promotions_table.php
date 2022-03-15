@@ -16,16 +16,16 @@ class CreateProduitPromotionsTable extends Migration
         Schema::create('produit_promotions', function (Blueprint $table) {
             $table->id();
             // ! Clés étrangères
-            $table->integer('id_prod')->unsigned();
-            $table->integer('id_promo')->unsigned();
+            $table->foreignId('id_prod')->references('id')->on('produits');
+            $table->foreignId('id_promo')->references('id')->on('promotions');
             // ! Attributs
             $table->integer('qte_prod_promo');
             $table->integer('prix_prod_promo');
             // ! Statistiques
-            $table->dateTime('deleted_at')->nullable();
-            $table->integer('updated_by')->unsigned()->nullable();
-            $table->integer('deleted_by')->unsigned()->nullable();
-            $table->integer('created_by')->unsigned()->nullable();
+            $table->timestamp('deleted_at')->nullable();
+            $table->foreignId('updated_by')->nullable();
+            $table->foreignId('deleted_by')->nullable();
+            $table->foreignId('created_by')->nullable();
             $table->timestamps();
         });
     }

@@ -16,13 +16,13 @@ class CreateBesoinClientsTable extends Migration
         Schema::create('besoin_clients', function (Blueprint $table) {
             $table->id();
             // ! Clés étrangères
-            $table->integer('id_besoin')->unsigned();
-            $table->integer('id_client')->unsigned();
+            $table->foreignId('id_besoin')->references('id')->on('besoins');
+            $table->foreignId('id_client')->references('id')->on('clients');
             // ! Statistiques
-            $table->dateTime('deleted_at')->nullable();
-            $table->integer('updated_by')->unsigned()->nullable();
-            $table->integer('deleted_by')->unsigned()->nullable();
-            $table->integer('created_by')->unsigned()->nullable();
+            $table->timestamp('deleted_at')->nullable();
+            $table->foreignId('updated_by')->nullable();
+            $table->foreignId('deleted_by')->nullable();
+            $table->foreignId('created_by')->nullable();
             $table->timestamps();
         });
     }

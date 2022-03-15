@@ -17,12 +17,12 @@ class CreateSousCategoriesTable extends Migration
             $table->id();
             $table->string('lib_sous_cat')->unique();
             // ! Clé étrangère
-            $table->foreignId('id_cat')->unsigned();
+            $table->foreignId('id_cat')->references('id')->on('categories');
             // ! Statistiques
+            $table->foreignId('updated_by')->nullable();
+            $table->foreignId('deleted_by')->nullable();
+            $table->foreignId('created_by')->nullable();
             $table->timestamp('deleted_at')->nullable();
-            $table->integer('updated_by')->unsigned()->nullable();
-            $table->integer('deleted_by')->unsigned()->nullable();
-            $table->integer('created_by')->unsigned()->nullable();
             $table->timestamps();
         });
     }

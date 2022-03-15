@@ -25,13 +25,13 @@ class CreateProduitsTable extends Migration
             $table->integer('ancien_prix')->nullable();
             $table->boolean('en_promo')->nullable();
             // ! Clés étrangères
-            $table->integer('id_cat')->unsigned();
-            $table->integer('id_sous_cat')->unsigned()->nullable();
+            $table->foreignId('id_cat')->references('id')->on('categories');
+            $table->foreignId('id_sous_cat')->references('id')->on('sous_categories')->nullable();
             // ! Statistiques
-            $table->dateTime('deleted_at')->nullable();
-            $table->integer('updated_by')->unsigned()->nullable();
-            $table->integer('deleted_by')->unsigned()->nullable();
-            $table->integer('created_by')->unsigned()->nullable();
+            $table->timestamp('deleted_at')->nullable();
+            $table->foreignId('updated_by')->nullable();
+            $table->foreignId('deleted_by')->nullable();
+            $table->foreignId('created_by')->nullable();
             $table->timestamps();
         });
     }

@@ -17,10 +17,10 @@ class CreateCaracteristiquesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('type');
-            $table->string('constitution') ;
-            $table->string('poids') ;
-            $table->string('bienfait') ;
-            $table->foreignId('produit_id')->constrained() ;
+            $table->string('constitution');
+            $table->string('poids');
+            $table->string('bienfait');
+            $table->foreignId('id_produit')->references('id')->on('produits');
         });
     }
 

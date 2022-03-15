@@ -17,16 +17,16 @@ class CreateCommandesTable extends Migration
             $table->id();
             // ! Attributs
             $table->string('code_cmd');
-            $table->dateTime('date_cmd');
+            $table->timestamp('date_cmd');
             $table->string('statut_cmd');
             // ! Clé étrangère
-            $table->integer('id_client')->unsigned();
-            $table->integer('id_moyen_paiement')->unsigned();
+            $table->foreignId('id_client')->references('id')->on('clients');
+            $table->foreignId('id_moyen_paiement')->references('id')->on('moyen_paiements');
             // ! Statistiques
-            $table->dateTime('deleted_at')->nullable();
-            $table->integer('updated_by')->unsigned()->nullable();
-            $table->integer('deleted_by')->unsigned()->nullable();
-            $table->integer('created_by')->unsigned()->nullable();
+            $table->timestamp('deleted_at')->nullable();
+            $table->foreignId('updated_by')->nullable();
+            $table->foreignId('deleted_by')->nullable();
+            $table->foreignId('created_by')->nullable();
             $table->timestamps();
         });
     }
