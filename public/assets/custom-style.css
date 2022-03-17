@@ -29,11 +29,6 @@
     padding: 18px 20px !important;
 }
 
-.admin-footer {
-    /*position: absolute;
-    bottom: 0;*/
-}
-
 .best-products-div {
     display: flex;
     justify-content: space-between;
@@ -80,17 +75,11 @@
     height: min-content !important;
 }
 
-.custom-table tbody {
+.custom-table {
     display: block !important;
-    height: 500px !important;
     overflow: auto !important;
-}
-
-.custom-table thead {
-    display: table !important;
     width: 100% !important;
-    table-layout: fixed !important;
-    /* even columns width , fix width of table too*/
+    max-height: 500px !important;
 }
 
 .form-footer {
@@ -102,18 +91,19 @@
     display: flex;
     justify-content: center;
     margin-top: 70px;
-.margin-div{
+}
+
+.margin-div {
     margin-left: 30px;
 }
 
-.div-p{
+.div-p {
     display: flex;
     background-color: rgba(245, 245, 245, 0.418);
     border-radius: 10px;
 }
 
-
-.div-s{
+.div-s {
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: 30px;
@@ -121,12 +111,12 @@
     width: 500px;
 }
 
-.image{
+.image {
     width: 100%;
     height: 65%;
 }
 
-.wrapper{
+.wrapper {
     height: 40px;
     width: 150px;
     display: flex;
@@ -137,7 +127,7 @@
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-.wrapper span{
+.wrapper span {
     width: 100%;
     text-align: center;
     font-size: 25px;
@@ -145,7 +135,7 @@
     cursor: pointer;
 }
 
-.wrapper span.num{
+.wrapper span.num {
     font-size: 50px;
     border-right: 2px solid rgba(0, 0, 0, 0.2);
     border-right: 2px solid rgba(0, 0, 0, 0.2);
@@ -160,132 +150,120 @@
     background-color: #C70039;
 }*/
 
-.bar{
+.bar {
     width: 370px;
     background-color: #dadada;
 }
 
-.price{
-
+.price {
     margin-top: 60px;
 }
 
-
-.prod_id{
+.prod_id {
     border-color: #e7ab3c;
     border-radius: 5px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     border: none;
 }
 
-.btn-destroy{
+.btn-destroy {
     border: none;
     background-color: white;
 }
 
-
-
-.change_qt{
+.change_qt {
     cursor: pointer;
 }
 
-.paiement{
+.paiement {
     margin-top: 10px;
 }
 
-.no_stock{
-
+.no_stock {
     border-color: #eb2222;
     background-color: #eb2222;
     border-radius: 5px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     border: none;
-
 }
-
-
-
-
-
-
-
-
 
 
 /*********** bouton ajouter au panier *******************/
 
 .button-69 {
-  background-color: initial;
-  background-image: linear-gradient(#f78707 0, #f78707 100%);
-  border-radius: 5px;
-  border-style: none;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-family: Inter, sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  height: 60px;
-  line-height: 60px;
-  margin-left: -4px;
-  outline: 0;
-  text-align: center;
-  transition: all .3s cubic-bezier(.05, .03, .35, 1);
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: bottom;
-  width: 250px;
+    background-color: initial;
+    background-image: linear-gradient(#f78707 0, #f78707 100%);
+    border-radius: 5px;
+    border-style: none;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    height: 60px;
+    line-height: 60px;
+    margin-left: -4px;
+    outline: 0;
+    text-align: center;
+    transition: all .3s cubic-bezier(.05, .03, .35, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: bottom;
+    width: 250px;
 }
 
 .button-69:hover {
-  opacity: .7;
+    opacity: .7;
 }
 
 @media screen and (max-width: 1000px) {
-  .button-69 {
-    font-size: 14px;
-    height: 55px;
-    line-height: 55px;
-    width: 150px;
-  }
+    .button-69 {
+        font-size: 14px;
+        height: 55px;
+        line-height: 55px;
+        width: 150px;
+    }
 }
 
 
 /************************************************/
 
-
-
-.qt{
+.qt {
     margin-bottom: 30px;
 }
 
-
-.produit-populaire{
+.produit-populaire {
     display: flex;
     flex-direction: row;
     width: 100%;
     height: 118px;
-
 }
 
-.populaire-image{
+.populaire-image {
     height: 100%;
     width: 40%;
 }
 
-.image-populaire{
+.image-populaire {
     height: 100%;
     width: 100%;
-
 }
 
-.margin-div-populaire{
+.margin-div-populaire {
     display: flex;
     flex-direction: column;
 }
 
-.information-populaire{
+.information-populaire {
     margin-left: 5px;
+}
+
+.warning-td {
+    color: red;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
 }

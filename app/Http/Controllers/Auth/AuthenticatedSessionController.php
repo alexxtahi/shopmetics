@@ -34,7 +34,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         // redirection sur la page d'accueil
-        $welcome_text = "C'est un plaisir de vous revoir M./Mme. " . Auth::user()->nom . "!";
+        $welcome_text = "C'est un plaisir de vous revoir M./Mme. " . Auth::user()->nom . " !";
         $home = new HomeController;
         return $home->index(compact('welcome_text'));
         // return redirect()->intended(RouteServiceProvider::HOME);

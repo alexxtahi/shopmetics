@@ -52,16 +52,7 @@ Route::view('/faq', 'faq')
 Route::get('/produit/{id}', [BoutiqueController::class, 'ProduitApercu'])
     ->name('produit');
 
-
-
-
-
-
-
-
-
-// Route pour le panier
-
+//! Route pour le panier
 Route::get('/monpanier/{id}', [BoutiqueController::class, 'addStore'])
     ->name('cart.panier');
 
@@ -81,9 +72,6 @@ Route::get('/destroy-product/{id}', [BoutiqueController::class, 'destroyproduit'
 // ! Route vers la page de commande
 Route::get('/verification', [BoutiqueController::class, 'ValidateCommand'])
     ->name('verification');
-
-
-
 
 /*
 Route::get('/boutique/ajout', [CartController::class, 'create'])
