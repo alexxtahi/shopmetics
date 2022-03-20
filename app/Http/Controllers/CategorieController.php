@@ -19,6 +19,7 @@ class CategorieController extends Controller
     {
         // Récupération des produits
         $categories = Categorie::where('categories.deleted_at', null)
+            ->orderBy('categories.created_at', 'DESC')
             ->get();
         // Récupération des résultats d'opération sur le formulaire si existants
         $result = [];

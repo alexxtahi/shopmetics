@@ -12,9 +12,19 @@ class MoyenPaiementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // Récupération des données
+        $moyen_paiements = MoyenPaiement::where('moyen_paiements.deleted_at', null)
+            ->orderBy('moyen_paiements.created_at', 'DESC')
+            ->get();
+        // Récupération des résultats d'opération sur le formulaire si existants
+        $result = [];
+        if ($request->exists('result')) {
+            $result = $request->get('result');
+        }
+        // Affichage
+        return view('admin.pages.moyen-paiements.index', compact('moyen_paiements', 'result'));
     }
 
     /**

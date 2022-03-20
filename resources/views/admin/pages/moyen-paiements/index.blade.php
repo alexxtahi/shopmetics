@@ -8,13 +8,15 @@
                     <div class="card">
                         <!-- En tête -->
                         <div class="card-header table-card-header">
-                            <h4>Ajouter une catégorie</h4>
+                            <h4>Ajouter un moyen de paiement</h4>
                             <!-- Actions -->
                             <div class="form-row form-footer">
-                                <button form="add-form" type="submit" class="btn btn-primary"><i class="fas fa-check"></i>
-                                    Valider</button>
-                                <button form="add-form" type="reset" class="btn btn-danger" style="margin-left: 10px;"><i
-                                        class="fas fa-eraser"></i> Effacer</button>
+                                <button form="add-form" type="submit" class="btn btn-primary">
+                                    <i class="fas fa-check"></i> Valider
+                                </button>
+                                <button form="add-form" type="reset" class="btn btn-danger" style="margin-left: 10px;">
+                                    <i class="fas fa-eraser"></i> Effacer
+                                </button>
                             </div>
                         </div>
                         <!-- Corps -->
@@ -43,15 +45,15 @@
                                     @default
                                 @endswitch
                             @endif
-                            <form id="add-form" action="{{ route('admin.pages.categories.store') }}" method="POST"
+                            <form id="add-form" action="{{ route('admin.pages.moyen-paiement.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-row">
                                     <!-- Libelle -->
                                     <div class="form-group col-md-12">
-                                        <label for="lib_cat">Libellé *</label>
-                                        <input type="text" class="form-control" id="lib_cat" name="lib_cat"
-                                            placeholder="Libellé de la catégorie" required>
+                                        <label for="lib_moyen_paiement">Libellé *</label>
+                                        <input type="text" class="form-control" id="lib_moyen_paiement"
+                                            name="lib_moyen_paiement" placeholder="Libellé de la catégorie" required>
                                     </div>
                                 </div>
                             </form>
@@ -63,7 +65,7 @@
                     <div class="card">
                         <!-- En tête -->
                         <div class="card-header table-card-header">
-                            <h4>Modifier une catégorie</h4>
+                            <h4>Modifier un moyen de paiement</h4>
                             <!-- Actions -->
                             <div class="form-row form-footer">
                                 <button id="validate-btn" form="edit-form" type="submit" class="btn btn-primary" disabled><i
@@ -98,21 +100,21 @@
                                     @default
                                 @endswitch
                             @endif
-                            <form id="edit-form" action="{{ url('/dashboard/categories/update/{lib_cat}') }}"
+                            <form id="edit-form" action="{{ url('/dashboard/categories/update/{lib_moyen_paiement}') }}"
                                 method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-row">
                                     <!-- Ancien Libellé -->
                                     <div class="form-group col-md-6">
-                                        <label for="old_lib_cat">Ancien</label>
-                                        <input type="text" class="form-control" id="old_lib_cat" name="old_lib_cat"
-                                            placeholder="Ancien libellé" disabled required>
+                                        <label for="old_lib_moyen_paiement">Ancien</label>
+                                        <input type="text" class="form-control" id="old_lib_moyen_paiement"
+                                            name="old_lib_moyen_paiement" placeholder="Ancien libellé" disabled required>
                                     </div>
                                     <!-- Nouveau libellé -->
                                     <div class="form-group col-md-6">
-                                        <label for="new_lib_cat">Nouveau</label>
-                                        <input type="text" class="form-control" id="new_lib_cat" name="new_lib_cat"
-                                            placeholder="Nouveau libellé" disabled required>
+                                        <label for="new_lib_moyen_paiement">Nouveau</label>
+                                        <input type="text" class="form-control" id="new_lib_moyen_paiement"
+                                            name="new_lib_moyen_paiement" placeholder="Nouveau libellé" disabled required>
                                     </div>
                                 </div>
                             </form>
@@ -166,16 +168,16 @@
                             @foreach ($categories as $categorie)
                                 <tr>
                                     <td>{{ $categories->search($categorie) + 1 }}</td>
-                                    <td style="width: 100%;">{{ $categorie->lib_cat }}</td>
+                                    <td style="width: 100%;">{{ $categorie->lib_moyen_paiement }}</td>
                                     <td class="no-wrap-line">
                                         {{-- Bouton Modifier --}}
-                                        <button onclick="launchEdit('{{ $categorie->lib_cat }}')"
+                                        <button onclick="launchEdit('{{ $categorie->lib_moyen_paiement }}')"
                                             class="btn btn-primary actions-btn">
                                             <i class="fa fa-edit"></i>
                                         </button>
                                         {{-- Bouton Supprimer --}}
                                         <button class="btn btn-danger"
-                                            data-confirm="Etes-vous sûr(e) ?|Voulez vous vraiment supprimer la catégorie <strong>{{ $categorie->lib_cat }}</strong> ?"
+                                            data-confirm="Etes-vous sûr(e) ?|Voulez vous vraiment supprimer la catégorie <strong>{{ $categorie->lib_moyen_paiement }}</strong> ?"
                                             data-confirm-yes="window.location.replace('/dashboard/categories/delete/{{ $categorie->id }}');">
                                             <i class="far fa-trash-alt"></i>
                                         </button>

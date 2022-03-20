@@ -74,7 +74,6 @@ class ClientController extends Controller
             $request->validate([
                 "nom" => "required|string",
                 "prenom" => "required|string",
-                "contact" => "required|string",
                 "email" => "required|email",
                 "password" => "required|string",
                 "ville" => "required|string",
@@ -82,8 +81,7 @@ class ClientController extends Controller
             ]);
 
             // Vérifier si l'entité est déjà dans la base de données
-            $existant = User::where('email', $data['email'])
-                ->first();
+            $existant = User::where('email', $data['email'])->first();
             if ($existant != null) { // Si l'entité existe déjà
                 if ($existant->deleted_at == null) {
                     // Message au cas où l'entité existe déjà

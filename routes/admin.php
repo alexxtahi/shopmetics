@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\MoyenPaiementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +72,27 @@ Route::get('/dashboard/categories/etat', [CategorieController::class, 'etat'])
 Route::post('/dashboard/categories/update/{lib_cat}', [CategorieController::class, 'update'])
     ->middleware(['auth'])
     ->name('admin.pages.categories.update');
+
+// ! Route vers les catégories du tableau de bord
+Route::get('/dashboard/moyen-paiements', [MoyenPaiementController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('admin.pages.moyen-paiements');
+
+Route::post('/dashboard/moyen-paiements/store', [MoyenPaiementController::class, 'store'])
+    ->middleware(['auth'])
+    ->name('admin.pages.moyen-paiements.store');
+
+Route::get('/dashboard/moyen-paiements/delete/{id}', [MoyenPaiementController::class, 'destroy'])
+    ->middleware(['auth'])
+    ->name('admin.pages.moyen-paiements.delete');
+
+Route::get('/dashboard/moyen-paiements/etat', [MoyenPaiementController::class, 'etat'])
+    ->middleware(['auth'])
+    ->name('admin.pages.moyen-paiements.etat');
+
+Route::post('/dashboard/moyen-paiements/update/{lib_cat}', [MoyenPaiementController::class, 'update'])
+    ->middleware(['auth'])
+    ->name('admin.pages.moyen-paiements.update');
 
 // ! Route vers les clients du tableau de bord
 Route::get('/dashboard/clients', [ClientController::class, 'index'])
