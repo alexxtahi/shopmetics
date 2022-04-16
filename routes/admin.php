@@ -18,12 +18,12 @@ use App\Http\Controllers\MoyenPaiementController;
 |
 */
 
-// ! Route vers le tableau de bord
+// ANCHOR - Accueil
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth'])
     ->name('dashboard');
 
-// ! Route vers les produits du tableau de bord
+// ANCHOR - Produits
 Route::get('/dashboard/produits', [ProduitController::class, 'index'])
     ->middleware(['auth'])
     ->name('admin.pages.produits');
@@ -52,7 +52,7 @@ Route::post('/dashboard/produits/update/{id}', [ProduitController::class, 'updat
     ->middleware(['auth'])
     ->name('admin.pages.produits.update');
 
-// ! Route vers les catégories du tableau de bord
+// ANCHOR Catégories
 Route::get('/dashboard/categories', [CategorieController::class, 'index'])
     ->middleware(['auth'])
     ->name('admin.pages.categories');
@@ -73,7 +73,7 @@ Route::post('/dashboard/categories/update/{lib_cat}', [CategorieController::clas
     ->middleware(['auth'])
     ->name('admin.pages.categories.update');
 
-// ! Route vers les catégories du tableau de bord
+// ANCHOR - Moyens de paiement
 Route::get('/dashboard/moyen-paiements', [MoyenPaiementController::class, 'index'])
     ->middleware(['auth'])
     ->name('admin.pages.moyen-paiements');

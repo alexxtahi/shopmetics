@@ -45,7 +45,7 @@
                                     @default
                                 @endswitch
                             @endif
-                            <form id="add-form" action="{{ route('admin.pages.moyen-paiement.store') }}" method="POST"
+                            <form id="add-form" action="{{ route('admin.pages.moyen-paiements.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-row">
