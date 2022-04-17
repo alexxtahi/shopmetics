@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BoutiqueController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\PaiementController;
+
 // Importation des routes externes
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
@@ -80,3 +82,7 @@ Route::get('/boutique/ajout', [CartController::class, 'create'])
 Route::get('/boutique/destroy', [CartController::class, 'create1'])
 ->name('destroy.session') ;
 */
+
+//! Paiement
+Route::post('/paiement', [PaiementController::class, 'generateCheckoutLink'])
+    ->name('paiement');

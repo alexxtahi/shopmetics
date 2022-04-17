@@ -10,8 +10,9 @@ class Caracteristique extends Model
 {
     use HasFactory;
 
-    public function produit (){
+    public function produits()
+    {
 
-        return $this->belongsTo(Produit::class) ;
+        return $this->belongsTo(Produit::class);
     }
 }

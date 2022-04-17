@@ -26,7 +26,7 @@ class Produit extends Model
 
     ];
 
-    public function caracteristique()
+    public function caracteristiques()
     {
         return $this->hasOne(Caracteristique::class);
     }
