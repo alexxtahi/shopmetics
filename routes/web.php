@@ -65,13 +65,13 @@ Route::get('/monpanier/{id}', [BoutiqueController::class, 'addStore'])
 // ! Route pour ajouter un produit
 Route::post('/test', [BoutiqueController::class, 'addProduit']);
 
-// ! Route pour mettre a jour la quantite du produit
+// ! Route pour mettre a jour la quantité du produit
 
-Route::post('/update', [BoutiqueController::class, 'updatequantite'])
-    ->name('update');
+Route::post('/quantite/update', [BoutiqueController::class, 'updateQuantite'])
+    ->name('qte.update');
 
 // ! Route pour supprimer un produit
-Route::get('/destroy-product/{id}', [BoutiqueController::class, 'destroyproduit'])
+Route::get('/destroy-product/{id}', [BoutiqueController::class, 'destroyProduit'])
     ->name('produit.destroy');
 
 // ! Route vers la page de commande

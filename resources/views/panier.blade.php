@@ -35,10 +35,16 @@
     <!-- Breadcrumb Section Begin -->
 
     <!-- Message après opération -->
-    @if (isset($recentActions['paymentMsg']) && !empty($recentActions['paymentMsg']))
-        <div class="alert alert-success text-center" role="alert">
-            {{ $recentActions['paymentMsg'] }}
-        </div>
+    @if (!empty($detailsTransaction['paymentMsg']))
+        @if ($detailsTransaction['status'] == 'REFUSED')
+            <div class="alert alert-danger text-center">
+                {{ $detailsTransaction['paymentMsg'] }}
+            </div>
+        @elseif ($detailsTransaction['status'] == 'ACCEPTED')
+            <div class="alert alert-success text-center" role="alert">
+                {{ $detailsTransaction['paymentMsg'] }}
+            </div>
+        @endif
     @endif
 
     <!-- Shopping Cart Section Begin -->
@@ -83,7 +89,7 @@
                                             <div class="quantity">
                                                 <div class="pro-qty">
                                                     <span class="qtybtn change_qt decr">-</span>
-                                                    <input type="text" class="prod_qt"
+                                                    <input type="number" class="prod_qt"
                                                         value="{{ $items->qt_prod }}" disabled='true'>
                                                     <span class="qtybtn change_qt incr">+</span>
                                                 </div>
