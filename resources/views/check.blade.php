@@ -109,10 +109,13 @@
                                     @endphp
 
                                     @forelse ($cart as $item)
+
                                         <li class="fw-normal">{{ $item->produits->designation }} x
                                             {{ $item->qt_prod }} <span>
-                                                {{ number_format($item->produits->prix_prod * $item->produits->qte_prod, 0, ',', ' ') }}
-                                                FCFA</span></li>
+                                                {{ number_format($item->produits->prix_prod * $item->qt_prod, 0, ',', ' ') }}
+                                                FCFA</span>
+                                        </li>
+
                                         @php
                                             $total += $item->produits->prix_prod * $item->qt_prod;
                                         @endphp
@@ -205,6 +208,7 @@
             }
 
         }).render('#paypal-button-container');
+            
     </script>
 
 

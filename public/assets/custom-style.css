@@ -166,6 +166,18 @@
     border: none;
 }
 
+.prod_id2 {
+    height: auto;
+    
+    border-color: #ffffff;
+    background-color: white;
+    color: black;
+    border: none;
+    font-weight: bold;
+    padding: 16px 18px 12px 19px;
+}
+
+
 .btn-destroy {
     border: none;
     background-color: white;

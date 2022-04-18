@@ -194,44 +194,48 @@
                     <div class="product-list ">
                         <div class="row">
                             <!-- Récupération des produits depuis la base de données -->
-                            @foreach ($produits as $produit)
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src= "{{ asset($produit->img_prod) }}"  alt="">
-                                        <!-- Afficher la bannière promo si le produit est en promotion -->
-                                        @if ($produit->en_promo == true)
-                                        <div class="sale pp-sale">Sale</div>
-                                        @endif
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <!-- Rajouter les accolades pour que ça marche <button value="{$produit->id}}" id="cartBtn" class="btn_add">+ Ajouter au panier</button> -->
-                                            <div>
-                                                <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                                <li class="quick-view"><a href="{{route('produit', ['id'=>$produit->id])}}">+ Aperçu rapide</a></li>
-                                            </div>
-
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name"><!-- {$produit->lib_cat }--></div>
-                                        <a href="#">
-                                            <h5>{{ $produit->designation }}</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            <!-- Prix actuel -->
-                                            {{ number_format($produit->prix_prod, 0, ',', ' ') }} FCFA
-                                            <!-- Ancien prix -->
-                                            @if ($produit->ancien_prix != $produit->prix_prod)
-                                            <span>{{ number_format($produit->ancien_prix, 0, ',', ' ') }} FCFA</span>
+                            @forelse ($produits as $produit)
+                                <div class="col-lg-4 col-sm-6 prod_general2">
+                                    <div class="product-item" >
+                                        <div class="pi-pic">
+                                            <img src= "{{ asset($produit->img_prod) }}"  alt="">
+                                            <!-- Afficher la bannière promo si le produit est en promotion -->
+                                            @if ($produit->en_promo == true)
+                                            <div class="sale pp-sale">Sale</div>
                                             @endif
+                                            <div class="icon">
+                                                <i class="icon_heart_alt"></i>
+                                            </div>
+                                            <ul>
+                                                <!-- Rajouter les accolades pour que ça marche <button value="{$produit->id}}" id="cartBtn" class="btn_add">+ Ajouter au panier</button> -->
+                                                <div>
+                                                    <li class="w-icon active"><a href="{{route('produit', ['id'=>$produit->id])}}"><i class="icon_bag_alt"></i></a></li>
+                                                    <button id="cartBtn2" class="primary-btn pd-cart prod_id2 "
+                                                        value="{{ $produit->id }}">+ Ajouter au panier
+                                                    </button>
+                                                </div>
+
+                                            </ul>
+                                        </div>
+                                        <div class="pi-text">
+                                            <div class="catagory-name"><!-- {$produit->lib_cat }--></div>
+                                            <a href="#">
+                                                <h5>{{ $produit->designation }}</h5>
+                                            </a>
+                                            <div class="product-price">
+                                                <!-- Prix actuel -->
+                                                {{ number_format($produit->prix_prod, 0, ',', ' ') }} FCFA
+                                                <!-- Ancien prix -->
+                                                @if ($produit->ancien_prix != $produit->prix_prod)
+                                                <span>{{ number_format($produit->ancien_prix, 0, ',', ' ') }} FCFA</span>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            @endforeach
+                            @empty
+
+                            ~@endforelse
                         </div>
                     </div>
                 </div>
