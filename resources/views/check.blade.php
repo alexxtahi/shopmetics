@@ -42,9 +42,12 @@
                 @csrf @method('POST')
                 <div class="row">
                     <div class="col-lg-6">
-                        <div class="checkout-content">
-                            <a href="#" class="content-btn">Connectez vous </a>
-                        </div>
+                        @if (!Auth::check())
+                            <div class="checkout-content">
+                                <a href="#" class="content-btn">Connectez vous </a>
+                            </div>
+                        @endif
+
                         <h4>Détails sur la facturation</h4>
                         <div class="row">
                             <div class="col-lg-6">
@@ -109,10 +112,13 @@
                                     @endphp
 
                                     @forelse ($cart as $item)
-                                        <li class="fw-normal">{{ $item->produits->designation }} x
-                                            {{ $item->qt_prod }} <span>
+                                        <li class="fw-normal">
+                                            {{ $item->produits->designation }} x {{ $item->qt_prod }}
+                                            <span>
                                                 {{ number_format($item->produits->prix_prod * $item->produits->qte_prod, 0, ',', ' ') }}
-                                                FCFA</span></li>
+                                                FCFA
+                                            </span>
+                                        </li>
                                         @php
                                             $total += $item->produits->prix_prod * $item->qt_prod;
                                         @endphp
@@ -142,6 +148,8 @@
                                         </label>
                                     </div>
                                 </div>-->
+                                {{-- Bouton de paiement --}}
+                                {{ $payBtn }}
                                 <div class="order-btn">
                                     <button type="submit" class="site-btn place-btn">Passer la commande</button>
                                     <div class="paiement" id="paypal-button-container"></div>
