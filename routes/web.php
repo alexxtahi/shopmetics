@@ -45,7 +45,7 @@ Route::view('/blog', 'blog')
 // ! Route vers le panier
 Route::get('/monpanier', [BoutiqueController::class, 'showCart'])
     ->name('panier');
-Route::post('/redirection', [PaiementController::class, 'returnUrl'])
+Route::post('/cinetpay/return', [PaiementController::class, 'returnUrl'])
     ->name('cinetpay.return');
 
 

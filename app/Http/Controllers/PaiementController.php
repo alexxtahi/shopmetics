@@ -30,6 +30,9 @@ class PaiementController extends Controller
     // Return URL
     public function returnUrl(Request $request)
     {
+        // request scanning
+        dd($request);
+        // Return view with message
         $paymentMsg = "Votre commande a bien été validée. Merci de votre confiance !";
         // On redirige l'utilisateur sur la page du panier
         $ctrler = new BoutiqueController;

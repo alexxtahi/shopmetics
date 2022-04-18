@@ -154,7 +154,8 @@
                                 {{-- Bouton de paiement --}}
                                 {{-- {{ $paymentForm['btn'] }} --}}
                                 <div class="order-btn">
-                                    <button type="submit" class="site-btn place-btn">Passer la commande</button>
+                                    <button type="submit" class="site-btn place-btn custom-pay-btn">Passer la
+                                        commande</button>
                                     <div class="paiement" id="paypal-button-container"></div>
                                 </div>
 
