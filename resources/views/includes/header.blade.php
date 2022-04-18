@@ -25,8 +25,7 @@
                     <!-- Formulaire de déconnexion -->
                     <form method="POST" action="{{ route('logout') }}" class="login-panel logout-btn">
                         @csrf
-                        <a href="" class="logout-btn"
-                            onclick="event.preventDefault(); this.closest('form').submit();">
+                        <a class="logout-btn" onclick="event.preventDefault(); this.closest('form').submit();">
                             <i class="fa fa-sign-out"></i> Se déconnecter
                         </a>
                     </form>

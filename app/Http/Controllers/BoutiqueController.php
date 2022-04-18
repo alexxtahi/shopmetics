@@ -276,8 +276,6 @@ class BoutiqueController extends Controller
 
 
 
-
-
     public function addProduit(Request $request)
     {  // Fonction AJAX
 
@@ -287,12 +285,11 @@ class BoutiqueController extends Controller
 
         // Le client est-il connecté ?
         if (Auth::check()) {
-            // Récupération du produit dans la BD ainsi que toutes ses caractérristique
-            $product = Produit::where('id', $id)
-                ->first();
+            // Récupération du produit dans la BD ainsi que toutes ses caractéristiques
+            $product = Produit::where('id', $id)->first();
 
             if ($product) {
-                // Vérification de l'existance du produit dans le panier
+                // Vérification de l'existence du produit dans le panier
                 if (Panier::where('id_prod', $id)
                     ->where('id_user', Auth::id())
                     ->exists()
@@ -306,13 +303,15 @@ class BoutiqueController extends Controller
                     $cart->id_user = Auth::id();
                     $cart->qt_prod = $qt;
                     $cart->save();
-                    return response()
-                        ->json(['status' => 'ajouter']);
+                    return response()->json([
+                        'status' => 'ajouter'
+                    ]);
                 }
             }
         } else {
-            return response()
-                ->json(['status' => "Connectez vous pour continuer !"]);
+            return response()->json([
+                'status' => "Connectez vous pour continuer !"
+            ]);
         }
 
         //Cart::add($product_id, $product_name,$qt,$product_price);
@@ -373,29 +372,20 @@ class BoutiqueController extends Controller
     }
 
 
-    public function viewproduit()
+    public function showCart(array $recentActions = [])
     {
-        // Récuperation des élements concernant le client connecté
-        $cart = Panier::where('id_user', Auth::id())
-            ->get();
+        // Récupération des éléments concernant le client connecté
+        $cart = Panier::where('id_user', Auth::id())->get();
         // Récupération du nombre total de produit dans le panier
-        if (Auth::check()) {
-            $cart = Panier::where('id_user', Auth::id())
-                ->get();
-            $val = 0;
-            foreach ($cart as $key) {
-                $var = 1 * $key->qt_prod;
-                $val = $val + $var;
-            }
-
-            $nombre_prod = $val;
-        } else {
-            $nombre_prod = 0;
-        }
+        $nombre_prod = 0;
+        if (Auth::check())
+            foreach ($cart as $key)
+                $nombre_prod += $key->qt_prod;
         // Appel de la vue en passant les données
         return view('panier', [
             'cart' => $cart,
             'nombre_prod' => $nombre_prod,
+            'recentActions' => $recentActions,
         ]);
     }
 
@@ -453,28 +443,27 @@ class BoutiqueController extends Controller
     public function ValidateCommand()
     {
         if (Auth::check()) {
-            //Récupération de tous les produit concernants le clients connecté
-            $cart = Panier::where('id_user', Auth::id())
-                ->get();
-            //Récuperation des information du client
+            // Récupération de tous les produit concernant le clients connecté
+            $cart = Panier::where('id_user', Auth::id())->get();
+            // Récupération des information du client
             $user_info = User::find(Auth::id());
             // Récupération du nombre total de produit dans le panier
-            if (Auth::check()) {
-                $val = 0;
-                foreach ($cart as $key) {
-                    $var = 1 * $key->qt_prod;
-                    $val = $val + $var;
+            $nombre_prod = 0;
+            $montant_total = 0;
+            if (Auth::check())
+                foreach ($cart as $item) {
+                    $nombre_prod += $item->qt_prod;
+                    $montant_total += $item->produits->prix_prod * $item->qt_prod;
                 }
-
-                $nombre_prod = $val;
-            } else {
-                $nombre_prod = 0;
-            }
+            // chargement du bouton de paiement
+            $paiement = new PaiementController;
+            $paymentForm = $paiement->paymentForm($montant_total);
             // Appel de la vue en passant les données
             return view('check', [
                 'cart' => $cart,
                 'user_info' => $user_info,
                 'nombre_prod' => $nombre_prod,
+                'paymentForm' => $paymentForm,
             ]);
         }
     }

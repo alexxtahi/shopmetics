@@ -38,7 +38,8 @@
     <!-- Shopping Cart Section Begin -->
     <section class="checkout-section spad">
         <div class="container">
-            <form action="{{ route('paiement') }}" method="POST" class="checkout-form">
+            <form id="{{ $paymentForm['name'] }}" name="{{ $paymentForm['name'] }}"
+                action="{{ $paymentForm['action'] }}" method="POST" class="checkout-form">
                 @csrf @method('POST')
                 <div class="row">
                     <div class="col-lg-6">
@@ -87,7 +88,7 @@
                                 <label for="phone">Téléphone<span>*</span></label>
                                 <input type="text" id="phone" value="{{ $user_info->contact }}">
                             </div>
-                            <!--
+                            @if (!Auth::check())
                                 <div class="col-lg-12">
                                     <div class="create-item">
                                         <label for="acc-create">
@@ -97,7 +98,9 @@
                                         </label>
                                     </div>
                                 </div>
-                            -->
+                            @endif
+                            {{-- Adding payment hidden fields --}}
+                            <?= $paymentForm['fields'] ?>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -115,7 +118,7 @@
                                         <li class="fw-normal">
                                             {{ $item->produits->designation }} x {{ $item->qt_prod }}
                                             <span>
-                                                {{ number_format($item->produits->prix_prod * $item->produits->qte_prod, 0, ',', ' ') }}
+                                                {{ number_format($item->produits->prix_prod * $item->qt_prod, 0, ',', ' ') }}
                                                 FCFA
                                             </span>
                                         </li>
@@ -149,7 +152,7 @@
                                     </div>
                                 </div>-->
                                 {{-- Bouton de paiement --}}
-                                {{ $payBtn }}
+                                {{-- {{ $paymentForm['btn'] }} --}}
                                 <div class="order-btn">
                                     <button type="submit" class="site-btn place-btn">Passer la commande</button>
                                     <div class="paiement" id="paypal-button-container"></div>
