@@ -372,7 +372,7 @@ class BoutiqueController extends Controller
     }
 
 
-    public function showCart(array $recentActions = [])
+    public function showCart(array $detailsTransaction = [])
     {
         // Récupération des éléments concernant le client connecté
         $cart = Panier::where('id_user', Auth::id())->get();
@@ -385,7 +385,7 @@ class BoutiqueController extends Controller
         return view('panier', [
             'cart' => $cart,
             'nombre_prod' => $nombre_prod,
-            'recentActions' => $recentActions,
+            'detailsTransaction' => $detailsTransaction,
         ]);
     }
 
@@ -422,20 +422,16 @@ class BoutiqueController extends Controller
 
         if (Auth::check()) {
             // Le produit existe-il ?
-            if (Panier::where('id_prod', $id_prod)
-                ->where('id_user', Auth::id())
-                ->exists()
-            ) {
+            if (Panier::where([['id_prod', $id_prod], ['id_user', Auth::id()]])->exists()) {
                 //Récupération du produit en question
-                $items = Panier::where('id_prod', $id_prod)
-                    ->where('id_user', Auth::id())
-                    ->first();
+                $items = Panier::where([['id_prod', $id_prod], ['id_user', Auth::id()]])->first();
                 //Ajout de la nouvelle quantité
                 $items->qt_prod = $qt_prod;
                 //Mise à jour dans la BD
                 $items->update();
-                return response()
-                    ->json(['status' => "Quantité mis à jour !"]);
+                return response()->json([
+                    'status' => "Quantité mise à jour !"
+                ]);
             }
         }
     }
