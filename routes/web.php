@@ -43,8 +43,11 @@ Route::view('/blog', 'blog')
     ->name('blog');
 
 // ! Route vers le panier
-Route::get('/monpanier', [BoutiqueController::class, 'viewproduit'])
+Route::get('/monpanier', [BoutiqueController::class, 'showCart'])
     ->name('panier');
+Route::post('/cinetpay/return', [PaiementController::class, 'returnUrl'])
+    ->name('cinetpay.return');
+
 
 // ! Route vers la foire aux questions
 Route::view('/faq', 'faq')
