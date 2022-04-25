@@ -22,70 +22,56 @@ require __DIR__ . '/shop.php';
 |
 */
 
-// ! Route vers l'accueil
-Route::get('/', [HomeController::class, 'index'])
-    ->name('home');
+//! Accueil
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// ! Route vers la recherche d'un article
-Route::get('/boutique/recherche', [BoutiqueController::class, 'searchProduct'])
-    ->name('products.recherche');
-
-// ! Route vers la boutique
-Route::get('/boutique', [BoutiqueController::class, 'index'])
-    ->name('boutique');
-
-// ! Route vers les contacts
-Route::view('/contact', 'contact')
-    ->name('contact');
-
-// ! Route vers le blog
-Route::view('/blog', 'blog')
-    ->name('blog');
-
-// ! Route vers le panier
-Route::get('/monpanier', [BoutiqueController::class, 'showCart'])
-    ->name('panier');
-Route::post('/cinetpay/return', [PaiementController::class, 'returnUrl'])
-    ->name('cinetpay.return');
+//! Boutique
+Route::group(['prefix' => 'boutique'], function () {
+    // Accueil de la boutique
+    Route::get('/', [BoutiqueController::class, 'index'])->name('boutique');
+    // Recherche d'un produit
+    Route::get('/recherche', [BoutiqueController::class, 'searchProduct'])->name('products.recherche');
+});
 
 
-// ! Route vers la foire aux questions
-Route::view('/faq', 'faq')
-    ->name('faq');
+//! Contact
+Route::view('/contact', 'contact')->name('contact');
 
-// ! Route pour la description du produit
-Route::get('/produit/{id}', [BoutiqueController::class, 'ProduitApercu'])
-    ->name('produit');
+//! Panier
+Route::group(['prefix' => 'monpanier'], function () {
+    // Accueil du panier
+    Route::get('/', [BoutiqueController::class, 'showCart'])->name('panier');
+    // Ajouter un produit au panier
+    Route::get('/{id}', [BoutiqueController::class, 'addStore'])->name('cart.panier');
+});
 
-//! Route pour le panier
-Route::get('/monpanier/{id}', [BoutiqueController::class, 'addStore'])
-    ->name('cart.panier');
+//! Produit
+Route::group(['prefix' => 'produit'], function () {
+    // Aperçu d'un produit
+    Route::get('/{id}', [BoutiqueController::class, 'ProduitApercu'])->name('produit');
+    // Ajouter un produit
+    Route::post('/nouveau', [BoutiqueController::class, 'addProduit']);
+    // Modifier la quantité d'un produit dans le panier
+    Route::post('/quantite/update', [BoutiqueController::class, 'updateQuantite'])->name('qte.update');
+    // Supprimer un produit
+    Route::get('/destroy/{id}', [BoutiqueController::class, 'destroyProduit'])->name('produit.destroy');
+});
+
+//! Commande
+Route::group(['prefix' => 'commande'], function () {
+
+    Route::get('/verification', [BoutiqueController::class, 'ValidateCommand'])->name('verification');
+    Route::post('/paiement', [PaiementController::class, 'payment'])->name('payment');
+    Route::post('/resultat', [PaiementController::class, 'returnUrl'])->name('payment.result');
+});
 
 
-// ! Route pour ajouter un produit
-Route::post('/test', [BoutiqueController::class, 'addProduit']);
-
-// ! Route pour mettre a jour la quantité du produit
-
-Route::post('/quantite/update', [BoutiqueController::class, 'updateQuantite'])
-    ->name('qte.update');
-
-// ! Route pour supprimer un produit
-Route::get('/destroy-product/{id}', [BoutiqueController::class, 'destroyProduit'])
-    ->name('produit.destroy');
-
-// ! Route vers la page de commande
-Route::get('/verification', [BoutiqueController::class, 'ValidateCommand'])
-    ->name('verification');
-
-/*
-Route::get('/boutique/ajout', [CartController::class, 'create'])
-->name('ajout.session') ;
-
-Route::get('/boutique/destroy', [CartController::class, 'create1'])
-->name('destroy.session') ;
-*/
 
 //! Paiement
-Route::post('/paiement', [PaiementController::class, 'generateCheckoutLink'])
-    ->name('paiement');
+
+
+/*
+Route::get('/boutique/ajout', [CartController::class, 'create']->name('ajout.session') ;
+
+Route::get('/boutique/destroy', [CartController::class, 'create1']->name('destroy.session') ;
+*/

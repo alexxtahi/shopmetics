@@ -451,15 +451,11 @@ class BoutiqueController extends Controller
                     $nombre_prod += $item->qt_prod;
                     $montant_total += $item->produits->prix_prod * $item->qt_prod;
                 }
-            // chargement du bouton de paiement
-            $paiement = new PaiementController;
-            $paymentForm = $paiement->paymentForm($montant_total);
             // Appel de la vue en passant les données
             return view('check', [
                 'cart' => $cart,
                 'user_info' => $user_info,
                 'nombre_prod' => $nombre_prod,
-                'paymentForm' => $paymentForm,
             ]);
         }
     }
