@@ -53,12 +53,20 @@
                                             Continuer les achats
                                         </a>
                                     </div>
-                                @else
+                                @elseif ($status == 'REFUSED')
                                     <div class="checkout-result-icon"
                                         style="background-image: url('{{ asset('assets/img/cancel.png') }}');">
                                     </div>
                                     <div class="checkout-result-content">
                                         <h3 style="margin-bottom: 15px">Transaction annulée</h3>
+                                        <a href="{{ route('panier') }}" class="primary-btn">Revenir au panier</a>
+                                    </div>
+                                @elseif ($status == 'SERVER_ERROR')
+                                    <div class="checkout-result-icon"
+                                        style="background-image: url('{{ asset('assets/img/warning.png') }}');">
+                                    </div>
+                                    <div class="checkout-result-content">
+                                        <h3 style="margin-bottom: 15px">Une erreur est survenue</h3>
                                         <a href="{{ route('panier') }}" class="primary-btn">Revenir au panier</a>
                                     </div>
                                 @endif
@@ -70,7 +78,7 @@
                 <div class="col-lg-5 offset-lg-1">
                     <div class="contact-title">
                         @if ($status == 'ACCEPTED')
-                            <h2>Félicitations !</h2>
+                            <h2 style="font-weight: 900">Félicitations !</h2>
                             <p> <strong> {{ $paymentMsg }}.</strong> </p>
                             <hr>
                             <ul>
@@ -83,7 +91,7 @@
                                     <p>{{ $paymentMethod }}</p>
                                 </li>
                             </ul>
-                        @else
+                        @elseif ($status == 'REFUSED')
                             <h2 style="font-weight: 900">Echec de paiement</h2>
                             <p> <strong> {{ $paymentMsg }}.</strong> </p>
                             <hr>
@@ -97,6 +105,14 @@
                             </p>
                             <p>
                                 Nous vous invitons à vérifier les informations de votre compte et réessayer.
+                            </p>
+                        @elseif ($status == 'SERVER_ERROR')
+                            <h2 style="font-weight: 900">Erreur...</h2>
+                            <p> <strong> {{ $paymentMsg }}.</strong> </p>
+                            <hr>
+                            <p>
+                                Notre équipe d'administration a été informée de cette erreur et nous la règlerons dans
+                                les plus brefs délais.
                             </p>
                         @endif
                     </div>

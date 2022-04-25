@@ -60,7 +60,7 @@ Route::group(['prefix' => 'produit'], function () {
 //! Commande
 Route::group(['prefix' => 'commande'], function () {
 
-    Route::get('/verification', [BoutiqueController::class, 'ValidateCommand'])->name('verification');
+    Route::get('/verification', [BoutiqueController::class, 'ValidateCommand'])->name('commande.verification');
     Route::post('/paiement', [PaiementController::class, 'payment'])->name('payment');
     Route::post('/resultat', [PaiementController::class, 'returnUrl'])->name('payment.result');
 });

@@ -26,8 +26,9 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb-text product-more">
                         <a href="{{ route('home') }}"><i class="fa fa-home"></i> Accueil</a>
-                        <a href="{{ route('boutique') }}">Vérification</a>
-                        <span>Panier</span>
+                        <a href="{{ route('boutique') }}">Boutique</a>
+                        <a href="{{ route('panier') }}">Panier</a>
+                        <span>Commande</span>
                     </div>
                 </div>
             </div>

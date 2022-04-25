@@ -32,30 +32,33 @@ class PaiementController extends Controller
         $paymentMsg = '';
         $response = Http::withHeaders([
             'Content-type' => 'application/json',
-            'X-CSRF-TOKEN' => csrf_token(),
+            // 'X-CSRF-TOKEN' => csrf_token(),
         ])->post('https://api-checkout.cinetpay.com/v2/payment/check', [
             'apikey' => $this->apiKey,
             'site_id' => $this->site_id,
             'token' => $request->get('token'),
         ]);
         // Récupération de la réponse du serveur
-        $transaction = $response['data'];
+        // dd($request->get('token'));
+        $transaction = $response['data'] ?? ['status' => 'SERVER_ERROR'];
         // dd($transaction);
         if ($transaction['status'] == 'REFUSED') { // Échec de la transaction...
             if (isset($response['cpm_error_message']) && $response['cpm_error_message'] == 'INSUFFICIENT_BALANCE')
                 $paymentMsg = "La paiement a échoué en raison d'un solde insuffisant sur votre compte";
             else
                 $paymentMsg = "La transaction a échouée";
-        } else { // Succès de la transaction ($transaction['status'] == 'ACCEPTED')
+        } else if ($transaction['status'] == 'ACCEPTED') { // Succès de la transaction ($transaction['status'] == 'ACCEPTED')
             $paymentMsg = "Le paiement de votre commande d'un montant de " . $transaction['amount'] . " " . $transaction['currency'] . " a été effectué avec succès. Merci pour votre confiance";
+        } else {
+            $paymentMsg = "Une erreur est survenue suite au paiement de votre commande";
         }
         // On redirige l'utilisateur sur la page du résultat de la commande
         return view('checkout-result', [
             'status' => $transaction['status'],
             'paymentMsg' => $paymentMsg,
-            'paymentMethod' => $transaction['payment_method'],
-            'amount' => $transaction['amount'],
-            'currency' => $transaction['currency'],
+            'paymentMethod' => $transaction['payment_method'] ?? '',
+            'amount' => $transaction['amount'] ?? 0,
+            'currency' => $transaction['currency'] ?? 'XOF',
         ]);
     }
 
@@ -66,7 +69,7 @@ class PaiementController extends Controller
         // Création de la commande
         $response = Http::withHeaders([
             'Content-type' => 'application/json',
-            'X-CSRF-TOKEN' => csrf_token(),
+            // 'X-CSRF-TOKEN' => csrf_token(),
         ])->post('https://api-checkout.cinetpay.com/v2/payment', [
             'apikey' => $this->apiKey,
             'site_id' => $this->site_id,
