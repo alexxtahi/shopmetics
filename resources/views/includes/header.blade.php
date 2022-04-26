@@ -133,9 +133,9 @@
                         </ul>
                     </li>
                     <!-- Bouton Blog -->
-                    <li @if ($view_name == 'blog') class="active" @endif>
+                    {{-- <li @if ($view_name == 'blog') class="active" @endif>
                         <a href="{{ route('blog') }}">Blog</a>
-                    </li>
+                    </li> --}}
                     <!-- Bouton Contact -->
                     <li @if ($view_name == 'contact') class="active" @endif>
                         <a href="{{ route('contact') }}">Contact</a>
@@ -153,7 +153,7 @@
                                 <li><a href="{{ route('login') }}">Connexion</a></li>
                             @endif
                             <li><a href="{{ route('panier') }}">Panier</a></li>
-                            <li><a href="{{ route('faq') }}">F.A.Q</a></li>
+                            {{-- <li><a href="{{ route('faq') }}">F.A.Q</a></li> --}}
                         </ul>
                     </li>
                 </ul>

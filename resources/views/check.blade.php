@@ -26,8 +26,9 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb-text product-more">
                         <a href="{{ route('home') }}"><i class="fa fa-home"></i> Accueil</a>
-                        <a href="{{ route('boutique') }}">Vérification</a>
-                        <span>Panier</span>
+                        <a href="{{ route('boutique') }}">Boutique</a>
+                        <a href="{{ route('panier') }}">Panier</a>
+                        <span>Commande</span>
                     </div>
                 </div>
             </div>
@@ -38,77 +39,69 @@
     <!-- Shopping Cart Section Begin -->
     <section class="checkout-section spad">
         <div class="container">
-            <form id="{{ $paymentForm['name'] }}" name="{{ $paymentForm['name'] }}"
-                action="{{ $paymentForm['action'] }}" method="POST" class="checkout-form">
+            <form action="{{ route('payment') }}" method="POST" class="checkout-form">
                 @csrf @method('POST')
                 <div class="row">
                     <div class="col-lg-6">
-                        @if (!Auth::check())
-                            <div class="checkout-content">
-                                <a href="#" class="content-btn">Connectez vous </a>
-                            </div>
-                        @endif
-
                         <h4>Détails sur la facturation</h4>
+                        {{-- Nom & Prénom --}}
                         <div class="row">
                             <div class="col-lg-6">
-                                <label for="fir">Nom<span>*</span></label>
-                                <input type="text" id="fir" value="{{ $user_info->nom }}">
+                                <label for="nom">Nom <span>*</span></label>
+                                <input required type="text" name="nom" id="nom" value="{{ $user_info->nom }}">
                             </div>
                             <div class="col-lg-6">
-                                <label for="last">Prenom<span>*</span></label>
-                                <input type="text" id="last" value="{{ $user_info->prenom }}">
+                                <label for="prenom">Prenom <span>*</span></label>
+                                <input required type="text" name="prenom" id="prenom"
+                                    value="{{ $user_info->prenom }}">
                             </div>
-                            <div class="col-lg-12">
-                                <label for="cun-name">Nom de l'entreprise</label>
-                                <input type="text" id="cun-name" value="SkinnyThé" disabled='true'
-                                    style="font-weight:bold;">
-                            </div>
-                            <div class="col-lg-12">
-                                <label for="cun">Pays<span>*</span></label>
-                                <input type="text" id="cun">
-                            </div>
-                            <div class="col-lg-12">
-                                <label for="street">Adresse de la rue<span>*</span></label>
-                                <input type="text" id="street" class="street-first">
-                            </div>
-                            <div class="col-lg-12">
-                                <label for="zip">Code postal</label>
-                                <input type="text" id="zip">
-                            </div>
-                            <div class="col-lg-12">
-                                <label for="town">Ville<span>*</span></label>
-                                <input type="text" id="town">
-                            </div>
-                            <div class="col-lg-6">
-                                <label for="email">Email<span>*</span></label>
-                                <input type="text" id="email" value="{{ $user_info->email }}">
-                            </div>
-                            <div class="col-lg-6">
-                                <label for="phone">Téléphone<span>*</span></label>
-                                <input type="text" id="phone" value="{{ $user_info->contact }}">
-                            </div>
-                            @if (!Auth::check())
-                                <div class="col-lg-12">
-                                    <div class="create-item">
-                                        <label for="acc-create">
-                                            Create an account?
-                                            <input type="checkbox" id="acc-create">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            @endif
-                            {{-- Adding payment hidden fields --}}
-                            <?= $paymentForm['fields'] ?>
                         </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label for="pays">Pays <span>*</span></label>
+                                <input required type="text" name="pays" id="pays" value="Côte d'ivoire"
+                                    placeholder="Ex: Côte d'ivoire">
+                            </div>
+                            <div class="col-lg-12">
+                                <label for="ville">Ville <span>*</span></label>
+                                <input required type="text" name="ville" id="ville" value="Abidjan">
+                            </div>
+                        </div>
+                        {{-- Email & Téléphone --}}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="email">Email <span>*</span></label>
+                                <input required type="email" name="email" id="email" value="{{ $user_info->email }}">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="telephone">Téléphone <span>*</span></label>
+                                <input required type="text" name="telephone" id="telephone" value="0584649825"
+                                    placeholder="Ex: +225 0102030405">
+                                {{-- value="{{ $user_info->contact }}" placeholder="Ex: +225 0102030405"> --}}
+                            </div>
+                        </div>
+                        {{-- Adresse & Code postal --}}
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="adresse">Adresse <span>*</span></label>
+                                <input required type="text" name="adresse" id="adresse" value="Yopougon, Cité verte"
+                                    placeholder="Ex: Cocody, Riviera 2" class="street-first">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="code_postal">Code postal</label>
+                                <input type="text" id="code_postal">
+                            </div>
+
+                        </div>
+
                     </div>
+                    {{-- Volet droit --}}
                     <div class="col-lg-6">
                         <div class="place-order">
                             <h4>Votre commande</h4>
                             <div class="order-total">
                                 <ul class="order-table">
-                                    <li>Produit <span>Total</span></li>
+                                    <li>Produit<span>Total</span></li>
 
                                     @php
                                         $total = 0;
@@ -125,9 +118,7 @@
                                         @php
                                             $total += $item->produits->prix_prod * $item->qt_prod;
                                         @endphp
-
                                     @empty
-
                                         <p>Aucun produit</p>
                                     @endforelse
 
@@ -153,9 +144,12 @@
                                 </div>-->
                                 {{-- Bouton de paiement --}}
                                 {{-- {{ $paymentForm['btn'] }} --}}
+                                {{-- Champ caché du montant total --}}
+                                <input type="hidden" name="montant_total" value="{{ $total }}">
                                 <div class="order-btn">
-                                    <button type="submit" class="site-btn place-btn custom-pay-btn">Passer la
-                                        commande</button>
+                                    <button type="submit" class="site-btn place-btn custom-pay-btn">
+                                        Passer la commande
+                                    </button>
                                     <div class="paiement" id="paypal-button-container"></div>
                                 </div>
 

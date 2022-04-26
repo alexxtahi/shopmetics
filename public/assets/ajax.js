@@ -4,7 +4,7 @@ $(document).ready(function () { // ajouter un produit au panier
 
         var prod_id = $(this).closest('.prod_cont').find('.prod_id').val();
         var prod_qt = $(this).closest('.prod_cont').find('.prod_qt').val();
-        alert(prod_id)
+        alert("Ajout du produit: " + prod_id)
 
 
         $.ajaxSetup({
@@ -15,7 +15,7 @@ $(document).ready(function () { // ajouter un produit au panier
 
         $.ajax({
             type: "POST",
-            url: "/test",
+            url: "/produit/nouveau",
             data: {
                 'prod_id': prod_id,
                 'prod_qt': prod_qt,
@@ -50,7 +50,7 @@ $(document).ready(function () { // ajouter un produit au panier
 
     $.ajax({
         type: "POST",
-        url: "/destroy-product",
+        url: "/produit/destroy",
         data: {
             'prod_id': prod_id,
         },
@@ -123,7 +123,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "/quantite/update",
+            url: "/produit/quantite/update",
             data: {
                 'prod_id': $prod_id,
                 'prod_qt': $prod_qt,
@@ -151,7 +151,7 @@ $(document).ready(function () {
 
         var prod_id = $(this).closest('.prod_general2').find('.prod_id2').val();
         var prod_qt = 1;
-        alert(prod_id)
+        alert("Ajout du produit: " + prod_id + " au panier")
 
 
 
@@ -163,7 +163,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "/test",
+            url: "/produit/nouveau",
             data: {
                 'prod_id': prod_id,
                 'prod_qt': prod_qt,

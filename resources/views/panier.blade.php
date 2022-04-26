@@ -145,10 +145,13 @@
                                     @if ('condition' == 'Coupon de réduction')
                                         <li class="subtotal">Subtotal <span>{{ $total }}</span></li>
                                     @endif
-                                    <li class="cart-total">Total <span> {{ number_format($total, 0, ',', ' ') }}
-                                            (TTC)</span></li>
+                                    <li class="cart-total">
+                                        Total
+                                        <span> {{ number_format($total, 0, ',', ' ') }} FCFA </span>
+                                    </li>
                                 </ul>
-                                <a href="{{ route('verification') }}" class="proceed-btn">Valider la commande</a>
+                                <a href="{{ route('commande.verification') }}" class="proceed-btn">Valider la
+                                    commande</a>
                             </div>
                         </div>
                     </div>
