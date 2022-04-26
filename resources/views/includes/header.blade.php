@@ -12,11 +12,11 @@
             <div class="ht-left">
                 <div class="mail-service">
                     <i class=" fa fa-envelope"></i>
-                    shopmetics@gmail.com
+                    <a class="custom-header-link" href="mailto: info@skinnythe.com">info@skinnythe.com</a>
                 </div>
                 <div class="phone-service">
                     <i class=" fa fa-phone"></i>
-                    +65 11.188.888
+                    <a class="custom-header-link" href="sms: +4915110100130">+4915110100130</a>
                 </div>
             </div>
             <div class="ht-right">
@@ -45,10 +45,9 @@
                     </select>
                 </div>
                 <div class="top-social">
-                    <a href="#"><i class="ti-facebook"></i></a>
-                    <a href="#"><i class="ti-twitter-alt"></i></a>
-                    <a href="#"><i class="ti-linkedin"></i></a>
-                    <a href="#"><i class="ti-pinterest"></i></a>
+                    <a href="https://www.facebook.com/Abidjan-BazarChic-105970801271700/"><i
+                            class="ti-facebook"></i></a>
+                    <a href="https://instagram.com/skinnythe_12?igshid=YmMyMTA2M2Y="><i class="ti-instagram"></i></a>
                 </div>
             </div>
         </div>
@@ -139,6 +138,10 @@
                     <!-- Bouton Contact -->
                     <li @if ($view_name == 'contact') class="active" @endif>
                         <a href="{{ route('contact') }}">Contact</a>
+                    </li>
+                    {{-- Commandes --}}
+                    <li @if ($view_name == 'commandes') class="active" @endif>
+                        <a href="{{ route('commandes') }}">Commandes</a>
                     </li>
                     <li><a href="#">Pages</a>
                         <ul class="dropdown">

@@ -8,29 +8,45 @@
 @switch($view_name)
     @case('home')
         <title>Shopmetics | Accueil</title>
-        @break
+    @break
+
     @case('boutique')
         <title>Shopmetics | Boutique</title>
-        @break
+    @break
+
     @case('contact')
         <title>Shopmetics | Contact</title>
-        @break
+    @break
+
     @case('blog')
         <title>Shopmetics | Blog</title>
-        @break
+    @break
+
     @case('login')
         <title>Shopmetics | Connexion</title>
-        @break
+    @break
+
     @case('inscription')
         <title>Shopmetics | Inscription</title>
-        @break
+    @break
+
     @case('faq')
         <title>Shopmetics | F.A.Q</title>
-        @break
+    @break
+
     @case('panier')
         <title>Shopmetics | Panier</title>
-        @break
+    @break
+
+    @case('commandes')
+        <title>Shopmetics | Commandes</title>
+    @break
+
+    @case('checkout-result')
+        <title>Shopmetics | Résultat de transaction</title>
+    @break
+
     @default
         <title>Shopmetics</title>
-        @break
+    @break
 @endswitch
