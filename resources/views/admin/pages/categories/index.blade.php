@@ -104,16 +104,19 @@
                                 <div class="form-row">
                                     <!-- Ancien Libellé -->
                                     <div class="form-group col-md-6">
-                                        <label for="old_lib_cat">Ancien</label>
-                                        <input type="text" class="form-control" id="old_lib_cat" name="old_lib_cat"
+                                        <label for="old_lib">Ancien</label>
+                                        <input type="text" class="form-control" id="old_lib" name="old_lib"
                                             placeholder="Ancien libellé" disabled required>
                                     </div>
                                     <!-- Nouveau libellé -->
                                     <div class="form-group col-md-6">
-                                        <label for="new_lib_cat">Nouveau</label>
-                                        <input type="text" class="form-control" id="new_lib_cat" name="new_lib_cat"
+                                        <label for="new_lib">Nouveau</label>
+                                        <input type="text" class="form-control" id="new_lib" name="new_lib"
                                             placeholder="Nouveau libellé" disabled required>
                                     </div>
+                                    {{-- Conserver l'url du formulaire --}}
+                                    <input type="hidden" id="edit-form-url"
+                                        value="{{ url('/dashboard/categories/update/{lib_cat}') }}">
                                 </div>
                             </form>
                         </div>
@@ -169,7 +172,7 @@
                                     <td style="width: 100%;">{{ $categorie->lib_cat }}</td>
                                     <td class="no-wrap-line">
                                         {{-- Bouton Modifier --}}
-                                        <button onclick="launchEdit('{{ $categorie->lib_cat }}')"
+                                        <button onclick="launchCatEdit('{{ $categorie->lib_cat }}')"
                                             class="btn btn-primary actions-btn">
                                             <i class="fa fa-edit"></i>
                                         </button>

@@ -9,15 +9,17 @@
                         </a>
                     </div>
                     <ul>
-                        <li>Adresse: 60-49 Road 11378 New York</li>
-                        <li>Téléhone: +225 XX XX XX XX XX</li>
-                        <li>Email: shopmetics@gmail.com</li>
+                        <li>Instagram: skinnythe_12</li>
+                        <li>Téléphone: +4915110100130</li>
+                        <li>Email: info@skinnythe.com</li>
                     </ul>
                     <div class="footer-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                        <a href="https://www.facebook.com/Abidjan-BazarChic-105970801271700/"><i
+                                class="fa fa-facebook"></i></a>
+                        <a href="https://instagram.com/skinnythe_12?igshid=YmMyMTA2M2Y="><i
+                                class="fa fa-instagram"></i></a>
+                        <a href="sms: +4915110100130"><i class="fa fa-whatsapp"></i></a>
+                        <a href="mailto: info@skinnythe.com"><i class="fa ti-email"></i></a>
                     </div>
                 </div>
             </div>

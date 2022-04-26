@@ -302,3 +302,22 @@
     align-self: center;
     margin-bottom: 15px;
 }
+
+.custom-header-link,
+.custom-header-link:hover {
+    color: black;
+    /* font-weight: bold; */
+    text-decoration: none;
+}
+
+.custom-link,
+.custom-span {
+    color: #e7ab3c;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.custom-link:hover {
+    color: #e7ab3c;
+    text-decoration: underline;
+}

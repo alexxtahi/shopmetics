@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BoutiqueController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\PaiementController;
 
 // Importation des routes externes
@@ -60,6 +61,7 @@ Route::group(['prefix' => 'produit'], function () {
 //! Commande
 Route::group(['prefix' => 'commande'], function () {
 
+    Route::get('/', [CommandeController::class, 'index'])->middleware('auth')->name('commandes');
     Route::get('/verification', [BoutiqueController::class, 'ValidateCommand'])->name('commande.verification');
     Route::post('/paiement', [PaiementController::class, 'payment'])->name('payment');
     Route::post('/resultat', [PaiementController::class, 'returnUrl'])->name('payment.result');

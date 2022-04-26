@@ -103,8 +103,7 @@ class CategorieController extends Controller
             }
         }
         // Redirection
-        return redirect()
-            ->route('admin.pages.categories', compact('result'));
+        return redirect()->route('admin.pages.categories', compact('result'));
     }
 
     /**
@@ -153,7 +152,7 @@ class CategorieController extends Controller
             // Mise à jour
             if ($categorie != null) {
                 try {
-                    $categorie->lib_cat = $data['new_lib_cat'];
+                    $categorie->lib_cat = $data['new_lib'];
                     $categorie->updated_by = Auth::user()
                         ->id;
                     $categorie->updated_at = now();

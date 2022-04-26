@@ -55,18 +55,20 @@
             <div class="row">
                 <div class="col-lg-5">
                     <div class="contact-title">
-                        <h4>Contactez-Nous</h4>
-                        <p>Contrary to popular belief, Lorem Ipsum is simply random text. It has roots in a piece of
-                            classical Latin literature from 45 BC, maki years old.</p>
+                        <h4>Contactez Nous</h4>
+                        <p>
+                            Nous sommes ravi de la confiance que vous nous accordez.
+                            Vous pouvez nous contacter par téléphone ou par email pour toute question.
+                        </p>
                     </div>
                     <div class="contact-widget">
                         <div class="cw-item">
                             <div class="ci-icon">
-                                <i class="ti-location-pin"></i>
+                                <i class="ti-instagram"></i>
                             </div>
                             <div class="ci-text">
-                                <span>Addresse :</span>
-                                <p>60-49 Road 11378 New York</p>
+                                <span>Instagram:</span>
+                                <p>skinnythe_12</p>
                             </div>
                         </div>
                         <div class="cw-item">
@@ -74,8 +76,8 @@
                                 <i class="ti-mobile"></i>
                             </div>
                             <div class="ci-text">
-                                <span>Tel:</span>
-                                <p>+65 11.188.888</p>
+                                <span>Téléphone:</span>
+                                <p>+4915110100130</p>
                             </div>
                         </div>
                         <div class="cw-item">
@@ -84,7 +86,7 @@
                             </div>
                             <div class="ci-text">
                                 <span>Email:</span>
-                                <p>shopmetics@gmail.com</p>
+                                <p>info@skinnythe.com</p>
                             </div>
                         </div>
                     </div>
@@ -114,40 +116,6 @@
         </div>
     </section>
     <!-- Contact Section End -->
-
-    <!-- Partner Logo Section Begin -->
-    <div class="partner-logo">
-        <div class="container">
-            <div class="logo-carousel owl-carousel">
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-1.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-2.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-3.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-4.png" alt="">
-                    </div>
-                </div>
-                <div class="logo-item">
-                    <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-5.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Partner Logo Section End -->
 
     <!-- Footer Section Begin -->
     @include('includes.footer')

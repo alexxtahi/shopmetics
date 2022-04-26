@@ -90,7 +90,7 @@ Route::get('/dashboard/moyen-paiements/etat', [MoyenPaiementController::class, '
     ->middleware(['auth'])
     ->name('admin.pages.moyen-paiements.etat');
 
-Route::post('/dashboard/moyen-paiements/update/{lib_cat}', [MoyenPaiementController::class, 'update'])
+Route::post('/dashboard/moyen-paiements/update/{lib_moyen_paiement}', [MoyenPaiementController::class, 'update'])
     ->middleware(['auth'])
     ->name('admin.pages.moyen-paiements.update');
 
