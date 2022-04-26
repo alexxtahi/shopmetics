@@ -108,6 +108,7 @@
                     <div class="product-slider owl-carousel">
                         <!-- Récupération des produits depuis la base de données -->
                         @foreach ($produits as $produit)
+                        
                             <div class="product-item">
                                 <div class="pi-pic">
                                     <img src="{{ asset('fashi/img/products/women-2.jpg') }}" alt="">
@@ -132,6 +133,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         @endforeach
                     </div>
                 </div>
@@ -337,4 +339,12 @@
         </div>
     </div>
     <!-- Partner Logo Section End -->
+    <script>
+        var auto_refresh = setInterval(
+            function(){
+                console.log(1) ;
+            };
+            
+        }, 1000);
+    <script/>
 @endsection
