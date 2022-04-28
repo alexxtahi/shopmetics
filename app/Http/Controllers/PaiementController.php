@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PaiementRequest;
 use Illuminate\Http\Request;
 use CinetPay\CinetPay;
 use Exception;
@@ -26,13 +27,13 @@ class PaiementController extends Controller
         $this->cancel_url = route('payment.result');
     }
     // Return to specified view after payment
-    public function returnUrl(Request $request)
+    public function returnUrl(PaiementRequest $request)
     {
         // Vérification de la transaction
         $paymentMsg = '';
         $response = Http::withHeaders([
             'Content-type' => 'application/json',
-            // 'X-CSRF-TOKEN' => csrf_token(),
+            'X-CSRF-TOKEN' => csrf_token(),
         ])->post('https://api-checkout.cinetpay.com/v2/payment/check', [
             'apikey' => $this->apiKey,
             'site_id' => $this->site_id,
@@ -69,7 +70,7 @@ class PaiementController extends Controller
         // Création de la commande
         $response = Http::withHeaders([
             'Content-type' => 'application/json',
-            // 'X-CSRF-TOKEN' => csrf_token(),
+            'X-CSRF-TOKEN' => csrf_token(),
         ])->post('https://api-checkout.cinetpay.com/v2/payment', [
             'apikey' => $this->apiKey,
             'site_id' => $this->site_id,
@@ -91,6 +92,7 @@ class PaiementController extends Controller
             'customer_country' => 'CI',
             'customer_state' => $commande['adresse'] ?? '',
             'customer_zip_code' => $commande['code_postal'] ?? '',
+            'metadata' => "_token=" . csrf_token(),
         ]);
         // redirection
         // dd($response);

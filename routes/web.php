@@ -6,6 +6,7 @@ use App\Http\Controllers\BoutiqueController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\PaiementController;
+use Illuminate\Http\Request;
 
 // Importation des routes externes
 require __DIR__ . '/auth.php';

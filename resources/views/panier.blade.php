@@ -150,8 +150,12 @@
                                         <span> {{ number_format($total, 0, ',', ' ') }} FCFA </span>
                                     </li>
                                 </ul>
-                                <a href="{{ route('commande.verification') }}" class="proceed-btn">Valider la
-                                    commande</a>
+                                @if (!Auth::check())
+                                    <a href="{{ route('login') }}" class="proceed-btn">Se connecter</a>
+                                @else
+                                    <a href="{{ route('commande.verification') }}" class="proceed-btn">Valider la
+                                        commande</a>
+                                @endif
                             </div>
                         </div>
                     </div>
