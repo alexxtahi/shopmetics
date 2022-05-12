@@ -34,16 +34,14 @@
                 @else
                     <a href="{{ route('login') }}" class="login-panel"><i class="fa fa-user"></i>Connexion</a>
                 @endif
-                <div class="lan-selector">
-                </div>
-                <div class="lan-selector">
+                {{-- <div class="lan-selector">
                     <select class="language_drop" name="countries" id="countries" style="width:300px;">
                         <option value='yu' data-image="{{ asset('fashi/img/flag-4.png') }}" data-imagecss="flag yu"
                             data-title="Français">Français</option>
                         <option value='yt' data-image="{{ asset('fashi/img/flag-1.jpg') }}" data-imagecss="flag yt"
                             data-title="English">English</option>
                     </select>
-                </div>
+                </div> --}}
                 <div class="top-social">
                     <a href="https://www.facebook.com/Abidjan-BazarChic-105970801271700/"><i
                             class="ti-facebook"></i></a>
