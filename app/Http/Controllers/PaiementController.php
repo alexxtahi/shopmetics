@@ -96,6 +96,6 @@ class PaiementController extends Controller
         ]);
         // redirection
         // dd($response);
-        return Redirect::to($response['data']['payment_url']);
+        return redirect($response['data']['payment_url']);
     }
 }

@@ -39,8 +39,10 @@
     <!-- Shopping Cart Section Begin -->
     <section class="checkout-section spad">
         <div class="container">
-            <form action="{{ route('payment') }}" method="POST" class="checkout-form">
-                @csrf @method('POST')
+            {{-- <form action="{{ route('payment') }}" method="POST" class="checkout-form">
+                @csrf @method('POST') --}}
+            <form class="checkout-form">
+                @csrf
                 <div class="row">
                     <div class="col-lg-6">
                         <h4>Détails sur la facturation</h4>
@@ -147,7 +149,7 @@
                                 {{-- Champ caché du montant total --}}
                                 <input type="hidden" name="montant_total" value="{{ $total }}">
                                 <div class="order-btn">
-                                    <button type="submit" class="site-btn place-btn custom-pay-btn">
+                                    <button class="site-btn place-btn custom-pay-btn">
                                         Passer la commande
                                     </button>
                                     <div class="paiement" id="paypal-button-container"></div>
