@@ -29,20 +29,9 @@ class PaiementController extends Controller
     // Return to specified view after payment
     public function returnUrl(PaiementRequest $request)
     {
-        // Vérification de la transaction
-        $paymentMsg = '';
-        $response = Http::withHeaders([
-            'Content-type' => 'application/json',
-            'X-CSRF-TOKEN' => csrf_token(),
-        ])->post('https://api-checkout.cinetpay.com/v2/payment/check', [
-            'apikey' => $this->apiKey,
-            'site_id' => $this->site_id,
-            'token' => $request->get('token'),
-        ]);
-        // Récupération de la réponse du serveur
-        // dd($request->get('token'));
-        $transaction = $response['data'] ?? ['status' => 'SERVER_ERROR'];
+        $transaction = json_decode($_COOKIE['paymentResult'], true);
         // dd($transaction);
+
         if ($transaction['status'] == 'REFUSED') { // Échec de la transaction...
             if (isset($response['cpm_error_message']) && $response['cpm_error_message'] == 'INSUFFICIENT_BALANCE')
                 $paymentMsg = "La paiement a échoué en raison d'un solde insuffisant sur votre compte";
