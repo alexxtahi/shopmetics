@@ -23,24 +23,9 @@ class HomeController extends Controller
             ->get();
         $produits = Produit::where('deleted_at', null)
             ->get();
-        // Récupération du nombre total de produit dans le panier
-        if (Auth::check()) {
-            $cart = Panier::where('id_user', Auth::id())
-                ->get();
-            $val = 0;
-            foreach ($cart as $key) {
-                //$var = 1 * $key->qt_prod; //! inutile
-                $val = $val + $key->qt_prod;
-            }
-
-            $nombre_prod = $val;
-        } else {
-            $nombre_prod = 0;
-        }
         // Appel de la vue
         return view('home', [
             'produits' => $produits,
-            'nombre_prod' => $nombre_prod,
             'previous_result' => $previous_result,
         ]);
     }

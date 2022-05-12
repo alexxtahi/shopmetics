@@ -6,6 +6,7 @@ use App\Http\Controllers\BoutiqueController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\PaiementController;
+use Illuminate\Http\Request;
 
 // Importation des routes externes
 require __DIR__ . '/auth.php';
@@ -64,7 +65,7 @@ Route::group(['prefix' => 'commande'], function () {
     Route::get('/', [CommandeController::class, 'index'])->middleware('auth')->name('commandes');
     Route::get('/verification', [BoutiqueController::class, 'ValidateCommand'])->name('commande.verification');
     Route::post('/paiement', [PaiementController::class, 'payment'])->name('payment');
-    Route::post('/resultat', [PaiementController::class, 'returnUrl'])->name('payment.result');
+    Route::get('/resultat', [PaiementController::class, 'returnUrl'])->name('payment.result');
 });
 
 

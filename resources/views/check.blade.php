@@ -6,6 +6,20 @@
     @include('includes.meta')
     <!-- Css Styles -->
     @include('includes.css')
+    {{-- CinetPay Seamless SDK --}}
+    <script src="https://cdn.cinetpay.com/seamless/main.js" type="text/javascript"></script>
+    <style>
+        .sdk {
+            display: block;
+            position: absolute;
+            background-position: center;
+            text-align: center;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+    </style>
 </head>
 
 <body>
@@ -39,8 +53,10 @@
     <!-- Shopping Cart Section Begin -->
     <section class="checkout-section spad">
         <div class="container">
-            <form action="{{ route('payment') }}" method="POST" class="checkout-form">
-                @csrf @method('POST')
+            {{-- <form action="{{ route('payment') }}" method="POST" class="checkout-form">
+                @csrf @method('POST') --}}
+            <form class="checkout-form">
+                @csrf
                 <div class="row">
                     <div class="col-lg-6">
                         <h4>Détails sur la facturation</h4>
@@ -89,7 +105,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <label for="code_postal">Code postal</label>
-                                <input type="text" id="code_postal">
+                                <input type="text" id="code_postal" name="code_postal">
                             </div>
 
                         </div>
@@ -145,9 +161,12 @@
                                 {{-- Bouton de paiement --}}
                                 {{-- {{ $paymentForm['btn'] }} --}}
                                 {{-- Champ caché du montant total --}}
-                                <input type="hidden" name="montant_total" value="{{ $total }}">
+                                <input type="hidden" id="montant_total" name="montant_total"
+                                    value="{{ $total }}">
                                 <div class="order-btn">
-                                    <button type="submit" class="site-btn place-btn custom-pay-btn">
+                                    <div class="sdk"></div>
+                                    <button type="button" onclick="checkout()"
+                                        class="site-btn place-btn custom-pay-btn">
                                         Passer la commande
                                     </button>
                                     <div class="paiement" id="paypal-button-container"></div>
@@ -169,7 +188,56 @@
     <!-- Js Plugins -->
     @include('includes.js')
 
+    {{-- CinetPay payment script --}}
+    <script>
+        function checkout() {
+            // Global configs
+            CinetPay.setConfig({
+                apikey: "208399534962592c3add2e16.66241584",
+                site_id: 305123,
+                mode: 'PRODUCTION',
+                notify_url: "{{ route('payment.result') }}",
+            });
+            // Create a new payment
+            CinetPay.getCheckout({
+                transaction_id: Math.floor(Math.random() * 100000000).toString(), // YOUR TRANSACTION ID
+                amount: $('#montant_total').val(), // AMOUNT IN FCFA
+                currency: 'XOF',
+                channels: 'ALL',
+                description: 'Test de paiement',
+                //Fournir ces variables pour le paiements par carte bancaire
+                customer_name: $('#nom').val(), //Le nom du client
+                customer_surname: $('#prenom').val(), //Le prenom du client
+                customer_email: $('#email').val(), //l'email du client
+                customer_phone_number: $('#telephone').val(), //l'email du client
+                customer_address: $('#adresse').val(), //addresse du client
+                customer_city: $('#ville').val(), // La ville du client
+                customer_country: 'CI', // le code ISO du pays
+                customer_state: 'CI', // le code ISO l'état
+                customer_zip_code: $('#code_postal').val() ?? '', // code postal
+            });
+            // Handle the payment result
+            CinetPay.waitResponse(function(data) {
+                var dataJson = JSON.stringify(data);
+                document.cookie = "paymentResult=" + dataJson;
+                console.log("data is: " + typeof dataJson);
+                console.log(dataJson);
+                window.location.href = "{{ route('payment.result') }}";
+                // if (data.status == "REFUSED") {
+                //     alert("Votre paiement a échoué")
+                //     window.location.href = "{{ route('payment.result') }}";
+                // } else if (data.status == "ACCEPTED") {
+                //     alert("Votre paiement a été effectué avec succès")
+                //     window.location.href = "{{ route('payment.result') }}";
+                // }
+            });
+            CinetPay.onError(function(data) {
+                console.log(data);
+            });
+        }
+    </script>
 
+    {{-- PayPal payment script --}}
     <script>
         paypal.Buttons({
 

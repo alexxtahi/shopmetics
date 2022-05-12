@@ -38,22 +38,7 @@ class BoutiqueController extends Controller
         $tags = Tag::where('deleted_at', null)
             ->get();
         // Récupération des promotions
-        $promotions = Promotion::where('deleted_at', null)
-            ->get();
-        // Récupération du nombre total de produit dans le panier
-        if (Auth::check()) {
-            $cart = Panier::where('id_user', Auth::id())
-                ->get();
-            $val = 0;
-            foreach ($cart as $key) {
-                $var = 1 * $key->qt_prod;
-                $val = $val + $var;
-            }
-
-            $nombre_prod = $val;
-        } else {
-            $nombre_prod = 0;
-        }
+        $promotions = Promotion::where('deleted_at', null)->get();
         // Appel de la vue en passant les données
         return view(
             'boutique',
@@ -62,7 +47,6 @@ class BoutiqueController extends Controller
                 'categories' => $categories,
                 'tags' => $tags,
                 'promotions' => $promotions,
-                'nombre_prod' => $nombre_prod,
             ]
         );
     }
@@ -94,20 +78,6 @@ class BoutiqueController extends Controller
         // Récupération des promotions
         $promotions = Promotion::where('deleted_at', null)
             ->get();
-        // Récupération du nombre total de produit dans le panier
-        if (Auth::check()) {
-            $cart = Panier::where('id_user', Auth::id())
-                ->get();
-            $val = 0;
-            foreach ($cart as $key) {
-                $var = 1 * $key->qt_prod;
-                $val = $val + $var;
-            }
-
-            $nombre_prod = $val;
-        } else {
-            $nombre_prod = 0;
-        }
         // Appel de la vue en passant les données
         return view(
             'boutique',
@@ -118,7 +88,6 @@ class BoutiqueController extends Controller
                 'promotions' => $promotions,
                 'priceFilterMin' => $priceFilterMin,
                 'priceFilterMax' => $priceFilterMax,
-                'nombre_prod' => $nombre_prod,
             ]
         );
     }
@@ -145,22 +114,7 @@ class BoutiqueController extends Controller
         $tags = Tag::where('deleted_at', null)
             ->get();
         // Récupération des promotions
-        $promotions = Promotion::where('deleted_at', null)
-            ->get();
-        // Récupération du nombre total de produit dans le panier
-        if (Auth::check()) {
-            $cart = Panier::where('id_user', Auth::id())
-                ->get();
-            $val = 0;
-            foreach ($cart as $key) {
-                $var = 1 * $key->qt_prod;
-                $val = $val + $var;
-            }
-
-            $nombre_prod = $val;
-        } else {
-            $nombre_prod = 0;
-        }
+        $promotions = Promotion::where('deleted_at', null)->get();
         // Appel de la vue en passant les données
         return view(
             'boutique',
@@ -170,7 +124,6 @@ class BoutiqueController extends Controller
                 'tags' => $tags,
                 'promotions' => $promotions,
                 'selectedCategorie' => $data['id_cat'],
-                'nombre_prod' => $nombre_prod,
             ]
         );
     }
@@ -197,22 +150,7 @@ class BoutiqueController extends Controller
         $promotions = Promotion::where('deleted_at', null)
             ->get();
         // Récupération des tags
-        $tags = Tag::where('deleted_at', null)
-            ->get();
-        // Récupération du nombre total de produit dans le panier
-        if (Auth::check()) {
-            $cart = Panier::where('id_user', Auth::id())
-                ->get();
-            $val = 0;
-            foreach ($cart as $key) {
-                $var = 1 * $key->qt_prod;
-                $val = $val + $var;
-            }
-
-            $nombre_prod = $val;
-        } else {
-            $nombre_prod = 0;
-        }
+        $tags = Tag::where('deleted_at', null)->get();
         // Appel de la vue en passant les données
         return view(
             'boutique',
@@ -222,7 +160,6 @@ class BoutiqueController extends Controller
                 'tags' => $tags,
                 'promotions' => $promotions,
                 'selectedTag' => $data['tag'],
-                'nombre_prod' => $nombre_prod,
             ]
         );
     }
@@ -247,29 +184,13 @@ class BoutiqueController extends Controller
         // Récuperation du produit saisie
         $input = $request->input('q');
         //Recherche du produit
-        $produit = Produit::where('designation', $input)
-            ->get();
-        // Récupération du nombre total de produit dans le panier
-        if (Auth::check()) {
-            $cart = Panier::where('id_user', Auth::id())
-                ->get();
-            $val = 0;
-            foreach ($cart as $key) {
-                $var = 1 * $key->qt_prod;
-                $val = $val + $var;
-            }
-
-            $nombre_prod = $val;
-        } else {
-            $nombre_prod = 0;
-        }
+        $produit = Produit::where('designation', $input)->get();
         // Appel de la vue en passant les données
         return view('boutique', [
             'produits' => $produit,
             'categories' => $categories,
             'tags' => $tags,
             'promotions' => $promotions,
-            'nombre_prod' => $nombre_prod,
         ]);
     }
 
@@ -345,21 +266,6 @@ class BoutiqueController extends Controller
         //$users = $users->intersect(Produit::whereIn('id', [1, 2, 3])->get());
         //$users = rand(10,25) ;
         //dd($users) ;
-
-        // Récupération du nombre total de produit dans le panier
-        if (Auth::check()) {
-            $cart = Panier::where('id_user', Auth::id())
-                ->get();
-            $val = 0;
-            foreach ($cart as $key) {
-                $var = 1 * $key->qt_prod;
-                $val = $val + $var;
-            }
-
-            $nombre_prod = $val;
-        } else {
-            $nombre_prod = 0;
-        }
         // Appel de la vue en passant les données
         return view('description', [
             'produits' => $produits,
@@ -367,7 +273,6 @@ class BoutiqueController extends Controller
             'tags' => $tags,
             'MonProduits' => $MonProduits,
             'MesCategories' => $MesCategories,
-            'nombre_prod' => $nombre_prod,
         ]);
     }
 
@@ -376,15 +281,9 @@ class BoutiqueController extends Controller
     {
         // Récupération des éléments concernant le client connecté
         $cart = Panier::where('id_user', Auth::id())->get();
-        // Récupération du nombre total de produit dans le panier
-        $nombre_prod = 0;
-        if (Auth::check())
-            foreach ($cart as $key)
-                $nombre_prod += $key->qt_prod;
         // Appel de la vue en passant les données
         return view('panier', [
             'cart' => $cart,
-            'nombre_prod' => $nombre_prod,
             'detailsTransaction' => $detailsTransaction,
         ]);
     }
@@ -443,19 +342,10 @@ class BoutiqueController extends Controller
             $cart = Panier::where('id_user', Auth::id())->get();
             // Récupération des information du client
             $user_info = User::find(Auth::id());
-            // Récupération du nombre total de produit dans le panier
-            $nombre_prod = 0;
-            $montant_total = 0;
-            if (Auth::check())
-                foreach ($cart as $item) {
-                    $nombre_prod += $item->qt_prod;
-                    $montant_total += $item->produits->prix_prod * $item->qt_prod;
-                }
             // Appel de la vue en passant les données
             return view('check', [
                 'cart' => $cart,
                 'user_info' => $user_info,
-                'nombre_prod' => $nombre_prod,
             ]);
         }
     }

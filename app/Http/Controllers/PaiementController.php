@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PaiementRequest;
 use Illuminate\Http\Request;
 use CinetPay\CinetPay;
 use Exception;
@@ -26,22 +27,11 @@ class PaiementController extends Controller
         $this->cancel_url = route('payment.result');
     }
     // Return to specified view after payment
-    public function returnUrl(Request $request)
+    public function returnUrl(PaiementRequest $request)
     {
-        // Vérification de la transaction
-        $paymentMsg = '';
-        $response = Http::withHeaders([
-            'Content-type' => 'application/json',
-            // 'X-CSRF-TOKEN' => csrf_token(),
-        ])->post('https://api-checkout.cinetpay.com/v2/payment/check', [
-            'apikey' => $this->apiKey,
-            'site_id' => $this->site_id,
-            'token' => $request->get('token'),
-        ]);
-        // Récupération de la réponse du serveur
-        // dd($request->get('token'));
-        $transaction = $response['data'] ?? ['status' => 'SERVER_ERROR'];
+        $transaction = json_decode($_COOKIE['paymentResult'], true);
         // dd($transaction);
+
         if ($transaction['status'] == 'REFUSED') { // Échec de la transaction...
             if (isset($response['cpm_error_message']) && $response['cpm_error_message'] == 'INSUFFICIENT_BALANCE')
                 $paymentMsg = "La paiement a échoué en raison d'un solde insuffisant sur votre compte";
@@ -69,7 +59,7 @@ class PaiementController extends Controller
         // Création de la commande
         $response = Http::withHeaders([
             'Content-type' => 'application/json',
-            // 'X-CSRF-TOKEN' => csrf_token(),
+            'X-CSRF-TOKEN' => csrf_token(),
         ])->post('https://api-checkout.cinetpay.com/v2/payment', [
             'apikey' => $this->apiKey,
             'site_id' => $this->site_id,
@@ -91,9 +81,10 @@ class PaiementController extends Controller
             'customer_country' => 'CI',
             'customer_state' => $commande['adresse'] ?? '',
             'customer_zip_code' => $commande['code_postal'] ?? '',
+            'metadata' => "_token=" . csrf_token(),
         ]);
         // redirection
         // dd($response);
-        return Redirect::to($response['data']['payment_url']);
+        return redirect($response['data']['payment_url']);
     }
 }

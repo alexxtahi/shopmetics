@@ -32,20 +32,12 @@ class CommandeController extends Controller
                 ->get();
         }
         // dd($commandes);
-        // Récupération du nombre total de produit dans le panier
-        $nombre_prod = 0;
-        if (Auth::check()) {
-            $cart = Panier::where('id_user', Auth::id())->get();
-            foreach ($cart as $key)
-                $nombre_prod += $key->qt_prod;
-        }
         // Appel de la vue en passant les données
         return view(
             'commandes',
             [
                 'commandes' => $commandes,
                 'total_commandes' => count($commandes),
-                'nombre_prod' => $nombre_prod,
             ]
         );
     }

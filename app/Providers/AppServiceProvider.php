@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Helpers\CartHelper;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,10 +24,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Passer le nom de la vue actuelle à toutes les pages
         view()->composer('*', function ($view) {
+            // Passer le nom de la vue actuelle à toutes les pages
             $view_name = str_replace('.', '-', $view->getName());
-            view()->share('view_name', $view_name);
+            // Récupération du nombre total de produit dans le panier
+            $nombre_prod = CartHelper::getNombreProd();
+            view()->share(['view_name' => $view_name, 'nombre_prod' => $nombre_prod]);
         });
     }
 }

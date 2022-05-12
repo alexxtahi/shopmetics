@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'commande/resultat'
+        // 'commande/resultat', // désactiver la vérification du token pour les commandes
     ];
 }
