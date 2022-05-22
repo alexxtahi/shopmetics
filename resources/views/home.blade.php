@@ -339,12 +339,5 @@
         </div>
     </div>
     <!-- Partner Logo Section End -->
-    <script>
-        var auto_refresh = setInterval(
-            function(){
-                console.log(1) ;
-            };
-            
-        }, 1000);
-    <script/>
+
 @endsection

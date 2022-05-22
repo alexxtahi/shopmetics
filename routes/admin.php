@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\MoyenPaiementController;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,22 @@ use App\Http\Controllers\MoyenPaiementController;
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth'])
     ->name('dashboard');
+
+// ANCHOR - Commandes
+Route::get('/dashboard/commandes', [CommandeController::class, 'DashboardCmd'])
+    ->middleware(['auth'])
+    ->name('admin.pages.commandes');
+
+Route::get('/dashboard/commandes/edit/{id}', [CommandeController::class, 'edit'])
+    ->middleware(['auth'])
+    ->name('admin.pages.commandes.edit');
+
+Route::post('/dashboard/commandes/update/{id}', [CommandeController::class, 'update'])
+    ->middleware(['auth'])
+    ->name('admin.pages.commandes.update');
+
+
+    
 
 // ANCHOR - Produits
 Route::get('/dashboard/produits', [ProduitController::class, 'index'])
@@ -52,6 +69,12 @@ Route::post('/dashboard/produits/update/{id}', [ProduitController::class, 'updat
     ->middleware(['auth'])
     ->name('admin.pages.produits.update');
 
+
+
+
+
+
+
 // ANCHOR Catégories
 Route::get('/dashboard/categories', [CategorieController::class, 'index'])
     ->middleware(['auth'])
@@ -73,6 +96,9 @@ Route::post('/dashboard/categories/update/{lib_cat}', [CategorieController::clas
     ->middleware(['auth'])
     ->name('admin.pages.categories.update');
 
+
+
+
 // ANCHOR - Moyens de paiement
 Route::get('/dashboard/moyen-paiements', [MoyenPaiementController::class, 'index'])
     ->middleware(['auth'])
@@ -93,6 +119,9 @@ Route::get('/dashboard/moyen-paiements/etat', [MoyenPaiementController::class, '
 Route::post('/dashboard/moyen-paiements/update/{lib_moyen_paiement}', [MoyenPaiementController::class, 'update'])
     ->middleware(['auth'])
     ->name('admin.pages.moyen-paiements.update');
+
+
+
 
 // ! Route vers les clients du tableau de bord
 Route::get('/dashboard/clients', [ClientController::class, 'index'])

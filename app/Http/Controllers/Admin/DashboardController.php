@@ -7,6 +7,7 @@ use App\Models\Besoin;
 use App\Models\Commande;
 use App\Models\Produit;
 use Illuminate\Http\Request;
+use App\Models\ProduitCommande;
 
 class DashboardController extends Controller
 {
@@ -17,9 +18,26 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        /*********************************Commandes******************************************/ 
         // Récupération des commandes
         $commandes = Commande::where('deleted_at', null)
             ->get();
+        
+        // Récupération des commandes validé
+        $commandesValidé = Commande::where('statut_cmd', 'validé')
+            ->get();
+        
+        // Récupération des commandes en cours
+        $commandesEncours = Commande::where('statut_cmd', 'En cours')
+            ->get();
+
+        // Récupération des produits commandes
+        $produitcommande = ProduitCommande::where('deleted_at', null)
+        ->get();
+ 
+        /***************************************************************************/ 
+
+      
         // Récupération des produits
         $produits = Produit::where('deleted_at', null)
             ->get();
@@ -32,6 +50,9 @@ class DashboardController extends Controller
         $besoins = Besoin::where('deleted_at', null)
             ->get();
         // Appel de la vue
-        return view('admin.index', compact('commandes', 'produits', 'meilleursProduits', 'top5Produits', 'besoins'));
+        return view('admin.index', 
+                compact('produitcommande','commandes', 'produits', 
+                        'meilleursProduits', 'top5Produits', 'besoins',
+                        'commandesValidé', 'commandesEncours'));
     }
 }

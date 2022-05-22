@@ -1,12 +1,13 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\BoutiqueController;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\PaiementController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Admin\DashboardController;
 
 // Importation des routes externes
 require __DIR__ . '/auth.php';
@@ -38,6 +39,11 @@ Route::group(['prefix' => 'boutique'], function () {
 
 //! Contact
 Route::view('/contact', 'contact')->name('contact');
+
+//utilisateur
+Route::get('/moncompte', [UserController::class, 'moncompte'])->name('moncompte') ;
+
+
 
 //! Panier
 Route::group(['prefix' => 'monpanier'], function () {
