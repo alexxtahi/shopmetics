@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Produit;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ProduitCommande extends Model
 {
@@ -17,5 +18,9 @@ class ProduitCommande extends Model
         'id_cmd',
 
     ] ;
+
+    /*public function produits(){
+        return  $this->hasMany(Produit::class) ;
+    }*/
 
 }

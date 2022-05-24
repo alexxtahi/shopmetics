@@ -78,4 +78,11 @@ class UserController extends Controller
         // Redirection
         return view('register', $result);
     }
+
+
+    public function moncompte(){
+
+
+        return view('user') ;
+    }
 }

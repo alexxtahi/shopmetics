@@ -58,7 +58,7 @@
                                 <div class="card">
                                     <div class="card-heading active">
                                         <a class="active" data-toggle="collapse" data-target="#collapseOne">
-                                            {{ $commande->code_cmd . ' - ' . $commande->date_cmd }}
+                                           Code de la commande : {{ $commande->code_cmd . ' - ' . $commande->date_cmd }}
                                         </a>
                                     </div>
                                     <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
@@ -69,7 +69,7 @@
                                                         {{ $commande_produit->designation }}
                                                         X{{ $commande_produit->qte_cmd }} <br>
                                                         <span
-                                                            class="custom-span"><strong>{{ $commande_produit->prix_prod_actuel }}</strong></span>
+                                                            class="custom-span"><strong>{{ $commande_produit->prix_prod_actuel * $commande_produit->qte_cmd }} FCFA</strong></span>
                                                     </li>
                                                     <hr>
                                                 @empty

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Commentaire;
 use App\Models\Caracteristique;
+use App\Models\ProduitCommande;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -35,4 +36,9 @@ class Produit extends Model
     {
         return $this->hasMany(Commentaire::class);
     }
+    /*
+    public function produitcommandes()
+    {
+        return $this->belongsToMany(ProduitCommande::class);
+    }*/
 }

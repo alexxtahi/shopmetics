@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PaiementRequest;
-use Illuminate\Http\Request;
-use CinetPay\CinetPay;
 use Exception;
+use App\Models\Panier;
+use CinetPay\CinetPay;
+use App\Models\Commande;
+use Illuminate\Http\Request;
+use App\Models\ProduitCommande;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use App\Http\Requests\PaiementRequest;
 use Illuminate\Support\Facades\Redirect;
 
 class PaiementController extends Controller
@@ -39,6 +42,27 @@ class PaiementController extends Controller
                 $paymentMsg = "La transaction a échouée";
         } else if ($transaction['status'] == 'ACCEPTED') { // Succès de la transaction ($transaction['status'] == 'ACCEPTED')
             $paymentMsg = "Le paiement de votre commande d'un montant de " . $transaction['amount'] . " " . $transaction['currency'] . " a été effectué avec succès. Merci pour votre confiance";
+        
+            $commande = new Commande();
+            $commande->code_cmd =  uniqid();
+            $commande->date_cmd = $date = date('d-m-y h:i:s');
+            $commande->statut_cmd = "Validé" ;
+            $commande->id_client = Auth::id();
+            $commande->id_moyen_paiement = 1 ;
+            $commande->save() ;
+
+            $cart = Panier::where('id_user', Auth::id())->get();
+            foreach($cart as $monproduit){
+                $produit_cmd = new ProduitCommande();
+                $produit_cmd->id_prod = $monproduit->id_prod ;
+                $produit_cmd->id_cmd = $commande->id ;
+                $produit_cmd->qte_cmd = $monproduit->qt_prod ;
+                $produit_cmd->prix_prod_actuel = $monproduit->produits->prix_prod ;
+                $produit_cmd->save() ;
+
+            }
+        
+        
         } else {
             $paymentMsg = "Une erreur est survenue suite au paiement de votre commande";
         }

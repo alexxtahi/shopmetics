@@ -40,8 +40,8 @@ class ProduitFactory extends Factory
             'img_prod' => Arr::random($imgList),
             'prix_prod' => 100, //$this->faker->numberBetween(1, 100),
             'ancien_prix' => $this->faker->numberBetween(1, 1000),
-            'id_cat' => $this->faker->numberBetween(1, 5),
-            'id_sous_cat' => $this->faker->numberBetween(1, 5),
+            'id_cat' => $this->faker->numberBetween(1, 4),
+            'id_sous_cat' => $this->faker->numberBetween(1, 4),
             'en_promo' => array_rand([true, false]),
         ];
     }

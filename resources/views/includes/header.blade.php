@@ -145,7 +145,7 @@
                         <ul class="dropdown">
                             <!-- Affichage du bouton dashboard si l'utilisateur connecté est un Admin -->
                             @if (Auth::check())
-                                <li><a href="#">Mon compte</a></li>
+                                <li><a href="{{route('moncompte')}}">Mon compte</a></li>
                                 @if (Auth::user()->role == 'Administrateur' || Auth::user()->role == 'Dev')
                                     <li><a href="{{ route('dashboard') }}">Tableau de bord</a></li>
                                 @endif

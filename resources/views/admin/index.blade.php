@@ -28,9 +28,15 @@
                                     </ul>
                                 </div>
                             </div>
+
+                            @php
+                                $total = 0;
+                                $vente = 0 ;
+                            @endphp
+
                             <div class="card-stats-items">
                                 <div class="card-stats-item">
-                                    <div class="card-stats-item-count">{{ $commandes->count() }}</div>
+                                    <div class="card-stats-item-count">{{ $commandesEncours->count() }}</div>
                                     <div class="card-stats-item-label">Attente</div>
                                 </div>
                                 <div class="card-stats-item">
@@ -38,9 +44,20 @@
                                     <div class="card-stats-item-label">Livraison</div>
                                 </div>
                                 <div class="card-stats-item">
-                                    <div class="card-stats-item-count">{{ $commandes->count() }}</div>
+                                    <div class="card-stats-item-count">{{ $commandesValidé->count() }}</div>
                                     <div class="card-stats-item-label">Terminé</div>
                                 </div>
+                                @forelse ($produitcommande as $solde)
+                                    @php
+                                        $total += $solde->qte_cmd * $solde->prix_prod_actuel;
+                                        $vente += $solde->qte_cmd ;
+                                    @endphp
+                                @empty
+                                    @php
+                                        $total = 0 ;
+                                        $vente = 0 ;
+                                    @endphp
+                                @endforelse
                             </div>
                         </div>
                         <div class="card-icon shadow-primary bg-primary">
@@ -56,6 +73,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <div class="card card-statistic-2">
                         <div class="card-chart">
@@ -69,7 +87,7 @@
                                 <h4>Solde</h4>
                             </div>
                             <div class="card-body">
-                                0 FCFA
+                                {{ $total }} FCFA                                
                             </div>
                         </div>
                     </div>
@@ -87,7 +105,7 @@
                                 <h4>Ventes</h4>
                             </div>
                             <div class="card-body">
-                                0
+                                {{$vente}}
                             </div>
                         </div>
                     </div>
