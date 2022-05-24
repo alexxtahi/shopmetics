@@ -12,11 +12,11 @@
             <div class="ht-left">
                 <div class="mail-service">
                     <i class=" fa fa-envelope"></i>
-                    <a class="custom-header-link" href="mailto: info@skinnythe.com">info@skinnythe.com</a>
+                    <a class="custom-header-link" href="mailto:info@skinnythe.com">info@skinnythe.com</a>
                 </div>
                 <div class="phone-service">
                     <i class=" fa fa-phone"></i>
-                    <a class="custom-header-link" href="sms: +4915110100130">+4915110100130</a>
+                    <a class="custom-header-link" href="tel:+4915110100130">+4915110100130</a>
                 </div>
             </div>
             <div class="ht-right">
