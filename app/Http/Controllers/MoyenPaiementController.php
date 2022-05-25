@@ -174,8 +174,43 @@ class MoyenPaiementController extends Controller
      * @param  \App\Models\MoyenPaiement  $moyenPaiement
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MoyenPaiement $moyenPaiement)
+    public function destroy($id)
     {
-        //
+        // Recherche et récupération du moyen de paiement
+        $moyen_paiement = MoyenPaiement::find($id);
+        $result = [
+            'type' => 'table',
+            'state' => 'success',
+            'message' => 'Le moyen de paiement a bien été supprimée'
+        ];
+        try {
+            if ($moyen_paiement != null) { // Suppression
+                $moyen_paiement->deleted_at = now();
+                $moyen_paiement->deleted_by = Auth::user()->id;
+                $moyen_paiement->save();
+            } else {
+                $result['state'] = 'warning';
+                $result['message'] = 'Le moyen de paiement est introuvable';
+            }
+        } catch (Exception $error) {
+            $result['state'] = 'error';
+            $result['message'] = 'Une erreur est survenue';
+        }
+        // Redirection
+        return redirect()->route('admin.pages.moyen-paiements', compact('result'));
+    }
+
+    public function etat()
+    {
+        // Récupération de tous les enregistrements
+        $records = MoyenPaiement::all();
+        // Éléments du tableau
+        $thead = [
+            'Libellé',
+        ];
+        $tbody = 'admin.etats.components.moyen-paiement-body';
+        $title = 'moyens de paiement';
+        // Affichage
+        return view('admin.etats.etat', compact('records', 'thead', 'tbody', 'title'));
     }
 }

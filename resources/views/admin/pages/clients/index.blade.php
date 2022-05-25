@@ -8,7 +8,7 @@
                     <div class="table-card-action-btn">
                         <a href="{{ route('admin.pages.clients.create') }}" class="btn btn-primary"><i
                                 class="fas fa-plus"></i> Ajouter un client</a>
-                        <a href="{{ route('admin.pages.clients.etat') }}" class="btn btn-warning"
+                        <a href="{{ route('admin.pages.clients.etat') }}" target="_blank" class="btn btn-warning"
                             style="margin-left: 10px"><i class="fa fa-print"></i> Imprimer</a>
                     </div>
                 </div>

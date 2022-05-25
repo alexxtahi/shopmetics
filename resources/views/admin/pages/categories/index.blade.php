@@ -128,7 +128,7 @@
                 <div class="card-header table-card-header">
                     <h4>Liste des catégories</h4>
                     <div class="table-card-action-btn">
-                        <a href="{{ route('admin.pages.categories.etat') }}" class="btn btn-warning"><i
+                        <a href="{{ route('admin.pages.categories.etat') }}" target="_blank" class="btn btn-warning"><i
                                 class="fa fa-print"></i> Imprimer</a>
                     </div>
                 </div>
@@ -168,7 +168,7 @@
                         <tbody>
                             @foreach ($categories as $categorie)
                                 <tr>
-                                    <td>{{ $categories->search($categorie) + 1 }}</td>
+                                    <td class="text-center">{{ $categories->search($categorie) + 1 }}</td>
                                     <td style="width: 100%;">{{ $categorie->lib_cat }}</td>
                                     <td class="no-wrap-line">
                                         {{-- Bouton Modifier --}}

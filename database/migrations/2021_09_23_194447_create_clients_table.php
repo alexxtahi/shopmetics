@@ -19,7 +19,7 @@ class CreateClientsTable extends Migration
             $table->string('ville');
             $table->string('commune');
             // ! Clé étrangère
-            $table->foreignId('id_user')->references('id')->on('users'); //->nullable();
+            $table->foreignId('id_user')->references('id')->on('users');
             // ! Statistiques
             $table->timestamp('deleted_at')->nullable();
             $table->foreignId('updated_by')->nullable();

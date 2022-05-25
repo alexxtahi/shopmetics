@@ -130,10 +130,10 @@
             <!-- Liste des catégories -->
             <div class="card">
                 <div class="card-header table-card-header">
-                    <h4>Liste des catégories</h4>
+                    <h4>Liste des moyens de paiement</h4>
                     <div class="table-card-action-btn">
-                        <a href="{{ route('admin.pages.moyen-paiements.etat') }}" class="btn btn-warning"><i
-                                class="fa fa-print"></i> Imprimer</a>
+                        <a href="{{ route('admin.pages.moyen-paiements.etat') }}" target="_blank"
+                            class="btn btn-warning"><i class="fa fa-print"></i> Imprimer</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -165,14 +165,14 @@
                         <thead>
                             <tr class="no-wrap-line">
                                 <th class="text-center" style="width: 9.5%;" scope="col">No.</th>
-                                <th scope="col">Catégorie</th>
+                                <th scope="col">Moyen de paiement</th>
                                 <th class="text-center" style="width: 20%;" scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($moyen_paiements as $moyen_paiement)
                                 <tr>
-                                    <td>{{ $moyen_paiements->search($moyen_paiement) + 1 }}</td>
+                                    <td class="text-center">{{ $moyen_paiements->search($moyen_paiement) + 1 }}</td>
                                     <td style="width: 100%;">{{ $moyen_paiement->lib_moyen_paiement }}</td>
                                     <td class="no-wrap-line">
                                         {{-- Bouton Modifier --}}
@@ -182,8 +182,8 @@
                                         </button>
                                         {{-- Bouton Supprimer --}}
                                         <button class="btn btn-danger"
-                                            data-confirm="Etes-vous sûr(e) ?|Voulez vous vraiment supprimer la catégorie <strong>{{ $moyen_paiement->lib_moyen_paiement }}</strong> ?"
-                                            data-confirm-yes="window.location.replace('/dashboard/categories/delete/{{ $moyen_paiement->id }}');">
+                                            data-confirm="Etes-vous sûr(e) ?|Voulez vous vraiment supprimer le moyen de paiement <strong>{{ $moyen_paiement->lib_moyen_paiement }}</strong> ?"
+                                            data-confirm-yes="window.location.replace('/dashboard/moyen-paiements/delete/{{ $moyen_paiement->id }}');">
                                             <i class="far fa-trash-alt"></i>
                                         </button>
                                     </td>

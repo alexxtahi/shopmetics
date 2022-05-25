@@ -9,7 +9,8 @@
         <ul class="sidebar-menu">
             <!-- Tableau de bord -->
             <li class="menu-header">Tableau de bord</li>
-            <li><a class="nav-link" href="{{ route('dashboard') }}"><i class="fas fa-home"></i>
+            <li class="{{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}"><a class="nav-link"
+                    href="{{ route('dashboard') }}"><i class="fas fa-home"></i>
                     <span>Accueil</span></a></li>
             <li><a class="nav-link" href="{{ route('home') }}"><i class="fas fa-shopping-cart"></i> <span>Revenir
                         à la boutique</span></a></li>
@@ -23,15 +24,22 @@
                     <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
                 </ul>
             </li> --}}
-            <li><a class="nav-link" href="{{ route('admin.pages.clients') }}"><i class="fas fa-users"></i>
+            <li class="{{ Route::currentRouteName() == 'admin.pages.clients' ? 'active' : '' }}"><a
+                    class="nav-link" href="{{ route('admin.pages.clients') }}"><i class="fas fa-users"></i>
                     <span>Clients</span></a></li>
-            <li><a class="nav-link" href="{{ route('admin.pages.commandes') }}"><i class="fa fa-shopping-bag"></i>
-                <span>Commandes</span></a></li>
-            <li><a class="nav-link" href="{{ route('admin.pages.produits') }}"><i class="fas fa-cube"></i>
+            <li class="{{ Route::currentRouteName() == 'admin.pages.commandes' ? 'active' : '' }}"><a
+                    class="nav-link" href="{{ route('admin.pages.commandes') }}"><i
+                        class="fa fa-shopping-bag"></i>
+                    <span>Commandes</span></a></li>
+            <li class="{{ Route::currentRouteName() == 'admin.pages.produits' ? 'active' : '' }}"><a
+                    class="nav-link" href="{{ route('admin.pages.produits') }}"><i class="fas fa-cube"></i>
                     <span>Produits</span></a></li>
-            <li><a class="nav-link" href="{{ route('admin.pages.categories') }}"><i class="fas fa-th"></i>
+            <li class="{{ Route::currentRouteName() == 'admin.pages.categories' ? 'active' : '' }}"><a
+                    class="nav-link" href="{{ route('admin.pages.categories') }}"><i
+                        class="fas fa-th"></i>
                     <span>Catégories</span></a></li>
-            <li><a class="nav-link" href="{{ route('admin.pages.moyen-paiements') }}"><i
+            <li class="{{ Route::currentRouteName() == 'admin.pages.moyen-paiements' ? 'active' : '' }}"><a
+                    class="nav-link" href="{{ route('admin.pages.moyen-paiements') }}"><i
                         class="fas fa-wallet"></i> <span>Moyens de paiement</span></a></li>
             <!--<li class="nav-item dropdown"><i class="fa-solid fa-bag-shopping"></i>
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Bootstrap</span></a>
@@ -159,7 +167,7 @@
             <li><a class="nav-link" href="credits.html"><i class="fas fa-pencil-ruler"></i>
                     <span>Credits</span></a></li>
             -->
-        </ul> 
+        </ul>
 
         <!--<div class="mt-4 mb-4 p-3 hide-sidebar-mini">
             <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">

@@ -19,10 +19,9 @@ class ClientController extends Controller
     {
         // Récupération des données de l'entité
         $clients = Client::join('users', 'users.id', '=', 'clients.id_user')
-            ->select('clients.*', 'users.*')
-            ->where('clients.deleted_at', null)
+            ->select('clients.*', 'users.nom', 'users.prenom', 'users.contact', 'users.email')
+            ->where([['clients.deleted_at', null], ['users.deleted_at', null]])
             ->get();
-        //dd($clients);
         // Récupération des résultats d'opération sur le formulaire si existants
         $result = [];
         if ($request->exists('result')) {
@@ -91,8 +90,7 @@ class ClientController extends Controller
                     $existant->deleted_at = null;
                     $existant->deleted_by = null;
                     $existant->created_at = now();
-                    $existant->created_by = Auth::user()
-                        ->id;
+                    $existant->created_by = Auth::user()->id;
                     $existant->save();
                     // Message de success
                     $result['state'] = 'success';
@@ -130,8 +128,7 @@ class ClientController extends Controller
             }
         }
         // Redirection
-        return redirect()
-            ->route('admin.pages.clients.create', compact('result'));
+        return redirect()->route('admin.pages.clients.create', compact('result'));
     }
 
     /**
@@ -152,9 +149,16 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function edit(Client $client)
+    public function edit($id)
     {
-        //
+        // Recherche et récupération du client
+        $client = Client::join('users', 'users.id', '=', 'clients.id_user')
+            ->select('clients.*', 'users.nom', 'users.prenom', 'users.contact', 'users.email')
+            ->where([['clients.deleted_at', null], ['users.deleted_at', null], ['clients.id', $id]])
+            ->first();
+        // dd($client);
+        // Affichage de la vue
+        return view('admin.pages.clients.edit', compact('client'));
     }
 
     /**
@@ -164,9 +168,48 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client $client)
+    public function update($id, Request $request)
     {
-        $client->update($request->all());
+        // ! Contrôles
+        $result = ['state' => 'error', 'message' => 'Une erreur est survenue'];
+        if ($request->isMethod('POST')) {
+            // Récupération de tous les résultats de la requête
+            $data = $request->all();
+            // Recherche et récupération du client
+            $client = Client::find($id);
+            $client_user = User::find($client->id_user);
+            // Mise à jour
+            if ($client != null && $client_user != null) {
+                try {
+                    // Mise à jour de l'utilisateur associé au client
+                    $client_user->nom = $data['nom'];
+                    $client_user->prenom = $data['prenom'];
+                    $client_user->contact = $data['contact'] ?? null;
+                    $client_user->email = $data['email'];
+                    if ($data['password'] != null)
+                        $client_user->password = bcrypt($data['password']);
+                    $client_user->updated_by = Auth::user()->id;
+                    $client_user->updated_at = now();
+                    $client_user->save(); // Sauvegarde
+                    // Mise à jour du client
+                    $client->ville = $data['ville'];
+                    $client->commune = $data['commune'];
+                    $client_user->updated_by = Auth::user()->id;
+                    $client->updated_at = now();
+                    $client->save(); // Sauvegarde
+                    // Message de success
+                    $result['state'] = 'success';
+                    $result['message'] = 'Modification réussie';
+                } catch (Exception $exc) { // ! En cas d'erreur
+                    $result['message'] = $exc->getMessage();
+                }
+            } else {
+                $result['state'] = 'warning';
+                $result['message'] = 'Le client est introuvable';
+            }
+        }
+        // Redirection
+        return redirect()->route('admin.pages.clients', compact('result'));
     }
 
     /**
@@ -175,9 +218,62 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Client $client)
+    public function destroy($id)
     {
-        $client->tokens->each->delete();
-        $client->delete();
+        // Recherche et récupération du client
+        $client = Client::find($id);
+        $client_user = User::find($client->id);
+        $result = [
+            'state' => 'success',
+            'message' => 'Le client a bien été supprimé'
+        ];
+        // dd($produit);
+        try {
+            if ($client != null && $client_user != null) {
+                // Suppression du client
+                $client->deleted_at = now();
+                $client->deleted_by = Auth::user()->id;
+                $client->save();
+                // Suppression de l'utilisateur associé au client
+                $client_user->deleted_at = now();
+                $client_user->deleted_by = Auth::user()->id;
+                $client_user->save();
+            } else {
+                $result = [
+                    'state' => 'warning',
+                    'message' => "Client introuvable",
+                ];
+            }
+        } catch (Exception $error) {
+            $result = [
+                'state' => 'error',
+                'message' => "Une erreur est survenue",
+            ];
+        }
+        // Redirection
+        return redirect()->route('admin.pages.clients', compact('result'));
+    }
+
+
+    public function etat()
+    {
+        // Récupération de tous les enregistrements
+        $records = Client::join('users', 'users.id', '=', 'clients.id_user')
+            ->select('clients.*', 'users.nom', 'users.prenom', 'users.contact', 'users.email')
+            ->where([['clients.deleted_at', null], ['users.deleted_at', null]])
+            ->get();
+        // Éléments du tableau
+        $thead = [
+            'Nom',
+            'Prénom',
+            'Contact',
+            'Email',
+            'Ville',
+            'Commune',
+        ];
+        $tbody = 'admin.etats.components.client-body';
+        $title = 'clients';
+        // Affichage
+        return view('admin.etats.etat', compact('records', 'thead', 'tbody', 'title'));
     }
 }

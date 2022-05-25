@@ -191,8 +191,7 @@ class CategorieController extends Controller
         try {
             if ($categorie != null) { // Suppression
                 $categorie->deleted_at = now();
-                $categorie->deleted_by = Auth::user()
-                    ->id;
+                $categorie->deleted_by = Auth::user()->id;
                 $categorie->save();
             } else {
                 $result['state'] = 'warning';
@@ -203,7 +202,20 @@ class CategorieController extends Controller
             $result['message'] = 'Une erreur est survenue';
         }
         // Redirection
-        return redirect()
-            ->route('admin.pages.categories', compact('result'));
+        return redirect()->route('admin.pages.categories', compact('result'));
+    }
+
+    public function etat()
+    {
+        // Récupération de tous les enregistrements
+        $records = Categorie::all();
+        // Éléments du tableau
+        $thead = [
+            'Libellé',
+        ];
+        $tbody = 'admin.etats.components.categorie-body';
+        $title = 'catégories';
+        // Affichage
+        return view('admin.etats.etat', compact('records', 'thead', 'tbody', 'title'));
     }
 }

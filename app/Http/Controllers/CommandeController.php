@@ -7,6 +7,7 @@ use App\Models\Produit;
 use App\Models\Commande;
 use Illuminate\Http\Request;
 use App\Models\ProduitCommande;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 
 class CommandeController extends Controller
@@ -43,7 +44,8 @@ class CommandeController extends Controller
         );
     }
 
-    public function DashboardCmd(){
+    public function DashboardCmd()
+    {
         // Récupération des promotions
         $commandes = Commande::join('clients', 'clients.id', '=', 'commandes.id_client')
             ->join('moyen_paiements', 'moyen_paiements.id', '=', 'commandes.id_moyen_paiement')
@@ -118,8 +120,8 @@ class CommandeController extends Controller
             ->where([['commandes.deleted_at', null], ['commandes.id', $id]])
             ->first();
 
-       
-    
+
+
         return view(
             'admin.pages.commandes.edit',
             [
@@ -140,15 +142,15 @@ class CommandeController extends Controller
     {
         // ! Contrôles
         $result = ['state' => 'error', 'message' => 'Une erreur est survenue'];
-        if ($request->isMethod('POST')){
+        if ($request->isMethod('POST')) {
             // Récupération de tous les résultats de la requête
             $data = $request->all();
             // Recherche et récupération du commande
             $commande = Commande::find($id);
-            
+
             if ($commande != null) {
                 try {
-                    $commande->statut_cmd = $data['state'];             
+                    $commande->statut_cmd = $data['state'];
                     $commande->updated_by = Auth::user()
                         ->id;
                     $commande->updated_at = now();
@@ -159,7 +161,6 @@ class CommandeController extends Controller
                 } catch (Exception $exc) { // ! En cas d'erreur
                     $result['message'] = $exc->getMessage();
                 }
-
             } else {
                 $result['state'] = 'warning';
                 $result['message'] = 'La commande est introuvable';
@@ -178,5 +179,28 @@ class CommandeController extends Controller
     public function destroy(Commande $commande)
     {
         //
+    }
+
+    public function etat()
+    {
+        // Récupération de tous les enregistrements
+        $records = Commande::join('clients', 'clients.id', '=', 'commandes.id_client')
+            ->join('moyen_paiements', 'moyen_paiements.id', '=', 'commandes.id_moyen_paiement')
+            // ->join('produit_commandes', 'produit_commandes.id_cmd', '=', 'commandes.id')
+            ->select('commandes.*', 'moyen_paiements.lib_moyen_paiement')
+            ->where([['commandes.deleted_at', null], ['clients.id_user', Auth::user()->id]])
+            ->get();
+        // Éléments du tableau
+        $thead = [
+            'Code',
+            'Date',
+            'Statut',
+            'No. Client',
+            'Moyen de paiement',
+        ];
+        $tbody = 'admin.etats.components.commande-body';
+        $title = 'commandes';
+        // Affichage
+        return view('admin.etats.etat', compact('records', 'thead', 'tbody', 'title'));
     }
 }

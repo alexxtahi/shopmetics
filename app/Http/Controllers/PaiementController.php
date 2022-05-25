@@ -30,7 +30,7 @@ class PaiementController extends Controller
         $this->cancel_url = route('payment.result');
     }
     // Return to specified view after payment
-    public function returnUrl(PaiementRequest $request)
+    public function returnUrl()
     {
         $transaction = json_decode($_COOKIE['paymentResult'], true);
         // dd($transaction);
@@ -42,27 +42,24 @@ class PaiementController extends Controller
                 $paymentMsg = "La transaction a échouée";
         } else if ($transaction['status'] == 'ACCEPTED') { // Succès de la transaction ($transaction['status'] == 'ACCEPTED')
             $paymentMsg = "Le paiement de votre commande d'un montant de " . $transaction['amount'] . " " . $transaction['currency'] . " a été effectué avec succès. Merci pour votre confiance";
-        
+
             $commande = new Commande();
             $commande->code_cmd =  uniqid();
             $commande->date_cmd = $date = date('d-m-y h:i:s');
-            $commande->statut_cmd = "Validé" ;
+            $commande->statut_cmd = "Validé";
             $commande->id_client = Auth::id();
-            $commande->id_moyen_paiement = 1 ;
-            $commande->save() ;
+            $commande->id_moyen_paiement = 1;
+            $commande->save();
 
             $cart = Panier::where('id_user', Auth::id())->get();
-            foreach($cart as $monproduit){
+            foreach ($cart as $monproduit) {
                 $produit_cmd = new ProduitCommande();
-                $produit_cmd->id_prod = $monproduit->id_prod ;
-                $produit_cmd->id_cmd = $commande->id ;
-                $produit_cmd->qte_cmd = $monproduit->qt_prod ;
-                $produit_cmd->prix_prod_actuel = $monproduit->produits->prix_prod ;
-                $produit_cmd->save() ;
-
+                $produit_cmd->id_prod = $monproduit->id_prod;
+                $produit_cmd->id_cmd = $commande->id;
+                $produit_cmd->qte_cmd = $monproduit->qt_prod;
+                $produit_cmd->prix_prod_actuel = $monproduit->produits->prix_prod;
+                $produit_cmd->save();
             }
-        
-        
         } else {
             $paymentMsg = "Une erreur est survenue suite au paiement de votre commande";
         }
@@ -110,5 +107,34 @@ class PaiementController extends Controller
         // redirection
         // dd($response);
         return redirect($response['data']['payment_url']);
+    }
+
+    // Générer un token
+    public function generateToken()
+    {
+        $response = Http::withHeaders([
+            'Content-type' => '	application/x-www-form-urlencoded',
+            'X-CSRF-TOKEN' => csrf_token(),
+        ])->post('https://client.cinetpay.com/v1/auth/login', [
+            'apikey' => $this->apiKey,
+            'password' => '',
+        ]);
+        // Retourner le token
+        return $response;
+    }
+
+    // Consulter le solde de votre compte
+    public function balance()
+    {
+        $token = $this->generateToken();
+        $response = Http::withHeaders([
+            'Content-type' => 'application/json',
+            'X-CSRF-TOKEN' => csrf_token(),
+        ])->get('https://client.cinetpay.com/v1/transfer/check/balance', [
+            'token' => $token['data']['token'],
+            'lang' => 'fr',
+        ]);
+        // Retourner le solde
+        return response()->json($response);
     }
 }

@@ -6,7 +6,7 @@
                 <div class="card-header table-card-header">
                     <h4>Liste des commandes</h4>
                     <div class="table-card-action-btn">
-                        <a href="{{ route('admin.pages.produits.etat') }}" class="btn btn-warning"
+                        <a href="{{ route('admin.pages.commandes.etat') }}" target="_blank" class="btn btn-warning"
                             style="margin-left: 10px"><i class="fa fa-print"></i> Imprimer</a>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                         <tbody>
                             @foreach ($commandes as $commande)
                                 <tr>
-                                    
+
                                     <td>{{ $commande->id }}</td>
                                     <td>{{ $commande->code_cmd }}</td>
                                     <td>{{ $commande->date_cmd }}</td>
@@ -63,15 +63,14 @@
                                             onclick="window.location.replace('/dashboard/commandes/edit/{{ $commande->id }}')"
                                             class="btn btn-primary actions-btn"><i class="fa fa-edit"></i>
                                         </button>
-                                       
+
                                         {{-- Bouton Supprimer --}}
-                                       
+
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    
                 </div>
             </div>
         </div>

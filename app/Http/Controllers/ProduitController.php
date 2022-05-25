@@ -131,8 +131,7 @@ class ProduitController extends Controller
             }
         }
         // Redirection
-        return redirect()
-            ->route('admin.pages.produits.create', compact('result'));
+        return redirect()->route('admin.pages.produits.create', compact('result'));
     }
 
     /**
@@ -159,8 +158,7 @@ class ProduitController extends Controller
             ->where([['produits.deleted_at', null], ['produits.id', $id]])
             ->first();
         // Récupération des categories et des sous catégories
-        $categories = Categorie::where('deleted_at', null)
-            ->get();
+        $categories = Categorie::where('deleted_at', null)->get();
         // Affichage de la vue
         return view('admin.pages.produits.edit', compact('produit', 'categories'));
     }
@@ -197,8 +195,7 @@ class ProduitController extends Controller
                         $img_prod->resize(300, 300);
                         $img_prod->save(public_path('/assets/img/produits/' . $data['img_prod']->getClientOriginalName()));
                     }
-                    $produit->updated_by = Auth::user()
-                        ->id;
+                    $produit->updated_by = Auth::user()->id;
                     $produit->updated_at = now();
                     $produit->save(); // Sauvegarde
                     // Message de success
@@ -213,8 +210,7 @@ class ProduitController extends Controller
             }
         }
         // Redirection
-        return redirect()
-            ->route('admin.pages.produits', compact('result'));
+        return redirect()->route('admin.pages.produits', compact('result'));
     }
 
     /**
@@ -250,7 +246,27 @@ class ProduitController extends Controller
             ];
         }
         // Redirection
-        return redirect()
-            ->route('admin.pages.produits', compact('result'));
+        return redirect()->route('admin.pages.produits', compact('result'));
+    }
+
+    public function etat()
+    {
+        // Récupération de tous les enregistrements
+        $records = Produit::join('categories', 'categories.id', '=', 'produits.id_cat')
+            ->select('produits.*', 'categories.lib_cat as lib_cat')
+            ->where('produits.deleted_at', null)
+            ->get();
+        // Éléments du tableau
+        $thead = [
+            'Code',
+            'Désignation',
+            'Catégorie',
+            'Prix (FCFA)',
+            'Qté',
+        ];
+        $tbody = 'admin.etats.components.produit-body';
+        $title = 'produits';
+        // Affichage
+        return view('admin.etats.etat', compact('records', 'thead', 'tbody', 'title'));
     }
 }

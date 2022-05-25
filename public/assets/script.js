@@ -42,9 +42,7 @@ $('#sorting').change(function name(params) {
 function imprimeEtat() {
     // Lancer l'impression
     window.print();
-    window.onafterprint = function () {
-        window.close();
-    }
+    window.onafterprint = window.close;
 }
 
 

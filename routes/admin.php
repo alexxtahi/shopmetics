@@ -19,15 +19,19 @@ use App\Http\Controllers\Admin\DashboardController;
 |
 */
 
-// ANCHOR - Accueil
+//! Accueil
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth'])
     ->name('dashboard');
 
-// ANCHOR - Commandes
+//! Commandes
 Route::get('/dashboard/commandes', [CommandeController::class, 'DashboardCmd'])
     ->middleware(['auth'])
     ->name('admin.pages.commandes');
+
+Route::get('/dashboard/commandes/etat', [CommandeController::class, 'etat'])
+    ->middleware(['auth'])
+    ->name('admin.pages.commandes.etat');
 
 Route::get('/dashboard/commandes/edit/{id}', [CommandeController::class, 'edit'])
     ->middleware(['auth'])
@@ -37,10 +41,7 @@ Route::post('/dashboard/commandes/update/{id}', [CommandeController::class, 'upd
     ->middleware(['auth'])
     ->name('admin.pages.commandes.update');
 
-
-    
-
-// ANCHOR - Produits
+//! Produits
 Route::get('/dashboard/produits', [ProduitController::class, 'index'])
     ->middleware(['auth'])
     ->name('admin.pages.produits');
@@ -69,13 +70,7 @@ Route::post('/dashboard/produits/update/{id}', [ProduitController::class, 'updat
     ->middleware(['auth'])
     ->name('admin.pages.produits.update');
 
-
-
-
-
-
-
-// ANCHOR Catégories
+//! Catégories
 Route::get('/dashboard/categories', [CategorieController::class, 'index'])
     ->middleware(['auth'])
     ->name('admin.pages.categories');
@@ -96,10 +91,7 @@ Route::post('/dashboard/categories/update/{lib_cat}', [CategorieController::clas
     ->middleware(['auth'])
     ->name('admin.pages.categories.update');
 
-
-
-
-// ANCHOR - Moyens de paiement
+//! Moyens de paiement
 Route::get('/dashboard/moyen-paiements', [MoyenPaiementController::class, 'index'])
     ->middleware(['auth'])
     ->name('admin.pages.moyen-paiements');
@@ -121,9 +113,7 @@ Route::post('/dashboard/moyen-paiements/update/{lib_moyen_paiement}', [MoyenPaie
     ->name('admin.pages.moyen-paiements.update');
 
 
-
-
-// ! Route vers les clients du tableau de bord
+//! Clients
 Route::get('/dashboard/clients', [ClientController::class, 'index'])
     ->middleware(['auth'])
     ->name('admin.pages.clients');
