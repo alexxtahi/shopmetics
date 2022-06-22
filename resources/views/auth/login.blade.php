@@ -49,12 +49,13 @@
                             @csrf
                             <div class="group-input">
                                 <label for="email">Adresse Mail</label>
-                                <input type="email" id="email" name="email" value="{{ old('email') }}" required>
+                                <input type="email" id="email" name="email" value="{{ old('email') }}"
+                                    required>
                             </div>
                             <div class="group-input">
                                 <label for="password">Mot de passe</label>
                                 <input type="password" id="password" name="password" autocomplete="current-password"
-                                    value="{{ old('password') }}" required>
+                                    required>
                             </div>
                             <div class="group-input gi-check">
                                 <div class="gi-more">

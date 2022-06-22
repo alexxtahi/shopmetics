@@ -16,7 +16,8 @@
         "intervention/image": "^2.7",
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "symfony/psr-http-message-bridge": "^2.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

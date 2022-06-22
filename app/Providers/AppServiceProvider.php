@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Helpers\CartHelper;
+use App\Helpers\PaymentHelper;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,7 +30,11 @@ class AppServiceProvider extends ServiceProvider
             $view_name = str_replace('.', '-', $view->getName());
             // Récupération du nombre total de produit dans le panier
             $nombre_prod = CartHelper::getNombreProd();
-            view()->share(['view_name' => $view_name, 'nombre_prod' => $nombre_prod]);
+            // Partage à toutes les vues
+            view()->share([
+                'view_name' => $view_name,
+                'nombre_prod' => $nombre_prod,
+            ]);
         });
     }
 }

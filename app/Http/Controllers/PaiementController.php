@@ -112,29 +112,32 @@ class PaiementController extends Controller
     // Générer un token
     public function generateToken()
     {
-        $response = Http::withHeaders([
-            'Content-type' => '	application/x-www-form-urlencoded',
-            'X-CSRF-TOKEN' => csrf_token(),
-        ])->post('https://client.cinetpay.com/v1/auth/login', [
-            'apikey' => $this->apiKey,
-            'password' => '',
+        $client = new \GuzzleHttp\Client();
+        $response = $client->request('POST', 'https://client.cinetpay.com/v1/auth/login', [
+            'form_params' => [
+                'apikey' => $this->apiKey,
+                'password' => "Hash::make('xcoders22');",
+            ]
         ]);
+        $response = json_decode($response->getBody());
         // Retourner le token
-        return $response;
+        return $response->data->token;
     }
 
     // Consulter le solde de votre compte
     public function balance()
     {
         $token = $this->generateToken();
+        // dd($token);
         $response = Http::withHeaders([
             'Content-type' => 'application/json',
             'X-CSRF-TOKEN' => csrf_token(),
         ])->get('https://client.cinetpay.com/v1/transfer/check/balance', [
-            'token' => $token['data']['token'],
+            'token' => $token,
             'lang' => 'fr',
         ]);
+        $response = json_decode($response->getBody());
         // Retourner le solde
-        return response()->json($response);
+        return $response;
     }
 }

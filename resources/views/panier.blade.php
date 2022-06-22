@@ -152,9 +152,14 @@
                                 </ul>
                                 @if (!Auth::check())
                                     <a href="{{ route('login') }}" class="proceed-btn">Se connecter</a>
+                                @elseif ($nombre_prod == 0)
+                                    <a href="{{ route('boutique') }}" class="proceed-btn">
+                                        Boutique
+                                    </a>
                                 @else
-                                    <a href="{{ route('commande.verification') }}" class="proceed-btn">Valider la
-                                        commande</a>
+                                    <a href="{{ route('commande.verification') }}" class="proceed-btn">
+                                        Valider la commande
+                                    </a>
                                 @endif
                             </div>
                         </div>
