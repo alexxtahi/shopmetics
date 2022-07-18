@@ -48,13 +48,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($commandes as $commande)
+                            @foreach ($commandes->sortBy('statut_cmd') as $commande)
                                 <tr>
 
                                     <td>{{ $commande->id }}</td>
                                     <td>{{ $commande->code_cmd }}</td>
                                     <td>{{ $commande->date_cmd }}</td>
-                                    <td>{{ $commande->statut_cmd }}</td>
+                                    <td>
+                                        @php
+                                            $temp = $commande->statut_cmd 
+                                        @endphp
+
+                                        @if ($temp == "validé" )
+                                            <button 
+                                                disabled="true" class="btn btn-success" >
+                                                {{ $commande->statut_cmd }}
+                                            </button>
+                                        @else
+                                            <button disabled="true" class="btn btn-danger">
+                                               {{ $commande->statut_cmd }}
+                                            </button> 
+                                        @endif
+
+                                    </td>
                                     <td>{{ $commande->id_client }}</td>
                                     <td>{{ $commande->id_myen_paiement }}</td>
                                     <td class="no-wrap-line">

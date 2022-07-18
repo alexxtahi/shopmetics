@@ -34,7 +34,7 @@
                         @default
                     @endswitch
                 @endif
-                <form action="{{ url('/dashboard/commandes/update/' . $commandes->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('/dashboard/commandes/update/'.$commandes->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                     <div class="form-row">
                         <div class="form-group col-md-3">
@@ -59,7 +59,6 @@
                                 }
                             @endphp
                             <label for="designation">Statut</label>
-                            <!--<input type="text" class="form-control" id="designation" name="designation"  value="{{$commandes->statut_cmd}}" >-->
                             <select class="form-control" id="exampleFormControlSelect1" name="state">
                                 <option>{{$commandes->statut_cmd}}</option>
                                 <option>
@@ -71,35 +70,51 @@
                         
                     </div>
 
-                </form>
-                <div class="card-body">
-                    <table class="table table-striped custom-table">
-                        <thead>
-                            <tr class="no-wrap-line">
-                                <th scope="col">No.</th>
-                                <th scope="col">Image</th>
-                                <th scope="col">Designation</th>
-                                <th scope="col">Quantité</th>
-                                <th scope="col">Prix</th>
-                                <th scope="col">Montant</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                          
-                           
+                
+                    <div class="card-body">
+                        <table class="table table-striped custom-table">
+                            <thead>
+                                <tr class="no-wrap-line">
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Designation</th>
+                                    <th scope="col">Quantité</th>
+                                    <th scope="col">Prix</th>
+                                    <th scope="col">Montant</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $num = 0 ;
+                                @endphp
+                                @foreach ($prix_prod_cmd as $produit)     
+                                    @php
+                                        $num = $num + 1 ;
+                                    @endphp
+                                    <tr>
+                                        <td>{{$num}}</td>
+                                        <td><img src="{{ asset($produit->produits->img_prod) }}" alt="none"></td>
+                                        <td>{{$produit->produits->designation}}</td>
+                                        <td>{{$produit->qte_cmd}}</td>
+                                        <td>{{$produit->prix_prod_actuel}}</td>
+                                        <td>{{$produit->prix_prod_actuel*$produit->qte_cmd}}</td>  
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    
+                        <!-- Actions -->
+                        <div class="form-row form-footer">
+                            <button 
+                                type="submit" class="btn btn-success" >
+                                <i class="fas fa-check"></i> Valider
+                            </button>
                             
-                        </tbody>
-
-                    </table>
-                   
-                    <!-- Actions -->
-                    <div class="form-row form-footer">
-                        <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Valider</button>
-                        <button type="reset" class="btn btn-danger" style="margin-left: 10px;"><i class="fas fa-eraser"></i> Effacer</button>
-                    </div>
-               
-
+                            <button type="reset" class="btn btn-danger" style="margin-left: 10px;">
+                                <i class="fas fa-eraser"></i> Effacer
+                            </button>
+                        </div>
+                </form>
                 </div>
             </div>
         </div>
