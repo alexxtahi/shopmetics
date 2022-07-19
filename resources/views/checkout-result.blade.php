@@ -97,11 +97,11 @@
                             <hr>
                             <p>
                                 Il y'a plusieurs raisons causant un échec de paiement: <br>
-                                - Le montant de la transaction est incorrecte <br>
-                                - Le solde sur votre compte est insuffisant <br>
-                                - Le numéro de carte de crédit est incorrecte <br>
-                                - Le numéro de carte de crédit est expiré <br>
-                                - et bien d'autres raisons.
+                                - Le montant de la transaction est incorrect<br>
+                                - Le solde sur votre compte est insuffisant<br>
+                                - Le numéro de carte de crédit est incorrect<br>
+                                - Le numéro de carte de crédit est expiré<br>
+                                et bien d'autres raisons...
                             </p>
                             <p>
                                 Nous vous invitons à vérifier les informations de votre compte et réessayer.
@@ -170,7 +170,8 @@
                                 @csrf @method('POST')
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <input required name="nom_complet" type="text" placeholder="Votre nom complet">
+                                        <input required name="nom_complet" type="text"
+                                            placeholder="Votre nom complet">
                                     </div>
                                     <div class="col-lg-6">
                                         <input required name="email" type="email" placeholder="Votre adresse mail">

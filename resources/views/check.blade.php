@@ -18,7 +18,6 @@
             top: 50%;
             transform: translate(-50%, -50%);
         }
-
     </style>
 </head>
 
@@ -64,7 +63,8 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="nom">Nom <span>*</span></label>
-                                <input required type="text" name="nom" id="nom" value="{{ $user_info->nom }}">
+                                <input required type="text" name="nom" id="nom"
+                                    value="{{ $user_info->nom }}">
                             </div>
                             <div class="col-lg-6">
                                 <label for="prenom">Prenom <span>*</span></label>
@@ -87,7 +87,8 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="email">Email <span>*</span></label>
-                                <input required type="email" name="email" id="email" value="{{ $user_info->email }}">
+                                <input required type="email" name="email" id="email"
+                                    value="{{ $user_info->email }}">
                             </div>
                             <div class="col-lg-6">
                                 <label for="telephone">Téléphone <span>*</span></label>
@@ -100,8 +101,9 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="adresse">Adresse <span>*</span></label>
-                                <input required type="text" name="adresse" id="adresse" value="Yopougon, Cité verte"
-                                    placeholder="Ex: Cocody, Riviera 2" class="street-first">
+                                <input required type="text" name="adresse" id="adresse"
+                                    value="Yopougon, Cité verte" placeholder="Ex: Cocody, Riviera 2"
+                                    class="street-first">
                             </div>
                             <div class="col-lg-6">
                                 <label for="code_postal">Code postal</label>
@@ -223,18 +225,17 @@
                 console.log("data is: " + typeof dataJson);
                 console.log(dataJson);
                 window.location.href = "{{ route('payment.result') }}";
-                // if (data.status == "REFUSED") {
-                //     alert("Votre paiement a échoué")
-                //     window.location.href = "{{ route('payment.result') }}";
-                // } else if (data.status == "ACCEPTED") {
-                //     alert("Votre paiement a été effectué avec succès")
-                //     window.location.href = "{{ route('payment.result') }}";
-                // }
             });
             CinetPay.onError(function(data) {
                 console.log(data);
             });
         }
+
+        // Rafraichier la page après avoir fermé le formulaire CintePay
+        $('#cp-close').click(function() {
+            alert('Fermeture du formulaire');
+            window.location.href = "{{ route('commande.verification') }}";
+        });
     </script>
 
     {{-- PayPal payment script --}}

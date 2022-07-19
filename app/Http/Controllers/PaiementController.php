@@ -11,6 +11,8 @@ use App\Models\ProduitCommande;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use App\Http\Requests\PaiementRequest;
+use App\Mail\Shopmetics;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
 class PaiementController extends Controller
@@ -40,7 +42,7 @@ class PaiementController extends Controller
                 $paymentMsg = "La paiement a échoué en raison d'un solde insuffisant sur votre compte";
             else
                 $paymentMsg = "La transaction a échouée";
-        } else if ($transaction['status'] == 'ACCEPTED') { // Succès de la transaction ($transaction['status'] == 'ACCEPTED')
+        } else if ($transaction['status'] == 'ACCEPTED') { // Succès de la transaction...
             $paymentMsg = "Le paiement de votre commande d'un montant de " . $transaction['amount'] . " " . $transaction['currency'] . " a été effectué avec succès. Merci pour votre confiance";
 
             $commande = new Commande();
@@ -59,6 +61,17 @@ class PaiementController extends Controller
                 $produit_cmd->qte_cmd = $monproduit->qt_prod;
                 $produit_cmd->prix_prod_actuel = $monproduit->produits->prix_prod;
                 $produit_cmd->save();
+            }
+            // Informer le client que la commande est validée par mail
+            try {
+                $client = Auth::user();
+                Mail::to($client)->send(new Shopmetics($client, []));
+            } catch (Exception $exc) {
+                return response()->json([
+                    'success' => false,
+                    'message' => "Erreur lors de l'envoi du mail de confirmation de commande",
+                    'error' => $exc->getMessage(),
+                ], 400);
             }
         } else {
             $paymentMsg = "Une erreur est survenue suite au paiement de votre commande";
