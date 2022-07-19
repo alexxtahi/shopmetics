@@ -41,7 +41,7 @@ Route::group(['prefix' => 'boutique'], function () {
 Route::view('/contact', 'contact')->name('contact');
 
 //utilisateur
-Route::get('/moncompte', [UserController::class, 'moncompte'])->name('moncompte') ;
+Route::get('/moncompte', [UserController::class, 'moncompte'])->name('moncompte');
 
 
 

@@ -224,12 +224,13 @@
                     <i class="fas fa-cog"></i> Réglages
                 </a>
                 <div class="dropdown-divider"></div>
-                <form method="POST" action="{{ route('logout') }}" class="login-panel logout-btn">
-                    @csrf
-                    <a class="logout-btn" onclick="event.preventDefault(); this.closest('form').submit();">
-                        <i class="fas fa-sign-out-alt"></i> Se déconnecter
-                    </a>
-                </form>
+                <a class="dropdown-item has-icon text-danger logout-btn"
+                    onclick="event.preventDefault(); $('#logout-form').submit();">
+                    <i class="fas fa-sign-out-alt"></i> Se déconnecter
+                    <form method="POST" id="logout-form" action="{{ route('logout') }}">
+                        @csrf
+                    </form>
+                </a>
                 {{-- <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger">
                     @method('POST')
                     <i class="fas fa-sign-out-alt"></i> Se déconnecter

@@ -1,9 +1,9 @@
 <header class="header-section">
 
     <!-- Message après opération -->
-    @if (isset($previous_result['welcome_text']) && !empty($previous_result['welcome_text']))
+    @if (session()->get('welcome_text') !== null)
         <div class="alert alert-success text-center" role="alert">
-            {{ $previous_result['welcome_text'] }}
+            {{ session()->get('welcome_text') }}
         </div>
     @endif
 
@@ -23,12 +23,12 @@
                 @if (Auth::check())
                     <!-- Si l'utilisateur est connecté -->
                     <!-- Formulaire de déconnexion -->
-                    <form method="POST" action="{{ route('logout') }}" class="login-panel logout-btn">
-                        @csrf
-                        <a class="logout-btn" onclick="event.preventDefault(); this.closest('form').submit();">
-                            <i class="fa fa-sign-out"></i> Se déconnecter
-                        </a>
-                    </form>
+                    <a class="login-panel logout-btn" onclick="event.preventDefault(); $('#logout-form').submit();">
+                        <i class="fa fa-sign-out"></i> Se déconnecter
+                        <form method="POST" id="logout-form" action="{{ route('logout') }}">
+                            @csrf
+                        </form>
+                    </a>
                     <a href="#" class="login-panel"><i class="fa fa-user"></i>Bonjour, {{ Auth::user()->nom }}
                         !</a>
                 @else
@@ -145,7 +145,7 @@
                         <ul class="dropdown">
                             <!-- Affichage du bouton dashboard si l'utilisateur connecté est un Admin -->
                             @if (Auth::check())
-                                <li><a href="{{route('moncompte')}}">Mon compte</a></li>
+                                <li><a href="{{ route('moncompte') }}">Mon compte</a></li>
                                 @if (Auth::user()->role == 'Administrateur' || Auth::user()->role == 'Dev')
                                     <li><a href="{{ route('dashboard') }}">Tableau de bord</a></li>
                                 @endif
