@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\CartHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -7,7 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BoutiqueController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\PaiementController;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Api\CartController;
 
 // Importation des routes externes
 require __DIR__ . '/auth.php';
@@ -50,7 +51,9 @@ Route::group(['prefix' => 'monpanier'], function () {
     // Accueil du panier
     Route::get('/', [BoutiqueController::class, 'showCart'])->name('panier');
     // Ajouter un produit au panier
-    Route::get('/{id}', [BoutiqueController::class, 'addStore'])->name('cart.panier');
+    // Route::get('/{id}', [BoutiqueController::class, 'addStore'])->name('cart.panier');
+    // Récupérer la quantité de produits dans le panier
+    Route::get('/quantity', [CartController::class, 'getQuantity'])->name('cart.quantity');
 });
 
 //! Produit

@@ -84,7 +84,7 @@
                             <a href="{{ route('panier') }}" data-toggle="tooltip" title="Panier">
                                 <i class="icon_bag_alt"></i>
                                 @if (Auth::check())
-                                    <span>{{ $nombre_prod }}</span>
+                                    <span id="cart-quantity">{{ $nombre_prod }}</span>
                                 @endif
                             </a>
                         </li>

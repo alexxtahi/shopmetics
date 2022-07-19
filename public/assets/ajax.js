@@ -170,6 +170,8 @@ $(document).ready(function () {
             },
             dataType: 'json',
             success: function (response) {
+                // Mise à jour de la quantité du panier
+                $('#cart-quantity').text(response.cartQuantity);
                 alert(response.status)
             },
             error: function (jqXHR, status, err) {

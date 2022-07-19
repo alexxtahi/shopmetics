@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 
 //use Cart ;
+
+use App\Helpers\CartHelper;
 use App\Models\Tag;
 use App\Models\Cart;
 use App\Models\User;
@@ -224,8 +226,11 @@ class BoutiqueController extends Controller
                     $cart->id_user = Auth::id();
                     $cart->qt_prod = $qt;
                     $cart->save();
+                    // Mise à jour de la quantité du produit dans le panier
+                    $cartQuantity = CartHelper::getNombreProd();
                     return response()->json([
-                        'status' => 'ajouter'
+                        'status' => 'ajouter',
+                        'cartQuantity' => $cartQuantity,
                     ]);
                 }
             }
