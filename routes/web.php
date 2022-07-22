@@ -87,3 +87,7 @@ Route::get('/boutique/ajout', [CartController::class, 'create']->name('ajout.ses
 
 Route::get('/boutique/destroy', [CartController::class, 'create1']->name('destroy.session') ;
 */
+
+//! Emails
+
+Route::get('/email', [CommandeController::class, 'index'])->middleware('auth')->name('commandes');
