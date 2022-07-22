@@ -22,7 +22,7 @@ class DashboardController extends Controller
     {
         /*********************************Commandes******************************************/
         // Récupération des commandes
-        $commandes = Commande::where('deleted_at', null)->get();
+        $commandes = Commande::where('statut_cmd', 'en cours')->get();
 
         // Récupération des commandes validé
         $commandesValidé = Commande::where('statut_cmd', 'validé')->get();

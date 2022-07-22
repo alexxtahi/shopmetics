@@ -58,8 +58,10 @@ class CommandeController extends Controller
             $commande['produits'] = ProduitCommande::join('produits', 'produits.id', '=', 'produit_commandes.id_prod')
                 ->select('produit_commandes.*', 'produits.designation')
                 ->where('produit_commandes.id_cmd', $commande->id)
+                ->orderBy('created_at')
                 ->get();
         }
+        
         // dd($commandes);
         // Appel de la vue en passant les données
         return view(
@@ -110,15 +112,29 @@ class CommandeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        // Récupération des promotions
+    { 
+        $content_prod_cmd = array() ;
 
+        // Récupération des promotions
         $commandes = Commande::join('clients', 'clients.id', '=', 'commandes.id_client')
             ->join('moyen_paiements', 'moyen_paiements.id', '=', 'commandes.id_moyen_paiement')
             // ->join('produit_commandes', 'produit_commandes.id_cmd', '=', 'commandes.id')
             ->select('commandes.*', 'moyen_paiements.lib_moyen_paiement')
             ->where([['commandes.deleted_at', null], ['commandes.id', $id]])
             ->first();
+        
+        // afichages des produit commander et leur informations
+        if (Auth::check()){
+            $cmd = Commande::where('id', $id)->first();
+            $prod_cmd = ProduitCommande::where('id_cmd', $cmd->id)->get();
+            foreach($prod_cmd as $prod_cmds){
+                $prod = Produit::where('id', $prod_cmds->id_prod)->get();
+                $content_prod_cmd[] = $prod ;
+                
+            }
+            //dd($content_prod_cmd[0]);
+
+        }
 
 
 
@@ -126,6 +142,8 @@ class CommandeController extends Controller
             'admin.pages.commandes.edit',
             [
                 'commandes' => $commandes,
+                'prix_prod_cmd'  => $prod_cmd,
+                'prod' => $content_prod_cmd,
                 //'total_commandes' => count($commandes),
             ]
         );
@@ -140,17 +158,18 @@ class CommandeController extends Controller
      */
     public function update($id, Request $request)
     {
-        // ! Contrôles
+        
         $result = ['state' => 'error', 'message' => 'Une erreur est survenue'];
         if ($request->isMethod('POST')) {
             // Récupération de tous les résultats de la requête
-            $data = $request->all();
+
             // Recherche et récupération du commande
             $commande = Commande::find($id);
+            //dd($commande);
 
             if ($commande != null) {
                 try {
-                    $commande->statut_cmd = $data['state'];
+                    $commande->statut_cmd = $request['state'];
                     $commande->updated_by = Auth::user()
                         ->id;
                     $commande->updated_at = now();
@@ -159,6 +178,7 @@ class CommandeController extends Controller
                     $result['state'] = 'success';
                     $result['message'] = 'Modification réussie';
                 } catch (Exception $exc) { // ! En cas d'erreur
+                    dd("ok") ;
                     $result['message'] = $exc->getMessage();
                 }
             } else {
@@ -203,4 +223,5 @@ class CommandeController extends Controller
         // Affichage
         return view('admin.etats.etat', compact('records', 'thead', 'tbody', 'title'));
     }
+    
 }

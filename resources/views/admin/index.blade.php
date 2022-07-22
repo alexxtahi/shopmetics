@@ -86,11 +86,11 @@
                                     <div class="card-stats-item-label">Sur commande</div>
                                 </div>
                                 <div class="card-stats-item">
-                                    <div class="card-stats-item-count">{{ $solde }}</div>
+                                    <div class="card-stats-item-count">{{ $vente }}</div>
                                     <div class="card-stats-item-label">Portefeuille</div>
                                 </div>
                                 <div class="card-stats-item">
-                                    <div class="card-stats-item-count">{{ $total - $solde }}</div>
+                                    <div class="card-stats-item-count">{{ $total - $vente }}</div>
                                     <div class="card-stats-item-label">Différence</div>
                                 </div>
                             </div>
@@ -127,13 +127,13 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <!-- Top 5 des produits -->
-                <div class="col-lg-5">
-                    <div class="card gradient-bottom">
-                        <div class="card-header">
-                            <h4>Top 5 des produits</h4>
-                            {{-- <div class="card-header-action dropdown">
+            <!-- <div class="row">
+                     Top 5 des produits ->
+                    <div class="col-lg-5">
+                        <div class="card gradient-bottom">
+                            <div class="card-header">
+                                <h4>Top 5 des produits</h4>
+                                {{-- <div class="card-header-action dropdown">
                                 <a href="#" data-toggle="dropdown" class="btn btn-danger dropdown-toggle">Month</a>
                                 <ul class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                                     <li class="dropdown-title">Select Period</li>
@@ -143,86 +143,87 @@
                                     <li><a href="#" class="dropdown-item">This Year</a></li>
                                 </ul>
                             </div> --}}
-                        </div>
-                        <div class="card-body" id="top-5-scroll">
-                            <ul class="list-unstyled list-unstyled-border">
-                                @foreach ($top5Produits as $produit)
-                                    <li class="media">
-                                        <img class="mr-3 rounded" width="55"
-                                            src="{{ asset('stisla/assets/img/products/product-3-50.png') }}"
-                                            alt="product">
-                                        <div class="media-body">
-                                            <div class="float-right">
-                                                <div class="font-weight-600 text-muted text-small">86 Sales</div>
-                                            </div>
-                                            <div class="media-title">{{ $produit->designation }}</div>
-                                            <div class="mt-1">
-                                                <div class="budget-price">
-                                                    <div class="budget-price-square bg-primary" data-width="64%"></div>
-                                                    <div class="budget-price-label">
-                                                        {{ number_format($produit->prix_prod, 0, ',', ' ') }} FCFA</div>
-                                                </div>
-                                                <div class="budget-price">
-                                                    <div class="budget-price-square bg-danger" data-width="43%"></div>
-                                                    <div class="budget-price-label">
-                                                        {{ number_format($produit->prix_prod, 0, ',', ' ') }} FCFA</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        <div class="card-footer pt-3 d-flex justify-content-center">
-                            <div class="budget-price justify-content-center">
-                                <div class="budget-price-square bg-primary" data-width="20"></div>
-                                <div class="budget-price-label">Prix de vente</div>
                             </div>
-                            <div class="budget-price justify-content-center">
-                                <div class="budget-price-square bg-danger" data-width="20"></div>
-                                <div class="budget-price-label">Prix d'achat</div>
+                            <div class="card-body" id="top-5-scroll">
+                                <ul class="list-unstyled list-unstyled-border">
+                                    @foreach ($top5Produits as $produit)
+    <li class="media">
+                                            <img class="mr-3 rounded" width="55"
+                                                src="{{ asset('stisla/assets/img/products/product-3-50.png') }}"
+                                                alt="product">
+                                            <div class="media-body">
+                                                <div class="float-right">
+                                                    <div class="font-weight-600 text-muted text-small">86 Sales</div>
+                                                </div>
+                                                <div class="media-title">{{ $produit->designation }}</div>
+                                                <div class="mt-1">
+                                                    <div class="budget-price">
+                                                        <div class="budget-price-square bg-primary" data-width="64%"></div>
+                                                        <div class="budget-price-label">
+                                                            {{ number_format($produit->prix_prod, 0, ',', ' ') }} FCFA</div>
+                                                    </div>
+                                                    <div class="budget-price">
+                                                        <div class="budget-price-square bg-danger" data-width="43%"></div>
+                                                        <div class="budget-price-label">
+                                                            {{ number_format($produit->prix_prod, 0, ',', ' ') }} FCFA</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+    @endforeach
+                                </ul>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- les meilleurs produits -->
-                <div class="col-md-7">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Meilleurs Produits</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="owl-carousel owl-theme best-products-div" id="products-carousel">
-                                @foreach ($meilleursProduits as $produit)
-                                    <div>
-                                        <div class="product-item pb-3">
-                                            <div class="product-image">
-                                                <img alt="image"
-                                                    src="{{ asset('stisla/assets/img/products/product-4-50.png') }}"
-                                                    class="img-fluid">
-                                            </div>
-                                            <div class="product-details">
-                                                <div class="product-name">{{ $produit->designation }}</div>
-                                                <div class="product-review">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <div class="text-muted text-small">67 Sales</div>
-                                                <div class="product-cta">
-                                                    <a href="#" class="btn btn-primary">Détails</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
+                            <div class="card-footer pt-3 d-flex justify-content-center">
+                                <div class="budget-price justify-content-center">
+                                    <div class="budget-price-square bg-primary" data-width="20"></div>
+                                    <div class="budget-price-label">Prix de vente</div>
+                                </div>
+                                <div class="budget-price justify-content-center">
+                                    <div class="budget-price-square bg-danger" data-width="20"></div>
+                                    <div class="budget-price-label">Prix d'achat</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                    <!-- les meilleurs produits ->
+                    <div class="col-md-7">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Meilleurs Produits</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="owl-carousel owl-theme best-products-div" id="products-carousel">
+                                    @foreach ($meilleursProduits as $produit)
+    <div>
+                                            <div class="product-item pb-3">
+                                                <div class="product-image">
+                                                    <img alt="image"
+                                                        src="{{ asset('stisla/assets/img/products/product-4-50.png') }}"
+                                                        class="img-fluid">
+                                                </div>
+                                                <div class="product-details">
+                                                    <div class="product-name">{{ $produit->designation }}</div>
+                                                    <div class="product-review">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                    </div>
+                                                    <div class="text-muted text-small">67 Sales</div>
+                                                    <div class="product-cta">
+                                                        <a href="#" class="btn btn-primary">Détails</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+
             <div class="row">
                 <div class="col-md-8">
                     <div class="card">
@@ -268,7 +269,10 @@
                                                 @endif
                                                 <td>{{ $commande->date_cmd }}</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-primary">Détails</a>
+                                                    <button
+                                                        onclick="window.location.replace('/dashboard/commandes/edit/{{ $commande->id }}')"
+                                                        class="btn btn-primary actions-btn"><i class="fa fa-edit"></i>
+                                                    </button>
                                                 </td>
                                             </tr>
                                         @empty
