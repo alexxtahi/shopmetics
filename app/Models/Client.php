@@ -10,9 +10,12 @@ class Client extends Model
     use HasFactory;
 
     protected $fillable = [
-
         'ville',
         'commune',
-
-    ] ;
+    ];
+    // Relations
+    public function users()
+    {
+        return $this->hasOne(User::class);
+    }
 }

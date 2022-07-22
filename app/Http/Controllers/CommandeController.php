@@ -61,7 +61,7 @@ class CommandeController extends Controller
                 ->orderBy('created_at')
                 ->get();
         }
-        
+
         // dd($commandes);
         // Appel de la vue en passant les données
         return view(
@@ -74,77 +74,43 @@ class CommandeController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Commande  $commande
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Commande $commande)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Commande  $commande
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    { 
-        $content_prod_cmd = array() ;
+    {
+        $content_prod_cmd = array();
 
-        // Récupération des promotions
+        // Récupération des commandes
         $commandes = Commande::join('clients', 'clients.id', '=', 'commandes.id_client')
+            ->join('users', 'users.id', '=', 'clients.id_user')
             ->join('moyen_paiements', 'moyen_paiements.id', '=', 'commandes.id_moyen_paiement')
             // ->join('produit_commandes', 'produit_commandes.id_cmd', '=', 'commandes.id')
-            ->select('commandes.*', 'moyen_paiements.lib_moyen_paiement')
+            ->select('commandes.*', 'users.nom as nom_client', 'users.prenom as prenom_client', 'moyen_paiements.lib_moyen_paiement')
             ->where([['commandes.deleted_at', null], ['commandes.id', $id]])
             ->first();
-        
-        // afichages des produit commander et leur informations
-        if (Auth::check()){
+        // affichages des produits commandés et leur informations
+        if (Auth::check()) {
             $cmd = Commande::where('id', $id)->first();
             $prod_cmd = ProduitCommande::where('id_cmd', $cmd->id)->get();
-            foreach($prod_cmd as $prod_cmds){
+            foreach ($prod_cmd as $prod_cmds) {
                 $prod = Produit::where('id', $prod_cmds->id_prod)->get();
-                $content_prod_cmd[] = $prod ;
-                
+                $content_prod_cmd[] = $prod;
             }
             //dd($content_prod_cmd[0]);
-
         }
-
-
-
+        // Etats possibles d'une commande
+        $etats_cmd = ['En attente', 'Validée', 'Livrée'];
+        // Affichage de la vue
         return view(
             'admin.pages.commandes.edit',
             [
                 'commandes' => $commandes,
                 'prix_prod_cmd'  => $prod_cmd,
                 'prod' => $content_prod_cmd,
-                //'total_commandes' => count($commandes),
+                'etats_cmd' => $etats_cmd,
             ]
         );
     }
@@ -158,7 +124,7 @@ class CommandeController extends Controller
      */
     public function update($id, Request $request)
     {
-        
+
         $result = ['state' => 'error', 'message' => 'Une erreur est survenue'];
         if ($request->isMethod('POST')) {
             // Récupération de tous les résultats de la requête
@@ -169,16 +135,14 @@ class CommandeController extends Controller
 
             if ($commande != null) {
                 try {
-                    $commande->statut_cmd = $request['state'];
-                    $commande->updated_by = Auth::user()
-                        ->id;
+                    $commande->statut_cmd = $request->etat_cmd;
+                    $commande->updated_by = Auth::user()->id;
                     $commande->updated_at = now();
                     $commande->save(); // Sauvegarde
                     // Message de success
                     $result['state'] = 'success';
                     $result['message'] = 'Modification réussie';
                 } catch (Exception $exc) { // ! En cas d'erreur
-                    dd("ok") ;
                     $result['message'] = $exc->getMessage();
                 }
             } else {
@@ -186,19 +150,7 @@ class CommandeController extends Controller
                 $result['message'] = 'La commande est introuvable';
             }
         }
-        return redirect()
-            ->route('admin.pages.commandes', compact('result'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Commande  $commande
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Commande $commande)
-    {
-        //
+        return redirect()->route('dashboard', compact('result'))->with('result', $result);
     }
 
     public function etat()
@@ -223,5 +175,4 @@ class CommandeController extends Controller
         // Affichage
         return view('admin.etats.etat', compact('records', 'thead', 'tbody', 'title'));
     }
-    
 }

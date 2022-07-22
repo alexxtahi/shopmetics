@@ -15,13 +15,13 @@ class CreateProduitCommandesTable extends Migration
     {
         Schema::create('produit_commandes', function (Blueprint $table) {
             $table->id();
-            // ! Clés étrangères
+            //! Clés étrangères
             $table->foreignId('id_prod')->references('id')->on('produits');
             $table->foreignId('id_cmd')->references('id')->on('commandes');
-            // ! Attributs
+            //! Attributs
             $table->integer('qte_cmd');
             $table->integer('prix_prod_actuel');
-            // ! Statistiques
+            //! Statistiques
             $table->timestamp('deleted_at')->nullable();
             $table->foreignId('updated_by')->nullable();
             $table->foreignId('deleted_by')->nullable();

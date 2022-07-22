@@ -151,6 +151,7 @@ class PaiementController extends Controller
         ]);
         $response = json_decode($response->getBody());
         // Retourner le solde
+        // dd($response);
         return $response;
     }
 }

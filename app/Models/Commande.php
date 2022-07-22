@@ -10,11 +10,15 @@ class Commande extends Model
     use HasFactory;
 
     protected $fillable = [
-
         'date_cmd',
         'statut_cmd',
         'id_client',
         'id_moyen_paiement',
 
-    ] ;
+    ];
+    // Relations
+    public function clients()
+    {
+        return $this->hasOne(Client::class);
+    }
 }

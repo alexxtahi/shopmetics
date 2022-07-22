@@ -157,7 +157,7 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::group(['prefix' => 'balance'], function () {
         // Route::get('/admin', [PaiementController::class, 'generateToken']); // test
         Route::get('/', [PaiementController::class, 'balance'])
-            ->middleware(['auth'])
+            ->middleware(['auth']) // comment this if you want to test in Postman
             ->name('admin.account.balance');
     });
 });

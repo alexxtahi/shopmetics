@@ -15,9 +15,16 @@ class CreateCommentairesTable extends Migration
     {
         Schema::create('commentaires', function (Blueprint $table) {
             $table->id();
+            //! Clés étrangères
             $table->foreignId('id_produit')->references('id')->on('produits');
             $table->foreignId('id_user')->references('id')->on('users');
+            //! Attributs
             $table->string('commentaire');
+            //! Statistiques
+            $table->timestamp('deleted_at')->nullable();
+            $table->foreignId('updated_by')->nullable();
+            $table->foreignId('deleted_by')->nullable();
+            $table->foreignId('created_by')->nullable();
             $table->timestamps();
         });
     }
