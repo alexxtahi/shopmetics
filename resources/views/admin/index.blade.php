@@ -224,71 +224,71 @@
                 </div>
             </div>
             <!--
-                                                                                                                                                          <div class="row">
-                                                                                                                                                            <div class="col-md-6">
-                                                                                                                                                              <div class="card">
-                                                                                                                                                                <div class="card-header">
-                                                                                                                                                                  <h4>Ventes par quartier</h4>
-                                                                                                                                                                </div>
-                                                                                                                                                                <div class="card-body">
-                                                                                                                                                                  <div class="row">
-                                                                                                                                                                    <div class="col-sm-6">
-                                                                                                                                                                      <div class="text-title mb-2">{{ date('F', strtotime('-1 month')) }}</div>
-                                                                                                                                                                      <ul class="list-unstyled list-unstyled-border list-unstyled-noborder mb-0">
-                                                                                                                                                                        <li class="media">
-                                                                                                                                                                          <img class="img-fluid mt-1 img-shadow" src="{{ asset('stisla/node_modules/flag-icon-css/flags/4x3/id.svg') }}" alt="image" width="40">
-                                                                                                                                                                          <div class="media-body ml-3">
-                                                                                                                                                                            <div class="media-title">Indonesia</div>
-                                                                                                                                                                            <div class="text-small text-muted">3,282 <i class="fas fa-caret-down text-danger"></i></div>
-                                                                                                                                                                          </div>
-                                                                                                                                                                        </li>
-                                                                                                                                                                        <li class="media">
-                                                                                                                                                                          <img class="img-fluid mt-1 img-shadow" src="{{ asset('stisla/node_modules/flag-icon-css/flags/4x3/my.svg') }}" alt="image" width="40">
-                                                                                                                                                                          <div class="media-body ml-3">
-                                                                                                                                                                            <div class="media-title">Malaysia</div>
-                                                                                                                                                                            <div class="text-small text-muted">2,976 <i class="fas fa-caret-down text-danger"></i></div>
-                                                                                                                                                                          </div>
-                                                                                                                                                                        </li>
-                                                                                                                                                                        <li class="media">
-                                                                                                                                                                          <img class="img-fluid mt-1 img-shadow" src="{{ asset('stisla/node_modules/flag-icon-css/flags/4x3/us.svg') }}" alt="image" width="40">
-                                                                                                                                                                          <div class="media-body ml-3">
-                                                                                                                                                                            <div class="media-title">United States</div>
-                                                                                                                                                                            <div class="text-small text-muted">1,576 <i class="fas fa-caret-up text-success"></i></div>
-                                                                                                                                                                          </div>
-                                                                                                                                                                        </li>
-                                                                                                                                                                      </ul>
+                                                                                                                                                              <div class="row">
+                                                                                                                                                                <div class="col-md-6">
+                                                                                                                                                                  <div class="card">
+                                                                                                                                                                    <div class="card-header">
+                                                                                                                                                                      <h4>Ventes par quartier</h4>
                                                                                                                                                                     </div>
-                                                                                                                                                                    <div class="col-sm-6 mt-sm-0 mt-4">
-                                                                                                                                                                      <div class="text-title mb-2">{{ date('F') }}</div>
-                                                                                                                                                                      <ul class="list-unstyled list-unstyled-border list-unstyled-noborder mb-0">
-                                                                                                                                                                        <li class="media">
-                                                                                                                                                                          <img class="img-fluid mt-1 img-shadow" src="{{ asset('stisla/node_modules/flag-icon-css/flags/4x3/id.svg') }}" alt="image" width="40">
-                                                                                                                                                                          <div class="media-body ml-3">
-                                                                                                                                                                            <div class="media-title">Indonesia</div>
-                                                                                                                                                                            <div class="text-small text-muted">3,486 <i class="fas fa-caret-up text-success"></i></div>
-                                                                                                                                                                          </div>
-                                                                                                                                                                        </li>
-                                                                                                                                                                        <li class="media">
-                                                                                                                                                                          <img class="img-fluid mt-1 img-shadow" src="{{ asset('stisla/node_modules/flag-icon-css/flags/4x3/ps.svg') }}" alt="image" width="40">
-                                                                                                                                                                          <div class="media-body ml-3">
-                                                                                                                                                                            <div class="media-title">Palestine</div>
-                                                                                                                                                                            <div class="text-small text-muted">3,182 <i class="fas fa-caret-up text-success"></i></div>
-                                                                                                                                                                          </div>
-                                                                                                                                                                        </li>
-                                                                                                                                                                        <li class="media">
-                                                                                                                                                                          <img class="img-fluid mt-1 img-shadow" src="{{ asset('stisla/node_modules/flag-icon-css/flags/4x3/de.svg') }}" alt="image" width="40">
-                                                                                                                                                                          <div class="media-body ml-3">
-                                                                                                                                                                            <div class="media-title">Germany</div>
-                                                                                                                                                                            <div class="text-small text-muted">2,317 <i class="fas fa-caret-down text-danger"></i></div>
-                                                                                                                                                                          </div>
-                                                                                                                                                                        </li>
-                                                                                                                                                                      </ul>
+                                                                                                                                                                    <div class="card-body">
+                                                                                                                                                                      <div class="row">
+                                                                                                                                                                        <div class="col-sm-6">
+                                                                                                                                                                          <div class="text-title mb-2">{{ date('F', strtotime('-1 month')) }}</div>
+                                                                                                                                                                          <ul class="list-unstyled list-unstyled-border list-unstyled-noborder mb-0">
+                                                                                                                                                                            <li class="media">
+                                                                                                                                                                              <img class="img-fluid mt-1 img-shadow" src="{{ asset('stisla/node_modules/flag-icon-css/flags/4x3/id.svg') }}" alt="image" width="40">
+                                                                                                                                                                              <div class="media-body ml-3">
+                                                                                                                                                                                <div class="media-title">Indonesia</div>
+                                                                                                                                                                                <div class="text-small text-muted">3,282 <i class="fas fa-caret-down text-danger"></i></div>
+                                                                                                                                                                              </div>
+                                                                                                                                                                            </li>
+                                                                                                                                                                            <li class="media">
+                                                                                                                                                                              <img class="img-fluid mt-1 img-shadow" src="{{ asset('stisla/node_modules/flag-icon-css/flags/4x3/my.svg') }}" alt="image" width="40">
+                                                                                                                                                                              <div class="media-body ml-3">
+                                                                                                                                                                                <div class="media-title">Malaysia</div>
+                                                                                                                                                                                <div class="text-small text-muted">2,976 <i class="fas fa-caret-down text-danger"></i></div>
+                                                                                                                                                                              </div>
+                                                                                                                                                                            </li>
+                                                                                                                                                                            <li class="media">
+                                                                                                                                                                              <img class="img-fluid mt-1 img-shadow" src="{{ asset('stisla/node_modules/flag-icon-css/flags/4x3/us.svg') }}" alt="image" width="40">
+                                                                                                                                                                              <div class="media-body ml-3">
+                                                                                                                                                                                <div class="media-title">United States</div>
+                                                                                                                                                                                <div class="text-small text-muted">1,576 <i class="fas fa-caret-up text-success"></i></div>
+                                                                                                                                                                              </div>
+                                                                                                                                                                            </li>
+                                                                                                                                                                          </ul>
+                                                                                                                                                                        </div>
+                                                                                                                                                                        <div class="col-sm-6 mt-sm-0 mt-4">
+                                                                                                                                                                          <div class="text-title mb-2">{{ date('F') }}</div>
+                                                                                                                                                                          <ul class="list-unstyled list-unstyled-border list-unstyled-noborder mb-0">
+                                                                                                                                                                            <li class="media">
+                                                                                                                                                                              <img class="img-fluid mt-1 img-shadow" src="{{ asset('stisla/node_modules/flag-icon-css/flags/4x3/id.svg') }}" alt="image" width="40">
+                                                                                                                                                                              <div class="media-body ml-3">
+                                                                                                                                                                                <div class="media-title">Indonesia</div>
+                                                                                                                                                                                <div class="text-small text-muted">3,486 <i class="fas fa-caret-up text-success"></i></div>
+                                                                                                                                                                              </div>
+                                                                                                                                                                            </li>
+                                                                                                                                                                            <li class="media">
+                                                                                                                                                                              <img class="img-fluid mt-1 img-shadow" src="{{ asset('stisla/node_modules/flag-icon-css/flags/4x3/ps.svg') }}" alt="image" width="40">
+                                                                                                                                                                              <div class="media-body ml-3">
+                                                                                                                                                                                <div class="media-title">Palestine</div>
+                                                                                                                                                                                <div class="text-small text-muted">3,182 <i class="fas fa-caret-up text-success"></i></div>
+                                                                                                                                                                              </div>
+                                                                                                                                                                            </li>
+                                                                                                                                                                            <li class="media">
+                                                                                                                                                                              <img class="img-fluid mt-1 img-shadow" src="{{ asset('stisla/node_modules/flag-icon-css/flags/4x3/de.svg') }}" alt="image" width="40">
+                                                                                                                                                                              <div class="media-body ml-3">
+                                                                                                                                                                                <div class="media-title">Germany</div>
+                                                                                                                                                                                <div class="text-small text-muted">2,317 <i class="fas fa-caret-down text-danger"></i></div>
+                                                                                                                                                                              </div>
+                                                                                                                                                                            </li>
+                                                                                                                                                                          </ul>
+                                                                                                                                                                        </div>
+                                                                                                                                                                      </div>
                                                                                                                                                                     </div>
                                                                                                                                                                   </div>
                                                                                                                                                                 </div>
-                                                                                                                                                              </div>
-                                                                                                                                                            </div>
-                                                                                                                                                          </div>-->
+                                                                                                                                                              </div>-->
             <div class="row">
                 <div class="col-md-8">
                     <div class="card">
@@ -312,38 +312,37 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if (empty($commandes))
+                                        @forelse ($commandes as $commande)
+                                            <tr>
+                                                <td><a href="#">{{ $commande->code_cmd }}</a></td>
+                                                <td class="font-weight-600">{{ $commande->nom_client }}</td>
+                                                @if ($commande->statut_cmd == 'En attente')
+                                                    <td>
+                                                        <div class="badge badge-warning">{{ $commande->statut_cmd }}
+                                                        </div>
+                                                    </td>
+                                                @elseif ($commande->statut_cmd == 'Terminée')
+                                                    <td>
+                                                        <div class="badge badge-success">{{ $commande->statut_cmd }}
+                                                        </div>
+                                                    </td>
+                                                @elseif ($commande->statut_cmd == 'Annulée')
+                                                    <td>
+                                                        <div class="badge badge-danger">{{ $commande->statut_cmd }}
+                                                        </div>
+                                                    </td>
+                                                @endif
+                                                <td>{{ $commande->date_cmd }}</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-primary">Détails</a>
+                                                </td>
+                                            </tr>
+                                        @empty
                                             <tr>
                                                 <td colspan="5">Aucune commande pour le moment.</td>
                                             </tr>
-                                        @else
-                                            @foreach ($commandes as $commande)
-                                                <tr>
-                                                    <td><a href="#">{{ $commande->code_cmd }}</a></td>
-                                                    <td class="font-weight-600">{{ $commande->nom_client }}</td>
-                                                    @if ($commande->statut_cmd == 'En attente')
-                                                        <td>
-                                                            <div class="badge badge-warning">{{ $commande->statut_cmd }}
-                                                            </div>
-                                                        </td>
-                                                    @elseif ($commande->statut_cmd == 'Terminée')
-                                                        <td>
-                                                            <div class="badge badge-success">{{ $commande->statut_cmd }}
-                                                            </div>
-                                                        </td>
-                                                    @elseif ($commande->statut_cmd == 'Annulée')
-                                                        <td>
-                                                            <div class="badge badge-danger">{{ $commande->statut_cmd }}
-                                                            </div>
-                                                        </td>
-                                                    @endif
-                                                    <td>{{ $commande->date_cmd }}</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-primary">Détails</a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        @endif
+                                        @endforelse
+
                                     </tbody>
                                 </table>
                             </div>
