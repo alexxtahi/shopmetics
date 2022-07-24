@@ -23,3 +23,4 @@
 
 <!-- Paiement paypal -->
 <script src="https://www.paypal.com/sdk/js?client-id=AbBuktnYFMMX-ppZloX_wnhdqux0Mr-Y3TBkxfgY6YJejeK1KYvhV2retZg0PEwsqM99AOe-pchecbjF&currency=USD"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>

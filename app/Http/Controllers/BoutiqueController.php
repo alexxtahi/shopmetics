@@ -323,6 +323,7 @@ class BoutiqueController extends Controller
         $id_prod = $request->input('prod_id');
         //Récupération de la quantité du produit
         $qt_prod = $request->input('prod_qt');
+        
 
         if (Auth::check()) {
             // Le produit existe-il ?
@@ -333,8 +334,16 @@ class BoutiqueController extends Controller
                 $items->qt_prod = $qt_prod;
                 //Mise à jour dans la BD
                 $items->update();
+                // Mise à jour de la quantité du produit dans le panier
+                $cartQuantity = CartHelper::getNombreProd();
+                
+                $prodQuantity = $items->qt_prod;
+                
+                
                 return response()->json([
-                    'status' => "Quantité mise à jour !"
+                    'status' => "Quantité mise à jour !",
+                    'cartQuantity' => $cartQuantity,
+                    'prodQuantity' => $prodQuantity
                 ]);
             }
         }

@@ -22,6 +22,11 @@ $(document).ready(function () { // ajouter un produit au panier
             },
             dataType: 'json',
             success: function (response) {
+                $('#cart-quantity').text(response.cartQuantity);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Produit ajouter au panier',     
+                })
                 alert(response.status)
             },
             error: function (jqXHR, status, err) {
@@ -73,11 +78,12 @@ $(document).ready(function () {
 
         var inc_value = $(this).closest('.prod_general').find('.prod_qt').val();
         var value = parseInt(inc_value, 10);
-
+        
 
         value = isNaN(value) ? 0 : value;
         if (value < 10) {
             value++;
+            alert(value) ;
             $(this).closest('.prod_general').find('.prod_qt').val(value);
         }
 
@@ -90,11 +96,13 @@ $(document).ready(function () {
         var value = parseInt(dec_value, 10);
 
 
+        
         value = isNaN(value) ? 0 : value;
         if (value > 1) {
             value--;
             $(this).closest('.prod_general').find('.prod_qt').val(value);
         }
+
 
     });
 
@@ -113,6 +121,7 @@ $(document).ready(function () {
 
         var $prod_id = $(this).closest('.prod_general').find('.qt-dest').val();
         var $prod_qt = $(this).closest('.prod_general').find('.prod_qt').val();
+        //alert($prod_qt) ;
 
 
         $.ajaxSetup({
@@ -131,8 +140,8 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (response) {
                 // alert(response.status); // affiche le statut de la requête Ajax (réussite ou échec)
-                window.location.reload();
-                //$('#refresh-cart').load(location.href + "#refresh-cart") ;
+                window.reload()
+                //$('#refresh-cart').load(location.href + "#refresh-cart") ; 
             },
             error: function (jqXHR, status, err) {
                 alert(jqXHR.responseText);
@@ -170,9 +179,14 @@ $(document).ready(function () {
             },
             dataType: 'json',
             success: function (response) {
-                // Mise à jour de la quantité du panier
+                // Mise à jour de la quantité du panier 
                 $('#cart-quantity').text(response.cartQuantity);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Produit ajouter au panier',     
+                })
                 alert(response.status)
+                
             },
             error: function (jqXHR, status, err) {
                 alert(jqXHR.responseText);
@@ -182,6 +196,9 @@ $(document).ready(function () {
 
 
 });
+
+
+
 
 
 

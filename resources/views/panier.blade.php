@@ -87,9 +87,9 @@
 
                                         <td class="qua-col first-row">
                                             <div class="quantity">
-                                                <div class="pro-qty">
+                                                <div class="pro-qty" >
                                                     <span class="qtybtn change_qt decr">-</span>
-                                                    <input type="number" class="prod_qt"
+                                                    <input id="qt-prod"  type="number" class="prod_qt"
                                                         value="{{ $items->qt_prod }}" disabled='true'>
                                                     <span class="qtybtn change_qt incr">+</span>
                                                 </div>
